@@ -685,6 +685,7 @@ export default function Home() {
                 <div className="mt-8">
                   <Button 
                     className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto"
+                    onClick={() => window.open('https://www.google.com/maps/dir//1701+American+Blvd+E,+Bloomington,+MN+55425', '_blank', 'noopener,noreferrer')}
                     data-testid="button-get-directions"
                   >
                     <MapPin className="mr-2 h-5 w-5" />
@@ -692,14 +693,19 @@ export default function Home() {
                   </Button>
                 </div>
               </CardContent>
-              <div className="h-64 lg:h-auto bg-muted">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="text-4xl text-primary mb-4 mx-auto" />
-                    <p className="text-muted-foreground">Interactive Map</p>
-                    <p className="text-sm text-muted-foreground">Zawadi Restaurant Location</p>
-                  </div>
-                </div>
+              <div className="h-64 lg:h-auto bg-muted relative overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2827.4385779844844!2d-93.24215!3d44.8556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87f623e5c1e6e7d5%3A0x5e7b8c9a0d1e2f3c!2s1701%20American%20Blvd%20E%2C%20Bloomington%2C%20MN%2055425!5e0!3m2!1sen!2sus!4v1234567890"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, minHeight: '300px' }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Zawadi Restaurant Location"
+                  data-testid="map-google-maps"
+                  className="absolute inset-0"
+                />
               </div>
             </div>
           </Card>
