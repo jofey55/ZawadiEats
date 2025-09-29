@@ -1,11 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { MapPin, Phone, Mail, Star, Utensils, Leaf, Heart, Wheat, GlassWater, Cookie, Soup, Menu, X } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { MapPin, Phone, Mail, Star, Utensils, Leaf, Heart, Wheat, GlassWater, Cookie, Soup, Menu, X, Clock } from "lucide-react";
+
+const HOURS = {
+  monday: { open: '11:00', close: '21:00', label: 'Monday' },
+  tuesday: { open: '11:00', close: '21:00', label: 'Tuesday' },
+  wednesday: { open: '11:00', close: '21:00', label: 'Wednesday' },
+  thursday: { open: '11:00', close: '21:00', label: 'Thursday' },
+  friday: { open: '11:00', close: '22:00', label: 'Friday' },
+  saturday: { open: '11:00', close: '22:00', label: 'Saturday' },
+  sunday: { open: '12:00', close: '20:00', label: 'Sunday' },
+};
+
+function getRestaurantStatus() {
+  // Get current time in restaurant's timezone (America/Chicago - Minnesota)
+  const now = new Date();
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Chicago',
+    hour: 'numeric',
+    minute: 'numeric',
+    weekday: 'long',
+    hour12: false
+  });
+  
+  const parts = formatter.formatToParts(now);
+  const weekday = parts.find(p => p.type === 'weekday')?.value.toLowerCase() || 'monday';
+  const hour = parseInt(parts.find(p => p.type === 'hour')?.value || '0');
+  const minute = parseInt(parts.find(p => p.type === 'minute')?.value || '0');
+  
+  const today = weekday as keyof typeof HOURS;
+  const todayHours = HOURS[today];
+  
+  const currentTime = hour * 60 + minute;
+  const [openHour, openMin] = todayHours.open.split(':').map(Number);
+  const [closeHour, closeMin] = todayHours.close.split(':').map(Number);
+  const openTime = openHour * 60 + openMin;
+  const closeTime = closeHour * 60 + closeMin;
+  
+  const isOpen = currentTime >= openTime && currentTime < closeTime;
+  
+  return {
+    isOpen,
+    today: todayHours.label,
+    todayOpen: todayHours.open,
+    todayClose: todayHours.close,
+  };
+}
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [restaurantStatus, setRestaurantStatus] = useState(getRestaurantStatus());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRestaurantStatus(getRestaurantStatus());
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -596,7 +650,24 @@ export default function Home() {
           <Card className="mt-16 shadow-lg overflow-hidden">
             <div className="grid lg:grid-cols-2">
               <CardContent className="p-8 lg:p-12">
-                <h3 className="text-2xl font-semibold text-foreground mb-6">Hours of Operation</h3>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-semibold text-foreground">Hours of Operation</h3>
+                  <Badge 
+                    className={restaurantStatus.isOpen ? "bg-secondary text-secondary-foreground" : "bg-muted text-muted-foreground"}
+                    data-testid="badge-restaurant-status"
+                  >
+                    <Clock className="w-3 h-3 mr-1" />
+                    {restaurantStatus.isOpen ? 'Open Now' : 'Closed'}
+                  </Badge>
+                </div>
+                <div className="bg-primary/10 rounded-lg p-4 mb-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-foreground font-semibold">{restaurantStatus.today}</span>
+                    <span className="text-foreground font-medium" data-testid="text-today-hours">
+                      {restaurantStatus.todayOpen} - {restaurantStatus.todayClose}
+                    </span>
+                  </div>
+                </div>
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Monday - Thursday</span>
