@@ -260,6 +260,94 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Photo Gallery Section */}
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4" data-testid="text-gallery-title">
+              Our Gallery
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Experience the vibrant atmosphere and delicious dishes that make Zawadi Restaurant special
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="group relative overflow-hidden rounded-lg shadow-lg aspect-square">
+              <img 
+                src="https://images.unsplash.com/photo-1604909052743-94e838986d24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800"
+                alt="Authentic African rice bowl with colorful vegetables"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                data-testid="gallery-image-bowl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <p className="text-white p-4 font-semibold">Build-A-Bowl</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-lg shadow-lg aspect-square">
+              <img 
+                src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800"
+                alt="Golden crispy sambusas"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                data-testid="gallery-image-sambusas"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <p className="text-white p-4 font-semibold">Classic Sambusas</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-lg shadow-lg aspect-square">
+              <img 
+                src="https://images.unsplash.com/photo-1546793665-c74683f339c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800"
+                alt="Fresh tropical fruit bowl"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                data-testid="gallery-image-fruit"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <p className="text-white p-4 font-semibold">Fresh Fruit Bowl</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-lg shadow-lg aspect-square">
+              <img 
+                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800"
+                alt="Zawadi Restaurant welcoming interior"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                data-testid="gallery-image-interior"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <p className="text-white p-4 font-semibold">Restaurant Interior</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-lg shadow-lg aspect-square">
+              <img 
+                src="https://cdn.pixabay.com/photo/2020/05/11/15/06/quesadilla-5158087_1280.jpg"
+                alt="Grilled quesadilla with melted cheese"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                data-testid="gallery-image-quesadilla"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <p className="text-white p-4 font-semibold">Grilled Quesadilla</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-lg shadow-lg aspect-square">
+              <img 
+                src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800"
+                alt="Crispy golden plantain chips"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                data-testid="gallery-image-plantains"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <p className="text-white p-4 font-semibold">Plantain Chips</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Menu Section */}
       <section id="menu" className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
