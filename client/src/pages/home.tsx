@@ -677,6 +677,111 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Reviews Section */}
+      <section className="py-20 bg-muted">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4" data-testid="text-reviews-title">
+              What Our Customers Say
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Discover why our guests keep coming back for more
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="shadow-lg">
+              <CardContent className="p-8">
+                <div className="flex mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-6 italic" data-testid="review-1-text">
+                  "The build-a-bowl is absolutely amazing! Fresh ingredients, authentic flavors, and generous portions. The staff is incredibly friendly and welcoming. This is now my go-to spot for lunch!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-3">
+                    <span className="text-primary-foreground font-semibold text-lg">AM</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground" data-testid="review-1-name">Amina M.</p>
+                    <p className="text-sm text-muted-foreground">Regular Customer</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-lg">
+              <CardContent className="p-8">
+                <div className="flex mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-6 italic" data-testid="review-2-text">
+                  "Best sambusas in Bloomington! The crispy exterior and flavorful filling remind me of home. The restaurant is clean, modern, and the prices are very reasonable. Highly recommend!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mr-3">
+                    <span className="text-secondary-foreground font-semibold text-lg">JK</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground" data-testid="review-2-name">John K.</p>
+                    <p className="text-sm text-muted-foreground">Food Enthusiast</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-lg">
+              <CardContent className="p-8">
+                <div className="flex mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-6 italic" data-testid="review-3-text">
+                  "Fantastic experience! The quesadillas are loaded with fresh vegetables and perfectly grilled. Love that Zawadi is part of Zawadi Center - such a great addition to the community!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-3">
+                    <span className="text-primary-foreground font-semibold text-lg">SH</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground" data-testid="review-3-name">Sarah H.</p>
+                    <p className="text-sm text-muted-foreground">Local Resident</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12 text-center">
+            <Card className="inline-block shadow-lg">
+              <CardContent className="p-8">
+                <div className="flex items-center justify-center space-x-8">
+                  <div className="text-center">
+                    <div className="text-5xl font-bold text-primary mb-2" data-testid="stat-rating">4.8</div>
+                    <div className="flex justify-center mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-muted-foreground">Average Rating</p>
+                  </div>
+                  <div className="h-16 w-px bg-border"></div>
+                  <div className="text-center">
+                    <div className="text-5xl font-bold text-primary mb-2" data-testid="stat-reviews">500+</div>
+                    <p className="text-sm text-muted-foreground">Happy Customers</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-muted">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
