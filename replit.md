@@ -10,6 +10,12 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (September 30, 2025)
 
+**Latest Updates**
+- Added "Zawadi Restaurant" as prominent h1 title in hero section
+- Fixed image paths: moved from `public/images/` to `client/public/images/` for proper Vite production builds
+- Updated menu: changed "white rice" to "coconut rice" in all bowl descriptions
+- All 6 real restaurant photos now properly served in both dev and production
+
 **Major Pivot: Comprehensive Site → Mobile-First Funnel**
 - Removed internal online ordering system and database infrastructure
 - Replaced comprehensive multi-section site with simple one-page funnel
@@ -28,7 +34,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Key Files
 - `client/src/menu.json`: Static menu data with categories and items
-- `public/images/`: Real restaurant photos (hero.jpg, gallery-1.jpg through gallery-5.jpg)
+- `client/public/images/`: Real restaurant photos (hero.png, gallery-1.png through gallery-5.png)
 - `client/src/pages/home.tsx`: Main funnel page
 - `client/src/App.tsx`: Route configuration
 
