@@ -8,24 +8,24 @@
       "items": [
         {
           "name": "Chicken Bowl",
-          "description": "Somali saffron or white rice, marinated chicken, roasted veggies, lentils, pickled onions.",
+          "description": "Somali saffron or coconut rice, marinated chicken, roasted veggies, lentils, pickled onions.",
           "price": 12.99,
           "tags": ["halal"],
-          "image": "/images/gallery-1.jpg"
+          "image": "/images/gallery-1.png"
         },
         {
           "name": "Sambusa (2)",
           "description": "Crisp pastry stuffed with seasoned beef or lentils.",
           "price": 5.99,
           "tags": ["vegetarian option"],
-          "image": "/images/gallery-2.jpg"
+          "image": "/images/gallery-2.png"
         },
         {
           "name": "Plantains",
           "description": "Sweet fried plantains with house spice.",
           "price": 4.99,
           "tags": ["vegetarian", "gluten-free"],
-          "image": "/images/gallery-3.jpg"
+          "image": "/images/gallery-3.png"
         }
       ]
     },
@@ -35,17 +35,17 @@
       "items": [
         {
           "name": "Chicken Bowl",
-          "description": "Somali saffron or white rice, marinated chicken, roasted veggies, lentils.",
+          "description": "Somali saffron or coconut rice, marinated chicken, roasted veggies, lentils.",
           "price": 12.99,
           "tags": ["halal"],
-          "image": "/images/gallery-1.jpg"
+          "image": "/images/gallery-1.png"
         },
         {
           "name": "Steak Bowl",
-          "description": "Somali saffron or white rice, marinated steak, roasted veggies, lentils.",
+          "description": "Somali saffron or coconut rice, marinated steak, roasted veggies, lentils.",
           "price": 13.99,
           "tags": [],
-          "image": "/images/gallery-1.jpg"
+          "image": "/images/gallery-1.png"
         }
       ]
     },
@@ -58,14 +58,14 @@
           "description": "Griddled tortilla, chicken, cheese.", 
           "price": 9.99, 
           "tags": [], 
-          "image": "/images/gallery-1.jpg" 
+          "image": "/images/gallery-1.png" 
         },
         { 
           "name": "Steak Quesadilla", 
           "description": "Griddled tortilla, steak, cheese.", 
           "price": 10.99, 
           "tags": [], 
-          "image": "/images/gallery-1.jpg" 
+          "image": "/images/gallery-1.png" 
         }
       ]
     },
@@ -78,35 +78,35 @@
           "description": "Crisp pastry stuffed with seasoned beef.", 
           "price": 3.49, 
           "tags": [], 
-          "image": "/images/gallery-2.jpg" 
+          "image": "/images/gallery-2.png" 
         },
         { 
           "name": "Sambusa (lentil)", 
           "description": "Crisp pastry stuffed with spiced lentils.", 
           "price": 3.49, 
           "tags": ["vegetarian"], 
-          "image": "/images/gallery-2.jpg" 
+          "image": "/images/gallery-2.png" 
         },
         { 
           "name": "Plantains", 
           "description": "Sweet fried plantains.", 
           "price": 4.99, 
           "tags": ["vegetarian", "gluten-free"], 
-          "image": "/images/gallery-3.jpg" 
+          "image": "/images/gallery-3.png" 
         },
         { 
           "name": "Lentil Soup", 
           "description": "Comforting, gently spiced lentils.", 
           "price": 5.49, 
           "tags": ["vegetarian"], 
-          "image": "/images/gallery-1.jpg" 
+          "image": "/images/gallery-1.png" 
         },
         { 
           "name": "Fries", 
           "description": "Crispy fries.", 
           "price": 3.99, 
           "tags": ["vegetarian"], 
-          "image": "/images/gallery-1.jpg" 
+          "image": "/images/gallery-1.png" 
         }
       ]
     },
@@ -119,21 +119,21 @@
           "description": "House-made tropical ginger drink.", 
           "price": 3.99, 
           "tags": [], 
-          "image": "/images/gallery-1.jpg" 
+          "image": "/images/gallery-1.png" 
         },
         { 
           "name": "Hibiscus Ginger", 
           "description": "Tangy hibiscus with ginger.", 
           "price": 3.99, 
           "tags": [], 
-          "image": "/images/gallery-1.jpg" 
+          "image": "/images/gallery-1.png" 
         },
         { 
           "name": "Lemonade", 
           "description": "Fresh lemonade.", 
           "price": 2.99, 
           "tags": [], 
-          "image": "/images/gallery-1.jpg" 
+          "image": "/images/gallery-1.png" 
         }
       ]
     },
@@ -146,7 +146,7 @@
           "description": "Ask for today's sweet.", 
           "price": 3.99, 
           "tags": [], 
-          "image": "/images/gallery-1.jpg" 
+          "image": "/images/gallery-1.png" 
         }
       ]
     }

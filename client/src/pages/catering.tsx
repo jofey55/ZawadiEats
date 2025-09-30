@@ -15,7 +15,7 @@ export default function Catering() {
         <div className="mt-8 space-y-6">
           <div className="rounded-2xl overflow-hidden">
             <img 
-              src="/images/gallery-5.jpg" 
+              src="/images/gallery-4.png" 
               alt="Catering buffet setup" 
               className="w-full h-96 object-cover"
             />
