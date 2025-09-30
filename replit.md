@@ -2,11 +2,35 @@
 
 ## Overview
 
-Zawadi Restaurant is a full-stack web application built with React, Express, and PostgreSQL. The project features a modern restaurant website with a clean, component-based architecture using TypeScript throughout. It implements a monorepo structure with shared code between client and server, utilizing shadcn/ui components for a polished user interface.
+Zawadi Restaurant is a mobile-first one-page funnel website designed to direct visitors to third-party delivery services (Uber Eats and DoorDash). Built with React, Express, and TypeScript, the site features fast loading, optimized images, and thumb-friendly buttons for mobile users. The project emphasizes simplicity and conversion optimization over comprehensive features.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+
+## Recent Changes (September 30, 2025)
+
+**Major Pivot: Comprehensive Site → Mobile-First Funnel**
+- Removed internal online ordering system and database infrastructure
+- Replaced comprehensive multi-section site with simple one-page funnel
+- Integrated real restaurant photos replacing stock images
+- Added delivery platform CTAs (Uber Eats/DoorDash) throughout the site
+- Created stub pages for Contact, Jobs, Feedback, and Catering
+
+## Project Structure
+
+### Pages
+- **Home (`/`)**: One-page funnel with hero, best sellers, menu, contact/catering sections
+- **Contact (`/contact`)**: Contact information and map
+- **Jobs (`/jobs`)**: Careers and employment information
+- **Feedback (`/feedback`)**: Customer feedback form
+- **Catering (`/catering`)**: Catering services and event space information
+
+### Key Files
+- `client/src/menu.json`: Static menu data with categories and items
+- `public/images/`: Real restaurant photos (hero.jpg, gallery-1.jpg through gallery-5.jpg)
+- `client/src/pages/home.tsx`: Main funnel page
+- `client/src/App.tsx`: Route configuration
 
 ## System Architecture
 
@@ -16,85 +40,66 @@ Preferred communication style: Simple, everyday language.
 - React 18 with TypeScript for type-safe component development
 - Vite as the build tool and development server
 - Wouter for lightweight client-side routing
-- TanStack React Query for server state management and data fetching
+- Tailwind CSS for styling
 
-**UI Component System**
-- shadcn/ui component library built on Radix UI primitives
-- Tailwind CSS for styling with CSS variables for theming
-- Component structure follows the "New York" style variant
-- Custom design tokens defined in CSS variables for colors, spacing, and shadows
-- Comprehensive UI component library including forms, dialogs, navigation, and data display components
+**Content Strategy**
+- Static JSON menu data (`menu.json`) instead of database-driven content
+- Real restaurant photos optimized for web
+- Mobile-first responsive design
+- Conversion-focused layout with delivery CTAs
 
-**State Management Strategy**
-- React Query for server state with custom query client configuration
-- Local component state using React hooks
-- Toast notifications for user feedback
-- Custom hooks for mobile responsiveness detection
+**Key Features**
+- Dynamic timezone-aware hours display (America/Chicago)
+- Click-to-call phone links: (612) 284-0880
+- Click-to-email links: info@zawadirestaurant.com
+- Embedded Google Maps
+- Uber Eats and DoorDash integration with UTM tracking
 
 ### Backend Architecture
 
 **Server Framework**
-- Express.js for HTTP server and API routing
-- TypeScript for type safety across the backend
-- ESM module system for modern JavaScript features
-- Development mode using tsx for hot reloading
+- Express.js for HTTP server
+- TypeScript for type safety
+- Minimal API surface (health check endpoint only)
+- Static file serving via Vite
 
-**Database Layer**
-- Drizzle ORM for type-safe database operations
-- PostgreSQL as the primary database (configured for Neon serverless)
-- Schema-first approach with TypeScript type inference
-- Database migrations managed through Drizzle Kit
+**Database**
+- PostgreSQL connection available but not actively used
+- Minimal schema (users table only for future auth if needed)
+- No ordering/menu database infrastructure
 
-**Data Models**
-- User entity with username/password authentication fields
-- UUID-based primary keys generated at database level
-- Zod schemas for runtime validation derived from Drizzle schemas
+### Contact Information
 
-**Storage Abstraction**
-- Interface-based storage layer (IStorage) for data operations
-- In-memory storage implementation (MemStorage) for development/testing
-- Designed for easy swapping to database-backed implementation
-- CRUD methods for user management
+**Restaurant Details**
+- Address: 1701 American Blvd E, Suite 15, Bloomington, MN 55425
+- Phone: (612) 284-0880
+- Email: info@zawadirestaurant.com
 
-**API Architecture**
-- RESTful API design with `/api` prefix convention
-- Middleware for request logging with response time tracking
-- JSON request/response handling with body parsing
-- Raw body preservation for webhook/signature verification scenarios
+**Hours of Operation**
+- Monday - Saturday: 11:00 AM – 9:00 PM
+- Sunday: 12:00 PM – 7:00 PM
+
+### External Links
+- Uber Eats: https://ubereats.com/store/zawadi-restaurant-bloomington?utm_source=site
+- DoorDash: https://www.doordash.com/store/zawadi-restaurant-bloomington?utm_source=site
 
 ### External Dependencies
 
-**Core Runtime & Database**
+**Core Runtime**
 - Node.js runtime environment
-- PostgreSQL database (Neon serverless provider recommended)
-- Environment variable `DATABASE_URL` required for database connection
-
-**Development Tools**
-- Vite development server with HMR
-- Replit-specific plugins for development (cartographer, dev banner, runtime error overlay)
-- TypeScript compiler for type checking
-- ESBuild for production server bundling
+- TypeScript for type checking across the stack
 
 **Frontend Libraries**
-- React ecosystem: react, react-dom, react-router (wouter)
-- TanStack React Query for data fetching
-- Radix UI primitives for accessible components
+- React ecosystem: react, react-dom, wouter
 - Tailwind CSS for styling utilities
-- Class variance authority for component variant management
-- Date-fns for date manipulation
-- Lucide React for icons
+- Date-fns for date manipulation (timezone handling)
 
 **Backend Libraries**
 - Express.js web framework
-- Drizzle ORM with Neon serverless adapter
-- Connect-pg-simple for PostgreSQL session storage
+- Drizzle ORM (minimal usage)
 - Zod for schema validation
-- Drizzle-zod for schema derivation
-
-**UI Component Dependencies**
-- Complete shadcn/ui component set including: accordion, alert, avatar, badge, breadcrumb, button, calendar, card, carousel, chart, checkbox, collapsible, command palette, context menu, dialog, drawer, dropdown menu, form, hover card, input (including OTP), label, menubar, navigation menu, pagination, popover, progress, radio group, resizable panels, scroll area, select, separator, sheet, sidebar, skeleton, slider, switch, table, tabs, textarea, toast, toggle, tooltip
 
 **Build & Development**
-- Vite plugins for React and development tooling
-- PostCSS with Tailwind CSS and Autoprefixer
-- TypeScript for type checking across the stack
+- Vite development server with HMR
+- Replit-specific plugins for development
+- ESBuild for production server bundling
