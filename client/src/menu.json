@@ -1,0 +1,154 @@
+{
+  "currency": "USD",
+  "dietNotes": "Halal-friendly. Ask about allergens.",
+  "categories": [
+    {
+      "name": "Best Sellers",
+      "slug": "best-sellers",
+      "items": [
+        {
+          "name": "Chicken Bowl",
+          "description": "Somali saffron or white rice, marinated chicken, roasted veggies, lentils, pickled onions.",
+          "price": 12.99,
+          "tags": ["halal"],
+          "image": "/images/gallery-1.jpg"
+        },
+        {
+          "name": "Sambusa (2)",
+          "description": "Crisp pastry stuffed with seasoned beef or lentils.",
+          "price": 5.99,
+          "tags": ["vegetarian option"],
+          "image": "/images/gallery-2.jpg"
+        },
+        {
+          "name": "Plantains",
+          "description": "Sweet fried plantains with house spice.",
+          "price": 4.99,
+          "tags": ["vegetarian", "gluten-free"],
+          "image": "/images/gallery-3.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Bowls",
+      "slug": "bowls",
+      "items": [
+        {
+          "name": "Chicken Bowl",
+          "description": "Somali saffron or white rice, marinated chicken, roasted veggies, lentils.",
+          "price": 12.99,
+          "tags": ["halal"],
+          "image": "/images/gallery-1.jpg"
+        },
+        {
+          "name": "Steak Bowl",
+          "description": "Somali saffron or white rice, marinated steak, roasted veggies, lentils.",
+          "price": 13.99,
+          "tags": [],
+          "image": "/images/gallery-1.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Quesadillas",
+      "slug": "quesadillas",
+      "items": [
+        { 
+          "name": "Chicken Quesadilla", 
+          "description": "Griddled tortilla, chicken, cheese.", 
+          "price": 9.99, 
+          "tags": [], 
+          "image": "/images/gallery-1.jpg" 
+        },
+        { 
+          "name": "Steak Quesadilla", 
+          "description": "Griddled tortilla, steak, cheese.", 
+          "price": 10.99, 
+          "tags": [], 
+          "image": "/images/gallery-1.jpg" 
+        }
+      ]
+    },
+    {
+      "name": "Specials",
+      "slug": "specials",
+      "items": [
+        { 
+          "name": "Sambusa (beef)", 
+          "description": "Crisp pastry stuffed with seasoned beef.", 
+          "price": 3.49, 
+          "tags": [], 
+          "image": "/images/gallery-2.jpg" 
+        },
+        { 
+          "name": "Sambusa (lentil)", 
+          "description": "Crisp pastry stuffed with spiced lentils.", 
+          "price": 3.49, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-2.jpg" 
+        },
+        { 
+          "name": "Plantains", 
+          "description": "Sweet fried plantains.", 
+          "price": 4.99, 
+          "tags": ["vegetarian", "gluten-free"], 
+          "image": "/images/gallery-3.jpg" 
+        },
+        { 
+          "name": "Lentil Soup", 
+          "description": "Comforting, gently spiced lentils.", 
+          "price": 5.49, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-1.jpg" 
+        },
+        { 
+          "name": "Fries", 
+          "description": "Crispy fries.", 
+          "price": 3.99, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-1.jpg" 
+        }
+      ]
+    },
+    {
+      "name": "Drinks",
+      "slug": "drinks",
+      "items": [
+        { 
+          "name": "Pineapple Ginger", 
+          "description": "House-made tropical ginger drink.", 
+          "price": 3.99, 
+          "tags": [], 
+          "image": "/images/gallery-1.jpg" 
+        },
+        { 
+          "name": "Hibiscus Ginger", 
+          "description": "Tangy hibiscus with ginger.", 
+          "price": 3.99, 
+          "tags": [], 
+          "image": "/images/gallery-1.jpg" 
+        },
+        { 
+          "name": "Lemonade", 
+          "description": "Fresh lemonade.", 
+          "price": 2.99, 
+          "tags": [], 
+          "image": "/images/gallery-1.jpg" 
+        }
+      ]
+    },
+    {
+      "name": "Desserts",
+      "slug": "desserts",
+      "items": [
+        { 
+          "name": "Baklava (or daily dessert)", 
+          "description": "Ask for today's sweet.", 
+          "price": 3.99, 
+          "tags": [], 
+          "image": "/images/gallery-1.jpg" 
+        }
+      ]
+    }
+  ]
+}
