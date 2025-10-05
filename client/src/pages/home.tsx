@@ -135,35 +135,62 @@ export default function Home() {
       </section>
 
       {/* Menu */}
-      <section id="menu" className="bg-gray-50">
-        <div className="mx-auto max-w-5xl px-4 py-12">
-          <h2 className="text-2xl font-bold">Menu</h2>
-          <p className="mt-2 text-sm text-gray-600">{menuData.dietNotes} Prices may vary on delivery apps.</p>
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <section id="menu" className="bg-gradient-to-b from-gray-50 to-white">
+        <div className="mx-auto max-w-5xl px-4 py-16">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold text-gray-900">Our Menu</h2>
+            <p className="mt-3 text-base text-gray-600 max-w-2xl mx-auto">
+              {menuData.dietNotes} Prices may vary on delivery apps.
+            </p>
+          </div>
+          
+          <div className="space-y-12">
             {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category) => (
-              <div key={category.slug} className="rounded-2xl border bg-white p-4" data-testid={`card-menu-${category.slug}`}>
-                <h3 className="text-lg font-semibold">{category.name}</h3>
-                <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                  {category.items.map((item) => (
-                    <li key={item.name} data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
-                      {item.name} — {item.description}
-                    </li>
-                  ))}
-                </ul>
+              <div key={category.slug} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden" data-testid={`card-menu-${category.slug}`}>
+                <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-4">
+                  <h3 className="text-2xl font-bold text-white">{category.name}</h3>
+                </div>
+                <div className="p-6">
+                  <div className="space-y-5">
+                    {category.items.map((item) => (
+                      <div 
+                        key={item.name} 
+                        className="flex items-start justify-between gap-4 pb-5 border-b border-gray-100 last:border-0 last:pb-0 hover:bg-gray-50/50 -mx-2 px-2 py-2 rounded-lg transition-colors"
+                        data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-baseline gap-2 mb-1 flex-wrap">
+                            <h4 className="font-semibold text-gray-900 text-lg">{item.name}</h4>
+                            {item.tags && item.tags.length > 0 && item.tags.map((tag, idx) => (
+                              <span key={`${item.name}-${tag}-${idx}`} className="text-xs text-green-600 font-medium px-2 py-0.5 bg-green-50 rounded-full">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                        </div>
+                        <div className="flex-shrink-0">
+                          <span className="text-xl font-bold text-amber-600">${item.price}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
-          <div className="mt-6 flex gap-3">
+
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 
               href={uberEatsUrl} 
-              className="rounded-xl bg-gray-900 px-4 py-2 text-sm font-semibold text-white"
+              className="rounded-xl bg-gray-900 px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-gray-800 transition-colors w-full sm:w-auto text-center"
               data-testid="button-ubereats-menu"
             >
               Order on Uber Eats
             </a>
             <a 
               href={doorDashUrl} 
-              className="rounded-xl bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-900"
+              className="rounded-xl bg-amber-500 px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-amber-600 transition-colors w-full sm:w-auto text-center"
               data-testid="button-doordash-menu"
             >
               Order on DoorDash
