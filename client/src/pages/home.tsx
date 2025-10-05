@@ -8,13 +8,13 @@ const email = "info@zawadirestaurant.com";
 const address = "1701 American Blvd E, Suite 15, Bloomington, MN 55425";
 
 const hours = [
-  { d: "Mon", h: "11:00 AM – 9:00 PM" },
-  { d: "Tue", h: "11:00 AM – 9:00 PM" },
-  { d: "Wed", h: "11:00 AM – 9:00 PM" },
-  { d: "Thu", h: "11:00 AM – 9:00 PM" },
-  { d: "Fri", h: "11:00 AM – 9:00 PM" },
-  { d: "Sat", h: "11:00 AM – 9:00 PM" },
-  { d: "Sun", h: "12:00 PM – 7:00 PM" },
+  { d: "Mon", h: "11:00 AM – 9:30 PM" },
+  { d: "Tue", h: "11:00 AM – 9:30 PM" },
+  { d: "Wed", h: "11:00 AM – 9:30 PM" },
+  { d: "Thu", h: "11:00 AM – 9:30 PM" },
+  { d: "Fri", h: "11:00 AM – 11:00 PM" },
+  { d: "Sat", h: "11:00 AM – 11:00 PM" },
+  { d: "Sun", h: "11:00 AM – 11:00 PM" },
 ];
 
 function getTodaysHours() {
@@ -25,7 +25,7 @@ function getTodaysHours() {
   });
   const weekday = formatter.format(now);
   const today = hours.find(h => h.d === weekday);
-  return today ? today.h : "11:00 AM – 9:00 PM";
+  return today ? today.h : "11:00 AM – 9:30 PM";
 }
 
 export default function Home() {

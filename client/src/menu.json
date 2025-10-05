@@ -142,8 +142,8 @@
       "slug": "desserts",
       "items": [
         { 
-          "name": "Baklava (or daily dessert)", 
-          "description": "Ask for today's sweet.", 
+          "name": "Baklava", 
+          "description": "Traditional sweet pastry.", 
           "price": 3.99, 
           "tags": [], 
           "image": "/images/gallery-1.png" 
