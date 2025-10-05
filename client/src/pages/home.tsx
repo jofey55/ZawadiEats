@@ -151,26 +151,37 @@ export default function Home() {
                   <h3 className="text-2xl font-bold text-white">{category.name}</h3>
                 </div>
                 <div className="p-6">
-                  <div className="space-y-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {category.items.map((item) => (
                       <div 
                         key={item.name} 
-                        className="flex items-start justify-between gap-4 pb-5 border-b border-gray-100 last:border-0 last:pb-0 hover:bg-gray-50/50 -mx-2 px-2 py-2 rounded-lg transition-colors"
+                        className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:shadow-md hover:border-amber-200 transition-all duration-300 bg-white"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                       >
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-baseline gap-2 mb-1 flex-wrap">
-                            <h4 className="font-semibold text-gray-900 text-lg">{item.name}</h4>
-                            {item.tags && item.tags.length > 0 && item.tags.map((tag, idx) => (
-                              <span key={`${item.name}-${tag}-${idx}`} className="text-xs text-green-600 font-medium px-2 py-0.5 bg-green-50 rounded-full">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                          <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
-                        </div>
                         <div className="flex-shrink-0">
-                          <span className="text-xl font-bold text-amber-600">${item.price}</span>
+                          <div className="w-24 h-24 rounded-lg overflow-hidden bg-gray-100">
+                            <img 
+                              src={item.image} 
+                              alt={item.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0 flex flex-col">
+                          <div className="flex items-start justify-between gap-2 mb-1">
+                            <h4 className="font-semibold text-gray-900 text-base">{item.name}</h4>
+                            <span className="text-lg font-bold text-amber-600 flex-shrink-0">${item.price}</span>
+                          </div>
+                          {item.tags && item.tags.length > 0 && (
+                            <div className="flex gap-1 mb-2 flex-wrap">
+                              {item.tags.map((tag, idx) => (
+                                <span key={`${item.name}-${tag}-${idx}`} className="text-xs text-green-600 font-medium px-2 py-0.5 bg-green-50 rounded-full">
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
                         </div>
                       </div>
                     ))}
