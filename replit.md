@@ -8,9 +8,25 @@ Zawadi Restaurant is a mobile-first one-page funnel website designed to direct v
 
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes (September 30, 2025)
+## Recent Changes (October 5, 2025)
 
 **Latest Updates**
+- Updated operating hours: Mon-Thu 11:00 AM – 9:30 PM, Fri-Sun 11:00 AM – 11:00 PM
+- Completely redesigned menu with photos next to each item
+- Updated all menu prices to match physical store menu
+- Added new menu categories: Favorites, Sides, Desserts, Beverages
+- Enhanced menu visual design with gradient headers and hover effects
+- Fixed menu item: Changed "Baklava (or daily dessert)" to "Baklava"
+
+**Menu Updates Based on Store Menu**
+- Build-a-Bowl: Veggie Bowl $12.00, Chicken Bowl $13.00, Steak Bowl $15.75
+- Quesadillas: Cheese $11.00, Chicken $12.25, Steak $15.00
+- Favorites: Plantain Chips + Guac $6.95, Classic Sambusa (Beef) $2.55
+- Sides: Seasoned Fries $6.00, Sweet Potato Fries $6.00, Plantains $6.25, Buffalo Cauliflower $7.25, Lentil Soup $8.00
+- Desserts: Somali Donuts (5-piece) $7.25, Fruit Bowl $6.95, Monster Cookies $3.15-$7.47
+- Beverages: House-made Drinks $3.95, Fountain Soda $1.75
+
+**Previous Updates (September 30, 2025)**
 - Added "Zawadi Restaurant" as prominent h1 title in hero section
 - Fixed image paths: moved from `public/images/` to `client/public/images/` for proper Vite production builds
 - Updated menu: changed "white rice" to "coconut rice" in all bowl descriptions
@@ -82,8 +98,8 @@ Preferred communication style: Simple, everyday language.
 - Email: info@zawadirestaurant.com
 
 **Hours of Operation**
-- Monday - Saturday: 11:00 AM – 9:00 PM
-- Sunday: 12:00 PM – 7:00 PM
+- Monday - Thursday: 11:00 AM – 9:30 PM
+- Friday - Sunday: 11:00 AM – 11:00 PM
 
 ### External Links
 - Uber Eats: https://ubereats.com/store/zawadi-restaurant-bloomington?utm_source=site
