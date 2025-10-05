@@ -8,43 +8,50 @@
       "items": [
         {
           "name": "Chicken Bowl",
-          "description": "Somali saffron or coconut rice, marinated chicken, roasted veggies, lentils, pickled onions.",
-          "price": 12.99,
+          "description": "Choose your base, protein, and unlimited toppings. Our bowls are made fresh to order.",
+          "price": 13.00,
           "tags": ["halal"],
           "image": "/images/gallery-1.png"
         },
         {
-          "name": "Sambusa (2)",
-          "description": "Crisp pastry stuffed with seasoned beef or lentils.",
-          "price": 5.99,
-          "tags": ["vegetarian option"],
+          "name": "Classic Sambusa (Beef)",
+          "description": "Filled with seasoned beef and cooked to a crisp, golden finish.",
+          "price": 2.55,
+          "tags": ["halal"],
           "image": "/images/gallery-2.png"
         },
         {
           "name": "Plantains",
-          "description": "Sweet fried plantains with house spice.",
-          "price": 4.99,
+          "description": "Tender fried plantains with a sweet finish.",
+          "price": 6.25,
           "tags": ["vegetarian", "gluten-free"],
           "image": "/images/gallery-3.png"
         }
       ]
     },
     {
-      "name": "Bowls",
+      "name": "Build-a-Bowl",
       "slug": "bowls",
       "items": [
         {
+          "name": "Veggie Bowl",
+          "description": "Choose your base (coconut rice, saffron rice, or black beans), Moroccan cauliflower, and unlimited toppings.",
+          "price": 12.00,
+          "tags": ["vegetarian"],
+          "image": "/images/gallery-1.png"
+        },
+        {
           "name": "Chicken Bowl",
-          "description": "Somali saffron or coconut rice, marinated chicken, roasted veggies, lentils.",
-          "price": 12.99,
+          "description": "Choose your base (coconut rice, saffron rice, or black beans), grilled or sumac chicken, and unlimited toppings.",
+          "price": 13.00,
           "tags": ["halal"],
           "image": "/images/gallery-1.png"
         },
         {
           "name": "Steak Bowl",
-          "description": "Somali saffron or coconut rice, marinated steak, roasted veggies, lentils.",
-          "price": 13.99,
-          "tags": [],
+          "description": "Choose your base (coconut rice, saffron rice, or black beans), sirloin steak, and unlimited toppings.",
+          "price": 15.75,
+          "tags": ["halal"],
           "image": "/images/gallery-1.png"
         }
       ]
@@ -54,85 +61,85 @@
       "slug": "quesadillas",
       "items": [
         { 
+          "name": "Cheese Quesadilla", 
+          "description": "Grilled quesadilla with tender fillings and fresh vegetables.", 
+          "price": 11.00, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-1.png" 
+        },
+        { 
           "name": "Chicken Quesadilla", 
-          "description": "Griddled tortilla, chicken, cheese.", 
-          "price": 9.99, 
-          "tags": [], 
+          "description": "Grilled quesadilla with tender chicken and fresh vegetables.", 
+          "price": 12.25, 
+          "tags": ["halal"], 
           "image": "/images/gallery-1.png" 
         },
         { 
           "name": "Steak Quesadilla", 
-          "description": "Griddled tortilla, steak, cheese.", 
-          "price": 10.99, 
-          "tags": [], 
+          "description": "Grilled quesadilla with tender steak and fresh vegetables.", 
+          "price": 15.00, 
+          "tags": ["halal"], 
           "image": "/images/gallery-1.png" 
         }
       ]
     },
     {
-      "name": "Specials",
-      "slug": "specials",
+      "name": "Favorites",
+      "slug": "favorites",
       "items": [
         { 
-          "name": "Sambusa (beef)", 
-          "description": "Crisp pastry stuffed with seasoned beef.", 
-          "price": 3.49, 
-          "tags": [], 
-          "image": "/images/gallery-2.png" 
+          "name": "Plantain Chips + Guac", 
+          "description": "Crispy plantain chips served with fresh, creamy guacamole as a light snack.", 
+          "price": 6.95, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-3.png" 
         },
         { 
-          "name": "Sambusa (lentil)", 
-          "description": "Crisp pastry stuffed with spiced lentils.", 
-          "price": 3.49, 
-          "tags": ["vegetarian"], 
+          "name": "Classic Sambusa (Beef)", 
+          "description": "Filled with seasoned beef and cooked to a crisp, golden finish.", 
+          "price": 2.55, 
+          "tags": ["halal"], 
           "image": "/images/gallery-2.png" 
+        }
+      ]
+    },
+    {
+      "name": "Sides",
+      "slug": "sides",
+      "items": [
+        { 
+          "name": "Seasoned Fries", 
+          "description": "Crispy golden fries with a salty crunch.", 
+          "price": 6.00, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-1.png" 
+        },
+        { 
+          "name": "Sweet Potato Fries", 
+          "description": "Crispy sweet fries with a caramelized touch.", 
+          "price": 6.00, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-1.png" 
         },
         { 
           "name": "Plantains", 
-          "description": "Sweet fried plantains.", 
-          "price": 4.99, 
+          "description": "Tender fried plantains with a sweet finish.", 
+          "price": 6.25, 
           "tags": ["vegetarian", "gluten-free"], 
           "image": "/images/gallery-3.png" 
         },
         { 
+          "name": "Buffalo Cauliflower", 
+          "description": "Spicy buffalo cauliflower with a tangy kick.", 
+          "price": 7.25, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-1.png" 
+        },
+        { 
           "name": "Lentil Soup", 
-          "description": "Comforting, gently spiced lentils.", 
-          "price": 5.49, 
+          "description": "Hearty lentil soup with warm, spiced comfort.", 
+          "price": 8.00, 
           "tags": ["vegetarian"], 
-          "image": "/images/gallery-1.png" 
-        },
-        { 
-          "name": "Fries", 
-          "description": "Crispy fries.", 
-          "price": 3.99, 
-          "tags": ["vegetarian"], 
-          "image": "/images/gallery-1.png" 
-        }
-      ]
-    },
-    {
-      "name": "Drinks",
-      "slug": "drinks",
-      "items": [
-        { 
-          "name": "Pineapple Ginger", 
-          "description": "House-made tropical ginger drink.", 
-          "price": 3.99, 
-          "tags": [], 
-          "image": "/images/gallery-1.png" 
-        },
-        { 
-          "name": "Hibiscus Ginger", 
-          "description": "Tangy hibiscus with ginger.", 
-          "price": 3.99, 
-          "tags": [], 
-          "image": "/images/gallery-1.png" 
-        },
-        { 
-          "name": "Lemonade", 
-          "description": "Fresh lemonade.", 
-          "price": 2.99, 
-          "tags": [], 
           "image": "/images/gallery-1.png" 
         }
       ]
@@ -142,9 +149,57 @@
       "slug": "desserts",
       "items": [
         { 
-          "name": "Baklava", 
-          "description": "Traditional sweet pastry.", 
-          "price": 3.99, 
+          "name": "Somali Donuts (5-piece)", 
+          "description": "Freshly fried Somali donuts served with warm, rich caramel dip as a sweet treat.", 
+          "price": 7.25, 
+          "tags": [], 
+          "image": "/images/gallery-1.png" 
+        },
+        { 
+          "name": "Fruit Bowl (Solo)", 
+          "description": "Chilled fruit bowl with cucumber, pineapple, and watermelon for a refreshing bite.", 
+          "price": 6.95, 
+          "tags": ["vegetarian", "gluten-free"], 
+          "image": "/images/gallery-1.png" 
+        },
+        { 
+          "name": "Fruit Bowl + Tajin", 
+          "description": "Chilled fruit bowl with cucumber, pineapple, and watermelon topped with Tajin seasoning.", 
+          "price": 6.95, 
+          "tags": ["vegetarian", "gluten-free"], 
+          "image": "/images/gallery-1.png" 
+        },
+        { 
+          "name": "Monster Cookie (One)", 
+          "description": "Monster cookie loaded with oats, chocolate chips, and colorful candy for a bold, sweet bite.", 
+          "price": 3.15, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-1.png" 
+        },
+        { 
+          "name": "Monster Cookies (Three)", 
+          "description": "Three monster cookies loaded with oats, chocolate chips, and colorful candy.", 
+          "price": 7.47, 
+          "tags": ["vegetarian"], 
+          "image": "/images/gallery-1.png" 
+        }
+      ]
+    },
+    {
+      "name": "Beverages",
+      "slug": "beverages",
+      "items": [
+        { 
+          "name": "House-made Drink", 
+          "description": "Freshly made tropical drinks (Pineapple Ginger, Hibiscus Ginger, or Lemonade).", 
+          "price": 3.95, 
+          "tags": [], 
+          "image": "/images/gallery-1.png" 
+        },
+        { 
+          "name": "Fountain Soda", 
+          "description": "Your choice of fountain soda.", 
+          "price": 1.75, 
           "tags": [], 
           "image": "/images/gallery-1.png" 
         }
