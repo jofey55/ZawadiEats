@@ -8,10 +8,24 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { ShoppingCart, Plus, Minus, X, Check } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import menuData from "../menu.json";
+
+interface BowlCustomization {
+  base: string;
+  mixBase?: string;
+  protein: string;
+  doubleProtein: boolean;
+  hotToppings: string[];
+  coldToppings: string[];
+  sauces: string[];
+}
 
 interface CartItem {
   name: string;
@@ -19,6 +33,7 @@ interface CartItem {
   price: number;
   quantity: number;
   image: string;
+  customization?: BowlCustomization;
 }
 
 const checkoutSchema = z.object({
@@ -29,10 +44,21 @@ const checkoutSchema = z.object({
   specialInstructions: z.string().optional(),
 });
 
+const BOWL_ITEMS = ["Veggie Bowl", "Chicken Bowl", "Steak Bowl"];
+
 export default function Order() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderNumber, setOrderNumber] = useState("");
+  const [customizingBowl, setCustomizingBowl] = useState<any>(null);
+  const [bowlCustomization, setBowlCustomization] = useState<BowlCustomization>({
+    base: "saffron",
+    protein: "chicken",
+    doubleProtein: false,
+    hotToppings: [],
+    coldToppings: [],
+    sauces: [],
+  });
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof checkoutSchema>>({
@@ -78,6 +104,19 @@ export default function Order() {
   });
 
   const addToCart = (item: any) => {
+    if (BOWL_ITEMS.includes(item.name)) {
+      setCustomizingBowl(item);
+      setBowlCustomization({
+        base: "saffron",
+        protein: item.name.includes("Chicken") ? "chicken" : item.name.includes("Steak") ? "steak" : "none",
+        doubleProtein: false,
+        hotToppings: [],
+        coldToppings: [],
+        sauces: [],
+      });
+      return;
+    }
+    
     setCart(prev => {
       const existing = prev.find(i => i.name === item.name);
       if (existing) {
@@ -91,6 +130,51 @@ export default function Order() {
       title: "Added to cart",
       description: `${item.name} added to your order`,
     });
+  };
+
+  const calculateBowlPrice = (basePrice: number, customization: BowlCustomization) => {
+    let price = basePrice;
+    
+    if (customization.doubleProtein) {
+      if (customization.protein === "chicken") price += 4.00;
+      if (customization.protein === "steak") price += 5.50;
+    }
+    
+    customization.coldToppings.forEach(topping => {
+      if (topping === "guacamole") price += 1.75;
+      if (topping === "harissa") price += 0.75;
+      if (topping === "pineapple" || topping === "watermelon") price += 1.00;
+    });
+    
+    return price;
+  };
+
+  const addCustomBowlToCart = () => {
+    if (!customizingBowl) return;
+    
+    const finalPrice = calculateBowlPrice(customizingBowl.price, bowlCustomization);
+    const customizationDetails = {
+      base: bowlCustomization.base + (bowlCustomization.mixBase ? ` & ${bowlCustomization.mixBase}` : ''),
+      protein: bowlCustomization.protein + (bowlCustomization.doubleProtein ? ' (Double)' : ''),
+      hotToppings: bowlCustomization.hotToppings.join(', '),
+      coldToppings: bowlCustomization.coldToppings.join(', '),
+      sauces: bowlCustomization.sauces.join(', '),
+    };
+    
+    setCart(prev => [...prev, {
+      ...customizingBowl,
+      price: finalPrice,
+      quantity: 1,
+      customization: bowlCustomization,
+      description: `Base: ${customizationDetails.base} | Protein: ${customizationDetails.protein}${customizationDetails.hotToppings ? ' | Hot: ' + customizationDetails.hotToppings : ''}${customizationDetails.coldToppings ? ' | Cold: ' + customizationDetails.coldToppings : ''}${customizationDetails.sauces ? ' | Sauce: ' + customizationDetails.sauces : ''}`,
+    }]);
+    
+    toast({
+      title: "Bowl added to cart",
+      description: `Custom ${customizingBowl.name} added`,
+    });
+    
+    setCustomizingBowl(null);
   };
 
   const updateQuantity = (name: string, delta: number) => {
@@ -155,8 +239,192 @@ export default function Order() {
     );
   }
 
+  const toggleTopping = (category: 'hotToppings' | 'coldToppings' | 'sauces', item: string) => {
+    setBowlCustomization(prev => ({
+      ...prev,
+      [category]: prev[category].includes(item)
+        ? prev[category].filter(t => t !== item)
+        : [...prev[category], item]
+    }));
+  };
+
+  const currentBowlPrice = customizingBowl ? calculateBowlPrice(customizingBowl.price, bowlCustomization) : 0;
+
   return (
     <div className="min-h-screen bg-white">
+      <Dialog open={!!customizingBowl} onOpenChange={() => setCustomizingBowl(null)}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Build Your Bowl</DialogTitle>
+            <DialogDescription>Customize your {customizingBowl?.name}</DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-6 py-4">
+            {/* Step 1: Base */}
+            <div className="space-y-3">
+              <h3 className="font-semibold text-lg">Step 1: Choose Your Base</h3>
+              <RadioGroup value={bowlCustomization.base} onValueChange={(value) => setBowlCustomization(prev => ({ ...prev, base: value }))}>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="saffron" id="saffron" />
+                  <Label htmlFor="saffron">Saffron Rice</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="coconut" id="coconut" />
+                  <Label htmlFor="coconut">Coconut Rice</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="black-beans" id="black-beans" />
+                  <Label htmlFor="black-beans">Black Beans</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="mix" id="mix" />
+                  <Label htmlFor="mix">Mix Two Bases</Label>
+                </div>
+              </RadioGroup>
+              {bowlCustomization.base === "mix" && (
+                <div className="ml-6 space-y-2">
+                  <Label>Second Base:</Label>
+                  <RadioGroup value={bowlCustomization.mixBase || ""} onValueChange={(value) => setBowlCustomization(prev => ({ ...prev, mixBase: value }))}>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="saffron" id="mix-saffron" />
+                      <Label htmlFor="mix-saffron">Saffron Rice</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="coconut" id="mix-coconut" />
+                      <Label htmlFor="mix-coconut">Coconut Rice</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="black-beans" id="mix-beans" />
+                      <Label htmlFor="mix-beans">Black Beans</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+              )}
+            </div>
+
+            {/* Step 2: Protein */}
+            <div className="space-y-3">
+              <h3 className="font-semibold text-lg">Step 2: Choose Your Protein</h3>
+              <RadioGroup value={bowlCustomization.protein} onValueChange={(value) => setBowlCustomization(prev => ({ ...prev, protein: value }))}>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="chicken" id="chicken" />
+                  <Label htmlFor="chicken">Grilled Chicken</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="spicy-chicken" id="spicy-chicken" />
+                  <Label htmlFor="spicy-chicken">Spicy Chicken</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="steak" id="steak" />
+                  <Label htmlFor="steak">Steak</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="none" id="no-protein" />
+                  <Label htmlFor="no-protein">No Protein (Veggie Bowl)</Label>
+                </div>
+              </RadioGroup>
+              {bowlCustomization.protein !== "none" && (
+                <div className="flex items-center space-x-2 ml-6">
+                  <Checkbox 
+                    id="double-protein" 
+                    checked={bowlCustomization.doubleProtein}
+                    onCheckedChange={(checked) => setBowlCustomization(prev => ({ ...prev, doubleProtein: !!checked }))}
+                  />
+                  <Label htmlFor="double-protein">
+                    Double Protein (+${bowlCustomization.protein === "steak" ? "5.50" : "4.00"})
+                  </Label>
+                </div>
+              )}
+            </div>
+
+            {/* Step 3: Hot Toppings */}
+            <div className="space-y-3">
+              <h3 className="font-semibold text-lg">Step 3: Hot Toppings (Choose any)</h3>
+              <div className="space-y-2">
+                {["Black Beans", "Sweet Plantains", "Roasted Cauliflower"].map(topping => (
+                  <div key={topping} className="flex items-center space-x-2">
+                    <Checkbox 
+                      id={topping}
+                      checked={bowlCustomization.hotToppings.includes(topping)}
+                      onCheckedChange={() => toggleTopping('hotToppings', topping)}
+                    />
+                    <Label htmlFor={topping}>{topping}</Label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 4: Cold Toppings */}
+            <div className="space-y-3">
+              <h3 className="font-semibold text-lg">Step 4: Fresh Toppings</h3>
+              <p className="text-sm text-gray-600">Free toppings:</p>
+              <div className="grid grid-cols-2 gap-2">
+                {["Pickled Onions", "Pickled Cabbage", "Lettuce", "Pico de Gallo", "Roasted Corn", "Cucumber & Tomato", "Cilantro", "Quinoa"].map(topping => (
+                  <div key={topping} className="flex items-center space-x-2">
+                    <Checkbox 
+                      id={topping}
+                      checked={bowlCustomization.coldToppings.includes(topping)}
+                      onCheckedChange={() => toggleTopping('coldToppings', topping)}
+                    />
+                    <Label htmlFor={topping} className="text-sm">{topping}</Label>
+                  </div>
+                ))}
+              </div>
+              
+              <p className="text-sm text-gray-600 mt-4">Premium add-ons:</p>
+              <div className="space-y-2">
+                {[
+                  { name: "Guacamole", price: 1.75 },
+                  { name: "Harissa (Hot Red Sauce)", price: 0.75 },
+                  { name: "Pineapple", price: 1.00 },
+                  { name: "Watermelon", price: 1.00 }
+                ].map(topping => (
+                  <div key={topping.name} className="flex items-center space-x-2">
+                    <Checkbox 
+                      id={topping.name}
+                      checked={bowlCustomization.coldToppings.includes(topping.name.toLowerCase().split(' ')[0])}
+                      onCheckedChange={() => toggleTopping('coldToppings', topping.name.toLowerCase().split(' ')[0])}
+                    />
+                    <Label htmlFor={topping.name} className="text-sm">
+                      {topping.name} (+${topping.price.toFixed(2)})
+                    </Label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 5: Sauces */}
+            <div className="space-y-3">
+              <h3 className="font-semibold text-lg">Step 5: Choose Your Sauces (up to 2)</h3>
+              <div className="space-y-2">
+                {["Jalapeño Salsa", "Chipotle Sauce", "Jalapeño Mayo", "Zawadi Signature Sauce", "Ranch"].map(sauce => (
+                  <div key={sauce} className="flex items-center space-x-2">
+                    <Checkbox 
+                      id={sauce}
+                      checked={bowlCustomization.sauces.includes(sauce)}
+                      onCheckedChange={() => toggleTopping('sauces', sauce)}
+                      disabled={bowlCustomization.sauces.length >= 2 && !bowlCustomization.sauces.includes(sauce)}
+                    />
+                    <Label htmlFor={sauce}>{sauce}</Label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t pt-4">
+              <div className="flex justify-between items-center text-lg font-semibold">
+                <span>Total Price:</span>
+                <span>${currentBowlPrice.toFixed(2)}</span>
+              </div>
+            </div>
+
+            <Button onClick={addCustomBowlToCart} className="w-full" size="lg">
+              Add to Cart - ${currentBowlPrice.toFixed(2)}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white py-8">
         <div className="max-w-7xl mx-auto px-4">
           <h1 className="text-4xl font-bold">Order Online</h1>
