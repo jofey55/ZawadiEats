@@ -130,6 +130,7 @@ export default function Home() {
             src="/images/hero.png" 
             alt="Zawadi bowls and sambusa" 
             className="h-full w-full object-cover"
+            loading="eager"
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
@@ -212,6 +213,7 @@ export default function Home() {
                   src={item.image} 
                   alt={item.name} 
                   className="h-full w-full object-cover"
+                  loading="lazy"
                 />
               </div>
               <div className="flex items-start justify-between gap-3">
@@ -270,6 +272,7 @@ export default function Home() {
                               src={item.image} 
                               alt={item.name}
                               className="w-full h-full object-cover"
+                              loading="lazy"
                             />
                           </div>
                         </div>
