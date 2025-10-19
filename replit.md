@@ -191,8 +191,8 @@ All previously stubbed pages now have complete functionality:
 - Website: https://zawadirestaurant.com
 - Facebook: https://www.facebook.com/zawadirestaurant
 - Instagram: https://www.instagram.com/zawadirestaurant
-- Uber Eats: https://ubereats.com/store/zawadi-restaurant-bloomington?utm_source=site
-- DoorDash: https://www.doordash.com/store/zawadi-restaurant-bloomington?utm_source=site
+- Uber Eats: https://www.ubereats.com/store/zawadi-restaurant-bloomington/bl9IxulbXL29K44sE6aR8Q?utm_source=website
+- DoorDash: https://www.doordash.com/store/zawadi-restraint-bloomington-30199876?utm_source=website
 
 ## Configuration Setup
 

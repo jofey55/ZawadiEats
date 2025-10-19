@@ -36,8 +36,8 @@ const faqs = [
   },
 ];
 
-const uberEatsUrl = "https://ubereats.com/store/zawadi-restaurant-bloomington?utm_source=site";
-const doorDashUrl = "https://www.doordash.com/store/zawadi-restaurant-bloomington?utm_source=site";
+const uberEatsUrl = "https://www.ubereats.com/store/zawadi-restaurant-bloomington/bl9IxulbXL29K44sE6aR8Q?utm_source=website";
+const doorDashUrl = "https://www.doordash.com/store/zawadi-restraint-bloomington-30199876?utm_source=website";
 const phone = "(612) 284-0880";
 const email = "info@zawadirestaurant.com";
 const address = "1701 American Blvd E, Suite 15, Bloomington, MN 55425";
