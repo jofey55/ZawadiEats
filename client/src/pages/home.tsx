@@ -1,5 +1,40 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Star } from "lucide-react";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
+import type { Review } from "@shared/schema";
 import menuData from "../menu.json";
+import { Helmet } from "react-helmet";
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
+const faqs = [
+  {
+    question: "Is your food halal?",
+    answer: "Yes! We are halal-friendly and follow halal practices in our kitchen."
+  },
+  {
+    question: "Do you have vegetarian options?",
+    answer: "Absolutely! We have several vegetarian options including our Veggie Bowl, plantains, and more. Check our menu for items tagged as 'vegetarian'."
+  },
+  {
+    question: "What's included in a bowl?",
+    answer: "Our bowls start with your choice of base (coconut rice, saffron rice, or black beans), then you choose your protein (or go veggie), and add unlimited toppings including vegetables, sauces, and seasonings."
+  },
+  {
+    question: "Do you offer catering?",
+    answer: "Yes! We cater events of all sizes. Visit our Catering page or call us at (612) 284-0880 for a custom quote."
+  },
+  {
+    question: "Can I order for pickup?",
+    answer: "Yes! You can order online directly from our website for pickup, or use Uber Eats or DoorDash for delivery."
+  },
+];
 
 const uberEatsUrl = "https://ubereats.com/store/zawadi-restaurant-bloomington?utm_source=site";
 const doorDashUrl = "https://www.doordash.com/store/zawadi-restaurant-bloomington?utm_source=site";
@@ -39,9 +74,55 @@ export default function Home() {
   }, []);
 
   const bestSellers = menuData.categories.find(cat => cat.slug === "best-sellers")?.items || [];
+  
+  const { data: reviews = [] } = useQuery<Review[]>({
+    queryKey: ["/api/reviews"],
+  });
+
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_path: window.location.pathname,
+      });
+    }
+  }, []);
 
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <>
+      <Helmet>
+        <title>Zawadi Restaurant - East-African Cuisine in Bloomington, MN</title>
+        <meta name="description" content="Authentic East-African bowls, sambusa, and more. Order online for pickup or delivery. Halal-friendly. Located in Bloomington, MN." />
+        
+        <meta property="og:title" content="Zawadi Restaurant - East-African Cuisine" />
+        <meta property="og:description" content="Authentic East-African bowls, sambusa, and more. Order online for pickup or delivery." />
+        <meta property="og:type" content="restaurant" />
+        <meta property="og:url" content="https://zawadirestaurant.com" />
+        <meta property="og:image" content="https://zawadirestaurant.com/images/hero.png" />
+        
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Restaurant",
+            "name": "Zawadi Restaurant",
+            "image": "https://zawadirestaurant.com/images/hero.png",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "1701 American Blvd E, Suite 15",
+              "addressLocality": "Bloomington",
+              "addressRegion": "MN",
+              "postalCode": "55425",
+              "addressCountry": "US"
+            },
+            "telephone": "+16122840880",
+            "email": "info@zawadirestaurant.com",
+            "servesCuisine": "East African",
+            "priceRange": "$$",
+            "openingHours": ["Mo-Th 11:00-21:30", "Fr-Su 11:00-23:00"]
+          })}
+        </script>
+      </Helmet>
+      
+      <main className="min-h-screen bg-white text-gray-900">
       {/* Hero */}
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -63,6 +144,14 @@ export default function Home() {
             Bowls, sambusa, plantains & house drinks. Halal-friendly. Made to order in Bloomington.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
+            <a 
+              href="/order" 
+              className="rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all" 
+              aria-label="Order Online for Pickup"
+              data-testid="button-order-online"
+            >
+              🛒 Order Online • Pickup
+            </a>
             <a 
               href={uberEatsUrl} 
               className="rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow hover:opacity-90" 
@@ -92,6 +181,23 @@ export default function Home() {
             <span className="text-xs">Today's hours:</span>
             <strong className="text-sm" data-testid="text-todays-hours">{todaysHours}</strong>
           </div>
+        </div>
+      </section>
+
+      {/* Special Offer Banner */}
+      <section className="bg-gradient-to-r from-green-600 to-emerald-600 text-white py-8">
+        <div className="mx-auto max-w-5xl px-4 text-center">
+          <h2 className="text-2xl font-bold" data-testid="text-special-offer">
+            🎉 First Online Order? Get 10% Off with code: FIRST10
+          </h2>
+          <p className="mt-2 text-lg">Valid for pickup orders only</p>
+          <a 
+            href="/order" 
+            className="mt-4 inline-block rounded-xl bg-white px-8 py-3 text-sm font-semibold text-green-600 hover:bg-gray-100 transition-colors"
+            data-testid="button-order-now-banner"
+          >
+            Order Now
+          </a>
         </div>
       </section>
 
@@ -210,6 +316,51 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Customer Reviews */}
+      {reviews.length > 0 && (
+        <section className="bg-amber-50 py-16">
+          <div className="mx-auto max-w-5xl px-4">
+            <h2 className="text-3xl font-bold text-center mb-2">What Our Customers Say</h2>
+            <p className="text-center text-gray-600 mb-8">Real reviews from real customers</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {reviews.slice(0, 3).map((review) => (
+                <div 
+                  key={review.id} 
+                  className="bg-white p-6 rounded-2xl shadow-sm"
+                  data-testid={`card-review-${review.id}`}
+                >
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-5 h-5 ${
+                          i < review.rating ? "fill-amber-500 text-amber-500" : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-3">{review.comment}</p>
+                  <p className="font-semibold text-gray-900">{review.customerName}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* FAQ Section */}
+      <section className="mx-auto max-w-3xl px-4 py-16">
+        <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+        <Accordion type="single" collapsible className="w-full">
+          {faqs.map((faq, index) => (
+            <AccordionItem key={index} value={`item-${index}`} data-testid={`faq-${index}`}>
+              <AccordionTrigger>{faq.question}</AccordionTrigger>
+              <AccordionContent>{faq.answer}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </section>
+
       {/* Location & Contact */}
       <section className="mx-auto max-w-5xl px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -286,7 +437,30 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t py-8 text-center text-sm text-gray-600">
         <div className="mx-auto max-w-5xl px-4">
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <a 
+              href="https://www.facebook.com/zawadirestaurant" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-600 hover:text-blue-600 transition-colors"
+              data-testid="link-facebook"
+              aria-label="Follow us on Facebook"
+            >
+              <FaFacebook className="w-6 h-6" />
+            </a>
+            <a 
+              href="https://www.instagram.com/zawadirestaurant" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-600 hover:text-pink-600 transition-colors"
+              data-testid="link-instagram"
+              aria-label="Follow us on Instagram"
+            >
+              <FaInstagram className="w-6 h-6" />
+            </a>
+          </div>
           <div className="flex flex-wrap items-center justify-center gap-4">
+            <a href="/order" className="underline" data-testid="link-order-footer">Order Online</a>
             <a href={uberEatsUrl} className="underline" data-testid="link-ubereats-footer">Order on Uber Eats</a>
             <a href={doorDashUrl} className="underline" data-testid="link-doordash-footer">Order on DoorDash</a>
             <a href="#menu" className="underline" data-testid="link-menu-footer">Menu</a>
@@ -299,5 +473,6 @@ export default function Home() {
         </div>
       </footer>
     </main>
+    </>
   );
 }
