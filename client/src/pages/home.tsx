@@ -15,6 +15,12 @@ const heroImages = [
   "/images/gallery-3.png",
   "/images/gallery-4.png",
   "/images/gallery-5.png",
+  "/images/seasoned-fries.jpg",
+  "/images/sweet-potato-fries.jpg",
+  "/images/plantains.jpg",
+  "/images/lentil-soup.jpg",
+  "/images/plantain-chips-guac.jpg",
+  "/images/fruit-bowl.jpg",
 ];
 
 declare global {
