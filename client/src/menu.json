@@ -65,21 +65,21 @@
           "description": "Grilled quesadilla with tender fillings and fresh vegetables.", 
           "price": 11.00, 
           "tags": ["vegetarian"], 
-          "image": "/images/ZawadiRestaurant_Hero_1761097027092.jpg" 
+          "image": "/images/ZawadiRestaurant_SafronRice_2880x2304_1761097161858.jpg" 
         },
         { 
           "name": "Chicken Quesadilla", 
           "description": "Grilled quesadilla with tender chicken and fresh vegetables.", 
           "price": 12.25, 
           "tags": ["halal"], 
-          "image": "/images/ZawadiRestaurant_Hero_1761097027092.jpg" 
+          "image": "/images/ZawadiRestaurant_Quinoa_2880x2304_1761097161857.jpg" 
         },
         { 
           "name": "Steak Quesadilla", 
           "description": "Grilled quesadilla with tender steak and fresh vegetables.", 
           "price": 15.00, 
           "tags": ["halal"], 
-          "image": "/images/ZawadiRestaurant_Hero_1761097027092.jpg" 
+          "image": "/images/ZawadiRestaurant_RanchDressing_2880x2304_1761097161858.jpg" 
         }
       ]
     },
@@ -133,7 +133,7 @@
           "description": "Spicy buffalo cauliflower with a tangy kick.", 
           "price": 7.25, 
           "tags": ["vegetarian"], 
-          "image": "/images/ZawadiRestaurant_Hero_1761097027092.jpg" 
+          "image": "/images/ZawadiRestaurant_SweetChiliSauce_2880x2304_1761097161859.jpg" 
         },
         { 
           "name": "Lentil Soup", 
