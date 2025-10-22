@@ -21,6 +21,10 @@ const heroImages = [
   "/images/lentil-soup.jpg",
   "/images/plantain-chips-guac.jpg",
   "/images/fruit-bowl.jpg",
+  "/images/pineapple-ginger.jpg",
+  "/images/hibiscus-ginger.jpg",
+  "/images/og-lemonade.jpg",
+  "/images/fountain-soda.jpg",
 ];
 
 declare global {

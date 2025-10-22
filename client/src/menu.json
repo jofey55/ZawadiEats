@@ -126,35 +126,28 @@
           "description": "Pineapple and ginger infused drink.",
           "price": 3.65,
           "tags": [],
-          "image": "/images/fruit-bowl.jpg"
+          "image": "/images/pineapple-ginger.jpg"
         },
         {
           "name": "Hibiscus Ginger",
           "description": "Floral and spicy tea infused with hibiscus and ginger.",
           "price": 3.65,
           "tags": [],
-          "image": "/images/fruit-bowl.jpg"
+          "image": "/images/hibiscus-ginger.jpg"
         },
         {
-          "name": "Dragonfruit Lemonade",
-          "description": "Refreshing drink made with dragonfruit and lemonade.",
+          "name": "OG Lemonade",
+          "description": "Refreshing original lemonade.",
           "price": 3.65,
           "tags": [],
-          "image": "/images/fruit-bowl.jpg"
+          "image": "/images/og-lemonade.jpg"
         },
         {
           "name": "Fountain Drinks",
           "description": "Your choice of fountain soda.",
           "price": 1.75,
           "tags": [],
-          "image": "/images/lentil-soup.jpg"
-        },
-        {
-          "name": "Passion Fruit",
-          "description": "Tropical passion fruit beverage.",
-          "price": 3.65,
-          "tags": [],
-          "image": "/images/fruit-bowl.jpg"
+          "image": "/images/fountain-soda.jpg"
         }
       ]
     }
