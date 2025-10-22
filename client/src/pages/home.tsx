@@ -6,6 +6,7 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 import type { Review } from "@shared/schema";
 import menuData from "../menu.json";
 import { Helmet } from "react-helmet";
+import heroImage from "@assets/ZawadiRestaurant_Hero_1761097027092.jpg";
 
 declare global {
   interface Window {
@@ -127,8 +128,8 @@ export default function Home() {
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <img 
-            src="/images/hero.png" 
-            alt="Zawadi bowls and sambusa" 
+            src={heroImage} 
+            alt="Zawadi Restaurant food spread with plantains, lentil soup, sweet potato fries, fruit bowl, and house-made drinks" 
             className="h-full w-full object-cover"
             loading="eager"
           />
