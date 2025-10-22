@@ -10,6 +10,26 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 22, 2025)
 
+**Complete Uber Eats Photo Extraction**
+
+Downloaded all available menu item photos from the Uber Eats restaurant page:
+- **7 Total Photos**: 6 menu items + 1 restaurant header image
+- **Direct CDN Access**: Downloaded high-quality photos from Uber Eats CDN (tb-static.uber.com)
+- **Automated Download**: Created Node.js script (`download-uber-eats-photos.js`) for batch downloading
+- **Dual Storage**: Photos saved to both `attached_assets/uber_eats_photos/` and `client/public/images/`
+- **Photo Inventory**: Created comprehensive `PHOTO_INVENTORY.md` documenting all photos and CDN URLs
+
+### Downloaded Photos from Uber Eats (All Available)
+1. Seasoned Fries ($6.00)
+2. Sweet Potato Fries ($6.00)
+3. Plantains ($6.25)
+4. Lentil Soup ($8.00)
+5. Plantain Chips and Guac ($6.85)
+6. Fruit Bowl ($6.95)
+7. Restaurant Header/Banner Image
+
+**Note:** Only 6 menu items have photos on Uber Eats currently. Other items (bowls, quesadillas, sambusa, most drinks) don't have photos uploaded to the Uber Eats platform yet.
+
 **Hero Slideshow Implementation**
 
 Added auto-playing slideshow to homepage hero section:
