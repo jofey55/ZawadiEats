@@ -10,26 +10,37 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 22, 2025)
 
-**Professional Photography Implementation**
+**Professional Photography Implementation & Hero Title Enhancement**
 
-Upgraded entire site with high-resolution (2880x2304) restaurant photos:
+Fixed photo loading issues and enhanced hero section styling:
 
-### Photo Assets Integration
-- **Homepage Hero**: High-res food spread showcasing restaurant dishes
-- **Menu Items**: 15+ professional photos matched to specific menu items
+### Photo Loading Fix
+- **Resolved @assets/ Path Issue**: Moved all photos from attached_assets/ to client/public/images/
+- **Updated All Image Paths**: Changed menu.json from `@assets/` imports to `/images/` public paths
+- **15 High-Resolution Photos**: All 2880x2304 professional restaurant photos now loading correctly
   - Sambusa, Seasoned Fries, Sweet Potato Fries, Plantains
-  - Plantain Chips & Guac, Lentil Soup, Fruit Bowl
-  - Somali Donuts, Saffron Rice, Quinoa
-  - Pineapple Ginger beverage, Lemonade beverage
-- **Smart Fallback Strategy**: Items without specific photos (quesadillas, buffalo cauliflower, monster cookies) use Hero image
-- **All Assets via @assets/**: Production-ready import paths for optimal Vite bundling
-- **Lazy Loading**: Menu images load on-demand for faster initial page load
-- **Image Optimization**: High-resolution 2880x2304 photos for retina displays
+  - Plantain Chips & Guac, Lentil Soup, Fruit Bowl, Somali Donuts
+  - Saffron Rice, Quinoa, Pineapple Ginger Lemonade, OG Lemonade
+  - Ranch Dressing, Sweet Chili Sauce (new sauce photos)
+
+### Photo Assignment Strategy
+- **Bowl Items**: Using Hero image as temporary placeholder (awaiting specific bowl photos)
+- **Quesadillas**: Unique photos - Saffron Rice, Quinoa, Ranch Dressing
+- **Buffalo Cauliflower**: Sweet Chili Sauce photo
+- **Monster Cookies**: Hero placeholder (awaiting specific cookie photos)
+- **Best Sellers**: Shows Chicken Bowl, Sambusa, Plantains with their photos
+- **All Other Items**: Specific product photos assigned
+
+### Hero Title Enhancement
+- **"ZAWADI RESTAURANT"**: Enlarged to text-8xl/9xl with font-weight 950, tighter tracking, text shadow
+- **Tagline**: Reduced to text-base/lg, placed directly underneath main title
+- **Result**: Bold, centered, eye-catching hero headline
 
 ### Visual Enhancements
 - Menu cards display actual restaurant food photography
-- Best Sellers section uses real product photos from menu.json
-- Consistent professional look across homepage and order page
+- No confusing photo duplicates (different items don't share photos)
+- Hero placeholder used consistently for items awaiting specific photos
+- Lazy loading for optimal performance
 - Mobile-first responsive image sizing
 
 ## Previous Changes (October 19, 2025)

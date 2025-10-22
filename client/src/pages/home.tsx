@@ -136,7 +136,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
         <div className="mx-auto max-w-5xl px-4 py-24 sm:py-32 text-center">
-          <h1 className="text-7xl sm:text-8xl md:text-9xl font-black text-white mb-2 tracking-tighter leading-none" style={{ fontWeight: 950, textShadow: '2px 2px 8px rgba(0,0,0,0.5)' }}>
+          <h1 className="text-8xl sm:text-9xl md:text-9xl font-black text-white mb-2 tracking-tighter leading-none" style={{ fontWeight: 950, textShadow: '2px 2px 8px rgba(0,0,0,0.5)' }}>
             ZAWADI RESTAURANT
           </h1>
           <h2 className="text-base sm:text-lg font-normal text-white/95 mb-6">
