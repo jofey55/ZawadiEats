@@ -160,14 +160,14 @@
           "description": "Chilled fruit bowl with cucumber, pineapple, and watermelon for a refreshing bite.", 
           "price": 6.95, 
           "tags": ["vegetarian", "gluten-free"], 
-          "image": "@assets/ZawadiRestaurant_FruitBowl_2880x2304_1761097161860.jpg" 
+          "image": "@assets/ZawadiRestaurant_FruitBowl_1761097027092.jpg" 
         },
         { 
           "name": "Fruit Bowl + Tajin", 
           "description": "Chilled fruit bowl with cucumber, pineapple, and watermelon topped with Tajin seasoning.", 
           "price": 6.95, 
           "tags": ["vegetarian", "gluten-free"], 
-          "image": "@assets/ZawadiRestaurant_FruitBowl_2880x2304_1761097161860.jpg" 
+          "image": "@assets/ZawadiRestaurant_FruitBowl_1761097027092.jpg" 
         },
         { 
           "name": "Monster Cookie (One)", 
