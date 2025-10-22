@@ -300,9 +300,19 @@ export default function Home() {
           </div>
           
           <div className="space-y-8 relative z-10">
-            {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category) => (
+            {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category) => {
+              const categoryColors: Record<string, string> = {
+                'appetizers': 'from-amber-400 via-orange-500 to-amber-500',
+                'bowls': 'from-green-500 via-emerald-500 to-green-600',
+                'quesadillas': 'from-orange-500 via-amber-500 to-orange-600',
+                'sambusa': 'from-pink-400 via-rose-500 to-pink-500',
+                'drinks': 'from-cyan-400 via-teal-500 to-cyan-500'
+              };
+              const colorClass = categoryColors[category.slug] || 'from-emerald-600 via-teal-600 to-cyan-600';
+              
+              return (
               <div key={category.slug} className="bg-white rounded-2xl shadow-2xl border-2 border-white overflow-hidden ring-4 ring-slate-200/50" data-testid={`card-menu-${category.slug}`} style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8)' }}>
-                <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 px-6 py-5">
+                <div className={`bg-gradient-to-r ${colorClass} px-6 py-5`}>
                   <h3 className="text-3xl font-bold text-white tracking-tight">{category.name}</h3>
                 </div>
                 <div className="p-6 bg-white">
@@ -344,7 +354,8 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
