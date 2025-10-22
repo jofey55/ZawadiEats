@@ -239,8 +239,18 @@ export default function Home() {
       </section>
 
       {/* Best sellers */}
-      <section className="mx-auto max-w-5xl px-4 py-12">
-        <h2 className="text-3xl font-bold text-slate-900">Best sellers</h2>
+      <section className="relative overflow-hidden py-12">
+        <div className="absolute inset-0 -z-10">
+          <img 
+            src="/images/zawadi-restaurant-header.jpg" 
+            alt="Zawadi Restaurant" 
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95" />
+        </div>
+        <div className="mx-auto max-w-5xl px-4 relative z-10">
+          <h2 className="text-3xl font-bold text-slate-900">Best sellers</h2>
         <ul className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
           {bestSellers.map((item) => (
             <li key={item.name} className="rounded-2xl border border-slate-200 p-4 bg-white hover:bg-slate-50 transition-all shadow-lg hover:shadow-xl" data-testid={`card-bestseller-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
@@ -276,6 +286,7 @@ export default function Home() {
             Order on DoorDash
           </a>
         </div>
+      </div>
       </section>
 
       {/* Menu */}
