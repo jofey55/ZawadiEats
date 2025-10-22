@@ -11,21 +11,21 @@
           "description": "Choose your base, protein, and unlimited toppings. Our bowls are made fresh to order.",
           "price": 13.00,
           "tags": ["halal"],
-          "image": "@assets/ZawadiRestaurant_SafronRice_1761097027090.jpg"
+          "image": "@assets/ZawadiRestaurant_SafronRice_2880x2304_1761097161858.jpg"
         },
         {
           "name": "Classic Sambusa (Beef)",
           "description": "Filled with seasoned beef and cooked to a crisp, golden finish.",
           "price": 2.55,
           "tags": ["halal"],
-          "image": "/images/gallery-2.png"
+          "image": "@assets/ZawadiRestaurant_Sambusa_2880x2304_1761097161858.jpg"
         },
         {
           "name": "Plantains",
           "description": "Tender fried plantains with a sweet finish.",
           "price": 6.25,
           "tags": ["vegetarian", "gluten-free"],
-          "image": "@assets/ZawadiRestaurant_Plantains_1761097027089.jpg"
+          "image": "@assets/ZawadiRestaurant_Plantains_2880x2304_1761097161857.jpg"
         }
       ]
     },
@@ -38,21 +38,21 @@
           "description": "Choose your base (coconut rice, saffron rice, or black beans), Moroccan cauliflower, and unlimited toppings.",
           "price": 12.00,
           "tags": ["vegetarian"],
-          "image": "@assets/ZawadiRestaurant_SafronRice_1761097027090.jpg"
+          "image": "@assets/ZawadiRestaurant_Quinoa_2880x2304_1761097161857.jpg"
         },
         {
           "name": "Chicken Bowl",
           "description": "Choose your base (coconut rice, saffron rice, or black beans), grilled or sumac chicken, and unlimited toppings.",
           "price": 13.00,
           "tags": ["halal"],
-          "image": "@assets/ZawadiRestaurant_SafronRice_1761097027090.jpg"
+          "image": "@assets/ZawadiRestaurant_SafronRice_2880x2304_1761097161858.jpg"
         },
         {
           "name": "Steak Bowl",
           "description": "Choose your base (coconut rice, saffron rice, or black beans), sirloin steak, and unlimited toppings.",
           "price": 15.75,
           "tags": ["halal"],
-          "image": "@assets/ZawadiRestaurant_SafronRice_1761097027090.jpg"
+          "image": "@assets/ZawadiRestaurant_SafronRice_2880x2304_1761097161858.jpg"
         }
       ]
     },
@@ -65,21 +65,21 @@
           "description": "Grilled quesadilla with tender fillings and fresh vegetables.", 
           "price": 11.00, 
           "tags": ["vegetarian"], 
-          "image": "/images/gallery-1.png" 
+          "image": "@assets/ZawadiRestaurant_Hero_1761097027092.jpg" 
         },
         { 
           "name": "Chicken Quesadilla", 
           "description": "Grilled quesadilla with tender chicken and fresh vegetables.", 
           "price": 12.25, 
           "tags": ["halal"], 
-          "image": "/images/gallery-1.png" 
+          "image": "@assets/ZawadiRestaurant_Hero_1761097027092.jpg" 
         },
         { 
           "name": "Steak Quesadilla", 
           "description": "Grilled quesadilla with tender steak and fresh vegetables.", 
           "price": 15.00, 
           "tags": ["halal"], 
-          "image": "/images/gallery-1.png" 
+          "image": "@assets/ZawadiRestaurant_Hero_1761097027092.jpg" 
         }
       ]
     },
@@ -92,14 +92,14 @@
           "description": "Crispy plantain chips served with fresh, creamy guacamole as a light snack.", 
           "price": 6.95, 
           "tags": ["vegetarian"], 
-          "image": "@assets/ZawadiRestaurant_PlantainChips&Guac_1761097027088.jpg" 
+          "image": "@assets/ZawadiRestaurant_PlantainChips&Guac_2880x2304_1761097161861.jpg" 
         },
         { 
           "name": "Classic Sambusa (Beef)", 
           "description": "Filled with seasoned beef and cooked to a crisp, golden finish.", 
           "price": 2.55, 
           "tags": ["halal"], 
-          "image": "/images/gallery-2.png" 
+          "image": "@assets/ZawadiRestaurant_Sambusa_2880x2304_1761097161858.jpg" 
         }
       ]
     },
@@ -112,35 +112,35 @@
           "description": "Crispy golden fries with a salty crunch.", 
           "price": 6.00, 
           "tags": ["vegetarian"], 
-          "image": "/images/gallery-1.png" 
+          "image": "@assets/ZawadiRestaurant_SeasonedFries_2880x2304_1761097161859.jpg" 
         },
         { 
           "name": "Sweet Potato Fries", 
           "description": "Crispy sweet fries with a caramelized touch.", 
           "price": 6.00, 
           "tags": ["vegetarian"], 
-          "image": "@assets/ZawadiRestaurant_SweetPotatoFries_1761097027091.jpg" 
+          "image": "@assets/ZawadiRestaurant_SweetPotatoFries_2880x2304_1761097161859.jpg" 
         },
         { 
           "name": "Plantains", 
           "description": "Tender fried plantains with a sweet finish.", 
           "price": 6.25, 
           "tags": ["vegetarian", "gluten-free"], 
-          "image": "@assets/ZawadiRestaurant_Plantains_1761097027089.jpg" 
+          "image": "@assets/ZawadiRestaurant_Plantains_2880x2304_1761097161857.jpg" 
         },
         { 
           "name": "Buffalo Cauliflower", 
           "description": "Spicy buffalo cauliflower with a tangy kick.", 
           "price": 7.25, 
           "tags": ["vegetarian"], 
-          "image": "/images/gallery-1.png" 
+          "image": "@assets/ZawadiRestaurant_Hero_1761097027092.jpg" 
         },
         { 
           "name": "Lentil Soup", 
           "description": "Hearty lentil soup with warm, spiced comfort.", 
           "price": 8.00, 
           "tags": ["vegetarian"], 
-          "image": "@assets/ZawadiRestaurant_LentilSoup_1761097027087.jpg" 
+          "image": "@assets/ZawadiRestaurant_LentilSoup_2880x2304_1761097161860.jpg" 
         }
       ]
     },
@@ -153,35 +153,35 @@
           "description": "Freshly fried Somali donuts served with warm, rich caramel dip as a sweet treat.", 
           "price": 7.25, 
           "tags": [], 
-          "image": "@assets/ZawadiRestaurant_SomaliDonuts_1761097027090.jpg" 
+          "image": "@assets/ZawadiRestaurant_SomaliDonuts_2880x2304_1761097161859.jpg" 
         },
         { 
           "name": "Fruit Bowl (Solo)", 
           "description": "Chilled fruit bowl with cucumber, pineapple, and watermelon for a refreshing bite.", 
           "price": 6.95, 
           "tags": ["vegetarian", "gluten-free"], 
-          "image": "@assets/ZawadiRestaurant_FruitBowl_1761097027092.jpg" 
+          "image": "@assets/ZawadiRestaurant_FruitBowl_2880x2304_1761097161860.jpg" 
         },
         { 
           "name": "Fruit Bowl + Tajin", 
           "description": "Chilled fruit bowl with cucumber, pineapple, and watermelon topped with Tajin seasoning.", 
           "price": 6.95, 
           "tags": ["vegetarian", "gluten-free"], 
-          "image": "@assets/ZawadiRestaurant_FruitBowl_1761097027092.jpg" 
+          "image": "@assets/ZawadiRestaurant_FruitBowl_2880x2304_1761097161860.jpg" 
         },
         { 
           "name": "Monster Cookie (One)", 
           "description": "Monster cookie loaded with oats, chocolate chips, and colorful candy for a bold, sweet bite.", 
           "price": 3.15, 
           "tags": ["vegetarian"], 
-          "image": "/images/gallery-1.png" 
+          "image": "@assets/ZawadiRestaurant_Hero_1761097027092.jpg" 
         },
         { 
           "name": "Monster Cookies (Three)", 
           "description": "Three monster cookies loaded with oats, chocolate chips, and colorful candy.", 
           "price": 7.47, 
           "tags": ["vegetarian"], 
-          "image": "/images/gallery-1.png" 
+          "image": "@assets/ZawadiRestaurant_Hero_1761097027092.jpg" 
         }
       ]
     },
@@ -194,14 +194,14 @@
           "description": "Freshly made tropical drinks (Pineapple Ginger, Hibiscus Ginger, or Lemonade).", 
           "price": 3.95, 
           "tags": [], 
-          "image": "@assets/ZawadiRestaurant_HibiscusGinger_1761097027092.jpg" 
+          "image": "@assets/ZawadiRestaurant_PineappleGingerLemonade_2880x2304_1761097161860.jpg" 
         },
         { 
           "name": "Fountain Soda", 
           "description": "Your choice of fountain soda.", 
           "price": 1.75, 
           "tags": [], 
-          "image": "/images/gallery-1.png" 
+          "image": "@assets/ZawadiRestaurant_OGLemonade_2880x2304_1761097161860.jpg" 
         }
       ]
     }
