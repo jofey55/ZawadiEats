@@ -59,7 +59,7 @@
           "description": "Tender grilled chicken served over a bed of flavorful ingredients.",
           "price": 13.00,
           "tags": ["halal"],
-          "image": "/images/plantains.jpg"
+          "image": "/images/chicken-bowl.jpg"
         },
         {
           "name": "Veggie Bowl",
@@ -86,21 +86,21 @@
           "description": "Melted cheese inside a crispy tortilla.",
           "price": 11.00,
           "tags": ["vegetarian"],
-          "image": "/images/plantain-chips-guac.jpg"
+          "image": "/images/cheese-quesadilla.jpg"
         },
         {
           "name": "Chicken Quesadilla",
           "description": "Tender chicken wrapped in a crispy tortilla.",
           "price": 12.25,
           "tags": ["halal"],
-          "image": "/images/sweet-potato-fries.jpg"
+          "image": "/images/chicken-quesadilla.jpg"
         },
         {
           "name": "Steak Quesadilla",
           "description": "Tender steak wrapped in a crispy tortilla with melted cheese.",
           "price": 15.00,
           "tags": ["halal"],
-          "image": "/images/seasoned-fries.jpg"
+          "image": "/images/steak-quesadilla.jpg"
         }
       ]
     },
@@ -113,7 +113,7 @@
           "description": "Beef filled pastry pockets with aromatic spices.",
           "price": 2.55,
           "tags": ["halal"],
-          "image": "/images/plantains.jpg"
+          "image": "/images/sambosa.jpg"
         }
       ]
     },
@@ -147,7 +147,7 @@
           "description": "Your choice of fountain soda.",
           "price": 1.75,
           "tags": [],
-          "image": "/images/fountain-soda.jpg"
+          "image": "/images/fountain-drinks.webp"
         }
       ]
     }
