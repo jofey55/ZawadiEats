@@ -135,17 +135,17 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
-        <div className="mx-auto max-w-5xl px-4 py-24 sm:py-32">
-          <h1 className="text-5xl sm:text-6xl font-extrabold text-white mb-4">
-            Zawadi Restaurant
+        <div className="mx-auto max-w-5xl px-4 py-24 sm:py-32 text-center">
+          <h1 className="text-6xl sm:text-7xl md:text-8xl font-black text-white mb-3 tracking-tight" style={{ fontWeight: 900 }}>
+            ZAWADI RESTAURANT
           </h1>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">
-            East-African flavors, fast & fresh.
+          <h2 className="text-xl sm:text-2xl font-medium text-white mb-6">
+            East African Flavors FAST and FRESH
           </h2>
-          <p className="mt-4 max-w-xl text-white/90">
+          <p className="mt-4 max-w-xl mx-auto text-white/90">
             Bowls, sambusa, plantains & house drinks. Halal-friendly. Made to order in Bloomington.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3 justify-center">
             <a 
               href="/order" 
               className="rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all" 
