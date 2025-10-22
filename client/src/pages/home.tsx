@@ -1,12 +1,21 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import { Star } from "lucide-react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import type { Review } from "@shared/schema";
 import menuData from "../menu.json";
 import { Helmet } from "react-helmet";
-const heroImage = "/images/hero.png";
+
+const heroImages = [
+  "/images/gallery-1.png",
+  "/images/gallery-2.png",
+  "/images/gallery-3.png",
+  "/images/gallery-4.png",
+  "/images/gallery-5.png",
+];
 
 declare global {
   interface Window {
@@ -124,18 +133,34 @@ export default function Home() {
       </Helmet>
       
       <main className="min-h-screen bg-white text-gray-900">
-      {/* Hero */}
+      {/* Hero with Slideshow */}
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <img 
-            src={heroImage} 
-            alt="Zawadi Restaurant food spread with plantains, lentil soup, sweet potato fries, fruit bowl, and house-made drinks" 
-            className="h-full w-full object-cover"
-            loading="eager"
-          />
+          <Carousel
+            opts={{ loop: true }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+              }),
+            ]}
+            className="h-full w-full"
+          >
+            <CarouselContent className="h-full">
+              {heroImages.map((image, index) => (
+                <CarouselItem key={index} className="h-full">
+                  <img 
+                    src={image} 
+                    alt={`Zawadi Restaurant - East African dishes including bowls, sambusa, plantains, and more (${index + 1})`}
+                    className="h-full w-full object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
           <div className="absolute inset-0 bg-black/40" />
         </div>
-        <div className="mx-auto max-w-5xl px-4 py-24 sm:py-32 text-center">
+        <div className="mx-auto max-w-5xl px-4 py-24 sm:py-32 text-center relative z-10">
           <h1 className="text-8xl sm:text-9xl md:text-9xl font-black text-white mb-2 tracking-tighter leading-none" style={{ fontWeight: 950, textShadow: '2px 2px 8px rgba(0,0,0,0.5)' }}>
             ZAWADI RESTAURANT
           </h1>
