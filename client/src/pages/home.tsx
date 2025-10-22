@@ -280,26 +280,26 @@ export default function Home() {
 
       {/* Menu */}
       <section id="menu" className="menu-texture relative overflow-hidden">
-        <div className="mx-auto max-w-5xl px-4 py-16">
-          <div className="text-center mb-12">
+        <div className="mx-auto max-w-5xl px-4 py-16 relative z-10">
+          <div className="text-center mb-12 bg-white/90 backdrop-blur-sm rounded-2xl py-8 px-6 shadow-lg border border-white">
             <h2 className="text-5xl font-bold text-slate-900">Our Menu</h2>
             <p className="mt-3 text-base text-slate-700 max-w-2xl mx-auto">
               {menuData.dietNotes} Prices may vary on delivery apps.
             </p>
           </div>
           
-          <div className="space-y-8">
+          <div className="space-y-8 relative z-10">
             {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category) => (
-              <div key={category.slug} className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden" data-testid={`card-menu-${category.slug}`}>
+              <div key={category.slug} className="bg-white rounded-2xl shadow-2xl border-2 border-white overflow-hidden ring-4 ring-slate-200/50" data-testid={`card-menu-${category.slug}`} style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8)' }}>
                 <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 px-6 py-5">
                   <h3 className="text-3xl font-bold text-white tracking-tight">{category.name}</h3>
                 </div>
-                <div className="p-6 bg-gradient-to-b from-slate-50/50 to-white">
+                <div className="p-6 bg-white">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {category.items.map((item) => (
                       <div 
                         key={item.name} 
-                        className="flex gap-4 p-5 rounded-xl border border-slate-200 hover:shadow-2xl hover:border-emerald-400 hover:bg-emerald-50/30 transition-all duration-300 bg-white"
+                        className="flex gap-4 p-5 rounded-xl border-2 border-slate-100 hover:shadow-2xl hover:border-emerald-400 hover:bg-emerald-50/50 transition-all duration-300 bg-white shadow-md"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                       >
                         <div className="flex-shrink-0">
