@@ -279,7 +279,7 @@ export default function Home() {
       </section>
 
       {/* Menu */}
-      <section id="menu" className="bg-gradient-to-b from-white via-slate-50 to-white">
+      <section id="menu" className="menu-texture relative overflow-hidden">
         <div className="mx-auto max-w-5xl px-4 py-16">
           <div className="text-center mb-12">
             <h2 className="text-5xl font-bold text-slate-900">Our Menu</h2>
