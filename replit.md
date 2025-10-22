@@ -10,38 +10,46 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 22, 2025)
 
-**Professional Photography Implementation & Hero Title Enhancement**
+**Menu Synchronization with Uber Eats**
 
-Fixed photo loading issues and enhanced hero section styling:
+Replaced entire menu with data directly from Uber Eats delivery platform:
 
-### Photo Loading Fix
-- **Resolved @assets/ Path Issue**: Moved all photos from attached_assets/ to client/public/images/
-- **Updated All Image Paths**: Changed menu.json from `@assets/` imports to `/images/` public paths
-- **15 High-Resolution Photos**: All 2880x2304 professional restaurant photos now loading correctly
-  - Sambusa, Seasoned Fries, Sweet Potato Fries, Plantains
-  - Plantain Chips & Guac, Lentil Soup, Fruit Bowl, Somali Donuts
-  - Saffron Rice, Quinoa, Pineapple Ginger Lemonade, OG Lemonade
-  - Ranch Dressing, Sweet Chili Sauce (new sauce photos)
+### Menu Data Source
+- **Uber Eats Integration**: Fetched complete menu from https://www.ubereats.com/store/zawadi-restaurant-bloomington/
+- **Exact Pricing**: All prices match Uber Eats listings
+- **Correct Item Names**: Menu items use exact names from delivery platform
+- **Official Photos**: Downloaded 6 product photos directly from Uber Eats CDN
 
-### Photo Assignment Strategy
-- **Bowl Items**: Using Hero image as temporary placeholder (awaiting specific bowl photos)
-- **Quesadillas**: Unique photos - Saffron Rice, Quinoa, Ranch Dressing
-- **Buffalo Cauliflower**: Sweet Chili Sauce photo
-- **Monster Cookies**: Hero placeholder (awaiting specific cookie photos)
-- **Best Sellers**: Shows Chicken Bowl, Sambusa, Plantains with their photos
-- **All Other Items**: Specific product photos assigned
+### Downloaded Photos from Uber Eats
+- Seasoned Fries ($6.00)
+- Sweet Potato Fries ($6.00)
+- Plantains ($6.25)
+- Lentil Soup ($8.00)
+- Plantain Chips and Guac ($6.85)
+- Fruit Bowl ($6.95)
+
+### Menu Categories
+**Appetizers:** Seasoned Fries, Sweet Potato Fries, Plantains, Lentil Soup, Plantain Chips & Guac, Loaded Fries
+
+**Bowls:** Grilled Chicken Bowl ($13.00), Veggie Bowl ($12.00), Fruit Bowl ($6.95)
+
+**Quesadillas:** Cheese ($11.00), Chicken ($12.25), Steak ($15.00)
+
+**Sambusa:** Spiced Beef ($2.55)
+
+**Drinks:** Pineapple Ginger, Hibiscus Ginger, Dragonfruit Lemonade, Fountain Drinks, Passion Fruit ($1.75-$3.65)
 
 ### Hero Title Enhancement
 - **"ZAWADI RESTAURANT"**: Enlarged to text-8xl/9xl with font-weight 950, tighter tracking, text shadow
 - **Tagline**: Reduced to text-base/lg, placed directly underneath main title
 - **Result**: Bold, centered, eye-catching hero headline
 
-### Visual Enhancements
-- Menu cards display actual restaurant food photography
-- No confusing photo duplicates (different items don't share photos)
-- Hero placeholder used consistently for items awaiting specific photos
-- Lazy loading for optimal performance
-- Mobile-first responsive image sizing
+### Technical Implementation
+- Removed all user-provided photos
+- Downloaded official Uber Eats product photography
+- Updated menu.json with exact Uber Eats menu structure
+- All photos stored in client/public/images/ with /images/ paths
+- Note: Items without photos on Uber Eats reuse available photos temporarily
 
 ## Previous Changes (October 19, 2025)
 
