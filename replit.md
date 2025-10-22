@@ -8,7 +8,31 @@ Zawadi Restaurant is a comprehensive full-stack restaurant website with online o
 
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes (October 19, 2025)
+## Recent Changes (October 22, 2025)
+
+**Professional Photography Implementation**
+
+Upgraded entire site with high-resolution (2880x2304) restaurant photos:
+
+### Photo Assets Integration
+- **Homepage Hero**: High-res food spread showcasing restaurant dishes
+- **Menu Items**: 15+ professional photos matched to specific menu items
+  - Sambusa, Seasoned Fries, Sweet Potato Fries, Plantains
+  - Plantain Chips & Guac, Lentil Soup, Fruit Bowl
+  - Somali Donuts, Saffron Rice, Quinoa
+  - Pineapple Ginger beverage, Lemonade beverage
+- **Smart Fallback Strategy**: Items without specific photos (quesadillas, buffalo cauliflower, monster cookies) use Hero image
+- **All Assets via @assets/**: Production-ready import paths for optimal Vite bundling
+- **Lazy Loading**: Menu images load on-demand for faster initial page load
+- **Image Optimization**: High-resolution 2880x2304 photos for retina displays
+
+### Visual Enhancements
+- Menu cards display actual restaurant food photography
+- Best Sellers section uses real product photos from menu.json
+- Consistent professional look across homepage and order page
+- Mobile-first responsive image sizing
+
+## Previous Changes (October 19, 2025)
 
 **Major Platform Upgrade - Full Online Ordering System**
 
