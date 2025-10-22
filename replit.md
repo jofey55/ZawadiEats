@@ -2,350 +2,41 @@
 
 ## Overview
 
-Zawadi Restaurant is a comprehensive full-stack restaurant website with online ordering capabilities, Toast POS integration, and conversion-optimized features. Built with React, Express, TypeScript, and PostgreSQL, the platform enables direct online ordering for pickup while maintaining integration with third-party delivery services (Uber Eats and DoorDash).
+Zawadi Restaurant is a full-stack website designed for online food ordering, focusing on pickup and integrated with third-party delivery services like Uber Eats and DoorDash. Built with React, Express, TypeScript, and PostgreSQL, the platform aims to provide a seamless online ordering experience, enhance customer engagement, and streamline restaurant operations through Toast POS integration. The project's vision is to increase direct online orders, reduce reliance on third-party commissions, and offer a comprehensive digital presence for the restaurant.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes (October 22, 2025)
-
-**Complete Uber Eats Photo Extraction**
-
-Downloaded all available menu item photos from the Uber Eats restaurant page:
-- **7 Total Photos**: 6 menu items + 1 restaurant header image
-- **Direct CDN Access**: Downloaded high-quality photos from Uber Eats CDN (tb-static.uber.com)
-- **Automated Download**: Created Node.js script (`download-uber-eats-photos.js`) for batch downloading
-- **Dual Storage**: Photos saved to both `attached_assets/uber_eats_photos/` and `client/public/images/`
-- **Photo Inventory**: Created comprehensive `PHOTO_INVENTORY.md` documenting all photos and CDN URLs
-
-### Downloaded Photos from Uber Eats (All Available)
-1. Seasoned Fries ($6.00)
-2. Sweet Potato Fries ($6.00)
-3. Plantains ($6.25)
-4. Lentil Soup ($8.00)
-5. Plantain Chips and Guac ($6.85)
-6. Fruit Bowl ($6.95)
-7. Restaurant Header/Banner Image
-
-**Note:** Only 6 menu items have photos on Uber Eats currently. Other items (bowls, quesadillas, sambusa, most drinks) don't have photos uploaded to the Uber Eats platform yet.
-
-**Hero Slideshow Implementation**
-
-Added auto-playing slideshow to homepage hero section:
-- **5 Gallery Images**: Automatically cycles through all restaurant dish photos
-- **Auto-play**: 4-second intervals with smooth transitions
-- **Infinite Loop**: Slideshow continuously rotates through images
-- **Technologies**: embla-carousel-react with autoplay plugin
-- **Performance**: First image loads eagerly, others lazy load
-
-**Menu Synchronization with Uber Eats**
-
-Replaced entire menu with data directly from Uber Eats delivery platform:
-
-### Menu Data Source
-- **Uber Eats Integration**: Fetched complete menu from https://www.ubereats.com/store/zawadi-restaurant-bloomington/
-- **Exact Pricing**: All prices match Uber Eats listings
-- **Correct Item Names**: Menu items use exact names from delivery platform
-- **Official Photos**: Downloaded 6 product photos directly from Uber Eats CDN
-
-### Downloaded Photos from Uber Eats
-- Seasoned Fries ($6.00)
-- Sweet Potato Fries ($6.00)
-- Plantains ($6.25)
-- Lentil Soup ($8.00)
-- Plantain Chips and Guac ($6.85)
-- Fruit Bowl ($6.95)
-
-### Menu Categories
-**Appetizers:** Seasoned Fries, Sweet Potato Fries, Plantains, Lentil Soup, Plantain Chips & Guac, Loaded Fries
-
-**Bowls:** Grilled Chicken Bowl ($13.00), Veggie Bowl ($12.00), Fruit Bowl ($6.95)
-
-**Quesadillas:** Cheese ($11.00), Chicken ($12.25), Steak ($15.00)
-
-**Sambusa:** Spiced Beef ($2.55)
-
-**Drinks:** Pineapple Ginger, Hibiscus Ginger, Dragonfruit Lemonade, Fountain Drinks, Passion Fruit ($1.75-$3.65)
-
-### Hero Title Enhancement
-- **"ZAWADI RESTAURANT"**: Enlarged to text-8xl/9xl with font-weight 950, tighter tracking, text shadow
-- **Tagline**: Reduced to text-base/lg, placed directly underneath main title
-- **Result**: Bold, centered, eye-catching hero headline
-
-### Technical Implementation
-- Removed all user-provided photos
-- Downloaded official Uber Eats product photography
-- Updated menu.json with exact Uber Eats menu structure
-- All photos stored in client/public/images/ with /images/ paths
-- Note: Items without photos on Uber Eats reuse available photos temporarily
-
-## Previous Changes (October 19, 2025)
-
-**Major Platform Upgrade - Full Online Ordering System**
-
-Transformed from a simple mobile-first funnel to a complete online ordering platform:
-
-### Toast POS Integration
-- Built complete Toast API integration infrastructure (`server/toast-api.ts`)
-- Ready for Toast credentials (Client ID, Client Secret, Restaurant GUID from https://dev.toasttab.com/)
-- Menu sync, pricing, and order submission capabilities
-- Placeholder mode active until credentials are added via environment variables:
-  - `TOAST_CLIENT_ID`
-  - `TOAST_CLIENT_SECRET`
-  - `TOAST_RESTAURANT_GUID`
-
-### Online Ordering System
-- Full shopping cart functionality with add/remove items
-- Real-time subtotal, tax (7.875%), and total calculations
-- Checkout flow with customer information capture
-- Pickup time selection
-- Special instructions field
-- Order confirmation with unique order numbers
-- Backend order storage and management
-
-### Database Schema (PostgreSQL)
-Created comprehensive schema for full platform functionality:
-- `orders` - Customer orders with Toast integration
-- `reviews` - Customer reviews and testimonials
-- `catering_inquiries` - Catering booking requests
-- `job_applications` - Employment applications
-- `contact_messages` - Customer contact form submissions
-- `feedback` - Customer feedback and ratings
-
-All tables use `varchar` IDs with `gen_random_uuid()` for consistency.
-
-### Homepage Enhancements
-- **Special Offers Banner**: Prominent promo code display (First Order 10% Off - FIRST10)
-- **Order Online Button**: Green gradient CTA in hero section
-- **Customer Reviews Section**: Displays approved reviews with star ratings
-- **FAQ Accordion**: 5 frequently asked questions with expandable answers
-- **Social Media Integration**: Facebook and Instagram links in footer
-- **SEO Optimization**: 
-  - Meta tags and Open Graph tags for social sharing
-  - Structured data (JSON-LD) for restaurant schema
-  - Unique page titles and descriptions
-- **Google Analytics**: Tracking script integrated (placeholder ID: G-XXXXXXXXXX)
-- **Image Optimization**: Lazy loading for menu images, eager loading for hero
-
-### Fully Functional Pages
-All previously stubbed pages now have complete functionality:
-
-**Catering Page (`/catering`)**
-- Detailed catering services information
-- Event space details
-- Booking inquiry form with database storage
-- Package pricing and menu options
-
-**Feedback Page (`/feedback`)**
-- Customer satisfaction survey
-- 1-5 star rating system
-- Detailed feedback form
-- Database storage for feedback analysis
-
-**Jobs Page (`/jobs`)**
-- Open positions listing
-- Position descriptions and requirements
-- Online application form
-- Resume/experience submission
-
-**Contact Page (`/contact`)**
-- Contact form with subject selection
-- Interactive Google Maps embed
-- Business hours display
-- Phone, email, and address information
-
-### Backend API Routes
-- `POST /api/orders` - Submit pickup orders
-- `GET /api/reviews` - Fetch approved reviews
-- `POST /api/reviews` - Submit new review
-- `POST /api/catering` - Submit catering inquiry
-- `POST /api/feedback` - Submit feedback
-- `POST /api/jobs` - Submit job application
-- `POST /api/contact` - Submit contact message
-
-### Storage Architecture
-- Using in-memory storage (MemStorage) as primary with database backup
-- All storage interfaces defined in `server/storage.ts`
-- Type-safe CRUD operations using Drizzle schemas
-
-## Previous Changes (October 5, 2025)
-
-**Menu and Hours Updates**
-- Updated operating hours: Mon-Thu 11:00 AM – 9:30 PM, Fri-Sun 11:00 AM – 11:00 PM
-- Completely redesigned menu with photos next to each item
-- Updated all menu prices to match physical store menu
-- Added new menu categories: Favorites, Sides, Desserts, Beverages
-- Enhanced menu visual design with gradient headers and hover effects
-
-**Menu Pricing**
-- Build-a-Bowl: Veggie Bowl $12.00, Chicken Bowl $13.00, Steak Bowl $15.75
-- Quesadillas: Cheese $11.00, Chicken $12.25, Steak $15.00
-- Favorites: Plantain Chips + Guac $6.95, Classic Sambusa (Beef) $2.55
-- Sides: Seasoned Fries $6.00, Sweet Potato Fries $6.00, Plantains $6.25, Buffalo Cauliflower $7.25, Lentil Soup $8.00
-- Desserts: Somali Donuts (5-piece) $7.25, Fruit Bowl $6.95, Monster Cookies $3.15-$7.47
-- Beverages: House-made Drinks $3.95, Fountain Soda $1.75
-
-## Project Structure
-
-### Pages
-- **Home (`/`)**: Full-featured homepage with hero, special offers, best sellers, menu, reviews, FAQ, location, social links
-- **Order (`/order`)**: Complete online ordering system with cart and checkout
-- **Contact (`/contact`)**: Contact form, map, hours, and business information
-- **Jobs (`/jobs`)**: Career opportunities and application system
-- **Feedback (`/feedback`)**: Customer feedback and rating system
-- **Catering (`/catering`)**: Catering services and booking system
-
-### Key Files
-- `shared/schema.ts`: Database schema and Zod validation types
-- `server/storage.ts`: Storage interface and implementations (MemStorage, DbStorage)
-- `server/toast-api.ts`: Toast POS API integration
-- `server/routes.ts`: API routes for all functionality
-- `client/src/menu.json`: Static menu data with categories and items
-- `client/src/pages/home.tsx`: Enhanced homepage with all features
-- `client/src/pages/order.tsx`: Online ordering interface
-- `client/public/images/`: Real restaurant photos
-
 ## System Architecture
 
 ### Frontend Architecture
 
-**Framework & Build System**
-- React 18 with TypeScript for type-safe component development
-- Vite as the build tool and development server
-- Wouter for lightweight client-side routing
-- Tailwind CSS + shadcn/ui components for consistent design
-- TanStack Query for server state management
-
-**Key Features**
-- Shopping cart with persistent state
-- Form validation with React Hook Form + Zod
-- Real-time price calculations
-- Responsive mobile-first design
-- Lazy loading images for performance
-- Google Analytics event tracking
-- SEO-optimized metadata
+The frontend is built with **React 18** and **TypeScript**, using **Vite** for fast development and builds. **Wouter** handles client-side routing, while **Tailwind CSS** and **shadcn/ui** provide a consistent and responsive design, following a mobile-first approach. **TanStack Query** manages server state. Key features include a persistent shopping cart, form validation with **React Hook Form** and **Zod**, real-time price calculations, lazy loading for images, and **Google Analytics** integration. UI/UX emphasizes visually distinct, color-coded menu categories (e.g., amber for Appetizers, green for Bowls) and a prominent hero slideshow with auto-play using `embla-carousel-react`.
 
 ### Backend Architecture
 
-**Server Framework**
-- Express.js for HTTP server
-- TypeScript for type safety
-- Comprehensive REST API
-- Toast POS integration layer
-- Session management ready for future auth
+The backend uses **Express.js** with **TypeScript** to provide a comprehensive REST API. It includes an integration layer for the **Toast POS API**, ready for menu synchronization and order submission. **PostgreSQL** serves as the database, managed with **Drizzle ORM** for type-safe queries and automatic UUID generation. The system uses an in-memory storage fallback with a database backup strategy. Data flow involves frontend submissions via TanStack Query, Zod validation on the backend, and persistence through the storage layer, with optional Toast API integration.
 
-**Database**
-- PostgreSQL with Drizzle ORM
-- Type-safe database queries
-- Automatic UUID generation
-- In-memory storage with database backup strategy
+### Core Features
 
-**Data Flow**
-1. Frontend submits orders/forms via TanStack Query mutations
-2. Backend validates with Zod schemas
-3. Storage layer persists to memory + database
-4. Toast API integration (when credentials configured)
-
-### Contact Information
-
-**Restaurant Details**
-- Name: Zawadi Restaurant
-- Address: 1701 American Blvd E, Suite 15, Bloomington, MN 55425
-- Phone: (612) 284-0880
-- Email: info@zawadirestaurant.com
-
-**Hours of Operation**
-- Monday - Thursday: 11:00 AM – 9:30 PM
-- Friday - Sunday: 11:00 AM – 11:00 PM
-
-### External Links
-- Website: https://zawadirestaurant.com
-- Facebook: https://www.facebook.com/zawadirestaurant
-- Instagram: https://www.instagram.com/zawadirestaurant
-- Uber Eats: https://www.ubereats.com/store/zawadi-restaurant-bloomington/bl9IxulbXL29K44sE6aR8Q?utm_source=website
-- DoorDash: https://www.doordash.com/store/zawadi-restraint-bloomington-30199876?utm_source=website
-
-## Configuration Setup
-
-### Toast POS Credentials (Required for Production)
-Add these environment variables in Replit Secrets:
-```
-TOAST_CLIENT_ID=your_client_id_here
-TOAST_CLIENT_SECRET=your_client_secret_here
-TOAST_RESTAURANT_GUID=your_restaurant_guid_here
-```
-
-Get credentials from: https://dev.toasttab.com/
-
-### Google Analytics (Required for Production)
-Replace placeholder in `client/index.html`:
-- Change `G-XXXXXXXXXX` to your actual Google Analytics Measurement ID
-
-### Database Migrations
-Run schema changes with:
-```bash
-npm run db:push --force
-```
+-   **Online Ordering System**: Full shopping cart functionality, real-time subtotal/tax calculations, checkout flow, pickup time selection, special instructions, and order confirmation.
+-   **Toast POS Integration**: Infrastructure for menu sync, pricing, and order submission.
+-   **Comprehensive Database Schema**: Tables for orders, reviews, catering inquiries, job applications, contact messages, and feedback.
+-   **Dynamic Content Pages**: Fully functional pages for Catering, Feedback, Jobs, and Contact with forms and data storage.
+-   **Homepage Enhancements**: Special offers banner, prominent "Order Online" CTA, customer reviews section, FAQ accordion, and social media integration.
+-   **SEO Optimization**: Meta tags, Open Graph tags, structured data (JSON-LD), unique page titles, and descriptions.
+-   **API Routes**: Dedicated endpoints for submitting orders, reviews, catering inquiries, feedback, job applications, and contact messages.
 
 ## External Dependencies
 
-**Core Runtime**
-- Node.js 20.x runtime environment
-- TypeScript for type checking across the stack
-
-**Frontend Libraries**
-- React ecosystem: react, react-dom, wouter
-- UI: @radix-ui components, shadcn/ui, lucide-react, react-icons
-- Forms: react-hook-form, @hookform/resolvers
-- State: @tanstack/react-query
-- Styling: Tailwind CSS, class-variance-authority, tailwind-merge
-- Meta: react-helmet
-
-**Backend Libraries**
-- Express.js web framework
-- Drizzle ORM with PostgreSQL
-- Zod for schema validation
-- Session: express-session, connect-pg-simple
-- WebSocket: ws
-
-**Build & Development**
-- Vite with React plugin
-- Replit-specific plugins for development
-- drizzle-kit for database management
-- tsx for TypeScript execution
-
-## Development Workflow
-
-**Local Development**
-```bash
-npm run dev  # Starts Express + Vite on port 5000
-```
-
-**Database Management**
-```bash
-npm run db:push --force  # Push schema changes to database
-```
-
-**Project is running at**: http://localhost:5000 or your Replit URL
-
-## Next Steps for Production
-
-1. **Add Toast POS Credentials**: Configure Toast API keys in Replit Secrets
-2. **Configure Google Analytics**: Replace placeholder GA measurement ID
-3. **Test Order Flow**: Submit test orders to verify Toast integration
-4. **Review Management**: Set up process to approve/reject customer reviews
-5. **Content Updates**: Add real customer testimonials to reviews table
-6. **Social Media**: Verify Facebook and Instagram URLs are correct
-7. **Testing**: Run comprehensive e2e tests on all features
-8. **Performance**: Monitor and optimize image loading and API response times
-
-## Notes
-
-- Application uses in-memory storage by default for development
-- Database is configured and ready for production use
-- Toast integration works in placeholder mode until credentials are added
-- All forms include proper validation and error handling
-- Mobile-first responsive design throughout
-- SEO-optimized with structured data and meta tags
-- All interactive elements include proper ARIA labels and test IDs
+-   **Runtime**: Node.js 20.x
+-   **Database**: PostgreSQL
+-   **Frontend Libraries**: React, React-DOM, Wouter, Tailwind CSS, shadcn/ui, TanStack Query, React Hook Form, Zod, Embla Carousel.
+-   **Backend Libraries**: Express.js, Drizzle ORM, Zod, Express-Session, Connect-PG-Simple.
+-   **Third-Party Services**:
+    -   **Toast POS**: For restaurant management and order processing.
+    -   **Uber Eats & DoorDash**: Integrated for menu synchronization and external delivery services.
+    -   **Google Analytics**: For website traffic and user behavior tracking.
+    -   **Google Maps Embed**: On the contact page.
+-   **Development Tools**: Vite, Drizzle-Kit, TSX.
