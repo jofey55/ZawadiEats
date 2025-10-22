@@ -279,31 +279,31 @@ export default function Home() {
       </section>
 
       {/* Menu */}
-      <section id="menu" className="bg-gradient-to-b from-gray-50 to-white">
+      <section id="menu" className="bg-gradient-to-b from-slate-50 via-white to-slate-50">
         <div className="mx-auto max-w-5xl px-4 py-16">
-          <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold text-gray-900">Our Menu</h2>
-            <p className="mt-3 text-base text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-slate-900">Our Menu</h2>
+            <p className="mt-3 text-base text-slate-600 max-w-2xl mx-auto">
               {menuData.dietNotes} Prices may vary on delivery apps.
             </p>
           </div>
           
-          <div className="space-y-12">
+          <div className="space-y-8">
             {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category) => (
-              <div key={category.slug} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden" data-testid={`card-menu-${category.slug}`}>
-                <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-4">
-                  <h3 className="text-2xl font-bold text-white">{category.name}</h3>
+              <div key={category.slug} className="bg-white rounded-2xl shadow-lg border border-slate-200/60 overflow-hidden" data-testid={`card-menu-${category.slug}`}>
+                <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 px-6 py-5">
+                  <h3 className="text-2xl font-bold text-white tracking-tight">{category.name}</h3>
                 </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="p-6 bg-gradient-to-b from-white to-slate-50/30">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {category.items.map((item) => (
                       <div 
                         key={item.name} 
-                        className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:shadow-md hover:border-amber-200 transition-all duration-300 bg-white"
+                        className="flex gap-4 p-4 rounded-xl border border-slate-200 hover:shadow-lg hover:border-teal-300 hover:bg-white transition-all duration-300 bg-white/80 backdrop-blur-sm"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                       >
                         <div className="flex-shrink-0">
-                          <div className="w-24 h-24 rounded-lg overflow-hidden bg-gray-100">
+                          <div className="w-24 h-24 rounded-xl overflow-hidden bg-slate-100 ring-2 ring-slate-200">
                             <img 
                               src={item.image} 
                               alt={item.name}
@@ -314,19 +314,19 @@ export default function Home() {
                         </div>
                         <div className="flex-1 min-w-0 flex flex-col">
                           <div className="flex items-start justify-between gap-2 mb-1">
-                            <h4 className="font-semibold text-gray-900 text-base">{item.name}</h4>
-                            <span className="text-lg font-bold text-amber-600 flex-shrink-0">${item.price}</span>
+                            <h4 className="font-bold text-slate-900 text-base">{item.name}</h4>
+                            <span className="text-lg font-bold text-teal-600 flex-shrink-0">${item.price}</span>
                           </div>
                           {item.tags && item.tags.length > 0 && (
                             <div className="flex gap-1 mb-2 flex-wrap">
                               {item.tags.map((tag, idx) => (
-                                <span key={`${item.name}-${tag}-${idx}`} className="text-xs text-green-600 font-medium px-2 py-0.5 bg-green-50 rounded-full">
+                                <span key={`${item.name}-${tag}-${idx}`} className="text-xs text-emerald-700 font-semibold px-2.5 py-1 bg-emerald-50 border border-emerald-200 rounded-full">
                                   {tag}
                                 </span>
                               ))}
                             </div>
                           )}
-                          <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                          <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
                         </div>
                       </div>
                     ))}
@@ -336,17 +336,17 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 
               href={uberEatsUrl} 
-              className="rounded-xl bg-gray-900 px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-gray-800 transition-colors w-full sm:w-auto text-center"
+              className="rounded-xl bg-slate-900 px-8 py-4 text-base font-semibold text-white shadow-xl hover:bg-slate-800 hover:shadow-2xl transition-all w-full sm:w-auto text-center"
               data-testid="button-ubereats-menu"
             >
               Order on Uber Eats
             </a>
             <a 
               href={doorDashUrl} 
-              className="rounded-xl bg-amber-500 px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-amber-600 transition-colors w-full sm:w-auto text-center"
+              className="rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 px-8 py-4 text-base font-semibold text-white shadow-xl hover:from-teal-600 hover:to-emerald-600 hover:shadow-2xl transition-all w-full sm:w-auto text-center"
               data-testid="button-doordash-menu"
             >
               Order on DoorDash
