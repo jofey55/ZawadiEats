@@ -10,6 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 22, 2025)
 
+**Hero Slideshow Implementation**
+
+Added auto-playing slideshow to homepage hero section:
+- **5 Gallery Images**: Automatically cycles through all restaurant dish photos
+- **Auto-play**: 4-second intervals with smooth transitions
+- **Infinite Loop**: Slideshow continuously rotates through images
+- **Technologies**: embla-carousel-react with autoplay plugin
+- **Performance**: First image loads eagerly, others lazy load
+
 **Menu Synchronization with Uber Eats**
 
 Replaced entire menu with data directly from Uber Eats delivery platform:
