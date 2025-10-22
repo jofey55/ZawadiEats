@@ -6,7 +6,7 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 import type { Review } from "@shared/schema";
 import menuData from "../menu.json";
 import { Helmet } from "react-helmet";
-import heroImage from "@assets/ZawadiRestaurant_Hero_1761097027092.jpg";
+const heroImage = "/images/ZawadiRestaurant_Hero_1761097027092.jpg";
 
 declare global {
   interface Window {
