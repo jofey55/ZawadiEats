@@ -11,7 +11,7 @@
           "description": "Choose your base, protein, and unlimited toppings. Our bowls are made fresh to order.",
           "price": 13.00,
           "tags": ["halal"],
-          "image": "/images/ZawadiRestaurant_SafronRice_2880x2304_1761097161858.jpg"
+          "image": "/images/ZawadiRestaurant_Hero_1761097027092.jpg"
         },
         {
           "name": "Classic Sambusa (Beef)",
@@ -38,21 +38,21 @@
           "description": "Choose your base (coconut rice, saffron rice, or black beans), Moroccan cauliflower, and unlimited toppings.",
           "price": 12.00,
           "tags": ["vegetarian"],
-          "image": "/images/ZawadiRestaurant_Quinoa_2880x2304_1761097161857.jpg"
+          "image": "/images/ZawadiRestaurant_Hero_1761097027092.jpg"
         },
         {
           "name": "Chicken Bowl",
           "description": "Choose your base (coconut rice, saffron rice, or black beans), grilled or sumac chicken, and unlimited toppings.",
           "price": 13.00,
           "tags": ["halal"],
-          "image": "/images/ZawadiRestaurant_SafronRice_2880x2304_1761097161858.jpg"
+          "image": "/images/ZawadiRestaurant_Hero_1761097027092.jpg"
         },
         {
           "name": "Steak Bowl",
           "description": "Choose your base (coconut rice, saffron rice, or black beans), sirloin steak, and unlimited toppings.",
           "price": 15.75,
           "tags": ["halal"],
-          "image": "/images/ZawadiRestaurant_SafronRice_2880x2304_1761097161858.jpg"
+          "image": "/images/ZawadiRestaurant_Hero_1761097027092.jpg"
         }
       ]
     },
