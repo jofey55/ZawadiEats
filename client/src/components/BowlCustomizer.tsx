@@ -27,7 +27,10 @@ export interface CustomizedItem {
   hotToppings: string[];
   coldToppings: string[];
   sauces: string[];
+  meat?: string;
   addFries: boolean;
+  addDrink?: string;
+  iceOption?: string;
   totalPrice: number;
 }
 
@@ -40,7 +43,10 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   const [selectedHotToppings, setSelectedHotToppings] = useState<string[]>([]);
   const [selectedColdToppings, setSelectedColdToppings] = useState<string[]>([]);
   const [selectedSauces, setSelectedSauces] = useState<string[]>([]);
+  const [selectedMeat, setSelectedMeat] = useState<string>("");
   const [addFries, setAddFries] = useState(false);
+  const [addDrink, setAddDrink] = useState<string>("");
+  const [iceOption, setIceOption] = useState<string>("With Ice");
 
   // Reset selections when item changes or modal opens
   useEffect(() => {
@@ -48,7 +54,10 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
       setSelectedHotToppings([]);
       setSelectedColdToppings([]);
       setSelectedSauces([]);
+      setSelectedMeat("");
       setAddFries(false);
+      setAddDrink("");
+      setIceOption("With Ice");
 
       // Quesadilla special logic: auto-select double meat (locked)
       if (item.type === "quesadilla" && item.baseProtein) {
@@ -79,13 +88,19 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
 
   if (!item) return null;
 
+  const isDrink = item.type === "drink";
+  const isLoadedFries = item.type === "loaded-fries";
   const isQuesadilla = item.type === "quesadilla";
+  const isSimpleItem = item.type === "sambusa" || item.type === "simple-item";
   const allowedToppings = item.allowedToppings || [];
   
   const hotToppings: Topping[] = allowedToppings.includes("hot") ? menuData.toppings.hot : [];
   const coldToppings: Topping[] = allowedToppings.includes("cold") ? menuData.toppings.cold : [];
   const sauces: Topping[] = allowedToppings.includes("sauces") ? menuData.toppings.sauces : [];
-  const canAddFries = allowedToppings.includes("fries") || (item.type?.includes("bowl") && item.type !== "fruit-bowl");
+  const meats: Topping[] = allowedToppings.includes("meats") ? menuData.toppings.meats : [];
+  const drinks: Topping[] = allowedToppings.includes("drink") ? menuData.toppings.drinks : [];
+  const canAddFries = allowedToppings.includes("fries");
+  const canAddIce = allowedToppings.includes("ice");
 
   const toggleHotTopping = (topping: string) => {
     // For quesadilla with baseProtein, lock the protein selection
@@ -134,9 +149,21 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
       const topping = coldToppings.find(t => t.name === toppingName);
       if (topping) total += topping.price;
     });
+
+    // Add meat price for loaded fries
+    if (selectedMeat) {
+      const meat = meats.find(m => m.name === selectedMeat);
+      if (meat) total += meat.price;
+    }
     
     // Add fries ($6)
     if (addFries) total += 6;
+
+    // Add drink
+    if (addDrink) {
+      const drink = drinks.find(d => d.name === addDrink);
+      if (drink) total += drink.price;
+    }
     
     return total;
   };
@@ -147,7 +174,10 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
       hotToppings: selectedHotToppings,
       coldToppings: selectedColdToppings,
       sauces: selectedSauces,
+      meat: selectedMeat || undefined,
       addFries,
+      addDrink: addDrink || undefined,
+      iceOption: isDrink ? iceOption : undefined,
       totalPrice: calculateTotalPrice(),
     };
     onCheckout(customizedItem);
@@ -160,7 +190,13 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
     return false;
   };
 
-  const itemTypeLabel = isQuesadilla ? "Quesadilla" : item.type?.includes("bowl") ? "Bowl" : "Item";
+  const getItemTypeLabel = () => {
+    if (isDrink) return "Drink";
+    if (isLoadedFries) return "Loaded Fries";
+    if (isQuesadilla) return "Quesadilla";
+    if (item.type?.includes("bowl")) return "Bowl";
+    return "Item";
+  };
 
   return (
     <AnimatePresence>
@@ -185,7 +221,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
               <div className="w-1/2 p-8 overflow-y-auto border-r border-slate-200">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-3xl font-bold text-slate-900">
-                    Build Your {itemTypeLabel}
+                    Customize Your {getItemTypeLabel()}
                   </h2>
                   <button
                     onClick={onClose}
@@ -195,6 +231,57 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                     <X className="w-8 h-8" />
                   </button>
                 </div>
+
+                {/* Drink Ice Option */}
+                {canAddIce && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3">Ice Preference</h3>
+                    <div className="space-y-2">
+                      {["With Ice", "No Ice"].map((option) => (
+                        <button
+                          key={option}
+                          onClick={() => setIceOption(option)}
+                          className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                            iceOption === option
+                              ? "border-red-500 bg-red-50 shadow-md"
+                              : "border-slate-200 hover:border-slate-300 bg-white"
+                          }`}
+                          data-testid={`button-ice-${option.toLowerCase().replace(/\s+/g, '-')}`}
+                        >
+                          <span className="font-semibold text-slate-900">{option}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Meat Selection for Loaded Fries */}
+                {meats.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3">Choose Your Meat</h3>
+                    <div className="space-y-2">
+                      {meats.map((meat) => (
+                        <button
+                          key={meat.name}
+                          onClick={() => setSelectedMeat(meat.name)}
+                          className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                            selectedMeat === meat.name
+                              ? "border-red-500 bg-red-50 shadow-md"
+                              : "border-slate-200 hover:border-slate-300 bg-white"
+                          }`}
+                          data-testid={`button-meat-${meat.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-semibold text-slate-900">{meat.name}</span>
+                            {meat.price > 0 && (
+                              <span className="text-sm text-orange-600">+${meat.price.toFixed(2)}</span>
+                            )}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Hot Toppings Section */}
                 {hotToppings.length > 0 && (
@@ -357,6 +444,43 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                     </button>
                   </div>
                 )}
+
+                {/* Add Drink Option */}
+                {drinks.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3">Add a Drink (Optional)</h3>
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => setAddDrink("")}
+                        className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                          !addDrink
+                            ? "border-red-500 bg-red-50 shadow-md"
+                            : "border-slate-200 hover:border-slate-300 bg-white"
+                        }`}
+                        data-testid="button-drink-none"
+                      >
+                        <span className="font-semibold text-slate-900">No Drink</span>
+                      </button>
+                      {drinks.map((drink) => (
+                        <button
+                          key={drink.name}
+                          onClick={() => setAddDrink(drink.name)}
+                          className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                            addDrink === drink.name
+                              ? "border-red-500 bg-red-50 shadow-md"
+                              : "border-slate-200 hover:border-slate-300 bg-white"
+                          }`}
+                          data-testid={`button-drink-${drink.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-semibold text-slate-900">{drink.name}</span>
+                            <span className="text-sm text-orange-600">+${drink.price.toFixed(2)}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Right Side - Item Preview */}
@@ -390,8 +514,20 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
 
                     {/* Order Summary */}
                     <div className="mt-6 bg-slate-50 rounded-2xl p-4 border border-slate-200">
-                      <h4 className="font-bold text-slate-900 mb-2">Your {itemTypeLabel}</h4>
+                      <h4 className="font-bold text-slate-900 mb-2">Your Order</h4>
                       <div className="space-y-1 text-sm text-slate-700">
+                        {isDrink && (
+                          <div className="flex justify-between">
+                            <span>Ice:</span>
+                            <span className="font-semibold">{iceOption}</span>
+                          </div>
+                        )}
+                        {selectedMeat && (
+                          <div className="flex justify-between">
+                            <span>Meat:</span>
+                            <span className="font-semibold">{selectedMeat}</span>
+                          </div>
+                        )}
                         {selectedHotToppings.length > 0 && (
                           <div className="pb-2">
                             <span className="font-semibold">
@@ -449,6 +585,16 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                             <div className="flex justify-between items-center">
                               <span className="font-semibold">Add Fries</span>
                               <span className="text-orange-600">+$6.00</span>
+                            </div>
+                          </div>
+                        )}
+                        {addDrink && (
+                          <div className="pt-2 border-t border-slate-300">
+                            <div className="flex justify-between items-center">
+                              <span className="font-semibold">Add {addDrink}</span>
+                              <span className="text-orange-600">
+                                +${drinks.find(d => d.name === addDrink)?.price.toFixed(2)}
+                              </span>
                             </div>
                           </div>
                         )}

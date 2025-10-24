@@ -32,6 +32,17 @@
       {"name": "Zawadi Sauce", "price": 0},
       {"name": "Tahini", "price": 0},
       {"name": "Lime Squeeze", "price": 0}
+    ],
+    "meats": [
+      {"name": "Grilled Chicken", "price": 4},
+      {"name": "Skirt Steak", "price": 6},
+      {"name": "No Meat", "price": 0}
+    ],
+    "drinks": [
+      {"name": "Pineapple Ginger", "price": 3.65},
+      {"name": "Hibiscus Ginger", "price": 3.65},
+      {"name": "OG Lemonade", "price": 3.65},
+      {"name": "Fountain Drink", "price": 1.75}
     ]
   },
   "categories": [
@@ -45,7 +56,7 @@
           "price": 6.00,
           "tags": ["vegetarian"],
           "image": "/images/seasoned-fries.jpg",
-          "type": "appetizer"
+          "type": "simple-item"
         },
         {
           "name": "Sweet Potato Fries",
@@ -53,7 +64,7 @@
           "price": 6.00,
           "tags": ["vegetarian"],
           "image": "/images/sweet-potato-fries.jpg",
-          "type": "appetizer"
+          "type": "simple-item"
         },
         {
           "name": "Plantains",
@@ -61,7 +72,7 @@
           "price": 6.25,
           "tags": ["vegetarian", "gluten-free"],
           "image": "/images/plantains.jpg",
-          "type": "appetizer"
+          "type": "simple-item"
         },
         {
           "name": "Lentil Soup",
@@ -69,7 +80,7 @@
           "price": 8.00,
           "tags": ["vegetarian"],
           "image": "/images/lentil-soup.jpg",
-          "type": "appetizer"
+          "type": "simple-item"
         },
         {
           "name": "Plantain Chips and Guac",
@@ -77,7 +88,7 @@
           "price": 6.85,
           "tags": ["vegetarian"],
           "image": "/images/plantain-chips-guac.jpg",
-          "type": "appetizer"
+          "type": "simple-item"
         },
         {
           "name": "Loaded Fries",
@@ -85,7 +96,8 @@
           "price": 14.00,
           "tags": [],
           "image": "/images/seasoned-fries.jpg",
-          "type": "appetizer"
+          "type": "loaded-fries",
+          "allowedToppings": ["meats", "cold", "sauces", "fries", "drink"]
         }
       ]
     },
@@ -100,7 +112,7 @@
           "tags": ["halal"],
           "image": "/images/chicken-bowl.jpg",
           "type": "chicken-bowl",
-          "allowedToppings": ["hot", "cold", "sauces"],
+          "allowedToppings": ["hot", "cold", "sauces", "fries", "drink"],
           "defaultProtein": "Grilled Chicken"
         },
         {
@@ -110,7 +122,7 @@
           "tags": ["vegetarian"],
           "image": "/images/lentil-soup.jpg",
           "type": "veg-bowl",
-          "allowedToppings": ["hot", "cold", "sauces"]
+          "allowedToppings": ["hot", "cold", "sauces", "fries", "drink"]
         },
         {
           "name": "Fruit Bowl",
@@ -119,7 +131,7 @@
           "tags": ["vegetarian", "gluten-free"],
           "image": "/images/fruit-bowl.jpg",
           "type": "fruit-bowl",
-          "allowedToppings": ["cold", "sauces"]
+          "allowedToppings": ["cold", "sauces", "drink"]
         }
       ]
     },
@@ -134,7 +146,7 @@
           "tags": ["vegetarian"],
           "image": "/images/cheese-quesadilla.jpg",
           "type": "quesadilla",
-          "allowedToppings": ["cold", "sauces", "fries"],
+          "allowedToppings": ["cold", "sauces", "fries", "drink"],
           "baseProtein": null
         },
         {
@@ -144,7 +156,7 @@
           "tags": ["halal"],
           "image": "/images/chicken-quesadilla.jpg",
           "type": "quesadilla",
-          "allowedToppings": ["hot", "cold", "sauces", "fries"],
+          "allowedToppings": ["hot", "cold", "sauces", "fries", "drink"],
           "baseProtein": "Grilled Chicken"
         },
         {
@@ -154,7 +166,7 @@
           "tags": ["halal"],
           "image": "/images/steak-quesadilla.jpg",
           "type": "quesadilla",
-          "allowedToppings": ["hot", "cold", "sauces", "fries"],
+          "allowedToppings": ["hot", "cold", "sauces", "fries", "drink"],
           "baseProtein": "Skirt Steak"
         }
       ]
@@ -169,7 +181,8 @@
           "price": 2.55,
           "tags": ["halal"],
           "image": "/images/sambosa.jpg",
-          "type": "sambusa"
+          "type": "sambusa",
+          "allowedToppings": ["drink"]
         }
       ]
     },
@@ -183,7 +196,8 @@
           "price": 3.65,
           "tags": [],
           "image": "/images/pineapple-ginger.jpg",
-          "type": "drink"
+          "type": "drink",
+          "allowedToppings": ["ice"]
         },
         {
           "name": "Hibiscus Ginger",
@@ -191,7 +205,8 @@
           "price": 3.65,
           "tags": [],
           "image": "/images/hibiscus-ginger.jpg",
-          "type": "drink"
+          "type": "drink",
+          "allowedToppings": ["ice"]
         },
         {
           "name": "OG Lemonade",
@@ -199,7 +214,8 @@
           "price": 3.65,
           "tags": [],
           "image": "/images/og-lemonade.jpg",
-          "type": "drink"
+          "type": "drink",
+          "allowedToppings": ["ice"]
         },
         {
           "name": "Fountain Drinks",
@@ -207,7 +223,8 @@
           "price": 1.75,
           "tags": [],
           "image": "/images/fountain-drinks.webp",
-          "type": "drink"
+          "type": "drink",
+          "allowedToppings": ["ice"]
         }
       ]
     }
