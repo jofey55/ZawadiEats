@@ -5,7 +5,7 @@
     "hot": [
       {"name": "Grilled Chicken", "price": 0},
       {"name": "Sumac Chicken", "price": 0},
-      {"name": "Skirt Steak", "price": 2},
+      {"name": "Skirt Steak", "price": 2.40},
       {"name": "Saffron Rice", "price": 0},
       {"name": "Coconut Rice", "price": 0},
       {"name": "Roasted Cauliflower", "price": 0},
@@ -18,8 +18,8 @@
       {"name": "Pickled Cabbage", "price": 0},
       {"name": "Pico de Gallo", "price": 0},
       {"name": "Cucumber Tomato Salsa", "price": 0},
-      {"name": "Avocado", "price": 2},
-      {"name": "Guacamole", "price": 2},
+      {"name": "Avocado", "price": 2.40},
+      {"name": "Guacamole", "price": 2.40},
       {"name": "Pineapple", "price": 0},
       {"name": "Banana", "price": 0},
       {"name": "Watermelon", "price": 0}
@@ -34,15 +34,15 @@
       {"name": "Lime Squeeze", "price": 0}
     ],
     "meats": [
-      {"name": "Grilled Chicken", "price": 4},
-      {"name": "Skirt Steak", "price": 6},
+      {"name": "Grilled Chicken", "price": 4.80},
+      {"name": "Skirt Steak", "price": 7.20},
       {"name": "No Meat", "price": 0}
     ],
     "drinks": [
-      {"name": "Pineapple Ginger", "price": 3.65},
-      {"name": "Hibiscus Ginger", "price": 3.65},
-      {"name": "OG Lemonade", "price": 3.65},
-      {"name": "Fountain Drink", "price": 1.75}
+      {"name": "Pineapple Ginger", "price": 4.38},
+      {"name": "Hibiscus Ginger", "price": 4.38},
+      {"name": "OG Lemonade", "price": 4.38},
+      {"name": "Fountain Drink", "price": 2.75}
     ],
     "fountainDrinks": [
       {"name": "Coke", "price": 0},
@@ -60,7 +60,7 @@
         {
           "name": "Seasoned Fries",
           "description": "Crispy fries seasoned to perfection.",
-          "price": 6.00,
+          "price": 7.20,
           "tags": ["vegetarian"],
           "image": "/images/seasoned-fries.jpg",
           "type": "simple-item"
@@ -68,7 +68,7 @@
         {
           "name": "Sweet Potato Fries",
           "description": "Crispy sweet potato strips served as a side dish.",
-          "price": 6.00,
+          "price": 7.20,
           "tags": ["vegetarian"],
           "image": "/images/sweet-potato-fries.jpg",
           "type": "simple-item"
@@ -76,23 +76,15 @@
         {
           "name": "Plantains",
           "description": "Ripe plantains, a starchy and sweet side dish.",
-          "price": 6.25,
+          "price": 7.50,
           "tags": ["vegetarian", "gluten-free"],
           "image": "/images/plantains.jpg",
           "type": "simple-item"
         },
         {
-          "name": "Lentil Soup",
-          "description": "Hearty, comforting soup made with lentils.",
-          "price": 8.00,
-          "tags": ["vegetarian"],
-          "image": "/images/lentil-soup.jpg",
-          "type": "simple-item"
-        },
-        {
           "name": "Plantain Chips and Guac",
           "description": "Thinly sliced plantains served with a creamy avocado dip.",
-          "price": 6.85,
+          "price": 8.22,
           "tags": ["vegetarian"],
           "image": "/images/plantain-chips-guac.jpg",
           "type": "simple-item"
@@ -100,24 +92,24 @@
         {
           "name": "Loaded Fries",
           "description": "Crunchy fries loaded with toppings.",
-          "price": 14.00,
+          "price": 16.80,
           "tags": [],
           "image": "/images/seasoned-fries.jpg",
           "type": "loaded-fries",
           "allowedToppings": ["meats", "cold", "sauces", "fries", "drink"],
           "customToppings": {
             "meats": [
-              {"name": "Grilled Chicken", "price": 4},
-              {"name": "Skirt Steak", "price": 6},
+              {"name": "Grilled Chicken", "price": 4.80},
+              {"name": "Skirt Steak", "price": 7.20},
               {"name": "No Meat", "price": 0}
             ],
             "cold": [
               {"name": "Lettuce", "price": 0},
               {"name": "Pico de Gallo", "price": 0},
               {"name": "Jalapeños", "price": 0},
-              {"name": "Sour Cream", "price": 0.50},
-              {"name": "Guacamole", "price": 2},
-              {"name": "Shredded Cheese", "price": 1}
+              {"name": "Sour Cream", "price": 0.60},
+              {"name": "Guacamole", "price": 2.40},
+              {"name": "Shredded Cheese", "price": 1.20}
             ],
             "sauces": [
               {"name": "Chipotle Sauce", "price": 0},
@@ -136,7 +128,7 @@
         {
           "name": "Grilled Chicken Bowl",
           "description": "Tender grilled chicken served over a bed of flavorful ingredients.",
-          "price": 13.00,
+          "price": 15.60,
           "tags": ["halal"],
           "image": "/images/chicken-bowl.jpg",
           "type": "chicken-bowl",
@@ -145,7 +137,7 @@
           "customToppings": {
             "hot": [
               {"name": "Grilled Chicken", "price": 0},
-              {"name": "Extra Chicken", "price": 3},
+              {"name": "Extra Chicken", "price": 3.60},
               {"name": "Saffron Rice", "price": 0},
               {"name": "Coconut Rice", "price": 0},
               {"name": "Black Beans", "price": 0},
@@ -156,7 +148,7 @@
               {"name": "Pico de Gallo", "price": 0},
               {"name": "Cucumber Tomato Salsa", "price": 0},
               {"name": "Pickled Cabbage", "price": 0},
-              {"name": "Avocado", "price": 2}
+              {"name": "Avocado", "price": 2.40}
             ],
             "sauces": [
               {"name": "Chipotle Sauce", "price": 0},
@@ -170,7 +162,7 @@
         {
           "name": "Veggie Bowl",
           "description": "Hearty bowl filled with vegetables.",
-          "price": 12.00,
+          "price": 14.40,
           "tags": ["vegetarian"],
           "image": "/images/lentil-soup.jpg",
           "type": "veg-bowl",
@@ -189,8 +181,8 @@
               {"name": "Cucumber Tomato Salsa", "price": 0},
               {"name": "Pickled Cabbage", "price": 0},
               {"name": "Pico de Gallo", "price": 0},
-              {"name": "Avocado", "price": 2},
-              {"name": "Guacamole", "price": 2}
+              {"name": "Avocado", "price": 2.40},
+              {"name": "Guacamole", "price": 2.40}
             ],
             "sauces": [
               {"name": "Tahini", "price": 0},
@@ -204,7 +196,7 @@
         {
           "name": "Fruit Bowl",
           "description": "A mix of fresh fruits served in a bowl.",
-          "price": 6.95,
+          "price": 8.34,
           "tags": ["vegetarian", "gluten-free"],
           "image": "/images/fruit-bowl.jpg",
           "type": "fruit-bowl",
@@ -214,13 +206,13 @@
               {"name": "Pineapple", "price": 0},
               {"name": "Banana", "price": 0},
               {"name": "Watermelon", "price": 0},
-              {"name": "Strawberries", "price": 0.50},
-              {"name": "Mango", "price": 0.50}
+              {"name": "Strawberries", "price": 0.60},
+              {"name": "Mango", "price": 0.60}
             ],
             "sauces": [
               {"name": "Honey Drizzle", "price": 0},
               {"name": "Lime Squeeze", "price": 0},
-              {"name": "Coconut Flakes", "price": 0.50}
+              {"name": "Coconut Flakes", "price": 0.60}
             ]
           }
         }
@@ -233,7 +225,7 @@
         {
           "name": "Cheese Quesadilla",
           "description": "Melted cheese inside a crispy tortilla.",
-          "price": 11.00,
+          "price": 13.20,
           "tags": ["vegetarian"],
           "image": "/images/cheese-quesadilla.jpg",
           "type": "quesadilla",
@@ -242,8 +234,8 @@
           "customToppings": {
             "cold": [
               {"name": "Pico de Gallo", "price": 0},
-              {"name": "Guacamole", "price": 2},
-              {"name": "Sour Cream", "price": 0.50},
+              {"name": "Guacamole", "price": 2.40},
+              {"name": "Sour Cream", "price": 0.60},
               {"name": "Jalapeños", "price": 0},
               {"name": "Lettuce", "price": 0}
             ],
@@ -257,7 +249,7 @@
         {
           "name": "Chicken Quesadilla",
           "description": "Tender chicken wrapped in a crispy tortilla.",
-          "price": 12.25,
+          "price": 14.70,
           "tags": ["halal"],
           "image": "/images/chicken-quesadilla.jpg",
           "type": "quesadilla",
@@ -270,9 +262,9 @@
               {"name": "Black Beans", "price": 0}
             ],
             "cold": [
-              {"name": "Guacamole", "price": 2},
+              {"name": "Guacamole", "price": 2.40},
               {"name": "Pico de Gallo", "price": 0},
-              {"name": "Sour Cream", "price": 0.50},
+              {"name": "Sour Cream", "price": 0.60},
               {"name": "Lettuce", "price": 0},
               {"name": "Jalapeños", "price": 0}
             ],
@@ -287,7 +279,7 @@
         {
           "name": "Steak Quesadilla",
           "description": "Tender steak wrapped in a crispy tortilla with melted cheese.",
-          "price": 15.00,
+          "price": 18.00,
           "tags": ["halal"],
           "image": "/images/steak-quesadilla.jpg",
           "type": "quesadilla",
@@ -295,15 +287,15 @@
           "baseProtein": "Skirt Steak",
           "customToppings": {
             "hot": [
-              {"name": "Skirt Steak", "price": 2},
+              {"name": "Skirt Steak", "price": 2.40},
               {"name": "Roasted Corn", "price": 0},
               {"name": "Black Beans", "price": 0},
               {"name": "Grilled Peppers", "price": 0}
             ],
             "cold": [
-              {"name": "Guacamole", "price": 2},
+              {"name": "Guacamole", "price": 2.40},
               {"name": "Pico de Gallo", "price": 0},
-              {"name": "Sour Cream", "price": 0.50},
+              {"name": "Sour Cream", "price": 0.60},
               {"name": "Jalapeños", "price": 0},
               {"name": "Pickled Onions", "price": 0}
             ],
@@ -324,7 +316,7 @@
         {
           "name": "Spiced Beef",
           "description": "Beef filled pastry pockets with aromatic spices.",
-          "price": 2.55,
+          "price": 3.06,
           "tags": ["halal"],
           "image": "/images/sambosa.jpg",
           "type": "sambusa",
@@ -339,7 +331,7 @@
         {
           "name": "Pineapple Ginger",
           "description": "Pineapple and ginger infused drink.",
-          "price": 3.65,
+          "price": 4.38,
           "tags": [],
           "image": "/images/pineapple-ginger.jpg",
           "type": "drink",
@@ -348,7 +340,7 @@
         {
           "name": "Hibiscus Ginger",
           "description": "Floral and spicy tea infused with hibiscus and ginger.",
-          "price": 3.65,
+          "price": 4.38,
           "tags": [],
           "image": "/images/hibiscus-ginger.jpg",
           "type": "drink",
@@ -357,7 +349,7 @@
         {
           "name": "OG Lemonade",
           "description": "Refreshing original lemonade.",
-          "price": 3.65,
+          "price": 4.38,
           "tags": [],
           "image": "/images/og-lemonade.jpg",
           "type": "drink",
@@ -366,7 +358,7 @@
         {
           "name": "Fountain Drinks",
           "description": "Your choice of fountain soda.",
-          "price": 1.75,
+          "price": 2.75,
           "tags": [],
           "image": "/images/fountain-drinks.webp",
           "type": "fountain-drink",
