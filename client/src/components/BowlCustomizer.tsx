@@ -13,6 +13,13 @@ interface MenuItem {
   allowedToppings?: string[];
   baseProtein?: string | null;
   defaultProtein?: string;
+  customToppings?: {
+    hot?: Topping[];
+    cold?: Topping[];
+    sauces?: Topping[];
+    meats?: Topping[];
+    fountainDrinks?: Topping[];
+  };
 }
 
 interface BowlCustomizerProps {
@@ -47,6 +54,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   const [addFries, setAddFries] = useState(false);
   const [addDrink, setAddDrink] = useState<string>("");
   const [iceOption, setIceOption] = useState<string>("With Ice");
+  const [selectedFountainDrink, setSelectedFountainDrink] = useState<string>("");
 
   // Reset selections when item changes or modal opens
   useEffect(() => {
@@ -58,6 +66,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
       setAddFries(false);
       setAddDrink("");
       setIceOption("With Ice");
+      setSelectedFountainDrink("");
 
       // Quesadilla special logic: auto-select double meat (locked)
       if (item.type === "quesadilla" && item.baseProtein) {
@@ -89,16 +98,29 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   if (!item) return null;
 
   const isDrink = item.type === "drink";
+  const isFountainDrink = item.type === "fountain-drink";
   const isLoadedFries = item.type === "loaded-fries";
   const isQuesadilla = item.type === "quesadilla";
   const isSimpleItem = item.type === "sambusa" || item.type === "simple-item";
   const allowedToppings = item.allowedToppings || [];
   
-  const hotToppings: Topping[] = allowedToppings.includes("hot") ? menuData.toppings.hot : [];
-  const coldToppings: Topping[] = allowedToppings.includes("cold") ? menuData.toppings.cold : [];
-  const sauces: Topping[] = allowedToppings.includes("sauces") ? menuData.toppings.sauces : [];
-  const meats: Topping[] = allowedToppings.includes("meats") ? menuData.toppings.meats : [];
+  // Use item-specific custom toppings if available, otherwise fall back to global toppings
+  const hotToppings: Topping[] = allowedToppings.includes("hot") 
+    ? (item.customToppings?.hot || menuData.toppings.hot) 
+    : [];
+  const coldToppings: Topping[] = allowedToppings.includes("cold") 
+    ? (item.customToppings?.cold || menuData.toppings.cold) 
+    : [];
+  const sauces: Topping[] = allowedToppings.includes("sauces") 
+    ? (item.customToppings?.sauces || menuData.toppings.sauces) 
+    : [];
+  const meats: Topping[] = allowedToppings.includes("meats") 
+    ? (item.customToppings?.meats || menuData.toppings.meats) 
+    : [];
   const drinks: Topping[] = allowedToppings.includes("drink") ? menuData.toppings.drinks : [];
+  const fountainDrinks: Topping[] = allowedToppings.includes("fountainDrinks") 
+    ? (item.customToppings?.fountainDrinks || menuData.toppings.fountainDrinks) 
+    : [];
   const canAddFries = allowedToppings.includes("fries");
   const canAddIce = allowedToppings.includes("ice");
 
@@ -216,6 +238,29 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                     <X className="w-8 h-8" />
                   </button>
                 </div>
+
+                {/* Fountain Drink Flavor Selection */}
+                {isFountainDrink && fountainDrinks.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3">Choose Your Flavor</h3>
+                    <div className="space-y-2">
+                      {fountainDrinks.map((drink) => (
+                        <button
+                          key={drink.name}
+                          onClick={() => setSelectedFountainDrink(drink.name)}
+                          className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                            selectedFountainDrink === drink.name
+                              ? "border-red-500 bg-red-50 shadow-md"
+                              : "border-slate-200 hover:border-slate-300 bg-white"
+                          }`}
+                          data-testid={`button-fountain-${drink.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        >
+                          <span className="font-semibold text-slate-900">{drink.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Drink Ice Option */}
                 {canAddIce && (
