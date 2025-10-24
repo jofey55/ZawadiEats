@@ -103,12 +103,6 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   const canAddIce = allowedToppings.includes("ice");
 
   const toggleHotTopping = (topping: string) => {
-    // For quesadilla with baseProtein, lock the protein selection
-    if (isQuesadilla && item.baseProtein) {
-      const isProtein = topping.toLowerCase().includes(item.baseProtein.toLowerCase());
-      if (isProtein) return; // Can't toggle locked protein
-    }
-
     setSelectedHotToppings(prev =>
       prev.includes(topping)
         ? prev.filter(t => t !== topping)
@@ -117,9 +111,6 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   };
 
   const toggleColdTopping = (topping: string) => {
-    // For quesadilla, guacamole is required on the side
-    if (isQuesadilla && topping === "Guacamole") return; // Can't toggle required guacamole
-    
     setSelectedColdToppings(prev =>
       prev.includes(topping)
         ? prev.filter(t => t !== topping)
@@ -183,12 +174,6 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
     onCheckout(customizedItem);
   };
 
-  const isProteinLocked = (topping: string) => {
-    if (isQuesadilla && item.baseProtein) {
-      return topping.toLowerCase().includes(item.baseProtein.toLowerCase());
-    }
-    return false;
-  };
 
   const getItemTypeLabel = () => {
     if (isDrink) return "Drink";
@@ -295,19 +280,17 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                     <div className="grid grid-cols-2 gap-2">
                       {hotToppings.map((topping) => {
                         const isSelected = selectedHotToppings.includes(topping.name);
-                        const isLocked = isProteinLocked(topping.name);
                         const count = selectedHotToppings.filter(t => t === topping.name).length;
                         
                         return (
                           <button
                             key={topping.name}
                             onClick={() => toggleHotTopping(topping.name)}
-                            disabled={isLocked}
                             className={`text-left px-3 py-2 rounded-lg border-2 transition-all ${
                               isSelected
                                 ? "border-red-500 bg-red-50 shadow-sm"
                                 : "border-slate-200 hover:border-slate-300 bg-white"
-                            } ${isLocked ? "opacity-75 cursor-not-allowed" : ""}`}
+                            }`}
                             data-testid={`button-hot-${topping.name.toLowerCase().replace(/\s+/g, '-')}`}
                           >
                             <div className="flex items-center gap-2">
@@ -319,7 +302,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                               <div className="flex-1">
                                 <span className="text-sm font-medium text-slate-900">
                                   {topping.name}
-                                  {isLocked && count > 1 && ` (×${count})`}
+                                  {count > 1 && ` (×${count})`}
                                 </span>
                                 {topping.price > 0 && (
                                   <span className="text-xs text-orange-600 ml-1">+${topping.price}</span>
@@ -345,18 +328,16 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                     <div className="grid grid-cols-2 gap-2">
                       {coldToppings.map((topping) => {
                         const isSelected = selectedColdToppings.includes(topping.name);
-                        const isGuacRequired = isQuesadilla && topping.name === "Guacamole";
                         
                         return (
                           <button
                             key={topping.name}
                             onClick={() => toggleColdTopping(topping.name)}
-                            disabled={isGuacRequired}
                             className={`text-left px-3 py-2 rounded-lg border-2 transition-all ${
                               isSelected
                                 ? "border-red-500 bg-red-50 shadow-sm"
                                 : "border-slate-200 hover:border-slate-300 bg-white"
-                            } ${isGuacRequired ? "opacity-75 cursor-not-allowed" : ""}`}
+                            }`}
                             data-testid={`button-cold-${topping.name.toLowerCase().replace(/\s+/g, '-')}`}
                           >
                             <div className="flex items-center gap-2">
@@ -368,9 +349,8 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                               <div className="flex-1">
                                 <span className="text-sm font-medium text-slate-900">
                                   {topping.name}
-                                  {isGuacRequired && " (Required)"}
                                 </span>
-                                {topping.price > 0 && !isGuacRequired && (
+                                {topping.price > 0 && (
                                   <span className="text-xs text-orange-600 ml-1">+${topping.price}</span>
                                 )}
                               </div>
