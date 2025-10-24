@@ -366,11 +366,25 @@ export default function Home() {
                     {category.items.map((item) => (
                       <div 
                         key={item.name} 
-                        className="group flex gap-6 p-6 rounded-2xl border border-slate-200/50 bg-white/95 backdrop-blur-sm shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:border-orange-400/60 transition-all duration-300 cursor-pointer"
+                        className="group relative flex gap-6 p-6 rounded-2xl border-2 border-slate-200 bg-white backdrop-blur-sm shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:border-transparent transition-all duration-300 cursor-pointer overflow-hidden"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                         onClick={() => handleItemClick(item, category.slug)}
-                        style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)' }}
                       >
+                        {/* Gradient border overlay on hover */}
+                        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
+                             style={{ 
+                               background: 'linear-gradient(135deg, #f97316 0%, #fb923c 25%, #fbbf24 50%, #fb923c 75%, #f97316 100%)',
+                               padding: '2px',
+                               WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                               WebkitMaskComposite: 'xor',
+                               maskComposite: 'exclude'
+                             }}>
+                        </div>
+                        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
+                             style={{ 
+                               boxShadow: '0 0 20px rgba(251, 146, 60, 0.5), 0 0 40px rgba(249, 115, 22, 0.3), inset 0 0 20px rgba(251, 191, 36, 0.1)'
+                             }}>
+                        </div>
                         <div className="flex-shrink-0 relative">
                           <div className="w-44 h-44 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50 shadow-md">
                             <img 
