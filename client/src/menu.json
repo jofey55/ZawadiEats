@@ -134,7 +134,7 @@
           "tags": ["vegetarian"],
           "image": "/images/cheese-quesadilla.jpg",
           "type": "quesadilla",
-          "allowedToppings": ["cold", "sauces"],
+          "allowedToppings": ["cold", "sauces", "fries"],
           "baseProtein": null
         },
         {
@@ -144,7 +144,7 @@
           "tags": ["halal"],
           "image": "/images/chicken-quesadilla.jpg",
           "type": "quesadilla",
-          "allowedToppings": ["hot", "cold", "sauces"],
+          "allowedToppings": ["hot", "cold", "sauces", "fries"],
           "baseProtein": "Grilled Chicken"
         },
         {
@@ -154,7 +154,7 @@
           "tags": ["halal"],
           "image": "/images/steak-quesadilla.jpg",
           "type": "quesadilla",
-          "allowedToppings": ["hot", "cold", "sauces"],
+          "allowedToppings": ["hot", "cold", "sauces", "fries"],
           "baseProtein": "Skirt Steak"
         }
       ]
