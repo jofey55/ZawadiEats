@@ -292,7 +292,7 @@ export default function Home() {
       {/* Menu */}
       <section id="menu" className="menu-texture relative overflow-hidden">
         <div className="mx-auto max-w-5xl px-4 py-16 relative z-10">
-          <div className="text-center mb-12 bg-white/90 backdrop-blur-sm rounded-2xl py-10 px-6 shadow-lg border border-white">
+          <div className="text-center mb-12 bg-white rounded-2xl py-10 px-6 shadow-2xl border-2 border-slate-100">
             <h2 className="text-6xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-4" style={{ letterSpacing: '-0.02em' }}>Our Menu</h2>
             <p className="mt-4 text-lg font-medium text-slate-600 max-w-2xl mx-auto leading-relaxed">
               {menuData.dietNotes} Prices may vary on delivery apps.
