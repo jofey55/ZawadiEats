@@ -1,6 +1,39 @@
 {
   "currency": "USD",
   "dietNotes": "Halal-friendly. Ask about allergens.",
+  "toppings": {
+    "hot": [
+      {"name": "Grilled Chicken", "price": 0},
+      {"name": "Sumac Chicken", "price": 0},
+      {"name": "Skirt Steak", "price": 2},
+      {"name": "Saffron Rice", "price": 0},
+      {"name": "Coconut Rice", "price": 0},
+      {"name": "Roasted Cauliflower", "price": 0},
+      {"name": "Roasted Corn", "price": 0},
+      {"name": "Black Beans", "price": 0},
+      {"name": "Quinoa", "price": 0}
+    ],
+    "cold": [
+      {"name": "Lettuce", "price": 0},
+      {"name": "Pickled Cabbage", "price": 0},
+      {"name": "Pico de Gallo", "price": 0},
+      {"name": "Cucumber Tomato Salsa", "price": 0},
+      {"name": "Avocado", "price": 2},
+      {"name": "Guacamole", "price": 2},
+      {"name": "Pineapple", "price": 0},
+      {"name": "Banana", "price": 0},
+      {"name": "Watermelon", "price": 0}
+    ],
+    "sauces": [
+      {"name": "Chipotle Sauce", "price": 0},
+      {"name": "Harissa", "price": 0},
+      {"name": "Jalapeño Mayo", "price": 0},
+      {"name": "Ranch", "price": 0},
+      {"name": "Zawadi Sauce", "price": 0},
+      {"name": "Tahini", "price": 0},
+      {"name": "Lime Squeeze", "price": 0}
+    ]
+  },
   "categories": [
     {
       "name": "Appetizers",
@@ -11,42 +44,48 @@
           "description": "Crispy fries seasoned to perfection.",
           "price": 6.00,
           "tags": ["vegetarian"],
-          "image": "/images/seasoned-fries.jpg"
+          "image": "/images/seasoned-fries.jpg",
+          "type": "appetizer"
         },
         {
           "name": "Sweet Potato Fries",
           "description": "Crispy sweet potato strips served as a side dish.",
           "price": 6.00,
           "tags": ["vegetarian"],
-          "image": "/images/sweet-potato-fries.jpg"
+          "image": "/images/sweet-potato-fries.jpg",
+          "type": "appetizer"
         },
         {
           "name": "Plantains",
           "description": "Ripe plantains, a starchy and sweet side dish.",
           "price": 6.25,
           "tags": ["vegetarian", "gluten-free"],
-          "image": "/images/plantains.jpg"
+          "image": "/images/plantains.jpg",
+          "type": "appetizer"
         },
         {
           "name": "Lentil Soup",
           "description": "Hearty, comforting soup made with lentils.",
           "price": 8.00,
           "tags": ["vegetarian"],
-          "image": "/images/lentil-soup.jpg"
+          "image": "/images/lentil-soup.jpg",
+          "type": "appetizer"
         },
         {
           "name": "Plantain Chips and Guac",
           "description": "Thinly sliced plantains served with a creamy avocado dip.",
           "price": 6.85,
           "tags": ["vegetarian"],
-          "image": "/images/plantain-chips-guac.jpg"
+          "image": "/images/plantain-chips-guac.jpg",
+          "type": "appetizer"
         },
         {
           "name": "Loaded Fries",
           "description": "Crunchy fries loaded with toppings.",
           "price": 14.00,
           "tags": [],
-          "image": "/images/seasoned-fries.jpg"
+          "image": "/images/seasoned-fries.jpg",
+          "type": "appetizer"
         }
       ]
     },
@@ -59,21 +98,28 @@
           "description": "Tender grilled chicken served over a bed of flavorful ingredients.",
           "price": 13.00,
           "tags": ["halal"],
-          "image": "/images/chicken-bowl.jpg"
+          "image": "/images/chicken-bowl.jpg",
+          "type": "chicken-bowl",
+          "allowedToppings": ["hot", "cold", "sauces"],
+          "defaultProtein": "Grilled Chicken"
         },
         {
           "name": "Veggie Bowl",
           "description": "Hearty bowl filled with vegetables.",
           "price": 12.00,
           "tags": ["vegetarian"],
-          "image": "/images/lentil-soup.jpg"
+          "image": "/images/lentil-soup.jpg",
+          "type": "veg-bowl",
+          "allowedToppings": ["hot", "cold", "sauces"]
         },
         {
           "name": "Fruit Bowl",
           "description": "A mix of fresh fruits served in a bowl.",
           "price": 6.95,
           "tags": ["vegetarian", "gluten-free"],
-          "image": "/images/fruit-bowl.jpg"
+          "image": "/images/fruit-bowl.jpg",
+          "type": "fruit-bowl",
+          "allowedToppings": ["cold", "sauces"]
         }
       ]
     },
@@ -86,21 +132,30 @@
           "description": "Melted cheese inside a crispy tortilla.",
           "price": 11.00,
           "tags": ["vegetarian"],
-          "image": "/images/cheese-quesadilla.jpg"
+          "image": "/images/cheese-quesadilla.jpg",
+          "type": "quesadilla",
+          "allowedToppings": ["cold", "sauces"],
+          "baseProtein": null
         },
         {
           "name": "Chicken Quesadilla",
           "description": "Tender chicken wrapped in a crispy tortilla.",
           "price": 12.25,
           "tags": ["halal"],
-          "image": "/images/chicken-quesadilla.jpg"
+          "image": "/images/chicken-quesadilla.jpg",
+          "type": "quesadilla",
+          "allowedToppings": ["hot", "cold", "sauces"],
+          "baseProtein": "Grilled Chicken"
         },
         {
           "name": "Steak Quesadilla",
           "description": "Tender steak wrapped in a crispy tortilla with melted cheese.",
           "price": 15.00,
           "tags": ["halal"],
-          "image": "/images/steak-quesadilla.jpg"
+          "image": "/images/steak-quesadilla.jpg",
+          "type": "quesadilla",
+          "allowedToppings": ["hot", "cold", "sauces"],
+          "baseProtein": "Skirt Steak"
         }
       ]
     },
@@ -113,7 +168,8 @@
           "description": "Beef filled pastry pockets with aromatic spices.",
           "price": 2.55,
           "tags": ["halal"],
-          "image": "/images/sambosa.jpg"
+          "image": "/images/sambosa.jpg",
+          "type": "sambusa"
         }
       ]
     },
@@ -126,28 +182,32 @@
           "description": "Pineapple and ginger infused drink.",
           "price": 3.65,
           "tags": [],
-          "image": "/images/pineapple-ginger.jpg"
+          "image": "/images/pineapple-ginger.jpg",
+          "type": "drink"
         },
         {
           "name": "Hibiscus Ginger",
           "description": "Floral and spicy tea infused with hibiscus and ginger.",
           "price": 3.65,
           "tags": [],
-          "image": "/images/hibiscus-ginger.jpg"
+          "image": "/images/hibiscus-ginger.jpg",
+          "type": "drink"
         },
         {
           "name": "OG Lemonade",
           "description": "Refreshing original lemonade.",
           "price": 3.65,
           "tags": [],
-          "image": "/images/og-lemonade.jpg"
+          "image": "/images/og-lemonade.jpg",
+          "type": "drink"
         },
         {
           "name": "Fountain Drinks",
           "description": "Your choice of fountain soda.",
           "price": 1.75,
           "tags": [],
-          "image": "/images/fountain-drinks.webp"
+          "image": "/images/fountain-drinks.webp",
+          "type": "drink"
         }
       ]
     }

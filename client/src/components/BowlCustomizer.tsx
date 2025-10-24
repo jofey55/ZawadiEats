@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { X, Plus, Minus, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import menuData from "../menu.json";
 
 interface MenuItem {
   name: string;
@@ -8,6 +9,10 @@ interface MenuItem {
   price: number;
   tags?: string[];
   image: string;
+  type?: string;
+  allowedToppings?: string[];
+  baseProtein?: string | null;
+  defaultProtein?: string;
 }
 
 interface BowlCustomizerProps {
@@ -19,88 +24,119 @@ interface BowlCustomizerProps {
 
 export interface CustomizedItem {
   baseItem: MenuItem;
-  base: string;
-  protein: string;
-  toppings: string[];
-  sauce: string;
+  hotToppings: string[];
+  coldToppings: string[];
+  sauces: string[];
+  addFries: boolean;
   totalPrice: number;
 }
 
-const bases = [
-  { name: "Coconut Rice", price: 0 },
-  { name: "Saffron Rice", price: 0 },
-  { name: "Black Beans", price: 0 },
-  { name: "Mixed Greens", price: 1.5 },
-];
-
-const proteins = [
-  { name: "Grilled Chicken", price: 0 },
-  { name: "Spiced Beef", price: 2 },
-  { name: "Falafel (Veggie)", price: 0 },
-  { name: "Extra Protein", price: 4 },
-  { name: "No Protein", price: -2 },
-];
-
-const toppings = [
-  "Tomatoes",
-  "Cucumbers",
-  "Red Onions",
-  "Pickled Vegetables",
-  "Avocado (+$2)",
-  "Jalapeños",
-  "Corn",
-  "Black Olives",
-  "Feta Cheese (+$1.5)",
-  "Fresh Cilantro",
-];
-
-const sauces = [
-  "Spicy Peri-Peri",
-  "Mild Garlic",
-  "Creamy Tahini",
-  "Lemon Herb",
-  "Mango Chutney",
-  "No Sauce",
-];
+interface Topping {
+  name: string;
+  price: number;
+}
 
 export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: BowlCustomizerProps) {
-  const [selectedBase, setSelectedBase] = useState(bases[0].name);
-  const [selectedProtein, setSelectedProtein] = useState(proteins[0].name);
-  const [selectedToppings, setSelectedToppings] = useState<string[]>([]);
-  const [selectedSauce, setSelectedSauce] = useState(sauces[0]);
+  const [selectedHotToppings, setSelectedHotToppings] = useState<string[]>([]);
+  const [selectedColdToppings, setSelectedColdToppings] = useState<string[]>([]);
+  const [selectedSauces, setSelectedSauces] = useState<string[]>([]);
+  const [addFries, setAddFries] = useState(false);
 
   // Reset selections when item changes or modal opens
   useEffect(() => {
     if (item && isOpen) {
-      setSelectedBase(bases[0].name);
-      setSelectedProtein(proteins[0].name);
-      setSelectedToppings([]);
-      setSelectedSauce(sauces[0]);
+      setSelectedHotToppings([]);
+      setSelectedColdToppings([]);
+      setSelectedSauces([]);
+      setAddFries(false);
+
+      // Quesadilla special logic: auto-select double meat (locked)
+      if (item.type === "quesadilla" && item.baseProtein) {
+        const proteinTopping = menuData.toppings.hot.find(t => 
+          t.name.toLowerCase().includes(item.baseProtein!.toLowerCase())
+        );
+        if (proteinTopping) {
+          setSelectedHotToppings([proteinTopping.name, proteinTopping.name]); // double meat
+        }
+      }
+      
+      // Bowl with default protein: auto-select it
+      if (item.type?.includes("bowl") && item.defaultProtein) {
+        const proteinTopping = menuData.toppings.hot.find(t => 
+          t.name === item.defaultProtein
+        );
+        if (proteinTopping) {
+          setSelectedHotToppings([proteinTopping.name]);
+        }
+      }
+
+      // Quesadilla: auto-add guacamole on cold side
+      if (item.type === "quesadilla") {
+        setSelectedColdToppings(["Guacamole"]);
+      }
     }
   }, [item, isOpen]);
 
   if (!item) return null;
 
-  const toggleTopping = (topping: string) => {
-    setSelectedToppings(prev =>
+  const isQuesadilla = item.type === "quesadilla";
+  const allowedToppings = item.allowedToppings || [];
+  
+  const hotToppings: Topping[] = allowedToppings.includes("hot") ? menuData.toppings.hot : [];
+  const coldToppings: Topping[] = allowedToppings.includes("cold") ? menuData.toppings.cold : [];
+  const sauces: Topping[] = allowedToppings.includes("sauces") ? menuData.toppings.sauces : [];
+  const canAddFries = allowedToppings.includes("fries") || (item.type?.includes("bowl") && item.type !== "fruit-bowl");
+
+  const toggleHotTopping = (topping: string) => {
+    // For quesadilla with baseProtein, lock the protein selection
+    if (isQuesadilla && item.baseProtein) {
+      const isProtein = topping.toLowerCase().includes(item.baseProtein.toLowerCase());
+      if (isProtein) return; // Can't toggle locked protein
+    }
+
+    setSelectedHotToppings(prev =>
       prev.includes(topping)
         ? prev.filter(t => t !== topping)
         : [...prev, topping]
     );
   };
 
+  const toggleColdTopping = (topping: string) => {
+    // For quesadilla, guacamole is required on the side
+    if (isQuesadilla && topping === "Guacamole") return; // Can't toggle required guacamole
+    
+    setSelectedColdToppings(prev =>
+      prev.includes(topping)
+        ? prev.filter(t => t !== topping)
+        : [...prev, topping]
+    );
+  };
+
+  const toggleSauce = (sauce: string) => {
+    setSelectedSauces(prev =>
+      prev.includes(sauce)
+        ? prev.filter(s => s !== sauce)
+        : [...prev, sauce]
+    );
+  };
+
   const calculateTotalPrice = () => {
     let total = item.price;
     
-    const basePrice = bases.find(b => b.name === selectedBase)?.price || 0;
-    const proteinPrice = proteins.find(p => p.name === selectedProtein)?.price || 0;
-    
-    total += basePrice + proteinPrice;
-    
-    selectedToppings.forEach(topping => {
-      if (topping.includes("Avocado")) total += 2;
-      if (topping.includes("Feta")) total += 1.5;
+    // Add hot topping prices
+    selectedHotToppings.forEach(toppingName => {
+      const topping = hotToppings.find(t => t.name === toppingName);
+      if (topping) total += topping.price;
     });
+    
+    // Add cold topping prices
+    selectedColdToppings.forEach(toppingName => {
+      const topping = coldToppings.find(t => t.name === toppingName);
+      if (topping) total += topping.price;
+    });
+    
+    // Add fries ($6)
+    if (addFries) total += 6;
     
     return total;
   };
@@ -108,14 +144,23 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   const handleCheckout = () => {
     const customizedItem: CustomizedItem = {
       baseItem: item,
-      base: selectedBase,
-      protein: selectedProtein,
-      toppings: selectedToppings,
-      sauce: selectedSauce,
+      hotToppings: selectedHotToppings,
+      coldToppings: selectedColdToppings,
+      sauces: selectedSauces,
+      addFries,
       totalPrice: calculateTotalPrice(),
     };
     onCheckout(customizedItem);
   };
+
+  const isProteinLocked = (topping: string) => {
+    if (isQuesadilla && item.baseProtein) {
+      return topping.toLowerCase().includes(item.baseProtein.toLowerCase());
+    }
+    return false;
+  };
+
+  const itemTypeLabel = isQuesadilla ? "Quesadilla" : item.type?.includes("bowl") ? "Bowl" : "Item";
 
   return (
     <AnimatePresence>
@@ -139,7 +184,9 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
               {/* Left Side - Customization Options */}
               <div className="w-1/2 p-8 overflow-y-auto border-r border-slate-200">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-3xl font-bold text-slate-900">Build Your Bowl</h2>
+                  <h2 className="text-3xl font-bold text-slate-900">
+                    Build Your {itemTypeLabel}
+                  </h2>
                   <button
                     onClick={onClose}
                     className="text-slate-400 hover:text-slate-600 transition-colors"
@@ -149,110 +196,167 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                   </button>
                 </div>
 
-                {/* Base Selection */}
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3">Choose Your Base</h3>
-                  <div className="space-y-2">
-                    {bases.map((base) => (
-                      <button
-                        key={base.name}
-                        onClick={() => setSelectedBase(base.name)}
-                        className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
-                          selectedBase === base.name
-                            ? "border-red-500 bg-red-50 shadow-md"
-                            : "border-slate-200 hover:border-slate-300 bg-white"
-                        }`}
-                        data-testid={`button-base-${base.name.toLowerCase().replace(/\s+/g, '-')}`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="font-semibold text-slate-900">{base.name}</span>
-                          {base.price > 0 && (
-                            <span className="text-sm text-orange-600">+${base.price.toFixed(2)}</span>
-                          )}
-                        </div>
-                      </button>
-                    ))}
+                {/* Hot Toppings Section */}
+                {hotToppings.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3">
+                      {isQuesadilla ? "Inside the Quesadilla (Hot)" : "Hot Toppings"}
+                      {isQuesadilla && item.baseProtein && (
+                        <span className="text-sm font-normal text-slate-500 ml-2">(Double meat included)</span>
+                      )}
+                    </h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {hotToppings.map((topping) => {
+                        const isSelected = selectedHotToppings.includes(topping.name);
+                        const isLocked = isProteinLocked(topping.name);
+                        const count = selectedHotToppings.filter(t => t === topping.name).length;
+                        
+                        return (
+                          <button
+                            key={topping.name}
+                            onClick={() => toggleHotTopping(topping.name)}
+                            disabled={isLocked}
+                            className={`text-left px-3 py-2 rounded-lg border-2 transition-all ${
+                              isSelected
+                                ? "border-red-500 bg-red-50 shadow-sm"
+                                : "border-slate-200 hover:border-slate-300 bg-white"
+                            } ${isLocked ? "opacity-75 cursor-not-allowed" : ""}`}
+                            data-testid={`button-hot-${topping.name.toLowerCase().replace(/\s+/g, '-')}`}
+                          >
+                            <div className="flex items-center gap-2">
+                              {isSelected ? (
+                                <Minus className="w-4 h-4 text-red-500" />
+                              ) : (
+                                <Plus className="w-4 h-4 text-slate-400" />
+                              )}
+                              <div className="flex-1">
+                                <span className="text-sm font-medium text-slate-900">
+                                  {topping.name}
+                                  {isLocked && count > 1 && ` (×${count})`}
+                                </span>
+                                {topping.price > 0 && (
+                                  <span className="text-xs text-orange-600 ml-1">+${topping.price}</span>
+                                )}
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                )}
 
-                {/* Protein Selection */}
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3">Choose Your Protein</h3>
-                  <div className="space-y-2">
-                    {proteins.map((protein) => (
-                      <button
-                        key={protein.name}
-                        onClick={() => setSelectedProtein(protein.name)}
-                        className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
-                          selectedProtein === protein.name
-                            ? "border-red-500 bg-red-50 shadow-md"
-                            : "border-slate-200 hover:border-slate-300 bg-white"
-                        }`}
-                        data-testid={`button-protein-${protein.name.toLowerCase().replace(/\s+/g, '-')}`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="font-semibold text-slate-900">{protein.name}</span>
-                          {protein.price !== 0 && (
-                            <span className={`text-sm ${protein.price > 0 ? 'text-orange-600' : 'text-red-600'}`}>
-                              {protein.price > 0 ? '+' : ''}${protein.price.toFixed(2)}
-                            </span>
-                          )}
-                        </div>
-                      </button>
-                    ))}
+                {/* Cold Toppings Section */}
+                {coldToppings.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3">
+                      {isQuesadilla ? "On the Side (Cold)" : "Cold Toppings"}
+                      {isQuesadilla && (
+                        <span className="text-sm font-normal text-slate-500 ml-2">(Guacamole included)</span>
+                      )}
+                    </h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {coldToppings.map((topping) => {
+                        const isSelected = selectedColdToppings.includes(topping.name);
+                        const isGuacRequired = isQuesadilla && topping.name === "Guacamole";
+                        
+                        return (
+                          <button
+                            key={topping.name}
+                            onClick={() => toggleColdTopping(topping.name)}
+                            disabled={isGuacRequired}
+                            className={`text-left px-3 py-2 rounded-lg border-2 transition-all ${
+                              isSelected
+                                ? "border-red-500 bg-red-50 shadow-sm"
+                                : "border-slate-200 hover:border-slate-300 bg-white"
+                            } ${isGuacRequired ? "opacity-75 cursor-not-allowed" : ""}`}
+                            data-testid={`button-cold-${topping.name.toLowerCase().replace(/\s+/g, '-')}`}
+                          >
+                            <div className="flex items-center gap-2">
+                              {isSelected ? (
+                                <Minus className="w-4 h-4 text-red-500" />
+                              ) : (
+                                <Plus className="w-4 h-4 text-slate-400" />
+                              )}
+                              <div className="flex-1">
+                                <span className="text-sm font-medium text-slate-900">
+                                  {topping.name}
+                                  {isGuacRequired && " (Required)"}
+                                </span>
+                                {topping.price > 0 && !isGuacRequired && (
+                                  <span className="text-xs text-orange-600 ml-1">+${topping.price}</span>
+                                )}
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                )}
 
-                {/* Toppings Selection */}
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3">
-                    Add Toppings <span className="text-sm font-normal text-slate-500">(Select multiple)</span>
-                  </h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    {toppings.map((topping) => (
-                      <button
-                        key={topping}
-                        onClick={() => toggleTopping(topping)}
-                        className={`text-left px-3 py-2 rounded-lg border-2 transition-all ${
-                          selectedToppings.includes(topping)
-                            ? "border-red-500 bg-red-50 shadow-sm"
-                            : "border-slate-200 hover:border-slate-300 bg-white"
-                        }`}
-                        data-testid={`button-topping-${topping.toLowerCase().replace(/\s+/g, '-').replace(/[()$+]/g, '')}`}
-                      >
-                        <div className="flex items-center gap-2">
-                          {selectedToppings.includes(topping) ? (
-                            <Minus className="w-4 h-4 text-red-500" />
+                {/* Sauces Section */}
+                {sauces.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3">
+                      Sauces & Dips <span className="text-sm font-normal text-slate-500">(Select multiple)</span>
+                    </h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {sauces.map((sauce) => {
+                        const isSelected = selectedSauces.includes(sauce.name);
+                        
+                        return (
+                          <button
+                            key={sauce.name}
+                            onClick={() => toggleSauce(sauce.name)}
+                            className={`text-left px-3 py-2 rounded-lg border-2 transition-all ${
+                              isSelected
+                                ? "border-red-500 bg-red-50 shadow-sm"
+                                : "border-slate-200 hover:border-slate-300 bg-white"
+                            }`}
+                            data-testid={`button-sauce-${sauce.name.toLowerCase().replace(/\s+/g, '-')}`}
+                          >
+                            <div className="flex items-center gap-2">
+                              {isSelected ? (
+                                <Minus className="w-4 h-4 text-red-500" />
+                              ) : (
+                                <Plus className="w-4 h-4 text-slate-400" />
+                              )}
+                              <span className="text-sm font-medium text-slate-900">{sauce.name}</span>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Add Fries Option */}
+                {canAddFries && (
+                  <div className="mb-6">
+                    <button
+                      onClick={() => setAddFries(!addFries)}
+                      className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                        addFries
+                          ? "border-red-500 bg-red-50 shadow-md"
+                          : "border-slate-200 hover:border-slate-300 bg-white"
+                      }`}
+                      data-testid="button-add-fries"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          {addFries ? (
+                            <Minus className="w-5 h-5 text-red-500" />
                           ) : (
-                            <Plus className="w-4 h-4 text-slate-400" />
+                            <Plus className="w-5 h-5 text-slate-400" />
                           )}
-                          <span className="text-sm font-medium text-slate-900">{topping}</span>
+                          <span className="font-semibold text-slate-900">Add Fries</span>
                         </div>
-                      </button>
-                    ))}
+                        <span className="text-sm text-orange-600">+$6.00</span>
+                      </div>
+                    </button>
                   </div>
-                </div>
-
-                {/* Sauce Selection */}
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3">Choose Your Sauce</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    {sauces.map((sauce) => (
-                      <button
-                        key={sauce}
-                        onClick={() => setSelectedSauce(sauce)}
-                        className={`text-left px-3 py-2 rounded-lg border-2 transition-all ${
-                          selectedSauce === sauce
-                            ? "border-red-500 bg-red-50 shadow-sm"
-                            : "border-slate-200 hover:border-slate-300 bg-white"
-                        }`}
-                        data-testid={`button-sauce-${sauce.toLowerCase().replace(/\s+/g, '-')}`}
-                      >
-                        <span className="text-sm font-medium text-slate-900">{sauce}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                )}
               </div>
 
               {/* Right Side - Item Preview */}
@@ -286,32 +390,65 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
 
                     {/* Order Summary */}
                     <div className="mt-6 bg-slate-50 rounded-2xl p-4 border border-slate-200">
-                      <h4 className="font-bold text-slate-900 mb-2">Your Bowl</h4>
+                      <h4 className="font-bold text-slate-900 mb-2">Your {itemTypeLabel}</h4>
                       <div className="space-y-1 text-sm text-slate-700">
-                        <div className="flex justify-between">
-                          <span>Base:</span>
-                          <span className="font-semibold">{selectedBase}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Protein:</span>
-                          <span className="font-semibold">{selectedProtein}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Sauce:</span>
-                          <span className="font-semibold">{selectedSauce}</span>
-                        </div>
-                        {selectedToppings.length > 0 && (
-                          <div className="pt-2 border-t border-slate-300">
-                            <span className="font-semibold">Toppings:</span>
+                        {selectedHotToppings.length > 0 && (
+                          <div className="pb-2">
+                            <span className="font-semibold">
+                              {isQuesadilla ? "Inside:" : "Hot:"}
+                            </span>
                             <div className="flex flex-wrap gap-1 mt-1">
-                              {selectedToppings.map((topping) => (
+                              {Array.from(new Set(selectedHotToppings)).map((topping) => {
+                                const count = selectedHotToppings.filter(t => t === topping).length;
+                                return (
+                                  <span
+                                    key={topping}
+                                    className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full border border-orange-300"
+                                  >
+                                    {topping}{count > 1 ? ` (×${count})` : ''}
+                                  </span>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                        {selectedColdToppings.length > 0 && (
+                          <div className="pb-2">
+                            <span className="font-semibold">
+                              {isQuesadilla ? "On the Side:" : "Cold:"}
+                            </span>
+                            <div className="flex flex-wrap gap-1 mt-1">
+                              {selectedColdToppings.map((topping) => (
                                 <span
                                   key={topping}
-                                  className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full border border-orange-300"
+                                  className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full border border-blue-300"
                                 >
                                   {topping}
                                 </span>
                               ))}
+                            </div>
+                          </div>
+                        )}
+                        {selectedSauces.length > 0 && (
+                          <div className="pb-2">
+                            <span className="font-semibold">Sauces:</span>
+                            <div className="flex flex-wrap gap-1 mt-1">
+                              {selectedSauces.map((sauce) => (
+                                <span
+                                  key={sauce}
+                                  className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full border border-red-300"
+                                >
+                                  {sauce}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {addFries && (
+                          <div className="pt-2 border-t border-slate-300">
+                            <div className="flex justify-between items-center">
+                              <span className="font-semibold">Add Fries</span>
+                              <span className="text-orange-600">+$6.00</span>
                             </div>
                           </div>
                         )}
