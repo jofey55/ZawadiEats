@@ -43,6 +43,13 @@
       {"name": "Hibiscus Ginger", "price": 3.65},
       {"name": "OG Lemonade", "price": 3.65},
       {"name": "Fountain Drink", "price": 1.75}
+    ],
+    "fountainDrinks": [
+      {"name": "Coke", "price": 0},
+      {"name": "Sprite", "price": 0},
+      {"name": "Fanta", "price": 0},
+      {"name": "Green Melo", "price": 0},
+      {"name": "Diet Coke", "price": 0}
     ]
   },
   "categories": [
@@ -97,7 +104,28 @@
           "tags": [],
           "image": "/images/seasoned-fries.jpg",
           "type": "loaded-fries",
-          "allowedToppings": ["meats", "cold", "sauces", "fries", "drink"]
+          "allowedToppings": ["meats", "cold", "sauces", "fries", "drink"],
+          "customToppings": {
+            "meats": [
+              {"name": "Grilled Chicken", "price": 4},
+              {"name": "Skirt Steak", "price": 6},
+              {"name": "No Meat", "price": 0}
+            ],
+            "cold": [
+              {"name": "Lettuce", "price": 0},
+              {"name": "Pico de Gallo", "price": 0},
+              {"name": "Jalapeños", "price": 0},
+              {"name": "Sour Cream", "price": 0.50},
+              {"name": "Guacamole", "price": 2},
+              {"name": "Shredded Cheese", "price": 1}
+            ],
+            "sauces": [
+              {"name": "Chipotle Sauce", "price": 0},
+              {"name": "Ranch", "price": 0},
+              {"name": "Zawadi Sauce", "price": 0},
+              {"name": "Jalapeño Mayo", "price": 0}
+            ]
+          }
         }
       ]
     },
@@ -113,7 +141,31 @@
           "image": "/images/chicken-bowl.jpg",
           "type": "chicken-bowl",
           "allowedToppings": ["hot", "cold", "sauces", "fries", "drink"],
-          "defaultProtein": "Grilled Chicken"
+          "defaultProtein": "Grilled Chicken",
+          "customToppings": {
+            "hot": [
+              {"name": "Grilled Chicken", "price": 0},
+              {"name": "Extra Chicken", "price": 3},
+              {"name": "Saffron Rice", "price": 0},
+              {"name": "Coconut Rice", "price": 0},
+              {"name": "Black Beans", "price": 0},
+              {"name": "Roasted Corn", "price": 0}
+            ],
+            "cold": [
+              {"name": "Lettuce", "price": 0},
+              {"name": "Pico de Gallo", "price": 0},
+              {"name": "Cucumber Tomato Salsa", "price": 0},
+              {"name": "Pickled Cabbage", "price": 0},
+              {"name": "Avocado", "price": 2}
+            ],
+            "sauces": [
+              {"name": "Chipotle Sauce", "price": 0},
+              {"name": "Jalapeño Mayo", "price": 0},
+              {"name": "Zawadi Sauce", "price": 0},
+              {"name": "Ranch", "price": 0},
+              {"name": "Lime Squeeze", "price": 0}
+            ]
+          }
         },
         {
           "name": "Veggie Bowl",
@@ -122,7 +174,32 @@
           "tags": ["vegetarian"],
           "image": "/images/lentil-soup.jpg",
           "type": "veg-bowl",
-          "allowedToppings": ["hot", "cold", "sauces", "fries", "drink"]
+          "allowedToppings": ["hot", "cold", "sauces", "fries", "drink"],
+          "customToppings": {
+            "hot": [
+              {"name": "Roasted Cauliflower", "price": 0},
+              {"name": "Roasted Corn", "price": 0},
+              {"name": "Black Beans", "price": 0},
+              {"name": "Quinoa", "price": 0},
+              {"name": "Saffron Rice", "price": 0},
+              {"name": "Coconut Rice", "price": 0}
+            ],
+            "cold": [
+              {"name": "Lettuce", "price": 0},
+              {"name": "Cucumber Tomato Salsa", "price": 0},
+              {"name": "Pickled Cabbage", "price": 0},
+              {"name": "Pico de Gallo", "price": 0},
+              {"name": "Avocado", "price": 2},
+              {"name": "Guacamole", "price": 2}
+            ],
+            "sauces": [
+              {"name": "Tahini", "price": 0},
+              {"name": "Harissa", "price": 0},
+              {"name": "Zawadi Sauce", "price": 0},
+              {"name": "Ranch", "price": 0},
+              {"name": "Lime Squeeze", "price": 0}
+            ]
+          }
         },
         {
           "name": "Fruit Bowl",
@@ -131,7 +208,21 @@
           "tags": ["vegetarian", "gluten-free"],
           "image": "/images/fruit-bowl.jpg",
           "type": "fruit-bowl",
-          "allowedToppings": ["cold", "sauces", "drink"]
+          "allowedToppings": ["cold", "sauces", "drink"],
+          "customToppings": {
+            "cold": [
+              {"name": "Pineapple", "price": 0},
+              {"name": "Banana", "price": 0},
+              {"name": "Watermelon", "price": 0},
+              {"name": "Strawberries", "price": 0.50},
+              {"name": "Mango", "price": 0.50}
+            ],
+            "sauces": [
+              {"name": "Honey Drizzle", "price": 0},
+              {"name": "Lime Squeeze", "price": 0},
+              {"name": "Coconut Flakes", "price": 0.50}
+            ]
+          }
         }
       ]
     },
@@ -147,7 +238,21 @@
           "image": "/images/cheese-quesadilla.jpg",
           "type": "quesadilla",
           "allowedToppings": ["cold", "sauces", "fries", "drink"],
-          "baseProtein": null
+          "baseProtein": null,
+          "customToppings": {
+            "cold": [
+              {"name": "Pico de Gallo", "price": 0},
+              {"name": "Guacamole", "price": 2},
+              {"name": "Sour Cream", "price": 0.50},
+              {"name": "Jalapeños", "price": 0},
+              {"name": "Lettuce", "price": 0}
+            ],
+            "sauces": [
+              {"name": "Chipotle Sauce", "price": 0},
+              {"name": "Ranch", "price": 0},
+              {"name": "Salsa Verde", "price": 0}
+            ]
+          }
         },
         {
           "name": "Chicken Quesadilla",
@@ -157,7 +262,27 @@
           "image": "/images/chicken-quesadilla.jpg",
           "type": "quesadilla",
           "allowedToppings": ["hot", "cold", "sauces", "fries", "drink"],
-          "baseProtein": "Grilled Chicken"
+          "baseProtein": "Grilled Chicken",
+          "customToppings": {
+            "hot": [
+              {"name": "Grilled Chicken", "price": 0},
+              {"name": "Roasted Corn", "price": 0},
+              {"name": "Black Beans", "price": 0}
+            ],
+            "cold": [
+              {"name": "Guacamole", "price": 2},
+              {"name": "Pico de Gallo", "price": 0},
+              {"name": "Sour Cream", "price": 0.50},
+              {"name": "Lettuce", "price": 0},
+              {"name": "Jalapeños", "price": 0}
+            ],
+            "sauces": [
+              {"name": "Chipotle Sauce", "price": 0},
+              {"name": "Jalapeño Mayo", "price": 0},
+              {"name": "Ranch", "price": 0},
+              {"name": "Zawadi Sauce", "price": 0}
+            ]
+          }
         },
         {
           "name": "Steak Quesadilla",
@@ -167,7 +292,28 @@
           "image": "/images/steak-quesadilla.jpg",
           "type": "quesadilla",
           "allowedToppings": ["hot", "cold", "sauces", "fries", "drink"],
-          "baseProtein": "Skirt Steak"
+          "baseProtein": "Skirt Steak",
+          "customToppings": {
+            "hot": [
+              {"name": "Skirt Steak", "price": 2},
+              {"name": "Roasted Corn", "price": 0},
+              {"name": "Black Beans", "price": 0},
+              {"name": "Grilled Peppers", "price": 0}
+            ],
+            "cold": [
+              {"name": "Guacamole", "price": 2},
+              {"name": "Pico de Gallo", "price": 0},
+              {"name": "Sour Cream", "price": 0.50},
+              {"name": "Jalapeños", "price": 0},
+              {"name": "Pickled Onions", "price": 0}
+            ],
+            "sauces": [
+              {"name": "Chipotle Sauce", "price": 0},
+              {"name": "Harissa", "price": 0},
+              {"name": "Jalapeño Mayo", "price": 0},
+              {"name": "Steak Sauce", "price": 0}
+            ]
+          }
         }
       ]
     },
@@ -223,8 +369,8 @@
           "price": 1.75,
           "tags": [],
           "image": "/images/fountain-drinks.webp",
-          "type": "drink",
-          "allowedToppings": ["ice"]
+          "type": "fountain-drink",
+          "allowedToppings": ["fountainDrinks", "ice"]
         }
       ]
     }
