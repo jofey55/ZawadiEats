@@ -325,7 +325,7 @@ export default function Home() {
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#faf8f5]/95 to-[#faf8f5]"></div>
           <img 
-            src="/attached_assets/image_1761285232873.png" 
+            src="/images/storefront.png" 
             alt="Zawadi Restaurant Storefront" 
             className="w-full h-full object-cover opacity-10"
           />
