@@ -365,16 +365,16 @@ export default function Home() {
                   <h3 className="text-3xl font-bold text-white tracking-tight">{category.name}</h3>
                 </div>
                 <div className="p-6 bg-white">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 gap-6">
                     {category.items.map((item) => (
                       <div 
                         key={item.name} 
-                        className="flex gap-4 p-5 rounded-xl border-2 border-slate-100 hover:shadow-2xl hover:border-red-400 hover:bg-red-50/30 transition-all duration-300 bg-white shadow-md cursor-pointer"
+                        className="flex gap-6 p-6 rounded-2xl border-2 border-slate-100 hover:shadow-2xl hover:border-red-400 hover:bg-red-50/30 transition-all duration-300 bg-white shadow-md cursor-pointer"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                         onClick={() => handleItemClick(item, category.slug)}
                       >
                         <div className="flex-shrink-0">
-                          <div className="w-28 h-28 rounded-xl overflow-hidden bg-slate-100 ring-2 ring-slate-200">
+                          <div className="w-44 h-44 rounded-2xl overflow-hidden bg-slate-100 ring-2 ring-slate-200">
                             <img 
                               src={item.image} 
                               alt={item.name}
@@ -383,21 +383,21 @@ export default function Home() {
                             />
                           </div>
                         </div>
-                        <div className="flex-1 min-w-0 flex flex-col">
-                          <div className="flex items-start justify-between gap-2 mb-1">
-                            <h4 className="font-bold text-slate-900 text-xl leading-tight">{item.name}</h4>
-                            <span className="text-xl font-extrabold text-red-600 flex-shrink-0">${item.price}</span>
+                        <div className="flex-1 min-w-0 flex flex-col justify-center">
+                          <div className="flex items-start justify-between gap-3 mb-2">
+                            <h4 className="font-bold text-slate-900 text-3xl leading-tight">{item.name}</h4>
+                            <span className="text-3xl font-extrabold text-red-600 flex-shrink-0">${item.price}</span>
                           </div>
                           {item.tags && item.tags.length > 0 && (
-                            <div className="flex gap-1 mb-2 flex-wrap">
+                            <div className="flex gap-2 mb-3 flex-wrap">
                               {item.tags.map((tag, idx) => (
-                                <span key={`${item.name}-${tag}-${idx}`} className="text-xs text-orange-700 font-semibold px-2.5 py-1 bg-orange-100 border border-orange-300 rounded-full">
+                                <span key={`${item.name}-${tag}-${idx}`} className="text-sm text-orange-700 font-semibold px-3 py-1.5 bg-orange-100 border border-orange-300 rounded-full">
                                   {tag}
                                 </span>
                               ))}
                             </div>
                           )}
-                          <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
+                          <p className="text-lg text-slate-600 leading-relaxed">{item.description}</p>
                         </div>
                       </div>
                     ))}
