@@ -321,6 +321,25 @@ export default function Home() {
 
       {/* Menu */}
       <section id="menu" className="menu-texture relative overflow-hidden">
+        {/* Decorative Food Shapes Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-10">
+          {/* Bowl shapes */}
+          <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-red-500 blur-2xl" />
+          <div className="absolute top-40 right-20 w-40 h-40 rounded-full bg-red-600 blur-3xl" />
+          <div className="absolute bottom-32 left-1/4 w-36 h-36 rounded-full bg-orange-500 blur-2xl" />
+          
+          {/* Quesadilla/Triangle shapes */}
+          <div className="absolute top-1/3 right-10 w-0 h-0 border-l-[80px] border-l-transparent border-r-[80px] border-r-transparent border-b-[140px] border-b-red-500 blur-2xl rotate-45" />
+          <div className="absolute bottom-20 right-1/3 w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-b-[100px] border-b-orange-600 blur-xl rotate-12" />
+          
+          {/* Drink/Cup shapes */}
+          <div className="absolute top-1/2 left-20 w-24 h-40 rounded-t-full bg-red-400 blur-2xl" />
+          <div className="absolute bottom-40 right-40 w-28 h-44 rounded-t-full bg-orange-400 blur-3xl" />
+          
+          {/* Fries/Rectangle shapes */}
+          <div className="absolute top-20 right-1/3 w-16 h-48 bg-red-500 blur-xl rotate-12" />
+          <div className="absolute bottom-60 left-40 w-20 h-52 bg-orange-500 blur-2xl -rotate-6" />
+        </div>
         <div className="mx-auto max-w-5xl px-4 py-16 relative z-10">
           <div className="text-center mb-12 bg-white rounded-2xl py-10 px-6 shadow-2xl border-2 border-slate-100">
             <h2 className="text-6xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-4" style={{ letterSpacing: '-0.02em' }}>Our Menu</h2>
