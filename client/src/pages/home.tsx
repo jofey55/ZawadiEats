@@ -8,6 +8,8 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 import type { Review } from "@shared/schema";
 import menuData from "../menu.json";
 import { Helmet } from "react-helmet";
+import BowlCustomizer, { type CustomizedItem } from "@/components/BowlCustomizer";
+import { useLocation } from "wouter";
 
 const heroImages = [
   "/images/gallery-1.png",
@@ -83,8 +85,19 @@ function getTodaysHours() {
   return today ? today.h : "11:00 AM – 9:30 PM";
 }
 
+interface MenuItem {
+  name: string;
+  description: string;
+  price: number;
+  tags?: string[];
+  image: string;
+}
+
 export default function Home() {
   const [todaysHours, setTodaysHours] = useState(getTodaysHours());
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -106,6 +119,18 @@ export default function Home() {
       });
     }
   }, []);
+
+  const handleItemClick = (item: MenuItem, categorySlug: string) => {
+    if (categorySlug === 'bowls') {
+      setSelectedItem(item);
+      setIsCustomizerOpen(true);
+    }
+  };
+
+  const handleCheckout = (customizedItem: CustomizedItem) => {
+    setIsCustomizerOpen(false);
+    setLocation('/order');
+  };
 
   return (
     <>
@@ -142,7 +167,7 @@ export default function Home() {
         </script>
       </Helmet>
       
-      <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-900">
+      <main className="min-h-screen bg-gradient-to-b from-amber-50/30 via-white to-stone-50 text-slate-900">
       {/* Hero with Slideshow */}
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -183,7 +208,7 @@ export default function Home() {
           <div className="mt-6 flex flex-wrap gap-3 justify-center">
             <a 
               href="/order" 
-              className="rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all" 
+              className="rounded-2xl bg-gradient-to-r from-red-500 to-red-600 px-6 py-3 text-sm font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all" 
               aria-label="Order Online for Pickup"
               data-testid="button-order-online"
             >
@@ -222,7 +247,7 @@ export default function Home() {
       </section>
 
       {/* Special Offer Banner */}
-      <section className="bg-gradient-to-r from-green-600 to-emerald-600 text-white py-8">
+      <section className="bg-gradient-to-r from-red-500 to-orange-500 text-white py-8">
         <div className="mx-auto max-w-5xl px-4 text-center">
           <h2 className="text-2xl font-bold" data-testid="text-special-offer">
             🎉 First Online Order? Get 10% Off with code: FIRST10
@@ -230,7 +255,7 @@ export default function Home() {
           <p className="mt-2 text-lg">Valid for pickup orders only</p>
           <a 
             href="/order" 
-            className="mt-4 inline-block rounded-xl bg-white px-8 py-3 text-sm font-semibold text-green-600 hover:bg-gray-100 transition-colors"
+            className="mt-4 inline-block rounded-xl bg-white px-8 py-3 text-sm font-semibold text-red-600 hover:bg-gray-100 transition-colors"
             data-testid="button-order-now-banner"
           >
             Order Now
@@ -264,7 +289,7 @@ export default function Home() {
               </div>
               <div className="flex items-start justify-between gap-3">
                 <h3 className="font-bold text-xl text-slate-900" data-testid={`text-item-name-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>{item.name}</h3>
-                <span className="text-lg text-emerald-600 font-bold" data-testid={`text-price-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>${item.price}</span>
+                <span className="text-lg text-red-600 font-bold" data-testid={`text-price-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>${item.price}</span>
               </div>
               <p className="mt-1 text-sm text-slate-600">{item.description}</p>
             </li>
@@ -280,7 +305,7 @@ export default function Home() {
           </a>
           <a 
             href={doorDashUrl} 
-            className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700 transition-colors"
+            className="rounded-xl bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600 transition-colors"
             data-testid="button-doordash-bestsellers"
           >
             Order on DoorDash
@@ -303,12 +328,12 @@ export default function Home() {
             {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category) => {
               const categoryColors: Record<string, string> = {
                 'appetizers': 'from-amber-400 via-orange-500 to-amber-500',
-                'bowls': 'from-green-500 via-emerald-500 to-green-600',
+                'bowls': 'from-red-500 via-orange-500 to-red-600',
                 'quesadillas': 'from-orange-500 via-amber-500 to-orange-600',
                 'sambusa': 'from-pink-400 via-rose-500 to-pink-500',
-                'drinks': 'from-cyan-400 via-teal-500 to-cyan-500'
+                'drinks': 'from-blue-400 via-indigo-500 to-blue-500'
               };
-              const colorClass = categoryColors[category.slug] || 'from-emerald-600 via-teal-600 to-cyan-600';
+              const colorClass = categoryColors[category.slug] || 'from-red-500 via-orange-500 to-red-600';
               
               return (
               <div key={category.slug} className="bg-white rounded-2xl shadow-2xl border-2 border-white overflow-hidden ring-4 ring-slate-200/50" data-testid={`card-menu-${category.slug}`} style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8)' }}>
@@ -320,8 +345,9 @@ export default function Home() {
                     {category.items.map((item) => (
                       <div 
                         key={item.name} 
-                        className="flex gap-4 p-5 rounded-xl border-2 border-slate-100 hover:shadow-2xl hover:border-emerald-400 hover:bg-emerald-50/50 transition-all duration-300 bg-white shadow-md"
+                        className="flex gap-4 p-5 rounded-xl border-2 border-slate-100 hover:shadow-2xl hover:border-red-400 hover:bg-red-50/30 transition-all duration-300 bg-white shadow-md cursor-pointer"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        onClick={() => handleItemClick(item, category.slug)}
                       >
                         <div className="flex-shrink-0">
                           <div className="w-28 h-28 rounded-xl overflow-hidden bg-slate-100 ring-2 ring-slate-200">
@@ -336,12 +362,12 @@ export default function Home() {
                         <div className="flex-1 min-w-0 flex flex-col">
                           <div className="flex items-start justify-between gap-2 mb-1">
                             <h4 className="font-bold text-slate-900 text-xl leading-tight">{item.name}</h4>
-                            <span className="text-xl font-extrabold text-emerald-600 flex-shrink-0">${item.price}</span>
+                            <span className="text-xl font-extrabold text-red-600 flex-shrink-0">${item.price}</span>
                           </div>
                           {item.tags && item.tags.length > 0 && (
                             <div className="flex gap-1 mb-2 flex-wrap">
                               {item.tags.map((tag, idx) => (
-                                <span key={`${item.name}-${tag}-${idx}`} className="text-xs text-emerald-700 font-semibold px-2.5 py-1 bg-emerald-100 border border-emerald-300 rounded-full">
+                                <span key={`${item.name}-${tag}-${idx}`} className="text-xs text-orange-700 font-semibold px-2.5 py-1 bg-orange-100 border border-orange-300 rounded-full">
                                   {tag}
                                 </span>
                               ))}
@@ -368,7 +394,7 @@ export default function Home() {
             </a>
             <a 
               href={doorDashUrl} 
-              className="rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 px-8 py-4 text-base font-semibold text-white shadow-xl hover:from-teal-600 hover:to-emerald-600 hover:shadow-2xl transition-all w-full sm:w-auto text-center"
+              className="rounded-xl bg-gradient-to-r from-red-500 to-orange-500 px-8 py-4 text-base font-semibold text-white shadow-xl hover:from-red-600 hover:to-orange-600 hover:shadow-2xl transition-all w-full sm:w-auto text-center"
               data-testid="button-doordash-menu"
             >
               Order on DoorDash
@@ -395,7 +421,7 @@ export default function Home() {
                       <Star
                         key={i}
                         className={`w-5 h-5 ${
-                          i < review.rating ? "fill-emerald-500 text-emerald-500" : "text-slate-300"
+                          i < review.rating ? "fill-orange-500 text-orange-500" : "text-slate-300"
                         }`}
                       />
                     ))}
@@ -415,7 +441,7 @@ export default function Home() {
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`} data-testid={`faq-${index}`} className="border-slate-200">
-              <AccordionTrigger className="text-slate-900 hover:text-emerald-600">{faq.question}</AccordionTrigger>
+              <AccordionTrigger className="text-slate-900 hover:text-red-600">{faq.question}</AccordionTrigger>
               <AccordionContent className="text-slate-700">{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}
@@ -429,10 +455,10 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-slate-900">Visit us</h2>
             <p className="mt-2 text-sm text-slate-700" data-testid="text-address">{address}</p>
             <p className="mt-1 text-sm text-slate-700">
-              Call: <a className="underline text-emerald-600 hover:text-emerald-700" href={`tel:${phone.replace(/[^\d]/g, "")}`} data-testid="link-phone">{phone}</a>
+              Call: <a className="underline text-red-600 hover:text-red-700" href={`tel:${phone.replace(/[^\d]/g, "")}`} data-testid="link-phone">{phone}</a>
             </p>
             <p className="mt-1 text-sm text-slate-700">
-              Email: <a className="underline text-emerald-600 hover:text-emerald-700" href={`mailto:${email}`} data-testid="link-email">{email}</a>
+              Email: <a className="underline text-red-600 hover:text-red-700" href={`mailto:${email}`} data-testid="link-email">{email}</a>
             </p>
             <div className="mt-4 rounded-2xl overflow-hidden border border-slate-300">
               <iframe
@@ -462,30 +488,30 @@ export default function Home() {
             </p>
             <form className="mt-4 space-y-3" onSubmit={(e) => e.preventDefault()}>
               <input 
-                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" 
+                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-red-500 focus:ring-2 focus:ring-red-200" 
                 placeholder="Name"
                 data-testid="input-name"
               />
               <input 
-                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" 
+                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-red-500 focus:ring-2 focus:ring-red-200" 
                 placeholder="Email"
                 type="email"
                 data-testid="input-email"
               />
               <input 
-                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" 
+                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-red-500 focus:ring-2 focus:ring-red-200" 
                 placeholder="Phone"
                 type="tel"
                 data-testid="input-phone"
               />
               <textarea 
-                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" 
+                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-red-500 focus:ring-2 focus:ring-red-200" 
                 placeholder="Tell us about your event…" 
                 rows={4}
                 data-testid="input-message"
               />
               <button 
-                className="rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 px-5 py-3 text-sm font-semibold text-white hover:from-teal-600 hover:to-emerald-600 transition-all"
+                className="rounded-xl bg-gradient-to-r from-red-500 to-orange-500 px-5 py-3 text-sm font-semibold text-white hover:from-red-600 hover:to-orange-600 transition-all"
                 data-testid="button-submit-catering"
               >
                 Send inquiry
@@ -521,18 +547,25 @@ export default function Home() {
             </a>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="/order" className="underline hover:text-emerald-600 transition-colors" data-testid="link-order-footer">Order Online</a>
-            <a href={uberEatsUrl} className="underline hover:text-emerald-600 transition-colors" data-testid="link-ubereats-footer">Order on Uber Eats</a>
-            <a href={doorDashUrl} className="underline hover:text-emerald-600 transition-colors" data-testid="link-doordash-footer">Order on DoorDash</a>
-            <a href="#menu" className="underline hover:text-emerald-600 transition-colors" data-testid="link-menu-footer">Menu</a>
-            <a href="/contact" className="underline hover:text-emerald-600 transition-colors" data-testid="link-contact-footer">Contact</a>
-            <a href="/jobs" className="underline hover:text-emerald-600 transition-colors" data-testid="link-jobs-footer">Jobs</a>
-            <a href="/feedback" className="underline hover:text-emerald-600 transition-colors" data-testid="link-feedback-footer">Feedback</a>
-            <a href="/catering" className="underline hover:text-emerald-600 transition-colors" data-testid="link-catering-footer">Catering</a>
+            <a href="/order" className="underline hover:text-red-600 transition-colors" data-testid="link-order-footer">Order Online</a>
+            <a href={uberEatsUrl} className="underline hover:text-red-600 transition-colors" data-testid="link-ubereats-footer">Order on Uber Eats</a>
+            <a href={doorDashUrl} className="underline hover:text-red-600 transition-colors" data-testid="link-doordash-footer">Order on DoorDash</a>
+            <a href="#menu" className="underline hover:text-red-600 transition-colors" data-testid="link-menu-footer">Menu</a>
+            <a href="/contact" className="underline hover:text-red-600 transition-colors" data-testid="link-contact-footer">Contact</a>
+            <a href="/jobs" className="underline hover:text-red-600 transition-colors" data-testid="link-jobs-footer">Jobs</a>
+            <a href="/feedback" className="underline hover:text-red-600 transition-colors" data-testid="link-feedback-footer">Feedback</a>
+            <a href="/catering" className="underline hover:text-red-600 transition-colors" data-testid="link-catering-footer">Catering</a>
           </div>
           <p className="mt-3">© {new Date().getFullYear()} Zawadi Restaurant. All rights reserved.</p>
         </div>
       </footer>
+
+      <BowlCustomizer
+        item={selectedItem}
+        isOpen={isCustomizerOpen}
+        onClose={() => setIsCustomizerOpen(false)}
+        onCheckout={handleCheckout}
+      />
     </main>
     </>
   );
