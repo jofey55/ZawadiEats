@@ -1,0 +1,223 @@
+Nice — I can fix this. I made a clean, ready-to-use set of toppings per menu item, plus concrete front-end suggestions and small code snippets you can drop into your Replit site to:
+
+* show the correct toppings per item (fruit bowl ≠ chicken bowl),
+* give every bowl/quesadilla a single “add fries” option,
+* enforce quesadilla rules (double meat on the hot side; guacamole only on the cold side), and
+* fix the front page so items open a side toppings menu (instead of being non-clickable).
+
+I used your uploaded prep/toppings file as the source for sauces/ingredients. 
+
+---
+
+# 1) Proposed toppings lists (ready to copy into your site)
+
+Use the categories below (Hot toppings = cooked / warm; Cold toppings = fresh / chilled; Sauces/dips; Extras).
+
+Fruit Bowl
+
+* Cold toppings: Sliced Pineapple, Watermelon, Berries (seasonal), Banana (if offered)
+* Sauces / finishing: Tahini (drizzle) — **choose one or both**; Lime Squeeze (option)
+* Extras: Add Fries? **No** (skip fries for fruit bowl unless you explicitly want it; you said all bowls and quesadillas should have fries — if you want fruit bowl to follow that, enable fries globally)
+
+Chicken Bowl (hot main)
+
+* Hot toppings: Grilled Chicken, Sumac Chicken (spicy), Saffron Rice, Coconut Rice, Roasted Cauliflower (warm)
+* Cold toppings: Lettuce, Pickled Cabbage, Pico de Gallo, Cucumber Tomato Salsa, Avocado / Guacamole (side)
+* Sauces: Harissa, Chipotle Sauce, Jalapeño Mayo, Ranch, Zawadi Sauce
+* Extras: Add fries (single-sized)
+
+Beef / Steak Bowl
+
+* Hot toppings: Skirt Steak, Saffron Rice / Coconut Rice, Roasted Corn (warm), Roasted Cauliflower
+* Cold toppings: Lettuce, Pickled Cabbage, Pico de Gallo, Cucumber Tomato Salsa, Avocado / Guacamole (side)
+* Sauces: Harissa, Chipotle Sauce, Jalapeño Mayo, Ranch, Zawadi Sauce
+* Extras: Add fries (single-sized)
+
+Black Bean / Vegetarian Bowl
+
+* Hot toppings: Black Beans (warm), Quinoa (warm), Roasted Cauliflower, Saffron or Coconut Rice
+* Cold toppings: Lettuce, Pickled Cabbage, Pico de Gallo, Cucumber Tomato Salsa, Guacamole (side)
+* Sauces: Chipotle Sauce, Jalapeño Mayo, Ranch, Tahini (if offered)
+* Extras: Add fries (single-sized)
+
+Seafood / Fish Bowl (if you have)
+
+* Hot toppings: Grilled Fish (specify), Saffron Rice / Coconut Rice, Roasted Corn
+* Cold toppings: Lettuce, Pico, Cucumber Tomato Salsa, Pickled Cabbage, Avocado (side)
+* Sauces: Zawadi Sauce, Lime Squeeze, Jalapeño Mayo
+* Extras: Add fries (single-sized)
+
+Quesadillas (rules you gave)
+
+* Hot side (inside the quesadilla): *Double meat* (i.e., if it’s a chicken quesadilla -> double chicken). Hot-side toppings same as the hot toppings for that protein’s bowl (e.g., grilled chicken, rice if you want, roasted corn, melted cheese—add cheese by default).
+* Cold side (served on the plate / optional): Guacamole on the side (mandatory per your instruction) and pico / pickled cabbage optional.
+* Sauces: Jalapeño Mayo, Chipotle Sauce on side.
+* Extras: Add fries (single-sized)
+
+Common Sauces / Dips (from your list)
+
+* Chipotle Sauce, Harissa (red hot sauce), Jalapeño Mayo, Ranch, Zawadi Sauce, Guacamole, Tahini, Lime Squeeze. (See your prep sheet for exact names/availability). 
+
+---
+
+# 2) Implementation notes for Replit — UX & Fixes
+
+Problem: “every item now has the same toppings menu” and “not all items on the front page are clickable / side menu for toppings.”
+Solution overview (drop-in steps):
+
+1. **Data model:** store menu items and toppings separately and map toppings to item types (not to every product).
+2. **Clickable items:** ensure the front page elements are interactive (use `<button>` or `<a role="button">`) and include `data-item-id` or `data-type` attributes. Avoid plain `<div>`s without click handlers.
+3. **Side toppings menu:** create one reusable side panel that loads toppings based on item type (e.g., `type: "chicken-bowl"`) — this ensures only relevant toppings show.
+4. **Quesadilla special logic:** when `type==="quesadilla"`, show two sections in the side panel: Hot (pre-selected double meat) and Cold (guacamole on side).
+5. **Fries:** add a single global “Add fries” toggle that appears on all bowls and quesadillas (if you want fruit bowl also, toggle it there).
+
+---
+
+# 3) Example JSON data model (simple — copy to `menu.json` or inline JS)
+
+```json
+{
+  "toppings": {
+    "hot": ["Grilled Chicken","Sumac Chicken","Skirt Steak","Saffron Rice","Coconut Rice","Roasted Cauliflower","Roasted Corn","Black Beans","Quinoa"],
+    "cold": ["Lettuce","Pickled Cabbage","Pico de Gallo","Cucumber Tomato Salsa","Avocado","Guacamole","Pineapple","Banana","Watermelon"],
+    "sauces": ["Chipotle Sauce","Harissa","Jalapeño Mayo","Ranch","Zawadi Sauce","Tahini","Lime Squeeze"]
+  },
+  "menuItems": [
+    {"id":"fruit-bowl","name":"Fruit Bowl","type":"fruit","allowedToppings":["cold","sauces"]},
+    {"id":"chicken-bowl","name":"Chicken Bowl","type":"chicken","allowedToppings":["hot","cold","sauces","fries"]},
+    {"id":"beef-bowl","name":"Beef Bowl","type":"beef","allowedToppings":["hot","cold","sauces","fries"]},
+    {"id":"blackbean-bowl","name":"Black Bean Bowl","type":"veg","allowedToppings":["hot","cold","sauces","fries"]},
+    {"id":"chicken-quesadilla","name":"Chicken Quesadilla","type":"quesadilla","baseProtein":"chicken","allowedToppings":["hot","cold","sauces","fries"]}
+  ]
+}
+```
+
+---
+
+# 4) Minimal HTML + Vanilla JS example to open side menu and load correct toppings
+
+Paste this into your site where your menu list exists. It assumes each front-page item has `data-item-id` or `data-type`. You can adapt for React/Vue quickly.
+
+```html
+<!-- Side panel -->
+<div id="toppingsSide" class="side-panel hidden" aria-hidden="true">
+  <button id="closeSide">Close</button>
+  <h2 id="sideTitle"></h2>
+  <div id="hotSection"></div>
+  <div id="coldSection"></div>
+  <div id="saucesSection"></div>
+  <label><input type="checkbox" id="addFries"> Add Fries</label>
+  <button id="addToOrder">Add to Order</button>
+</div>
+
+<script>
+const menuData = /* paste the JSON above as JS object */ {
+  toppings: { hot: ["Grilled Chicken","Sumac Chicken","Skirt Steak","Saffron Rice","Coconut Rice","Roasted Cauliflower","Roasted Corn","Black Beans","Quinoa"], cold: ["Lettuce","Pickled Cabbage","Pico de Gallo","Cucumber Tomato Salsa","Avocado","Guacamole","Pineapple","Banana","Watermelon"], sauces: ["Chipotle Sauce","Harissa","Jalapeño Mayo","Ranch","Zawadi Sauce","Tahini","Lime Squeeze"] },
+  menuItems: [ {id:"fruit-bowl", name:"Fruit Bowl", type:"fruit", allowedToppings:["cold","sauces"]}, {id:"chicken-bowl", name:"Chicken Bowl", type:"chicken", allowedToppings:["hot","cold","sauces","fries"]}, {id:"beef-bowl", name:"Beef Bowl", type:"beef", allowedToppings:["hot","cold","sauces","fries"]}, {id:"blackbean-bowl", name:"Black Bean Bowl", type:"veg", allowedToppings:["hot","cold","sauces","fries"]}, {id:"chicken-quesadilla", name:"Chicken Quesadilla", type:"quesadilla", baseProtein:"chicken", allowedToppings:["hot","cold","sauces","fries"] }]
+};
+
+function openSideMenu(itemId){
+  const item = menuData.menuItems.find(m=>m.id===itemId);
+  if(!item) return;
+  document.getElementById('sideTitle').innerText = item.name;
+  // Clear sections
+  ['hotSection','coldSection','saucesSection'].forEach(id=>document.getElementById(id).innerHTML='');
+  // Render allowed toppings
+  if(item.allowedToppings.includes('hot')){
+    const hot = menuData.toppings.hot.map(t => `<label><input type="checkbox" name="hot" value="${t}">${t}</label>`).join('');
+    document.getElementById('hotSection').innerHTML = `<h3>Hot</h3>${hot}`;
+  }
+  if(item.allowedToppings.includes('cold')){
+    const cold = menuData.toppings.cold.map(t => `<label><input type="checkbox" name="cold" value="${t}">${t}</label>`).join('');
+    document.getElementById('coldSection').innerHTML = `<h3>Cold</h3>${cold}`;
+  }
+  if(item.allowedToppings.includes('sauces')){
+    const s = menuData.toppings.sauces.map(t => `<label><input type="checkbox" name="sauce" value="${t}">${t}</label>`).join('');
+    document.getElementById('saucesSection').innerHTML = `<h3>Sauces</h3>${s}`;
+  }
+
+  // Quesadilla rules: if quesadilla, auto-check double meat and lock it
+  if(item.type==='quesadilla'){
+    // find checkboxes that match baseProtein
+    setTimeout(()=>{ // allow DOM to render
+      document.querySelectorAll('input[name="hot"]').forEach(cb=>{
+        if(cb.value.toLowerCase().includes(item.baseProtein)){
+          cb.checked = true;
+          cb.disabled = true; // lock double-meat selection
+        }
+      });
+      // guacamole on the side required: mark it visually (you can require it at order time)
+    },10);
+  }
+
+  // show fries checkbox according to allowed
+  document.getElementById('addFries').style.display = item.allowedToppings.includes('fries') ? 'inline-block' : 'none';
+
+  // show panel
+  document.getElementById('toppingsSide').classList.remove('hidden');
+  document.getElementById('toppingsSide').setAttribute('aria-hidden','false');
+}
+
+// Hook front page items: ensure every clickable has data-item-id and an event listener
+document.querySelectorAll('.menu-item').forEach(el=>{
+  // ensure it's clickable: replace non-interactive element with a button if needed.
+  el.addEventListener('click', e=>{
+    const id = el.dataset.itemId;
+    openSideMenu(id);
+  });
+});
+
+document.getElementById('closeSide').addEventListener('click', ()=>{
+  document.getElementById('toppingsSide').classList.add('hidden');
+  document.getElementById('toppingsSide').setAttribute('aria-hidden','true');
+});
+</script>
+
+<style>
+.side-panel{ position:fixed; right:0; top:0; width:340px; height:100%; background:#fff; box-shadow:-8px 0 20px rgba(0,0,0,.15); padding:16px; z-index:1000;}
+.side-panel.hidden{ display:none; }
+.menu-item{ cursor:pointer; } /* ensure pointer shows */
+</style>
+```
+
+**Notes:**
+
+* Replace `.menu-item` and `data-item-id` usage to match your site’s actual DOM selectors.
+* If you use React/Vue, implement the same mapping logic in state and open a slide-over component.
+
+---
+
+# 5) How to fix “not all items on the front page are clickable”
+
+* Inspect the front page elements: if they’re `<div>`s, wrap content in `<button class="menu-item" data-item-id="...">` or add `tabindex="0"` and keyboard handlers.
+* Make sure event listeners are attached **after** the DOM loads (or use event delegation on a parent).
+* For accessibility, include `aria-label` and role attributes.
+
+---
+
+# 6) Quesadilla edge cases & business rules (enforce on server or at checkout)
+
+* If `type === quesadilla` then require at least one “hot” checkbox that includes the base protein; set quantity multiplier to 2 for that protein (double meat).
+* Always add “Guacamole on the side” as an **option** and recommend it visually; if it’s mandatory, validate before add-to-cart.
+* Fries: one universal add-on (no sizes). Represent as boolean `addFries: true/false`.
+
+---
+
+# 7) Quick checklist for you (copy into Replit tasks)
+
+* [ ] Add `data-item-id` to every menu tile on the homepage.
+* [ ] Replace non-interactive `<div>` menu tiles with `<button>` or ensure they have click handlers.
+* [ ] Paste the JSON menu/toppings object into a script or server file.
+* [ ] Add the side-panel HTML/CSS/JS (or React component) and map toppings based on `data-item-id`.
+* [ ] Implement the Quesadilla locking logic (double meat) and guacamole-on-side.
+* [ ] Add global fries option visible for allowed items.
+* [ ] Test: click each front-page item and confirm only allowed toppings appear.
+
+---
+
+If you want, I can:
+
+* convert the example into the exact React/Vue component you’re using on Replit (I can generate a ready-to-paste file), **or**
+* produce a copy-paste JSON + a tiny JS file tailored to your current site structure if you paste an example of one front-page item’s HTML (no need to send more files if you don’t want to).
+
+Tell me which you prefer and I’ll produce the component or a ready JS file you can drop into your Replit project.
