@@ -429,29 +429,32 @@ export default function Home() {
 
       {/* Customer Reviews */}
       {reviews.length > 0 && (
-        <section className="bg-slate-100 py-16">
-          <div className="mx-auto max-w-5xl px-4">
-            <h2 className="text-3xl font-bold text-center mb-2 text-slate-900">What Our Customers Say</h2>
-            <p className="text-center text-slate-700 mb-8">Real reviews from real customers</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section className="bg-gradient-to-br from-orange-50 via-red-50 to-amber-50 py-20">
+          <div className="mx-auto max-w-6xl px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">What Our Customers Say</h2>
+              <p className="text-xl text-slate-700">Real reviews from real customers</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {reviews.slice(0, 3).map((review) => (
                 <div 
                   key={review.id} 
-                  className="bg-white p-6 rounded-2xl shadow-lg border border-slate-200"
+                  className="bg-white p-8 rounded-3xl shadow-2xl border-2 border-white hover:shadow-3xl hover:scale-105 transition-all duration-300"
                   data-testid={`card-review-${review.id}`}
+                  style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
                 >
-                  <div className="flex gap-1 mb-3">
+                  <div className="flex gap-1 mb-4">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-5 h-5 ${
+                        className={`w-6 h-6 ${
                           i < review.rating ? "fill-orange-500 text-orange-500" : "text-slate-300"
                         }`}
                       />
                     ))}
                   </div>
-                  <p className="text-slate-700 mb-3">{review.comment}</p>
-                  <p className="font-semibold text-slate-900">{review.customerName}</p>
+                  <p className="text-lg text-slate-700 mb-4 leading-relaxed">{review.comment}</p>
+                  <p className="font-bold text-xl text-slate-900">{review.customerName}</p>
                 </div>
               ))}
             </div>
@@ -460,127 +463,136 @@ export default function Home() {
       )}
 
       {/* FAQ Section */}
-      <section className="mx-auto max-w-3xl px-4 py-16">
-        <h2 className="text-3xl font-bold text-center mb-8 text-slate-900">Frequently Asked Questions</h2>
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`} data-testid={`faq-${index}`} className="border-slate-200">
-              <AccordionTrigger className="text-slate-900 hover:text-red-600">{faq.question}</AccordionTrigger>
-              <AccordionContent className="text-slate-700">{faq.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+      <section className="mx-auto max-w-4xl px-4 py-20">
+        <div className="text-center mb-12 bg-white rounded-3xl py-10 px-6 shadow-2xl border-2 border-slate-100">
+          <h2 className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">Frequently Asked Questions</h2>
+          <p className="text-xl text-slate-600">Everything you need to know</p>
+        </div>
+        <div className="bg-white rounded-3xl shadow-2xl border-2 border-slate-100 p-8">
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} data-testid={`faq-${index}`} className="border-slate-200">
+                <AccordionTrigger className="text-xl font-bold text-slate-900 hover:text-red-600 py-6">{faq.question}</AccordionTrigger>
+                <AccordionContent className="text-lg text-slate-700 leading-relaxed pb-6">{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </section>
 
       {/* Location & Contact */}
-      <section className="mx-auto max-w-5xl px-4 py-12 bg-slate-100">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900">Visit us</h2>
-            <p className="mt-2 text-sm text-slate-700" data-testid="text-address">{address}</p>
-            <p className="mt-1 text-sm text-slate-700">
-              Call: <a className="underline text-red-600 hover:text-red-700" href={`tel:${phone.replace(/[^\d]/g, "")}`} data-testid="link-phone">{phone}</a>
-            </p>
-            <p className="mt-1 text-sm text-slate-700">
-              Email: <a className="underline text-red-600 hover:text-red-700" href={`mailto:${email}`} data-testid="link-email">{email}</a>
-            </p>
-            <div className="mt-4 rounded-2xl overflow-hidden border border-slate-300">
-              <iframe
-                title="Google Map"
-                src="https://www.google.com/maps?q=1701+American+Blvd+E,+Suite+15,+Bloomington,+MN+55425&output=embed"
-                className="h-64 w-full"
-                loading="lazy"
-              />
+      <section className="bg-gradient-to-br from-slate-50 to-slate-100 py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl border-2 border-slate-100">
+              <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Visit Us</h2>
+              <p className="text-lg text-slate-700 mb-3" data-testid="text-address">{address}</p>
+              <p className="text-lg text-slate-700 mb-2">
+                Call: <a className="font-bold text-red-600 hover:text-red-700 underline" href={`tel:${phone.replace(/[^\d]/g, "")}`} data-testid="link-phone">{phone}</a>
+              </p>
+              <p className="text-lg text-slate-700 mb-6">
+                Email: <a className="font-bold text-red-600 hover:text-red-700 underline" href={`mailto:${email}`} data-testid="link-email">{email}</a>
+              </p>
+              <div className="rounded-2xl overflow-hidden border-2 border-slate-200 shadow-lg">
+                <iframe
+                  title="Google Map"
+                  src="https://www.google.com/maps?q=1701+American+Blvd+E,+Suite+15,+Bloomington,+MN+55425&output=embed"
+                  className="h-72 w-full"
+                  loading="lazy"
+                />
+              </div>
+              <div className="mt-8 bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-2xl border border-orange-200">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Hours</h3>
+                <ul className="grid grid-cols-2 gap-y-3 text-base text-slate-700">
+                  {hours.map((x) => (
+                    <li key={x.d} className="flex justify-between pr-6 font-medium" data-testid={`hours-${x.d.toLowerCase()}`}>
+                      <span className="font-bold">{x.d}</span>
+                      <span>{x.h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="mt-6">
-              <h3 className="font-semibold text-slate-900">Hours</h3>
-              <ul className="mt-2 grid grid-cols-2 gap-y-1 text-sm text-slate-700">
-                {hours.map((x) => (
-                  <li key={x.d} className="flex justify-between pr-4" data-testid={`hours-${x.d.toLowerCase()}`}>
-                    <span>{x.d}</span>
-                    <span>{x.h}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
 
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900">Catering & Events</h2>
-            <p className="mt-2 text-sm text-slate-700">
-              Planning a large group? Ask about trays and our event space.
-            </p>
-            <form className="mt-4 space-y-3" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-red-500 focus:ring-2 focus:ring-red-200" 
-                placeholder="Name"
-                data-testid="input-name"
-              />
-              <input 
-                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-red-500 focus:ring-2 focus:ring-red-200" 
-                placeholder="Email"
-                type="email"
-                data-testid="input-email"
-              />
-              <input 
-                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-red-500 focus:ring-2 focus:ring-red-200" 
-                placeholder="Phone"
-                type="tel"
-                data-testid="input-phone"
-              />
-              <textarea 
-                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 px-4 py-3 placeholder:text-slate-400 focus:border-red-500 focus:ring-2 focus:ring-red-200" 
-                placeholder="Tell us about your event…" 
-                rows={4}
-                data-testid="input-message"
-              />
-              <button 
-                className="rounded-xl bg-gradient-to-r from-red-500 to-orange-500 px-5 py-3 text-sm font-semibold text-white hover:from-red-600 hover:to-orange-600 transition-all"
-                data-testid="button-submit-catering"
-              >
-                Send inquiry
-              </button>
-            </form>
+            <div className="bg-white p-8 rounded-3xl shadow-2xl border-2 border-slate-100">
+              <h2 className="text-4xl font-extrabold text-slate-900 mb-4">Catering & Events</h2>
+              <p className="text-lg text-slate-700 mb-6">
+                Planning a large group? Ask about trays and our event space.
+              </p>
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <input 
+                  className="w-full rounded-2xl border-2 border-slate-200 bg-white text-slate-900 px-5 py-4 text-lg placeholder:text-slate-400 focus:border-red-500 focus:ring-4 focus:ring-red-200 transition-all" 
+                  placeholder="Name"
+                  data-testid="input-name"
+                />
+                <input 
+                  className="w-full rounded-2xl border-2 border-slate-200 bg-white text-slate-900 px-5 py-4 text-lg placeholder:text-slate-400 focus:border-red-500 focus:ring-4 focus:ring-red-200 transition-all" 
+                  placeholder="Email"
+                  type="email"
+                  data-testid="input-email"
+                />
+                <input 
+                  className="w-full rounded-2xl border-2 border-slate-200 bg-white text-slate-900 px-5 py-4 text-lg placeholder:text-slate-400 focus:border-red-500 focus:ring-4 focus:ring-red-200 transition-all" 
+                  placeholder="Phone"
+                  type="tel"
+                  data-testid="input-phone"
+                />
+                <textarea 
+                  className="w-full rounded-2xl border-2 border-slate-200 bg-white text-slate-900 px-5 py-4 text-lg placeholder:text-slate-400 focus:border-red-500 focus:ring-4 focus:ring-red-200 transition-all" 
+                  placeholder="Tell us about your event…" 
+                  rows={5}
+                  data-testid="input-message"
+                />
+                <button 
+                  className="w-full rounded-2xl bg-gradient-to-r from-red-500 to-orange-500 px-6 py-4 text-lg font-bold text-white shadow-xl hover:from-red-600 hover:to-orange-600 hover:shadow-2xl transition-all"
+                  data-testid="button-submit-catering"
+                >
+                  Send Inquiry
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-300 py-8 text-center text-sm text-slate-600 bg-white">
-        <div className="mx-auto max-w-5xl px-4">
-          <div className="flex items-center justify-center gap-6 mb-4">
+      <footer className="bg-gradient-to-br from-slate-900 to-slate-800 py-12 text-center text-white border-t-4 border-red-500">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="flex items-center justify-center gap-8 mb-8">
             <a 
               href="https://www.facebook.com/zawadirestaurant" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-slate-600 hover:text-blue-600 transition-colors"
+              className="bg-white/10 p-4 rounded-full hover:bg-white/20 hover:scale-110 transition-all"
               data-testid="link-facebook"
               aria-label="Follow us on Facebook"
             >
-              <FaFacebook className="w-6 h-6" />
+              <FaFacebook className="w-8 h-8 text-white" />
             </a>
             <a 
               href="https://www.instagram.com/zawadirestaurant" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-slate-600 hover:text-pink-600 transition-colors"
+              className="bg-white/10 p-4 rounded-full hover:bg-white/20 hover:scale-110 transition-all"
               data-testid="link-instagram"
               aria-label="Follow us on Instagram"
             >
-              <FaInstagram className="w-6 h-6" />
+              <FaInstagram className="w-8 h-8 text-white" />
             </a>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="/order" className="underline hover:text-red-600 transition-colors" data-testid="link-order-footer">Order Online</a>
-            <a href={uberEatsUrl} className="underline hover:text-red-600 transition-colors" data-testid="link-ubereats-footer">Order on Uber Eats</a>
-            <a href={doorDashUrl} className="underline hover:text-red-600 transition-colors" data-testid="link-doordash-footer">Order on DoorDash</a>
-            <a href="#menu" className="underline hover:text-red-600 transition-colors" data-testid="link-menu-footer">Menu</a>
-            <a href="/contact" className="underline hover:text-red-600 transition-colors" data-testid="link-contact-footer">Contact</a>
-            <a href="/jobs" className="underline hover:text-red-600 transition-colors" data-testid="link-jobs-footer">Jobs</a>
-            <a href="/feedback" className="underline hover:text-red-600 transition-colors" data-testid="link-feedback-footer">Feedback</a>
-            <a href="/catering" className="underline hover:text-red-600 transition-colors" data-testid="link-catering-footer">Catering</a>
+          <div className="flex flex-wrap items-center justify-center gap-6 mb-8">
+            <a href="/order" className="text-lg font-semibold hover:text-orange-400 transition-colors" data-testid="link-order-footer">Order Online</a>
+            <a href={uberEatsUrl} className="text-lg font-semibold hover:text-orange-400 transition-colors" data-testid="link-ubereats-footer">Order on Uber Eats</a>
+            <a href={doorDashUrl} className="text-lg font-semibold hover:text-orange-400 transition-colors" data-testid="link-doordash-footer">Order on DoorDash</a>
+            <a href="#menu" className="text-lg font-semibold hover:text-orange-400 transition-colors" data-testid="link-menu-footer">Menu</a>
+            <a href="/contact" className="text-lg font-semibold hover:text-orange-400 transition-colors" data-testid="link-contact-footer">Contact</a>
+            <a href="/jobs" className="text-lg font-semibold hover:text-orange-400 transition-colors" data-testid="link-jobs-footer">Jobs</a>
+            <a href="/feedback" className="text-lg font-semibold hover:text-orange-400 transition-colors" data-testid="link-feedback-footer">Feedback</a>
+            <a href="/catering" className="text-lg font-semibold hover:text-orange-400 transition-colors" data-testid="link-catering-footer">Catering</a>
           </div>
-          <p className="mt-3">© {new Date().getFullYear()} Zawadi Restaurant. All rights reserved.</p>
+          <div className="border-t border-white/20 pt-6">
+            <p className="text-lg text-white/80">© {new Date().getFullYear()} Zawadi Restaurant. All rights reserved.</p>
+          </div>
         </div>
       </footer>
 
