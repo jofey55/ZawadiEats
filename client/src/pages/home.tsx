@@ -331,11 +331,28 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent"></div>
         </div>
-        {/* Decorative Accent Blurs */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.07]">
-          <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-br from-orange-400 to-red-400 blur-3xl" />
-          <div className="absolute top-1/3 right-20 w-80 h-80 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 blur-3xl" />
-          <div className="absolute bottom-32 left-1/3 w-72 h-72 rounded-full bg-gradient-to-br from-red-400 to-pink-400 blur-3xl" />
+        {/* Decorative Food & Plate Shapes */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.12]">
+          {/* Large Plates - Circles */}
+          <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-gradient-to-br from-red-500 to-orange-500 blur-3xl" />
+          <div className="absolute top-1/4 right-16 w-80 h-80 rounded-full bg-gradient-to-br from-orange-500 to-red-500 blur-3xl" />
+          <div className="absolute bottom-40 left-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-red-500 to-orange-500 blur-2xl" />
+          
+          {/* Bowl Shapes - Smaller circles */}
+          <div className="absolute top-1/3 left-1/3 w-48 h-48 rounded-full bg-gradient-to-br from-orange-500 to-red-500 blur-2xl" />
+          <div className="absolute bottom-1/3 right-1/4 w-56 h-56 rounded-full bg-gradient-to-br from-red-500 to-orange-500 blur-2xl" />
+          
+          {/* Quesadilla/Triangle Shapes */}
+          <div className="absolute top-1/2 right-12 w-0 h-0 border-l-[100px] border-l-transparent border-r-[100px] border-r-transparent border-b-[160px] border-b-red-500 blur-2xl rotate-45 opacity-80" />
+          <div className="absolute bottom-24 left-1/2 w-0 h-0 border-l-[80px] border-l-transparent border-r-[80px] border-r-transparent border-b-[120px] border-b-orange-500 blur-xl rotate-12 opacity-80" />
+          
+          {/* Food Rectangle Shapes */}
+          <div className="absolute top-32 right-1/3 w-20 h-60 bg-gradient-to-br from-red-500 to-orange-500 blur-xl rotate-12 opacity-70" />
+          <div className="absolute bottom-48 left-20 w-24 h-56 bg-gradient-to-br from-orange-500 to-red-500 blur-2xl -rotate-6 opacity-70" />
+          
+          {/* Additional Plate Shapes scattered */}
+          <div className="absolute top-2/3 right-32 w-52 h-52 rounded-full bg-gradient-to-br from-red-500 to-orange-500 blur-3xl" />
+          <div className="absolute top-12 left-1/2 w-60 h-60 rounded-full bg-gradient-to-br from-orange-500 to-red-500 blur-3xl" />
         </div>
         <div className="mx-auto max-w-5xl px-4 py-16 relative z-10">
           <div className="text-center mb-12 bg-white rounded-2xl py-10 px-6 shadow-2xl border-2 border-slate-100">
