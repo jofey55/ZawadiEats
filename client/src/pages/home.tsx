@@ -321,8 +321,17 @@ export default function Home() {
 
       {/* Menu */}
       <section id="menu" className="menu-texture relative overflow-hidden">
+        {/* Storefront Background Image */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#faf8f5]/95 to-[#faf8f5]"></div>
+          <img 
+            src="/attached_assets/image_1761285232873.png" 
+            alt="Zawadi Restaurant Storefront" 
+            className="w-full h-full object-cover opacity-10"
+          />
+        </div>
         {/* Decorative Food Shapes Background */}
-        <div className="absolute inset-0 pointer-events-none opacity-10">
+        <div className="absolute inset-0 pointer-events-none opacity-5">
           {/* Bowl shapes */}
           <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-red-500 blur-2xl" />
           <div className="absolute top-40 right-20 w-40 h-40 rounded-full bg-red-600 blur-3xl" />
