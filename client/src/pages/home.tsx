@@ -91,6 +91,10 @@ interface MenuItem {
   price: number;
   tags?: string[];
   image: string;
+  type?: string;
+  allowedToppings?: string[];
+  baseProtein?: string | null;
+  defaultProtein?: string;
 }
 
 export default function Home() {
@@ -121,7 +125,8 @@ export default function Home() {
   }, []);
 
   const handleItemClick = (item: MenuItem, categorySlug: string) => {
-    if (categorySlug === 'bowls') {
+    // Open customizer for items that have allowedToppings (bowls, quesadillas, etc.)
+    if (item.allowedToppings && item.allowedToppings.length > 0) {
       setSelectedItem(item);
       setIsCustomizerOpen(true);
     }
