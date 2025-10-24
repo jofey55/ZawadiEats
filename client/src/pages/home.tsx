@@ -320,34 +320,22 @@ export default function Home() {
       </section>
 
       {/* Menu */}
-      <section id="menu" className="menu-texture relative overflow-hidden">
-        {/* Storefront Background Image */}
+      <section id="menu" className="relative overflow-hidden bg-gradient-to-br from-amber-50/50 via-orange-50/30 to-red-50/40">
+        {/* Enhanced Storefront Background */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#faf8f5]/95 to-[#faf8f5]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-orange-100/20 via-[#faf8f5]/90 to-[#faf8f5]"></div>
           <img 
             src="/images/storefront.png" 
             alt="Zawadi Restaurant Storefront" 
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover opacity-[0.08] mix-blend-multiply"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent"></div>
         </div>
-        {/* Decorative Food Shapes Background */}
-        <div className="absolute inset-0 pointer-events-none opacity-5">
-          {/* Bowl shapes */}
-          <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-red-500 blur-2xl" />
-          <div className="absolute top-40 right-20 w-40 h-40 rounded-full bg-red-600 blur-3xl" />
-          <div className="absolute bottom-32 left-1/4 w-36 h-36 rounded-full bg-orange-500 blur-2xl" />
-          
-          {/* Quesadilla/Triangle shapes */}
-          <div className="absolute top-1/3 right-10 w-0 h-0 border-l-[80px] border-l-transparent border-r-[80px] border-r-transparent border-b-[140px] border-b-red-500 blur-2xl rotate-45" />
-          <div className="absolute bottom-20 right-1/3 w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-b-[100px] border-b-orange-600 blur-xl rotate-12" />
-          
-          {/* Drink/Cup shapes */}
-          <div className="absolute top-1/2 left-20 w-24 h-40 rounded-t-full bg-red-400 blur-2xl" />
-          <div className="absolute bottom-40 right-40 w-28 h-44 rounded-t-full bg-orange-400 blur-3xl" />
-          
-          {/* Fries/Rectangle shapes */}
-          <div className="absolute top-20 right-1/3 w-16 h-48 bg-red-500 blur-xl rotate-12" />
-          <div className="absolute bottom-60 left-40 w-20 h-52 bg-orange-500 blur-2xl -rotate-6" />
+        {/* Decorative Accent Blurs */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.07]">
+          <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-br from-orange-400 to-red-400 blur-3xl" />
+          <div className="absolute top-1/3 right-20 w-80 h-80 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 blur-3xl" />
+          <div className="absolute bottom-32 left-1/3 w-72 h-72 rounded-full bg-gradient-to-br from-red-400 to-pink-400 blur-3xl" />
         </div>
         <div className="mx-auto max-w-5xl px-4 py-16 relative z-10">
           <div className="text-center mb-12 bg-white rounded-2xl py-10 px-6 shadow-2xl border-2 border-slate-100">
@@ -378,29 +366,32 @@ export default function Home() {
                     {category.items.map((item) => (
                       <div 
                         key={item.name} 
-                        className="flex gap-6 p-6 rounded-2xl border-2 border-slate-100 hover:shadow-2xl hover:border-red-400 hover:bg-red-50/30 transition-all duration-300 bg-white shadow-md cursor-pointer"
+                        className="group flex gap-6 p-6 rounded-2xl border border-slate-200/50 bg-white/95 backdrop-blur-sm shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:border-orange-400/60 transition-all duration-300 cursor-pointer"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                         onClick={() => handleItemClick(item, category.slug)}
+                        style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)' }}
                       >
-                        <div className="flex-shrink-0">
-                          <div className="w-44 h-44 rounded-2xl overflow-hidden bg-slate-100 ring-2 ring-slate-200">
+                        <div className="flex-shrink-0 relative">
+                          <div className="w-44 h-44 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50 shadow-md">
                             <img 
                               src={item.image} 
                               alt={item.name}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                               loading="lazy"
                             />
                           </div>
+                          <div className="absolute -top-2 -right-2 bg-gradient-to-br from-red-500 to-orange-500 text-white px-4 py-2 rounded-full shadow-lg font-extrabold text-xl">
+                            ${item.price}
+                          </div>
                         </div>
                         <div className="flex-1 min-w-0 flex flex-col justify-center">
-                          <div className="flex items-start justify-between gap-3 mb-2">
-                            <h4 className="font-bold text-slate-900 text-3xl leading-tight">{item.name}</h4>
-                            <span className="text-3xl font-extrabold text-red-600 flex-shrink-0">${item.price}</span>
+                          <div className="mb-2">
+                            <h4 className="font-extrabold text-slate-900 text-3xl leading-tight group-hover:text-orange-600 transition-colors">{item.name}</h4>
                           </div>
                           {item.tags && item.tags.length > 0 && (
                             <div className="flex gap-2 mb-3 flex-wrap">
                               {item.tags.map((tag, idx) => (
-                                <span key={`${item.name}-${tag}-${idx}`} className="text-sm text-orange-700 font-semibold px-3 py-1.5 bg-orange-100 border border-orange-300 rounded-full">
+                                <span key={`${item.name}-${tag}-${idx}`} className="inline-flex items-center text-xs text-orange-800 font-bold px-3 py-1.5 bg-gradient-to-r from-orange-100 to-amber-100 border border-orange-300 rounded-full shadow-sm">
                                   {tag}
                                 </span>
                               ))}
