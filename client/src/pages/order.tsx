@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useForm } from "react-hook-form";
@@ -60,6 +60,35 @@ export default function Order() {
     sauces: [],
   });
   const { toast } = useToast();
+
+  // Auto-add items from homepage when page loads
+  useEffect(() => {
+    const quickAddItemStr = sessionStorage.getItem('quickAddItem');
+    if (quickAddItemStr) {
+      try {
+        const item = JSON.parse(quickAddItemStr);
+        sessionStorage.removeItem('quickAddItem');
+        
+        // Add to cart
+        setCart(prev => {
+          const existing = prev.find(i => i.name === item.name);
+          if (existing) {
+            return prev.map(i =>
+              i.name === item.name ? { ...i, quantity: i.quantity + 1 } : i
+            );
+          }
+          return [...prev, { ...item, quantity: 1 }];
+        });
+        
+        toast({
+          title: "Item added",
+          description: `${item.name} added to your cart`,
+        });
+      } catch (e) {
+        console.error('Failed to add quick add item:', e);
+      }
+    }
+  }, [toast]);
 
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
