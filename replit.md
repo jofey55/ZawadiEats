@@ -33,9 +33,11 @@ The frontend is built with **React 18** and **TypeScript**, using **Vite** for f
 
 **Key Features**:
 - Green primary color (#6BBF59) for CTAs and buttons
+- Green border (#6BBF59) appears on menu cards on hover and click for visual feedback
 - Smooth hover transitions with scale and shadow effects
 - Each menu item maintains unique customization toppings functionality
 - Mobile-first responsive design throughout
+- **Pricing Update (October 2025)**: All menu prices reduced by 20%
 
 ### Backend Architecture
 
@@ -44,11 +46,13 @@ The backend uses **Express.js** with **TypeScript** to provide a comprehensive R
 ### Core Features
 
 -   **Online Ordering System**: Full shopping cart functionality, real-time subtotal/tax calculations, checkout flow, pickup time selection, special instructions, and order confirmation.
--   **Universal Item Ordering**: ALL menu items (both simple and customizable) are now clickable and orderable:
-    -   **Simple items** (fries, plantains, sambusa, drinks): Click → Auto-redirect to order page → Auto-add to cart → Merge by quantity when same item clicked multiple times
+-   **Universal Item Ordering**: ALL menu items are clickable and orderable on BOTH homepage AND order page:
+    -   **Simple items** (fries, plantains, sambusa, drinks): Click → Auto-add to cart → Merge by quantity when same item clicked multiple times
     -   **Customizable items** (bowls, quesadillas, loaded fries): Click → Open BowlCustomizer modal → Select toppings → Add to cart with unique ID → Never merge (each customization is unique)
+    -   **Consistency**: Same functionality works identically on homepage and order page menu sections
     -   **Cart persistence**: Uses sessionStorage to transfer items from homepage to order page
     -   **Data integrity**: Customized items maintain unique identities with auto-generated IDs (timestamp + random string) to prevent merging
+    -   **Menu Items**: Includes Grilled Chicken Bowl, Skirt Steak Bowl, Veggie Bowl, Fruit Bowl, all Quesadillas, Loaded Fries, and all simple items
 -   **Toast POS Integration**: Infrastructure for menu sync, pricing, and order submission.
 -   **Comprehensive Database Schema**: Tables for orders, reviews, catering inquiries, job applications, contact messages, and feedback.
 -   **Dynamic Content Pages**: Fully functional pages for Catering, Feedback, Jobs, and Contact with forms and data storage.
