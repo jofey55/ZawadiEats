@@ -139,8 +139,27 @@ export default function Home() {
 
   const handleCheckout = (customizedItem: CustomizedItem) => {
     setIsCustomizerOpen(false);
-    // Store the customized item in sessionStorage
-    sessionStorage.setItem('quickAddItem', JSON.stringify(customizedItem));
+    
+    // Convert customized item to cart format with unique ID
+    const cartItem = {
+      id: `custom-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      name: customizedItem.baseItem.name,
+      price: customizedItem.totalPrice,
+      quantity: 1,
+      image: customizedItem.baseItem.image,
+      description: customizedItem.baseItem.description,
+      customization: {
+        hotToppings: customizedItem.hotToppings,
+        coldToppings: customizedItem.coldToppings,
+        sauces: customizedItem.sauces,
+        meat: customizedItem.meat,
+        addFries: customizedItem.addFries,
+        addDrink: customizedItem.addDrink,
+        iceOption: customizedItem.iceOption,
+      }
+    };
+    
+    sessionStorage.setItem('quickAddItem', JSON.stringify(cartItem));
     setLocation('/order');
   };
 

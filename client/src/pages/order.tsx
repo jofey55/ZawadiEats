@@ -28,12 +28,13 @@ interface BowlCustomization {
 }
 
 interface CartItem {
+  id?: string;
   name: string;
   description: string;
   price: number;
   quantity: number;
   image: string;
-  customization?: BowlCustomization;
+  customization?: any;
 }
 
 const checkoutSchema = z.object({
@@ -71,10 +72,16 @@ export default function Order() {
         
         // Add to cart
         setCart(prev => {
-          const existing = prev.find(i => i.name === item.name);
+          // For customized items (with id or customization), always add as new item
+          if (item.id || item.customization) {
+            return [...prev, { ...item, quantity: 1 }];
+          }
+          
+          // For simple items, check if exists and increment quantity
+          const existing = prev.find(i => i.name === item.name && !i.customization);
           if (existing) {
             return prev.map(i =>
-              i.name === item.name ? { ...i, quantity: i.quantity + 1 } : i
+              i.name === item.name && !i.customization ? { ...i, quantity: i.quantity + 1 } : i
             );
           }
           return [...prev, { ...item, quantity: 1 }];
