@@ -173,93 +173,67 @@ export default function Home() {
       </Helmet>
       
       <main className="min-h-screen bg-white text-slate-900">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #d4f1d4 0%, #e8f5e9 100%)' }}>
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-4">
-                All Best recipes in one place
-              </h1>
-              <p className="text-lg text-gray-600 mb-8">
-                Enjoy authentic East African cuisine, made fresh daily
-              </p>
-              <button 
-                onClick={() => setLocation('/order')}
-                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-base font-medium text-white shadow-md hover:shadow-lg transition-all"
-                style={{ backgroundColor: '#6BBF59' }}
-                aria-label="Order now"
-                data-testid="button-order-now"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                Order now
-              </button>
-            </div>
-            <div className="relative">
-              <Carousel
-                opts={{ loop: true }}
-                plugins={[
-                  Autoplay({
-                    delay: 4000,
-                  }),
-                ]}
-                className="w-full"
-              >
-                <CarouselContent>
-                  {heroImages.map((image, index) => (
-                    <CarouselItem key={index}>
-                      <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
-                        <img 
-                          src={image} 
-                          alt={`Zawadi Restaurant - East African dishes (${index + 1})`}
-                          className="w-full h-full object-cover"
-                          loading={index === 0 ? "eager" : "lazy"}
-                        />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-              </Carousel>
-            </div>
+      {/* Hero with Slideshow */}
+      <section className="relative isolate overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <Carousel
+            opts={{ loop: true }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+              }),
+            ]}
+            className="h-full w-full"
+          >
+            <CarouselContent className="h-full">
+              {heroImages.map((image, index) => (
+                <CarouselItem key={index} className="h-full">
+                  <img 
+                    src={image} 
+                    alt={`Zawadi Restaurant - East African dishes including bowls, sambusa, plantains, and more (${index + 1})`}
+                    className="h-full w-full object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        <div className="mx-auto max-w-5xl px-4 py-32 sm:py-40 text-center relative z-10">
+          <h1 className="text-4xl sm:text-5xl font-medium text-white mb-3 tracking-tight">
+            Zawadi Restaurant
+          </h1>
+          <p className="text-lg font-light text-white/90 mb-8">
+            East African cuisine, made fresh
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4 justify-center">
+            <a 
+              href="/order" 
+              className="rounded-full bg-red-500 px-8 py-3 text-sm font-medium text-white hover:bg-red-600 transition-colors" 
+              aria-label="Order Online for Pickup"
+              data-testid="button-order-online"
+            >
+              Order for Pickup
+            </a>
+            <a 
+              href="#menu" 
+              className="rounded-full bg-white/20 px-8 py-3 text-sm font-medium text-white hover:bg-white/30 transition-colors" 
+              aria-label="View Menu"
+              data-testid="button-view-menu"
+            >
+              View Menu
+            </a>
           </div>
         </div>
       </section>
 
       {/* Special Offer Banner */}
-      <section className="py-6" style={{ backgroundColor: '#FFF3E0' }}>
+      <section className="border-b border-gray-100 py-6">
         <div className="mx-auto max-w-5xl px-4 text-center">
-          <p className="text-base text-gray-700">
-            First online order? Get <span className="font-semibold" style={{ color: '#6BBF59' }}>10% off</span> with code <span className="font-mono font-semibold bg-white px-2 py-1 rounded">FIRST10</span>
+          <p className="text-base text-gray-600">
+            First online order? Get <span className="font-semibold text-red-500">10% off</span> with code <span className="font-mono font-medium">FIRST10</span>
           </p>
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="py-16 bg-white">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Categories</h2>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 mb-16">
-            {[
-              { name: 'All', emoji: '🍽️', color: '#FFF3E0' },
-              { name: 'Bowls', emoji: '🥙', color: '#F3E5F5' },
-              { name: 'Quesadilla', emoji: '🌮', color: '#E3F2FD' },
-              { name: 'Sambusa', emoji: '🥟', color: '#FFF9C4' },
-              { name: 'Appetizers', emoji: '🍟', color: '#FFE0B2' },
-              { name: 'Drinks', emoji: '🥤', color: '#F1F8E9' }
-            ].map((cat) => (
-              <button
-                key={cat.name}
-                className="flex flex-col items-center gap-2 p-3 rounded-2xl hover:scale-105 transition-transform"
-                style={{ backgroundColor: cat.color }}
-                data-testid={`button-category-${cat.name.toLowerCase()}`}
-              >
-                <div className="text-3xl">{cat.emoji}</div>
-                <span className="text-xs font-medium text-gray-700">{cat.name}</span>
-              </button>
-            ))}
-          </div>
         </div>
       </section>
 
