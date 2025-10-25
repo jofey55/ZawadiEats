@@ -12,7 +12,16 @@ Preferred communication style: Simple, everyday language.
 
 ### Frontend Architecture
 
-The frontend is built with **React 18** and **TypeScript**, using **Vite** for fast development and builds. **Wouter** handles client-side routing, while **Tailwind CSS** and **shadcn/ui** provide a consistent and responsive design, following a mobile-first approach. **TanStack Query** manages server state. Key features include a persistent shopping cart, form validation with **React Hook Form** and **Zod**, real-time price calculations, lazy loading for images, and **Google Analytics** integration. UI/UX emphasizes visually distinct, color-coded menu categories (e.g., amber for Appetizers, green for Bowls) and a prominent hero slideshow with auto-play using `embla-carousel-react`.
+The frontend is built with **React 18** and **TypeScript**, using **Vite** for fast development and builds. **Wouter** handles client-side routing, while **Tailwind CSS** and **shadcn/ui** provide a consistent and responsive design, following a mobile-first approach. **TanStack Query** manages server state. Key features include a persistent shopping cart, form validation with **React Hook Form** and **Zod**, real-time price calculations, lazy loading for images, and **Google Analytics** integration. 
+
+**Design Philosophy**: The UI/UX follows a clean, minimal Apple-inspired aesthetic with mostly white backgrounds, subtle red and green accents, and no heavy gradients or blur effects. Design characteristics include:
+- **Color Palette**: Primarily white and light gray (gray-50) backgrounds with minimal use of red-500 and green-600 for accents
+- **Typography**: Simplified, clean fonts with medium/light weights (text-4xl/5xl for hero, text-3xl for sections)
+- **Cards**: Clean white cards with subtle gray borders, no heavy shadows
+- **Buttons**: Solid colors with rounded-full corners, no gradients
+- **Menu Items**: Small 80px thumbnail images for a lightweight, card-based layout
+- **Spacing**: Generous white space throughout for a clean, uncluttered appearance
+- **Hero Section**: Slideshow carousel with minimalist overlay, simplified typography, and clean CTAs
 
 ### Backend Architecture
 
