@@ -201,16 +201,16 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
         <div className="mx-auto max-w-5xl px-4 py-32 sm:py-40 text-center relative z-10">
-          <h1 className="text-6xl sm:text-7xl font-semibold text-white mb-4 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-medium text-white mb-3 tracking-tight">
             Zawadi Restaurant
           </h1>
-          <p className="text-xl sm:text-2xl font-light text-white/90 mb-8">
+          <p className="text-lg font-light text-white/90 mb-8">
             East African cuisine, made fresh
           </p>
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <a 
               href="/order" 
-              className="rounded-full bg-red-500 px-8 py-3 text-base font-medium text-white hover:bg-red-600 transition-colors" 
+              className="rounded-full bg-red-500 px-8 py-3 text-sm font-medium text-white hover:bg-red-600 transition-colors" 
               aria-label="Order Online for Pickup"
               data-testid="button-order-online"
             >
@@ -218,7 +218,7 @@ export default function Home() {
             </a>
             <a 
               href="#menu" 
-              className="rounded-full bg-white/20 backdrop-blur-sm px-8 py-3 text-base font-medium text-white hover:bg-white/30 transition-colors" 
+              className="rounded-full bg-white/20 px-8 py-3 text-sm font-medium text-white hover:bg-white/30 transition-colors" 
               aria-label="View Menu"
               data-testid="button-view-menu"
             >
@@ -258,22 +258,6 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        <div className="mt-6 flex gap-3">
-          <a 
-            href={uberEatsUrl} 
-            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition-colors"
-            data-testid="button-ubereats-bestsellers"
-          >
-            Order on Uber Eats
-          </a>
-          <a 
-            href={doorDashUrl} 
-            className="rounded-xl bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600 transition-colors"
-            data-testid="button-doordash-bestsellers"
-          >
-            Order on DoorDash
-          </a>
-        </div>
       </div>
       </section>
 
@@ -306,12 +290,12 @@ export default function Home() {
                     {category.items.map((item) => (
                       <div 
                         key={item.name} 
-                        className="group flex gap-6 p-6 bg-white rounded-xl border border-gray-200 hover:border-gray-300 transition-all cursor-pointer"
+                        className="group flex gap-4 p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-all cursor-pointer"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                         onClick={() => handleItemClick(item, category.slug)}
                       >
                         <div className="flex-shrink-0">
-                          <div className="w-32 h-32 rounded-lg overflow-hidden bg-gray-100">
+                          <div className="w-20 h-20 rounded-md overflow-hidden bg-gray-100">
                             <img 
                               src={item.image} 
                               alt={item.name}
@@ -351,17 +335,17 @@ export default function Home() {
             })}
           </div>
 
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a 
               href={uberEatsUrl} 
-              className="rounded-xl bg-slate-900 px-8 py-4 text-base font-semibold text-white shadow-xl hover:bg-slate-800 hover:shadow-2xl transition-all w-full sm:w-auto text-center"
+              className="rounded-full bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
               data-testid="button-ubereats-menu"
             >
               Order on Uber Eats
             </a>
             <a 
               href={doorDashUrl} 
-              className="rounded-xl bg-gradient-to-r from-red-500 to-orange-500 px-8 py-4 text-base font-semibold text-white shadow-xl hover:from-red-600 hover:to-orange-600 hover:shadow-2xl transition-all w-full sm:w-auto text-center"
+              className="rounded-full bg-red-500 px-6 py-3 text-sm font-medium text-white hover:bg-red-600 transition-colors"
               data-testid="button-doordash-menu"
             >
               Order on DoorDash
