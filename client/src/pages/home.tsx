@@ -173,179 +173,201 @@ export default function Home() {
       </Helmet>
       
       <main className="min-h-screen bg-white text-slate-900">
-      {/* Hero with Slideshow */}
-      <section className="relative isolate overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <Carousel
-            opts={{ loop: true }}
-            plugins={[
-              Autoplay({
-                delay: 4000,
-              }),
-            ]}
-            className="h-full w-full"
-          >
-            <CarouselContent className="h-full">
-              {heroImages.map((image, index) => (
-                <CarouselItem key={index} className="h-full">
-                  <img 
-                    src={image} 
-                    alt={`Zawadi Restaurant - East African dishes including bowls, sambusa, plantains, and more (${index + 1})`}
-                    className="h-full w-full object-cover"
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-        <div className="mx-auto max-w-5xl px-4 py-32 sm:py-40 text-center relative z-10">
-          <h1 className="text-4xl sm:text-5xl font-medium text-white mb-3 tracking-tight">
-            Zawadi Restaurant
-          </h1>
-          <p className="text-lg font-light text-white/90 mb-8">
-            East African cuisine, made fresh
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4 justify-center">
-            <a 
-              href="/order" 
-              className="rounded-full bg-red-500 px-8 py-3 text-sm font-medium text-white hover:bg-red-600 transition-colors" 
-              aria-label="Order Online for Pickup"
-              data-testid="button-order-online"
-            >
-              Order for Pickup
-            </a>
-            <a 
-              href="#menu" 
-              className="rounded-full bg-white/20 px-8 py-3 text-sm font-medium text-white hover:bg-white/30 transition-colors" 
-              aria-label="View Menu"
-              data-testid="button-view-menu"
-            >
-              View Menu
-            </a>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #d4f1d4 0%, #e8f5e9 100%)' }}>
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-4">
+                All Best recipes in one place
+              </h1>
+              <p className="text-lg text-gray-600 mb-8">
+                Enjoy authentic East African cuisine, made fresh daily
+              </p>
+              <button 
+                onClick={() => setLocation('/order')}
+                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-base font-medium text-white shadow-md hover:shadow-lg transition-all"
+                style={{ backgroundColor: '#6BBF59' }}
+                aria-label="Order now"
+                data-testid="button-order-now"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                Order now
+              </button>
+            </div>
+            <div className="relative">
+              <Carousel
+                opts={{ loop: true }}
+                plugins={[
+                  Autoplay({
+                    delay: 4000,
+                  }),
+                ]}
+                className="w-full"
+              >
+                <CarouselContent>
+                  {heroImages.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                        <img 
+                          src={image} 
+                          alt={`Zawadi Restaurant - East African dishes (${index + 1})`}
+                          className="w-full h-full object-cover"
+                          loading={index === 0 ? "eager" : "lazy"}
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Special Offer Banner */}
-      <section className="border-b border-gray-100 py-6">
+      <section className="py-6" style={{ backgroundColor: '#FFF3E0' }}>
         <div className="mx-auto max-w-5xl px-4 text-center">
-          <p className="text-base text-gray-600">
-            First online order? Get <span className="font-semibold text-red-500">10% off</span> with code <span className="font-mono font-medium">FIRST10</span>
+          <p className="text-base text-gray-700">
+            First online order? Get <span className="font-semibold" style={{ color: '#6BBF59' }}>10% off</span> with code <span className="font-mono font-semibold bg-white px-2 py-1 rounded">FIRST10</span>
           </p>
         </div>
       </section>
 
-      {/* Best sellers */}
+      {/* Categories */}
       <section className="py-16 bg-white">
-        <div className="mx-auto max-w-5xl px-4">
-          <h2 className="text-3xl font-semibold text-gray-900 mb-8">Popular dishes</h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {bestSellers.map((item) => (
-            <li key={item.name} className="group" data-testid={`card-bestseller-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
-              <div className="aspect-square w-full rounded-2xl bg-gray-50 overflow-hidden mb-4">
-                <img 
-                  src={item.image} 
-                  alt={item.name} 
-                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="font-medium text-lg text-gray-900 mb-1" data-testid={`text-item-name-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>{item.name}</h3>
-              <p className="text-sm text-gray-500 mb-2">{item.description}</p>
-              <span className="text-sm font-medium text-gray-900" data-testid={`text-price-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>${item.price}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div className="mx-auto max-w-6xl px-4">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Categories</h2>
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 mb-16">
+            {[
+              { name: 'All', emoji: '🍽️', color: '#FFF3E0' },
+              { name: 'Bowls', emoji: '🥙', color: '#F3E5F5' },
+              { name: 'Quesadilla', emoji: '🌮', color: '#E3F2FD' },
+              { name: 'Sambusa', emoji: '🥟', color: '#FFF9C4' },
+              { name: 'Appetizers', emoji: '🍟', color: '#FFE0B2' },
+              { name: 'Drinks', emoji: '🥤', color: '#F1F8E9' }
+            ].map((cat) => (
+              <button
+                key={cat.name}
+                className="flex flex-col items-center gap-2 p-3 rounded-2xl hover:scale-105 transition-transform"
+                style={{ backgroundColor: cat.color }}
+                data-testid={`button-category-${cat.name.toLowerCase()}`}
+              >
+                <div className="text-3xl">{cat.emoji}</div>
+                <span className="text-xs font-medium text-gray-700">{cat.name}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Menu */}
-      <section id="menu" className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-semibold text-gray-900 mb-2">Menu</h2>
-            <p className="text-base text-gray-500">
-              {menuData.dietNotes}
-            </p>
-          </div>
-          
-          <div className="space-y-16">
-            {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category) => {
-              const categoryAccents: Record<string, string> = {
-                'bowls': 'text-red-500',
-                'quesadillas': 'text-red-500',
-                'sambusa': 'text-red-500',
-                'appetizers': 'text-green-600',
-                'drinks': 'text-green-600'
-              };
-              const accentClass = categoryAccents[category.slug] || 'text-gray-900';
-              
-              return (
-              <div key={category.slug} data-testid={`card-menu-${category.slug}`}>
-                <h3 className={`text-2xl font-semibold mb-8 ${accentClass}`}>{category.name}</h3>
-                <div className="bg-white">
-                  <div className="grid grid-cols-1 gap-4">
-                    {category.items.map((item) => (
-                      <div 
-                        key={item.name} 
-                        className="group flex gap-4 p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-all cursor-pointer"
-                        data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                        onClick={() => handleItemClick(item, category.slug)}
-                      >
-                        <div className="flex-shrink-0">
-                          <div className="w-20 h-20 rounded-md overflow-hidden bg-gray-100">
-                            <img 
-                              src={item.image} 
-                              alt={item.name}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
-                        </div>
-                        <div className="flex-1 min-w-0 flex flex-col justify-center">
-                          <div className="flex items-start justify-between gap-4 mb-2">
-                            <h4 className="font-medium text-lg text-gray-900">{item.name}</h4>
-                            <span className="text-base font-medium text-gray-900 flex-shrink-0">${item.price}</span>
-                          </div>
-                          {item.tags && item.tags.length > 0 && (
-                            <div className="flex gap-2 mb-2 flex-wrap">
-                              {item.tags.map((tag, idx) => {
-                                const isVegetarian = tag.toLowerCase().includes('vegetarian') || tag.toLowerCase().includes('vegan');
-                                return (
-                                  <span 
-                                    key={`${item.name}-${tag}-${idx}`} 
-                                    className={`text-xs px-2 py-1 rounded ${isVegetarian ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-600'}`}
-                                  >
-                                    {tag}
-                                  </span>
-                                );
-                              })}
-                            </div>
-                          )}
-                          <p className="text-sm text-gray-500">{item.description}</p>
-                        </div>
+      <section id="menu" className="bg-white py-20">
+        <div className="mx-auto max-w-6xl px-4">          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {menuData.categories.filter(cat => cat.slug !== "best-sellers").flatMap(category => 
+              category.items.map((item, idx) => {
+                const pastelColors = [
+                  '#FFE8F0',
+                  '#FFF4E0', 
+                  '#E0F4FF',
+                  '#FFE8F0',
+                  '#FFF4E0',
+                  '#E0F4FF'
+                ];
+                const bgColor = pastelColors[idx % pastelColors.length];
+                
+                const discountChance = Math.random();
+                const hasDiscount = discountChance < 0.3;
+                const discountAmount = hasDiscount ? (discountChance < 0.15 ? '15% Off' : '10% Off') : null;
+                
+                return (
+                  <div 
+                    key={`${category.slug}-${item.name}`}
+                    className="relative rounded-3xl p-6 cursor-pointer transition-all hover:scale-105 hover:shadow-xl"
+                    style={{ backgroundColor: bgColor }}
+                    data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    onClick={() => handleItemClick(item, category.slug)}
+                  >
+                    {discountAmount && (
+                      <div className="absolute top-4 left-4 bg-white rounded-full px-3 py-1 text-xs font-semibold shadow-md" style={{ color: '#6BBF59' }}>
+                        {discountAmount}
                       </div>
-                    ))}
+                    )}
+                    <button 
+                      className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg transition-shadow"
+                      aria-label={`Add ${item.name} to favorites`}
+                    >
+                      <svg className="w-5 h-5 text-gray-400 hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </button>
+                    
+                    <div className="flex justify-center mb-4">
+                      <div className="w-40 h-40 rounded-full overflow-hidden bg-white shadow-lg">
+                        <img 
+                          src={item.image} 
+                          alt={item.name}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <h3 className="font-semibold text-lg text-gray-900 mb-1">{item.name}</h3>
+                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">{item.description}</p>
+                      
+                      {item.tags && item.tags.length > 0 && (
+                        <div className="flex gap-2 mb-3 justify-center flex-wrap">
+                          {item.tags.slice(0, 2).map((tag, tagIdx) => {
+                            const isVegetarian = tag.toLowerCase().includes('vegetarian') || tag.toLowerCase().includes('vegan');
+                            return (
+                              <span 
+                                key={`${item.name}-${tag}-${tagIdx}`} 
+                                className={`text-xs px-2 py-1 rounded-full ${isVegetarian ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}
+                              >
+                                {tag}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
+                      
+                      <div className="flex items-center justify-between mt-4">
+                        <span className="text-xl font-bold text-gray-900">${item.price}</span>
+                        <button 
+                          className="w-8 h-8 flex items-center justify-center rounded-full shadow-md hover:shadow-lg transition-all"
+                          style={{ backgroundColor: '#6BBF59' }}
+                          aria-label={`Add ${item.name} to cart`}
+                        >
+                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              )
-            })}
+                );
+              })
+            )}
           </div>
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a 
               href={uberEatsUrl} 
-              className="rounded-full bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
+              className="rounded-xl px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all"
+              style={{ backgroundColor: '#1A1A1A' }}
               data-testid="button-ubereats-menu"
             >
               Order on Uber Eats
             </a>
             <a 
               href={doorDashUrl} 
-              className="rounded-full bg-red-500 px-6 py-3 text-sm font-medium text-white hover:bg-red-600 transition-colors"
+              className="rounded-xl px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all"
+              style={{ backgroundColor: '#FF3008' }}
               data-testid="button-doordash-menu"
             >
               Order on DoorDash
