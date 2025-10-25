@@ -14,14 +14,28 @@ Preferred communication style: Simple, everyday language.
 
 The frontend is built with **React 18** and **TypeScript**, using **Vite** for fast development and builds. **Wouter** handles client-side routing, while **Tailwind CSS** and **shadcn/ui** provide a consistent and responsive design, following a mobile-first approach. **TanStack Query** manages server state. Key features include a persistent shopping cart, form validation with **React Hook Form** and **Zod**, real-time price calculations, lazy loading for images, and **Google Analytics** integration. 
 
-**Design Philosophy**: The UI/UX follows a clean, minimal Apple-inspired aesthetic with mostly white backgrounds, subtle red and green accents, and no heavy gradients or blur effects. Design characteristics include:
-- **Color Palette**: Primarily white and light gray (gray-50) backgrounds with minimal use of red-500 and green-600 for accents
-- **Typography**: Simplified, clean fonts with medium/light weights (text-4xl/5xl for hero, text-3xl for sections)
-- **Cards**: Clean white cards with subtle gray borders, no heavy shadows
-- **Buttons**: Solid colors with rounded-full corners, no gradients
-- **Menu Items**: Small 80px thumbnail images for a lightweight, card-based layout
-- **Spacing**: Generous white space throughout for a clean, uncluttered appearance
-- **Hero Section**: Slideshow carousel with minimalist overlay, simplified typography, and clean CTAs
+**Design Philosophy**: The UI/UX follows a hybrid design approach that combines a clean, minimal hero section with vibrant pastel menu cards. Design characteristics include:
+
+**Hero Section (Minimal Design)**:
+- Full-screen slideshow carousel with dark overlay
+- Clean, simplified typography (text-4xl/5xl)
+- Red "Order for Pickup" CTA and semi-transparent "View Menu" button
+- White background with subtle gray borders for offer banner
+
+**Menu Section (Pastel Card Design)**:
+- **Color Palette**: Alternating pastel backgrounds (pink #FFE8F0, peach #FFF4E0, blue #E0F4FF)
+- **Images**: Large circular food photos (160px diameter) with white backgrounds and shadows
+- **Cards**: Rounded-3xl pastel cards with hover effects (scale 1.05 + shadow)
+- **Interactive Elements**: Heart icon for favorites, green circular add-to-cart buttons (#6BBF59)
+- **Discount Badges**: Random 10% or 15% off badges on select items
+- **Typography**: Clean fonts with centered layout, 2-line description limit
+- **Grid Layout**: Responsive 3-column grid (1 on mobile, 2 on tablet, 3 on desktop)
+
+**Key Features**:
+- Green primary color (#6BBF59) for CTAs and buttons
+- Smooth hover transitions with scale and shadow effects
+- Each menu item maintains unique customization toppings functionality
+- Mobile-first responsive design throughout
 
 ### Backend Architecture
 
