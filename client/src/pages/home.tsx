@@ -321,7 +321,7 @@ export default function Home() {
                     return (
                       <div 
                         key={itemKey}
-                        className="relative rounded-3xl p-6 cursor-pointer transition-all hover:scale-105 hover:shadow-xl"
+                        className="relative rounded-3xl p-6 cursor-pointer transition-all hover:scale-105 hover:shadow-xl border-2 border-transparent hover:border-[#6BBF59] active:border-[#6BBF59]"
                         style={{ backgroundColor: bgColor }}
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                         onClick={() => handleItemClick(item, category.slug)}

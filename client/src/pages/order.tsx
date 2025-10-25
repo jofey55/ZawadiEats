@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ShoppingCart, Plus, Minus, X, Check } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import menuData from "../menu.json";
+import BowlCustomizer, { type CustomizedItem } from "@/components/BowlCustomizer";
 
 interface BowlCustomization {
   base: string;
@@ -60,6 +61,8 @@ export default function Order() {
     coldToppings: [],
     sauces: [],
   });
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
   const { toast } = useToast();
 
   // Auto-add items from homepage when page loads
@@ -139,25 +142,50 @@ export default function Order() {
     },
   });
 
+  const handleCustomizerCheckout = (customizedItem: CustomizedItem) => {
+    setIsCustomizerOpen(false);
+    
+    // Convert customized item to cart format with unique ID
+    const cartItem = {
+      id: `custom-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      name: customizedItem.baseItem.name,
+      price: customizedItem.totalPrice,
+      quantity: 1,
+      image: customizedItem.baseItem.image,
+      description: customizedItem.baseItem.description,
+      customization: {
+        hotToppings: customizedItem.hotToppings,
+        coldToppings: customizedItem.coldToppings,
+        sauces: customizedItem.sauces,
+        meat: customizedItem.meat,
+        addFries: customizedItem.addFries,
+        addDrink: customizedItem.addDrink,
+        iceOption: customizedItem.iceOption,
+      }
+    };
+    
+    setCart(prev => [...prev, cartItem]);
+    toast({
+      title: "Item added",
+      description: `${customizedItem.baseItem.name} added to your cart`,
+    });
+  };
+
   const addToCart = (item: any) => {
-    if (BOWL_ITEMS.includes(item.name)) {
-      setCustomizingBowl(item);
-      setBowlCustomization({
-        base: "saffron",
-        protein: item.name.includes("Chicken") ? "chicken" : item.name.includes("Steak") ? "steak" : "none",
-        doubleProtein: false,
-        hotToppings: [],
-        coldToppings: [],
-        sauces: [],
-      });
+    // Check if item has customization options (same logic as homepage)
+    if (item.allowedToppings && item.allowedToppings.length > 0 && (item as any).customToppings) {
+      // Open BowlCustomizer for items with customization
+      setSelectedItem(item);
+      setIsCustomizerOpen(true);
       return;
     }
     
+    // For simple items, add directly to cart
     setCart(prev => {
-      const existing = prev.find(i => i.name === item.name);
+      const existing = prev.find(i => i.name === item.name && !i.customization);
       if (existing) {
         return prev.map(i =>
-          i.name === item.name ? { ...i, quantity: i.quantity + 1 } : i
+          i.name === item.name && !i.customization ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
       return [...prev, { ...item, quantity: 1 }];
@@ -288,6 +316,12 @@ export default function Order() {
 
   return (
     <div className="min-h-screen bg-white">
+      <BowlCustomizer
+        item={selectedItem}
+        isOpen={isCustomizerOpen}
+        onClose={() => setIsCustomizerOpen(false)}
+        onCheckout={handleCustomizerCheckout}
+      />
       <Dialog open={!!customizingBowl} onOpenChange={() => setCustomizingBowl(null)}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
@@ -477,7 +511,7 @@ export default function Order() {
                 <h3 className="text-xl font-semibold text-amber-600">{category.name}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {category.items.map(item => (
-                    <Card key={item.name} className="hover:shadow-lg transition-shadow" data-testid={`card-menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <Card key={item.name} className="hover:shadow-lg transition-shadow border-2 border-transparent hover:border-[#6BBF59] active:border-[#6BBF59]" data-testid={`card-menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
                       <CardContent className="p-4">
                         <div className="flex gap-4">
                           <img
