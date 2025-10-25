@@ -172,7 +172,7 @@ export default function Home() {
         </script>
       </Helmet>
       
-      <main className="min-h-screen bg-gradient-to-b from-amber-50/30 via-white to-stone-50 text-slate-900">
+      <main className="min-h-screen bg-white text-slate-900">
       {/* Hero with Slideshow */}
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -200,103 +200,61 @@ export default function Home() {
           </Carousel>
           <div className="absolute inset-0 bg-black/40" />
         </div>
-        <div className="mx-auto max-w-5xl px-4 py-24 sm:py-32 text-center relative z-10">
-          <h1 className="text-8xl sm:text-9xl md:text-9xl font-black text-white mb-2 tracking-tighter leading-none" style={{ fontWeight: 950, textShadow: '2px 2px 8px rgba(0,0,0,0.5)' }}>
-            ZAWADI RESTAURANT
+        <div className="mx-auto max-w-5xl px-4 py-32 sm:py-40 text-center relative z-10">
+          <h1 className="text-6xl sm:text-7xl font-semibold text-white mb-4 tracking-tight">
+            Zawadi Restaurant
           </h1>
-          <h2 className="text-base sm:text-lg font-normal text-white/95 mb-6">
-            East African Flavors FAST and FRESH
-          </h2>
-          <p className="mt-4 max-w-xl mx-auto text-white/90">
-            Bowls, sambusa, plantains & house drinks. Halal-friendly. Made to order in Bloomington.
+          <p className="text-xl sm:text-2xl font-light text-white/90 mb-8">
+            East African cuisine, made fresh
           </p>
-          <div className="mt-6 flex flex-wrap gap-3 justify-center">
+          <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <a 
               href="/order" 
-              className="rounded-2xl bg-gradient-to-r from-red-500 to-red-600 px-6 py-3 text-sm font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all" 
+              className="rounded-full bg-red-500 px-8 py-3 text-base font-medium text-white hover:bg-red-600 transition-colors" 
               aria-label="Order Online for Pickup"
               data-testid="button-order-online"
             >
-              🛒 Order Online • Pickup
-            </a>
-            <a 
-              href={uberEatsUrl} 
-              className="rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow hover:opacity-90" 
-              aria-label="Order on Uber Eats"
-              data-testid="button-ubereats-hero"
-            >
-              Order on Uber Eats
-            </a>
-            <a 
-              href={doorDashUrl} 
-              className="rounded-2xl bg-amber-500 px-5 py-3 text-sm font-semibold text-white shadow hover:opacity-90" 
-              aria-label="Order on DoorDash"
-              data-testid="button-doordash-hero"
-            >
-              Order on DoorDash
+              Order for Pickup
             </a>
             <a 
               href="#menu" 
-              className="rounded-2xl border border-white/70 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10" 
+              className="rounded-full bg-white/20 backdrop-blur-sm px-8 py-3 text-base font-medium text-white hover:bg-white/30 transition-colors" 
               aria-label="View Menu"
               data-testid="button-view-menu"
             >
               View Menu
             </a>
           </div>
-          <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-white">
-            <span className="text-xs">Today's hours:</span>
-            <strong className="text-sm" data-testid="text-todays-hours">{todaysHours}</strong>
-          </div>
         </div>
       </section>
 
       {/* Special Offer Banner */}
-      <section className="bg-gradient-to-r from-red-500 to-orange-500 text-white py-8">
+      <section className="border-b border-gray-100 py-6">
         <div className="mx-auto max-w-5xl px-4 text-center">
-          <h2 className="text-2xl font-bold" data-testid="text-special-offer">
-            🎉 First Online Order? Get 10% Off with code: FIRST10
-          </h2>
-          <p className="mt-2 text-lg">Valid for pickup orders only</p>
-          <a 
-            href="/order" 
-            className="mt-4 inline-block rounded-xl bg-white px-8 py-3 text-sm font-semibold text-red-600 hover:bg-gray-100 transition-colors"
-            data-testid="button-order-now-banner"
-          >
-            Order Now
-          </a>
+          <p className="text-base text-gray-600">
+            First online order? Get <span className="font-semibold text-red-500">10% off</span> with code <span className="font-mono font-medium">FIRST10</span>
+          </p>
         </div>
       </section>
 
       {/* Best sellers */}
-      <section className="relative overflow-hidden py-12">
-        <div className="absolute inset-0 -z-10">
-          <img 
-            src="/images/zawadi-restaurant-header.jpg" 
-            alt="Zawadi Restaurant" 
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95" />
-        </div>
-        <div className="mx-auto max-w-5xl px-4 relative z-10">
-          <h2 className="text-3xl font-bold text-slate-900">Best sellers</h2>
-        <ul className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <section className="py-16 bg-white">
+        <div className="mx-auto max-w-5xl px-4">
+          <h2 className="text-3xl font-semibold text-gray-900 mb-8">Popular dishes</h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {bestSellers.map((item) => (
-            <li key={item.name} className="rounded-2xl border border-slate-200 p-4 bg-white hover:bg-slate-50 transition-all shadow-lg hover:shadow-xl" data-testid={`card-bestseller-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
-              <div className="h-40 w-full rounded-xl bg-slate-100 mb-3 overflow-hidden ring-2 ring-slate-200">
+            <li key={item.name} className="group" data-testid={`card-bestseller-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
+              <div className="aspect-square w-full rounded-2xl bg-gray-50 overflow-hidden mb-4">
                 <img 
                   src={item.image} 
                   alt={item.name} 
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
               </div>
-              <div className="flex items-start justify-between gap-3">
-                <h3 className="font-bold text-xl text-slate-900" data-testid={`text-item-name-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>{item.name}</h3>
-                <span className="text-lg text-red-600 font-bold" data-testid={`text-price-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>${item.price}</span>
-              </div>
-              <p className="mt-1 text-sm text-slate-600">{item.description}</p>
+              <h3 className="font-medium text-lg text-gray-900 mb-1" data-testid={`text-item-name-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>{item.name}</h3>
+              <p className="text-sm text-gray-500 mb-2">{item.description}</p>
+              <span className="text-sm font-medium text-gray-900" data-testid={`text-price-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>${item.price}</span>
             </li>
           ))}
         </ul>
@@ -320,115 +278,69 @@ export default function Home() {
       </section>
 
       {/* Menu */}
-      <section id="menu" className="relative overflow-hidden bg-gradient-to-br from-amber-50/50 via-orange-50/30 to-red-50/40">
-        {/* Enhanced Storefront Background */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-b from-orange-100/20 via-[#faf8f5]/90 to-[#faf8f5]"></div>
-          <img 
-            src="/images/storefront.png" 
-            alt="Zawadi Restaurant Storefront" 
-            className="w-full h-full object-cover opacity-[0.08] mix-blend-multiply"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent"></div>
-        </div>
-        {/* Decorative Food & Plate Shapes */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.12]">
-          {/* Large Plates - Circles */}
-          <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-gradient-to-br from-red-500 to-orange-500 blur-3xl" />
-          <div className="absolute top-1/4 right-16 w-80 h-80 rounded-full bg-gradient-to-br from-orange-500 to-red-500 blur-3xl" />
-          <div className="absolute bottom-40 left-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-red-500 to-orange-500 blur-2xl" />
-          
-          {/* Bowl Shapes - Smaller circles */}
-          <div className="absolute top-1/3 left-1/3 w-48 h-48 rounded-full bg-gradient-to-br from-orange-500 to-red-500 blur-2xl" />
-          <div className="absolute bottom-1/3 right-1/4 w-56 h-56 rounded-full bg-gradient-to-br from-red-500 to-orange-500 blur-2xl" />
-          
-          {/* Quesadilla/Triangle Shapes */}
-          <div className="absolute top-1/2 right-12 w-0 h-0 border-l-[100px] border-l-transparent border-r-[100px] border-r-transparent border-b-[160px] border-b-red-500 blur-2xl rotate-45 opacity-80" />
-          <div className="absolute bottom-24 left-1/2 w-0 h-0 border-l-[80px] border-l-transparent border-r-[80px] border-r-transparent border-b-[120px] border-b-orange-500 blur-xl rotate-12 opacity-80" />
-          
-          {/* Food Rectangle Shapes */}
-          <div className="absolute top-32 right-1/3 w-20 h-60 bg-gradient-to-br from-red-500 to-orange-500 blur-xl rotate-12 opacity-70" />
-          <div className="absolute bottom-48 left-20 w-24 h-56 bg-gradient-to-br from-orange-500 to-red-500 blur-2xl -rotate-6 opacity-70" />
-          
-          {/* Additional Plate Shapes scattered */}
-          <div className="absolute top-2/3 right-32 w-52 h-52 rounded-full bg-gradient-to-br from-red-500 to-orange-500 blur-3xl" />
-          <div className="absolute top-12 left-1/2 w-60 h-60 rounded-full bg-gradient-to-br from-orange-500 to-red-500 blur-3xl" />
-        </div>
-        <div className="mx-auto max-w-5xl px-4 py-16 relative z-10">
-          <div className="text-center mb-12 bg-white rounded-2xl py-10 px-6 shadow-2xl border-2 border-slate-100">
-            <h2 className="text-6xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-4" style={{ letterSpacing: '-0.02em' }}>Our Menu</h2>
-            <p className="mt-4 text-lg font-medium text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              {menuData.dietNotes} Prices may vary on delivery apps.
+      <section id="menu" className="bg-gray-50 py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-semibold text-gray-900 mb-2">Menu</h2>
+            <p className="text-base text-gray-500">
+              {menuData.dietNotes}
             </p>
           </div>
           
-          <div className="space-y-8 relative z-10">
+          <div className="space-y-16">
             {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category) => {
-              const categoryColors: Record<string, string> = {
-                'appetizers': 'from-amber-400 via-orange-500 to-amber-500',
-                'bowls': 'from-red-500 via-orange-500 to-red-600',
-                'quesadillas': 'from-orange-500 via-amber-500 to-orange-600',
-                'sambusa': 'from-pink-400 via-rose-500 to-pink-500',
-                'drinks': 'from-blue-400 via-indigo-500 to-blue-500'
+              const categoryAccents: Record<string, string> = {
+                'bowls': 'text-red-500',
+                'quesadillas': 'text-red-500',
+                'sambusa': 'text-red-500',
+                'appetizers': 'text-green-600',
+                'drinks': 'text-green-600'
               };
-              const colorClass = categoryColors[category.slug] || 'from-red-500 via-orange-500 to-red-600';
+              const accentClass = categoryAccents[category.slug] || 'text-gray-900';
               
               return (
-              <div key={category.slug} className="bg-white rounded-2xl shadow-2xl border-2 border-white overflow-hidden ring-4 ring-slate-200/50" data-testid={`card-menu-${category.slug}`} style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8)' }}>
-                <div className={`bg-gradient-to-r ${colorClass} px-6 py-5`}>
-                  <h3 className="text-3xl font-bold text-white tracking-tight">{category.name}</h3>
-                </div>
-                <div className="p-6 bg-white">
-                  <div className="grid grid-cols-1 gap-6">
+              <div key={category.slug} data-testid={`card-menu-${category.slug}`}>
+                <h3 className={`text-2xl font-semibold mb-8 ${accentClass}`}>{category.name}</h3>
+                <div className="bg-white">
+                  <div className="grid grid-cols-1 gap-4">
                     {category.items.map((item) => (
                       <div 
                         key={item.name} 
-                        className="group relative flex gap-6 p-6 rounded-2xl border-2 border-slate-200 bg-white backdrop-blur-sm shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:border-transparent transition-all duration-300 cursor-pointer overflow-hidden"
+                        className="group flex gap-6 p-6 bg-white rounded-xl border border-gray-200 hover:border-gray-300 transition-all cursor-pointer"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                         onClick={() => handleItemClick(item, category.slug)}
                       >
-                        {/* Gradient border overlay on hover */}
-                        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
-                             style={{ 
-                               background: 'linear-gradient(135deg, #f97316 0%, #fb923c 25%, #fbbf24 50%, #fb923c 75%, #f97316 100%)',
-                               padding: '2px',
-                               WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                               WebkitMaskComposite: 'xor',
-                               maskComposite: 'exclude'
-                             }}>
-                        </div>
-                        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
-                             style={{ 
-                               boxShadow: '0 0 20px rgba(251, 146, 60, 0.5), 0 0 40px rgba(249, 115, 22, 0.3), inset 0 0 20px rgba(251, 191, 36, 0.1)'
-                             }}>
-                        </div>
-                        <div className="flex-shrink-0 relative">
-                          <div className="w-44 h-44 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50 shadow-md">
+                        <div className="flex-shrink-0">
+                          <div className="w-32 h-32 rounded-lg overflow-hidden bg-gray-100">
                             <img 
                               src={item.image} 
                               alt={item.name}
-                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                              className="w-full h-full object-cover"
                               loading="lazy"
                             />
                           </div>
-                          <div className="absolute -top-2 -right-2 bg-gradient-to-br from-red-500 to-orange-500 text-white px-4 py-2 rounded-full shadow-lg font-extrabold text-xl">
-                            ${item.price}
-                          </div>
                         </div>
                         <div className="flex-1 min-w-0 flex flex-col justify-center">
-                          <div className="mb-2">
-                            <h4 className="font-extrabold text-slate-900 text-3xl leading-tight group-hover:text-orange-600 transition-colors">{item.name}</h4>
+                          <div className="flex items-start justify-between gap-4 mb-2">
+                            <h4 className="font-medium text-lg text-gray-900">{item.name}</h4>
+                            <span className="text-base font-medium text-gray-900 flex-shrink-0">${item.price}</span>
                           </div>
                           {item.tags && item.tags.length > 0 && (
-                            <div className="flex gap-2 mb-3 flex-wrap">
-                              {item.tags.map((tag, idx) => (
-                                <span key={`${item.name}-${tag}-${idx}`} className="inline-flex items-center text-xs text-orange-800 font-bold px-3 py-1.5 bg-gradient-to-r from-orange-100 to-amber-100 border border-orange-300 rounded-full shadow-sm">
-                                  {tag}
-                                </span>
-                              ))}
+                            <div className="flex gap-2 mb-2 flex-wrap">
+                              {item.tags.map((tag, idx) => {
+                                const isVegetarian = tag.toLowerCase().includes('vegetarian') || tag.toLowerCase().includes('vegan');
+                                return (
+                                  <span 
+                                    key={`${item.name}-${tag}-${idx}`} 
+                                    className={`text-xs px-2 py-1 rounded ${isVegetarian ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-600'}`}
+                                  >
+                                    {tag}
+                                  </span>
+                                );
+                              })}
                             </div>
                           )}
-                          <p className="text-lg text-slate-600 leading-relaxed">{item.description}</p>
+                          <p className="text-sm text-gray-500">{item.description}</p>
                         </div>
                       </div>
                     ))}
