@@ -237,115 +237,139 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Menu */}
-      <section id="menu" className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-4">          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {menuData.categories.filter(cat => cat.slug !== "best-sellers").flatMap(category => 
-              category.items.map((item, idx) => {
-                const pastelColors = [
-                  '#FFE8F0',
-                  '#FFF4E0', 
-                  '#E0F4FF',
-                  '#FFE8F0',
-                  '#FFF4E0',
-                  '#E0F4FF'
-                ];
-                const bgColor = pastelColors[idx % pastelColors.length];
-                
-                const discountChance = Math.random();
-                const hasDiscount = discountChance < 0.3;
-                const discountAmount = hasDiscount ? (discountChance < 0.15 ? '15% Off' : '10% Off') : null;
-                
-                return (
-                  <div 
-                    key={`${category.slug}-${item.name}`}
-                    className="relative rounded-3xl p-6 cursor-pointer transition-all hover:scale-105 hover:shadow-xl"
-                    style={{ backgroundColor: bgColor }}
-                    data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                    onClick={() => handleItemClick(item, category.slug)}
-                  >
-                    {discountAmount && (
-                      <div className="absolute top-4 left-4 bg-white rounded-full px-3 py-1 text-xs font-semibold shadow-md" style={{ color: '#6BBF59' }}>
-                        {discountAmount}
-                      </div>
-                    )}
-                    <button 
-                      className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg transition-shadow"
-                      aria-label={`Add ${item.name} to favorites`}
-                    >
-                      <svg className="w-5 h-5 text-gray-400 hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                      </svg>
-                    </button>
-                    
-                    <div className="flex justify-center mb-4">
-                      <div className="w-40 h-40 rounded-full overflow-hidden bg-white shadow-lg">
-                        <img 
-                          src={item.image} 
-                          alt={item.name}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="text-center">
-                      <h3 className="font-semibold text-lg text-gray-900 mb-1">{item.name}</h3>
-                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">{item.description}</p>
-                      
-                      {item.tags && item.tags.length > 0 && (
-                        <div className="flex gap-2 mb-3 justify-center flex-wrap">
-                          {item.tags.slice(0, 2).map((tag, tagIdx) => {
-                            const isVegetarian = tag.toLowerCase().includes('vegetarian') || tag.toLowerCase().includes('vegan');
-                            return (
-                              <span 
-                                key={`${item.name}-${tag}-${tagIdx}`} 
-                                className={`text-xs px-2 py-1 rounded-full ${isVegetarian ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}
-                              >
-                                {tag}
-                              </span>
-                            );
-                          })}
-                        </div>
-                      )}
-                      
-                      <div className="flex items-center justify-between mt-4">
-                        <span className="text-xl font-bold text-gray-900">${item.price}</span>
-                        <button 
-                          className="w-8 h-8 flex items-center justify-center rounded-full shadow-md hover:shadow-lg transition-all"
-                          style={{ backgroundColor: '#6BBF59' }}
-                          aria-label={`Add ${item.name} to cart`}
-                        >
-                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })
-            )}
-          </div>
-
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
+      {/* Delivery Options */}
+      <section className="py-8 bg-gray-50">
+        <div className="mx-auto max-w-5xl px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a 
               href={uberEatsUrl} 
-              className="rounded-xl px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all"
+              className="rounded-xl px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all w-full sm:w-auto text-center"
               style={{ backgroundColor: '#1A1A1A' }}
-              data-testid="button-ubereats-menu"
+              data-testid="button-ubereats-top"
             >
               Order on Uber Eats
             </a>
             <a 
               href={doorDashUrl} 
-              className="rounded-xl px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all"
+              className="rounded-xl px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all w-full sm:w-auto text-center"
               style={{ backgroundColor: '#FF3008' }}
-              data-testid="button-doordash-menu"
+              data-testid="button-doordash-top"
             >
               Order on DoorDash
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Menu */}
+      <section id="menu" className="bg-white py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-semibold text-gray-900 mb-2">Menu</h2>
+            <p className="text-base text-gray-500">
+              {menuData.dietNotes}
+            </p>
+          </div>
+          
+          <div className="space-y-16">
+            {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category, catIdx) => (
+              <div key={category.slug} data-testid={`section-${category.slug}`}>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-8">{category.name}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {category.items.map((item, idx) => {
+                    const pastelColors = [
+                      '#FFE8F0',
+                      '#FFF4E0', 
+                      '#E0F4FF',
+                      '#FFE8F0',
+                      '#FFF4E0',
+                      '#E0F4FF'
+                    ];
+                    const bgColor = pastelColors[idx % pastelColors.length];
+                    
+                    const itemKey = `${category.slug}-${item.name}`;
+                    const seedValue = itemKey.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+                    const hasDiscount = (seedValue % 10) < 3;
+                    const discountAmount = hasDiscount ? ((seedValue % 2) === 0 ? '15% Off' : '10% Off') : null;
+                    
+                    return (
+                      <div 
+                        key={itemKey}
+                        className="relative rounded-3xl p-6 cursor-pointer transition-all hover:scale-105 hover:shadow-xl"
+                        style={{ backgroundColor: bgColor }}
+                        data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        onClick={() => handleItemClick(item, category.slug)}
+                      >
+                        {discountAmount && (
+                          <div className="absolute top-4 left-4 bg-white rounded-full px-3 py-1 text-xs font-semibold shadow-md" style={{ color: '#6BBF59' }}>
+                            {discountAmount}
+                          </div>
+                        )}
+                        <button 
+                          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg transition-shadow"
+                          onClick={(e) => e.stopPropagation()}
+                          aria-label={`Add ${item.name} to favorites`}
+                        >
+                          <svg className="w-5 h-5 text-gray-400 hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                          </svg>
+                        </button>
+                        
+                        <div className="flex justify-center mb-4">
+                          <div className="w-40 h-40 rounded-full overflow-hidden bg-white shadow-lg">
+                            <img 
+                              src={item.image} 
+                              alt={item.name}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
+                        
+                        <div className="text-center">
+                          <h3 className="font-semibold text-lg text-gray-900 mb-1">{item.name}</h3>
+                          <p className="text-sm text-gray-600 mb-3 line-clamp-2">{item.description}</p>
+                          
+                          {item.tags && item.tags.length > 0 && (
+                            <div className="flex gap-2 mb-3 justify-center flex-wrap">
+                              {item.tags.slice(0, 2).map((tag, tagIdx) => {
+                                const isVegetarian = tag.toLowerCase().includes('vegetarian') || tag.toLowerCase().includes('vegan');
+                                return (
+                                  <span 
+                                    key={`${item.name}-${tag}-${tagIdx}`} 
+                                    className={`text-xs px-2 py-1 rounded-full ${isVegetarian ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}
+                                  >
+                                    {tag}
+                                  </span>
+                                );
+                              })}
+                            </div>
+                          )}
+                          
+                          <div className="flex items-center justify-between mt-4">
+                            <span className="text-xl font-bold text-gray-900">${item.price}</span>
+                            <button 
+                              className="w-8 h-8 flex items-center justify-center rounded-full shadow-md hover:shadow-lg transition-all"
+                              style={{ backgroundColor: '#6BBF59' }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleItemClick(item, category.slug);
+                              }}
+                              aria-label={`Add ${item.name} to cart`}
+                              data-testid={`button-add-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                            >
+                              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
