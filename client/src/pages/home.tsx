@@ -378,53 +378,57 @@ export default function Home() {
 
       {/* Customer Reviews */}
       {reviews.length > 0 && (
-        <section className="bg-white py-20">
+        <section className="py-20" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F9FF 100%)' }}>
           <div className="mx-auto max-w-6xl px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-semibold text-gray-900 mb-2">What customers say</h2>
               <p className="text-base text-gray-500">Real reviews from real people</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {reviews.slice(0, 3).map((review) => (
-                <div 
-                  key={review.id} 
-                  className="bg-gray-50 p-6 rounded-xl"
-                  data-testid={`card-review-${review.id}`}
-                >
-                  <div className="flex gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i < review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
-                        }`}
-                      />
-                    ))}
+              {reviews.slice(0, 3).map((review, idx) => {
+                const reviewColors = ['#FFE8F0', '#E0F4FF', '#FFF4E0'];
+                return (
+                  <div 
+                    key={review.id} 
+                    className="p-6 rounded-2xl shadow-sm"
+                    style={{ backgroundColor: reviewColors[idx % reviewColors.length] }}
+                    data-testid={`card-review-${review.id}`}
+                  >
+                    <div className="flex gap-1 mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-4 h-4 ${
+                            i < review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-sm text-gray-700 mb-3">{review.comment}</p>
+                    <p className="font-medium text-sm text-gray-900">{review.customerName}</p>
                   </div>
-                  <p className="text-sm text-gray-700 mb-3">{review.comment}</p>
-                  <p className="font-medium text-sm text-gray-900">{review.customerName}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
       )}
 
       {/* FAQ Section */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-white py-20">
         <div className="mx-auto max-w-3xl px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold text-gray-900 mb-2">Questions</h2>
+            <h2 className="text-3xl font-semibold text-gray-900 mb-2">Frequently Asked Questions</h2>
           </div>
-          <div className="bg-white rounded-xl border border-gray-200 divide-y divide-gray-200">
-            <Accordion type="single" collapsible className="w-full">
-              {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} data-testid={`faq-${index}`} className="border-0">
-                  <AccordionTrigger className="text-base font-medium text-gray-900 hover:text-gray-600 px-6 py-4">{faq.question}</AccordionTrigger>
+          <div className="space-y-3">
+            {faqs.map((faq, index) => (
+              <Accordion key={index} type="single" collapsible className="w-full">
+                <AccordionItem value={`item-${index}`} data-testid={`faq-${index}`} className="border-0 rounded-2xl overflow-hidden shadow-sm" style={{ backgroundColor: index % 2 === 0 ? '#F5F9FF' : '#FFF9F5' }}>
+                  <AccordionTrigger className="text-base font-semibold text-gray-900 px-6 py-4 hover:no-underline">{faq.question}</AccordionTrigger>
                   <AccordionContent className="text-sm text-gray-600 px-6 pb-4">{faq.answer}</AccordionContent>
                 </AccordionItem>
-              ))}
-            </Accordion>
+              </Accordion>
+            ))}
           </div>
         </div>
       </section>
@@ -439,10 +443,10 @@ export default function Home() {
             <div>
               <p className="text-base text-gray-700 mb-2" data-testid="text-address">{address}</p>
               <p className="text-base text-gray-700 mb-1">
-                <a className="text-red-500 hover:text-red-600" href={`tel:${phone.replace(/[^\d]/g, "")}`} data-testid="link-phone">{phone}</a>
+                <a className="hover:underline" style={{ color: '#6BBF59' }} href={`tel:${phone.replace(/[^\d]/g, "")}`} data-testid="link-phone">{phone}</a>
               </p>
               <p className="text-base text-gray-700 mb-8">
-                <a className="text-red-500 hover:text-red-600" href={`mailto:${email}`} data-testid="link-email">{email}</a>
+                <a className="hover:underline" style={{ color: '#6BBF59' }} href={`mailto:${email}`} data-testid="link-email">{email}</a>
               </p>
               <div className="rounded-xl overflow-hidden border border-gray-200 mb-8">
                 <iframe
@@ -465,14 +469,15 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-gray-50 p-8 rounded-xl">
+            <div className="p-8 rounded-2xl" style={{ background: 'linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)' }}>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Catering</h3>
-              <p className="text-sm text-gray-600 mb-6">
+              <p className="text-sm text-gray-700 mb-6">
                 Planning a large event? Get in touch for catering options.
               </p>
               <a 
                 href="/catering"
-                className="inline-block rounded-full bg-red-500 px-6 py-3 text-sm font-medium text-white hover:bg-red-600 transition-colors"
+                className="inline-block rounded-xl px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all"
+                style={{ backgroundColor: '#6BBF59' }}
               >
                 Learn More
               </a>
