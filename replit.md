@@ -44,6 +44,11 @@ The backend uses **Express.js** with **TypeScript** to provide a comprehensive R
 ### Core Features
 
 -   **Online Ordering System**: Full shopping cart functionality, real-time subtotal/tax calculations, checkout flow, pickup time selection, special instructions, and order confirmation.
+-   **Universal Item Ordering**: ALL menu items (both simple and customizable) are now clickable and orderable:
+    -   **Simple items** (fries, plantains, sambusa, drinks): Click → Auto-redirect to order page → Auto-add to cart → Merge by quantity when same item clicked multiple times
+    -   **Customizable items** (bowls, quesadillas, loaded fries): Click → Open BowlCustomizer modal → Select toppings → Add to cart with unique ID → Never merge (each customization is unique)
+    -   **Cart persistence**: Uses sessionStorage to transfer items from homepage to order page
+    -   **Data integrity**: Customized items maintain unique identities with auto-generated IDs (timestamp + random string) to prevent merging
 -   **Toast POS Integration**: Infrastructure for menu sync, pricing, and order submission.
 -   **Comprehensive Database Schema**: Tables for orders, reviews, catering inquiries, job applications, contact messages, and feedback.
 -   **Dynamic Content Pages**: Fully functional pages for Catering, Feedback, Jobs, and Contact with forms and data storage.
