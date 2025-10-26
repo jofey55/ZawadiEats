@@ -172,8 +172,8 @@ export default function Order() {
   };
 
   const addToCart = (item: any) => {
-    // Check if item has customization options (same logic as homepage)
-    if (item.allowedToppings && item.allowedToppings.length > 0 && (item as any).customToppings) {
+    // Check if item has customization options (allowedToppings indicates customizable)
+    if (item.allowedToppings && item.allowedToppings.length > 0) {
       // Open BowlCustomizer for items with customization
       setSelectedItem(item);
       setIsCustomizerOpen(true);

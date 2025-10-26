@@ -125,12 +125,12 @@ export default function Home() {
   }, []);
 
   const handleItemClick = (item: MenuItem, categorySlug: string) => {
-    // Open customizer for items that have customToppings defined
-    if (item.allowedToppings && item.allowedToppings.length > 0 && (item as any).customToppings) {
+    // Open customizer for items that have allowedToppings (customization options)
+    if (item.allowedToppings && item.allowedToppings.length > 0) {
       setSelectedItem(item);
       setIsCustomizerOpen(true);
     } else {
-      // For simple items without customization, go directly to order page
+      // For items without any customization, go directly to order page
       // Store the item in sessionStorage so order page can add it to cart
       sessionStorage.setItem('quickAddItem', JSON.stringify(item));
       setLocation('/order');
