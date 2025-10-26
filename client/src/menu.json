@@ -176,7 +176,11 @@
             "vegetarian"
           ],
           "image": "/images/seasoned-fries.jpg",
-          "type": "simple-item"
+          "type": "simple-item",
+          "allowedToppings": [
+            "drink",
+            "fries"
+          ]
         },
         {
           "name": "Sweet Potato Fries",
@@ -186,7 +190,11 @@
             "vegetarian"
           ],
           "image": "/images/sweet-potato-fries.jpg",
-          "type": "simple-item"
+          "type": "simple-item",
+          "allowedToppings": [
+            "drink",
+            "fries"
+          ]
         },
         {
           "name": "Plantains",
@@ -197,7 +205,11 @@
             "gluten-free"
           ],
           "image": "/images/plantains.jpg",
-          "type": "simple-item"
+          "type": "simple-item",
+          "allowedToppings": [
+            "drink",
+            "fries"
+          ]
         },
         {
           "name": "Plantain Chips and Guac",
@@ -207,7 +219,11 @@
             "vegetarian"
           ],
           "image": "/images/plantain-chips-guac.jpg",
-          "type": "simple-item"
+          "type": "simple-item",
+          "allowedToppings": [
+            "drink",
+            "fries"
+          ]
         },
         {
           "name": "Loaded Fries",
@@ -592,7 +608,8 @@
           "allowedToppings": [
             "cold",
             "sauces",
-            "drink"
+            "drink",
+            "fries"
           ],
           "customToppings": {
             "cold": [
@@ -862,7 +879,8 @@
           "image": "/images/sambosa.jpg",
           "type": "sambusa",
           "allowedToppings": [
-            "drink"
+            "drink",
+            "fries"
           ]
         }
       ]
