@@ -220,12 +220,12 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className="bg-gradient-to-br from-white to-slate-50 rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden"
+            className="bg-gradient-to-br from-white to-slate-50 rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex h-full">
+            <div className="flex flex-1 min-h-0">
               {/* Left Side - Customization Options */}
-              <div className="w-1/2 p-8 overflow-y-auto border-r border-slate-200">
+              <div className="w-1/2 p-8 overflow-y-auto border-r border-slate-200 flex-shrink-0">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-3xl font-bold text-slate-900">
                     Customize Your {getItemTypeLabel()}
