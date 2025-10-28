@@ -505,10 +505,10 @@ export default function Order() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
-            <h2 className="text-2xl font-bold">Menu</h2>
+            <h2 className="font-display text-4xl font-bold" style={{ color: '#6BBF59' }}>Menu</h2>
             {menuData.categories.map(category => (
               <div key={category.slug} className="space-y-4">
-                <h3 className="text-xl font-semibold text-amber-600">{category.name}</h3>
+                <h3 className="font-display text-3xl font-bold text-gray-900">{category.name}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {category.items.map((item, idx) => {
                     const pastelColors = [
