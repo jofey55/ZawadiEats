@@ -52,10 +52,18 @@ The backend uses **Express.js** with **TypeScript** to provide a comprehensive R
     -   **Consistency**: Same functionality works identically on homepage and order page menu sections
     -   **Cart persistence**: Uses sessionStorage to transfer items from homepage to order page
     -   **Data integrity**: Customized items maintain unique identities with auto-generated IDs (timestamp + random string) to prevent merging
-    -   **Menu Items**: Includes Grilled Chicken Bowl, Skirt Steak Bowl, Veggie Bowl, Fruit Bowl, all Quesadillas, Loaded Fries, and all simple items
+    -   **Menu Items**: Includes Grilled Chicken Bowl, Skirt Steak Bowl, Fruit Bowl, all Quesadillas, Loaded Fries, and all simple items
+    -   **Base Bowl Selection (October 2025)**: Dedicated "Choose Your Base" section for bowls and quesadillas
+        -   Role-based topping categorization: Each topping has a `role` property (base/protein/vegetable) in menu.json
+        -   Base items displayed prominently at top of customizer with 80x80px ingredient photos
+        -   Single-choice selection: Only one base can be selected per bowl (radio-style instead of checkboxes)
+        -   Base options include: Coconut Rice, Saffron Rice, Black Beans, Quinoa, Cauliflower
+        -   Selected base persisted in `CustomizedItem.base` property through checkout
+        -   Proteins and vegetables separated into distinct sections for better UX
     -   **Ingredient Images (October 2025)**: BowlCustomizer now displays ingredient photos for toppings
         -   19 high-quality ingredient photos integrated (chicken, steak, rice, beans, sauces, vegetables)
         -   Images stored in `/images/ingredient-*.jpg` format
+        -   Base items: 80x80px rounded thumbnails
         -   Hot/cold/sauce toppings: 40x40px rounded thumbnails
         -   Meat selections: 48x48px rounded thumbnails
         -   Graceful degradation for toppings without images
