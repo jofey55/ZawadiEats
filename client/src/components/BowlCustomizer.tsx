@@ -44,6 +44,7 @@ export interface CustomizedItem {
 interface Topping {
   name: string;
   price: number;
+  image?: string;
 }
 
 export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: BowlCustomizerProps) {
@@ -301,11 +302,20 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                           }`}
                           data-testid={`button-meat-${meat.name.toLowerCase().replace(/\s+/g, '-')}`}
                         >
-                          <div className="flex items-center justify-between">
-                            <span className="font-semibold text-slate-900">{meat.name}</span>
-                            {meat.price > 0 && (
-                              <span className="text-sm text-orange-600">+${meat.price.toFixed(2)}</span>
+                          <div className="flex items-center gap-3">
+                            {meat.image && (
+                              <img 
+                                src={meat.image} 
+                                alt={meat.name}
+                                className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                              />
                             )}
+                            <div className="flex-1 flex items-center justify-between">
+                              <span className="font-semibold text-slate-900">{meat.name}</span>
+                              {meat.price > 0 && (
+                                <span className="text-sm text-orange-600">+${meat.price.toFixed(2)}</span>
+                              )}
+                            </div>
                           </div>
                         </button>
                       ))}
@@ -339,18 +349,25 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                             data-testid={`button-hot-${topping.name.toLowerCase().replace(/\s+/g, '-')}`}
                           >
                             <div className="flex items-center gap-2">
-                              {isSelected ? (
-                                <Minus className="w-4 h-4 text-red-500" />
-                              ) : (
-                                <Plus className="w-4 h-4 text-slate-400" />
+                              {topping.image && (
+                                <img 
+                                  src={topping.image} 
+                                  alt={topping.name}
+                                  className="w-10 h-10 rounded-md object-cover flex-shrink-0"
+                                />
                               )}
-                              <div className="flex-1">
-                                <span className="text-sm font-medium text-slate-900">
+                              {isSelected ? (
+                                <Minus className="w-4 h-4 text-red-500 flex-shrink-0" />
+                              ) : (
+                                <Plus className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                              )}
+                              <div className="flex-1 min-w-0">
+                                <span className="text-sm font-medium text-slate-900 block truncate">
                                   {topping.name}
                                   {count > 1 && ` (×${count})`}
                                 </span>
                                 {topping.price > 0 && (
-                                  <span className="text-xs text-orange-600 ml-1">+${topping.price}</span>
+                                  <span className="text-xs text-orange-600">+${topping.price}</span>
                                 )}
                               </div>
                             </div>
@@ -386,17 +403,24 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                             data-testid={`button-cold-${topping.name.toLowerCase().replace(/\s+/g, '-')}`}
                           >
                             <div className="flex items-center gap-2">
-                              {isSelected ? (
-                                <Minus className="w-4 h-4 text-red-500" />
-                              ) : (
-                                <Plus className="w-4 h-4 text-slate-400" />
+                              {topping.image && (
+                                <img 
+                                  src={topping.image} 
+                                  alt={topping.name}
+                                  className="w-10 h-10 rounded-md object-cover flex-shrink-0"
+                                />
                               )}
-                              <div className="flex-1">
-                                <span className="text-sm font-medium text-slate-900">
+                              {isSelected ? (
+                                <Minus className="w-4 h-4 text-red-500 flex-shrink-0" />
+                              ) : (
+                                <Plus className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                              )}
+                              <div className="flex-1 min-w-0">
+                                <span className="text-sm font-medium text-slate-900 block truncate">
                                   {topping.name}
                                 </span>
                                 {topping.price > 0 && (
-                                  <span className="text-xs text-orange-600 ml-1">+${topping.price}</span>
+                                  <span className="text-xs text-orange-600">+${topping.price}</span>
                                 )}
                               </div>
                             </div>
@@ -429,12 +453,19 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                             data-testid={`button-sauce-${sauce.name.toLowerCase().replace(/\s+/g, '-')}`}
                           >
                             <div className="flex items-center gap-2">
-                              {isSelected ? (
-                                <Minus className="w-4 h-4 text-red-500" />
-                              ) : (
-                                <Plus className="w-4 h-4 text-slate-400" />
+                              {sauce.image && (
+                                <img 
+                                  src={sauce.image} 
+                                  alt={sauce.name}
+                                  className="w-10 h-10 rounded-md object-cover flex-shrink-0"
+                                />
                               )}
-                              <span className="text-sm font-medium text-slate-900">{sauce.name}</span>
+                              {isSelected ? (
+                                <Minus className="w-4 h-4 text-red-500 flex-shrink-0" />
+                              ) : (
+                                <Plus className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                              )}
+                              <span className="text-sm font-medium text-slate-900 flex-1">{sauce.name}</span>
                             </div>
                           </button>
                         );
