@@ -227,10 +227,10 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
         <div className="mx-auto max-w-5xl px-4 py-32 sm:py-40 text-center relative z-10">
-          <h1 className="text-4xl sm:text-5xl font-medium text-white mb-3 tracking-tight">
+          <h1 className="font-display text-6xl sm:text-7xl lg:text-8xl font-bold text-white mb-2 tracking-tight drop-shadow-2xl" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.5), 0 0 20px rgba(255,165,0,0.3)' }}>
             Zawadi Restaurant
           </h1>
-          <p className="text-lg font-light text-white/90 mb-8">
+          <p className="text-base sm:text-lg font-normal text-white/95 mb-8 drop-shadow-lg">
             East African cuisine, made fresh
           </p>
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
@@ -287,12 +287,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Decorative Divider */}
+      <div className="decorative-divider bg-gradient-to-b from-gray-50 to-white">
+        <div className="mx-auto max-w-5xl px-4 text-center">
+          <div className="inline-flex items-center gap-3">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-pink-300"></div>
+            <svg className="w-8 h-8 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-pink-300"></div>
+          </div>
+        </div>
+      </div>
+
       {/* Menu */}
-      <section id="menu" className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-4">
+      <section id="menu" className="menu-texture py-20 relative">
+        <div className="mx-auto max-w-6xl px-4 relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-semibold text-gray-900 mb-2">Menu</h2>
-            <p className="text-base text-gray-500">
+            <h2 className="font-display text-5xl sm:text-6xl font-bold text-gray-900 mb-4" style={{ color: '#6BBF59' }}>Menu</h2>
+            <p className="text-base text-gray-600">
               {menuData.dietNotes}
             </p>
           </div>
@@ -300,7 +313,7 @@ export default function Home() {
           <div className="space-y-16">
             {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category, catIdx) => (
               <div key={category.slug} data-testid={`section-${category.slug}`}>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-8">{category.name}</h3>
+                <h3 className="font-display text-4xl font-bold text-gray-900 mb-8">{category.name}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {category.items.map((item, idx) => {
                     const pastelColors = [
