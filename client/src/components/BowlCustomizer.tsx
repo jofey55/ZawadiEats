@@ -94,11 +94,6 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
           setSelectedHotToppings([proteinTopping.name]);
         }
       }
-
-      // Quesadilla: auto-add guacamole on cold side
-      if (item.type === "quesadilla") {
-        setSelectedColdToppings(["Guacamole"]);
-      }
     }
   }, [item, isOpen]);
 

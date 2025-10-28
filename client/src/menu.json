@@ -52,7 +52,7 @@
       },
       {
         "name": "Quinoa",
-        "price": 0,
+        "price": 0.96,
         "image": "/images/ingredient-quinoa.jpg",
         "role": "base"
       }
@@ -87,7 +87,7 @@
       },
       {
         "name": "Pineapple",
-        "price": 0,
+        "price": 0.96,
         "image": "/images/ingredient-pineapple.jpg"
       },
       {
@@ -96,7 +96,7 @@
       },
       {
         "name": "Watermelon",
-        "price": 0
+        "price": 0.96
       }
     ],
     "sauces": [
@@ -106,7 +106,7 @@
       },
       {
         "name": "Harissa",
-        "price": 0
+        "price": 0.48
       },
       {
         "name": "Jalapeño Mayo",
@@ -580,35 +580,12 @@
           "image": "/images/quesadilla.jpg",
           "type": "quesadilla",
           "allowedToppings": [
-            "cold",
             "sauces",
             "fries",
             "drink"
           ],
           "baseProtein": null,
           "customToppings": {
-            "cold": [
-              {
-                "name": "Pico de Gallo",
-                "price": 0
-              },
-              {
-                "name": "Guacamole",
-                "price": 1.92
-              },
-              {
-                "name": "Sour Cream",
-                "price": 0.48
-              },
-              {
-                "name": "Jalapeños",
-                "price": 0
-              },
-              {
-                "name": "Lettuce",
-                "price": 0
-              }
-            ],
             "sauces": [
               {
                 "name": "Chipotle Sauce",
@@ -636,7 +613,6 @@
           "type": "quesadilla",
           "allowedToppings": [
             "hot",
-            "cold",
             "sauces",
             "fries",
             "drink"
@@ -660,28 +636,6 @@
                 "price": 0,
                 "image": "/images/ingredient-beans.jpg",
                 "role": "base"
-              }
-            ],
-            "cold": [
-              {
-                "name": "Guacamole",
-                "price": 1.92
-              },
-              {
-                "name": "Pico de Gallo",
-                "price": 0
-              },
-              {
-                "name": "Sour Cream",
-                "price": 0.48
-              },
-              {
-                "name": "Lettuce",
-                "price": 0
-              },
-              {
-                "name": "Jalapeños",
-                "price": 0
               }
             ],
             "sauces": [
@@ -715,7 +669,6 @@
           "type": "quesadilla",
           "allowedToppings": [
             "hot",
-            "cold",
             "sauces",
             "fries",
             "drink"
@@ -744,28 +697,6 @@
                 "name": "Grilled Peppers",
                 "price": 0,
                 "role": "vegetable"
-              }
-            ],
-            "cold": [
-              {
-                "name": "Guacamole",
-                "price": 1.92
-              },
-              {
-                "name": "Pico de Gallo",
-                "price": 0
-              },
-              {
-                "name": "Sour Cream",
-                "price": 0.48
-              },
-              {
-                "name": "Jalapeños",
-                "price": 0
-              },
-              {
-                "name": "Pickled Onions",
-                "price": 0
               }
             ],
             "sauces": [
