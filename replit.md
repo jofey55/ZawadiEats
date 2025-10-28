@@ -53,6 +53,13 @@ The backend uses **Express.js** with **TypeScript** to provide a comprehensive R
     -   **Cart persistence**: Uses sessionStorage to transfer items from homepage to order page
     -   **Data integrity**: Customized items maintain unique identities with auto-generated IDs (timestamp + random string) to prevent merging
     -   **Menu Items**: Includes Grilled Chicken Bowl, Skirt Steak Bowl, Veggie Bowl, Fruit Bowl, all Quesadillas, Loaded Fries, and all simple items
+    -   **Ingredient Images (October 2025)**: BowlCustomizer now displays ingredient photos for toppings
+        -   19 high-quality ingredient photos integrated (chicken, steak, rice, beans, sauces, vegetables)
+        -   Images stored in `/images/ingredient-*.jpg` format
+        -   Hot/cold/sauce toppings: 40x40px rounded thumbnails
+        -   Meat selections: 48x48px rounded thumbnails
+        -   Graceful degradation for toppings without images
+        -   Ingredients with photos: Grilled Chicken, Skirt Steak, Coconut Rice, Saffron Rice, Cauliflower, Black Beans, Quinoa, Pickled Cabbage, Pico de Gallo, Guacamole, Pineapple, Ranch, Zawadi Sauce
 -   **Toast POS Integration**: Infrastructure for menu sync, pricing, and order submission.
 -   **Comprehensive Database Schema**: Tables for orders, reviews, catering inquiries, job applications, contact messages, and feedback.
 -   **Dynamic Content Pages**: Fully functional pages for Catering, Feedback, Jobs, and Contact with forms and data storage.
