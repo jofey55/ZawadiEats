@@ -547,46 +547,19 @@
           "image": "/images/fruit-bowl.jpg",
           "type": "fruit-bowl",
           "allowedToppings": [
-            "cold",
             "sauces",
             "drink",
             "fries"
           ],
           "customToppings": {
-            "cold": [
-              {
-                "name": "Pineapple",
-                "price": 0
-              },
-              {
-                "name": "Banana",
-                "price": 0
-              },
-              {
-                "name": "Watermelon",
-                "price": 0
-              },
-              {
-                "name": "Strawberries",
-                "price": 0.48
-              },
-              {
-                "name": "Mango",
-                "price": 0.48
-              }
-            ],
             "sauces": [
               {
-                "name": "Honey Drizzle",
+                "name": "Tahini",
                 "price": 0
               },
               {
                 "name": "Lime Squeeze",
                 "price": 0
-              },
-              {
-                "name": "Coconut Flakes",
-                "price": 0.48
               }
             ]
           }
