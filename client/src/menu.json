@@ -175,7 +175,7 @@
           "tags": [
             "vegetarian"
           ],
-          "image": "/images/seasoned-fries.jpg",
+          "image": "@assets/seasoned fries_1761619697771.JPG",
           "type": "simple-item",
           "allowedToppings": [
             "drink",
@@ -230,7 +230,7 @@
           "description": "Crunchy fries loaded with toppings.",
           "price": 13.44,
           "tags": [],
-          "image": "/images/seasoned-fries.jpg",
+          "image": "@assets/loaded fries_1761619697772.JPG",
           "type": "loaded-fries",
           "allowedToppings": [
             "meats",
@@ -313,7 +313,7 @@
           "tags": [
             "halal"
           ],
-          "image": "/images/chicken-bowl.jpg",
+          "image": "@assets/chicken bowl+quac_1761619697771.JPG",
           "type": "chicken-bowl",
           "allowedToppings": [
             "hot",
@@ -496,7 +496,7 @@
           "tags": [
             "halal"
           ],
-          "image": "/images/chicken-bowl.jpg",
+          "image": "@assets/steak bowl+quac2_1761619697771.JPG",
           "type": "steak-bowl",
           "allowedToppings": [
             "hot",
@@ -663,7 +663,7 @@
           "tags": [
             "vegetarian"
           ],
-          "image": "/images/cheese-quesadilla.jpg",
+          "image": "@assets/Quesadilla (no plate)_1761619697768.JPG",
           "type": "quesadilla",
           "allowedToppings": [
             "cold",
@@ -718,7 +718,7 @@
           "tags": [
             "halal"
           ],
-          "image": "/images/chicken-quesadilla.jpg",
+          "image": "@assets/Quesadilla (no plate)_1761619697768.JPG",
           "type": "quesadilla",
           "allowedToppings": [
             "hot",
@@ -792,7 +792,7 @@
           "tags": [
             "halal"
           ],
-          "image": "/images/steak-quesadilla.jpg",
+          "image": "@assets/Quesadilla (no plate)_1761619697768.JPG",
           "type": "quesadilla",
           "allowedToppings": [
             "hot",
