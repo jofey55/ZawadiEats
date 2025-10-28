@@ -237,20 +237,6 @@
           ]
         },
         {
-          "name": "Plantain Chips and Guac",
-          "description": "Thinly sliced plantains served with a creamy avocado dip.",
-          "price": 6.58,
-          "tags": [
-            "vegetarian"
-          ],
-          "image": "/images/plantain-chips-guac.jpg",
-          "type": "simple-item",
-          "allowedToppings": [
-            "drink",
-            "fries"
-          ]
-        },
-        {
           "name": "Loaded Fries",
           "description": "Crunchy fries loaded with toppings.",
           "price": 13.44,
