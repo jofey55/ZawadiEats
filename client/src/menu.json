@@ -5,27 +5,33 @@
     "hot": [
       {
         "name": "Grilled Chicken",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-chicken.jpg"
       },
       {
         "name": "Sumac Chicken",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-chicken.jpg"
       },
       {
         "name": "Skirt Steak",
-        "price": 1.92
+        "price": 1.92,
+        "image": "/images/ingredient-steak.jpg"
       },
       {
         "name": "Saffron Rice",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-white-rice.jpg"
       },
       {
         "name": "Coconut Rice",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-coconut-rice.jpg"
       },
       {
         "name": "Roasted Cauliflower",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-cauliflower.jpg"
       },
       {
         "name": "Roasted Corn",
@@ -33,11 +39,13 @@
       },
       {
         "name": "Black Beans",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-beans.jpg"
       },
       {
         "name": "Quinoa",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-quinoa.jpg"
       }
     ],
     "cold": [
@@ -47,11 +55,13 @@
       },
       {
         "name": "Pickled Cabbage",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-cabbage.jpg"
       },
       {
         "name": "Pico de Gallo",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-pico.jpg"
       },
       {
         "name": "Cucumber Tomato Salsa",
@@ -63,11 +73,13 @@
       },
       {
         "name": "Guacamole",
-        "price": 1.92
+        "price": 1.92,
+        "image": "/images/ingredient-guac.jpg"
       },
       {
         "name": "Pineapple",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-pineapple.jpg"
       },
       {
         "name": "Banana",
@@ -93,11 +105,13 @@
       },
       {
         "name": "Ranch",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-ranch.jpg"
       },
       {
         "name": "Zawadi Sauce",
-        "price": 0
+        "price": 0,
+        "image": "/images/ingredient-zawadi-sauce.jpg"
       },
       {
         "name": "Tahini",
@@ -111,11 +125,13 @@
     "meats": [
       {
         "name": "Grilled Chicken",
-        "price": 3.84
+        "price": 3.84,
+        "image": "/images/ingredient-chicken.jpg"
       },
       {
         "name": "Skirt Steak",
-        "price": 5.76
+        "price": 5.76,
+        "image": "/images/ingredient-steak.jpg"
       },
       {
         "name": "No Meat",
