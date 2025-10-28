@@ -509,35 +509,40 @@ export default function Order() {
             {menuData.categories.map(category => (
               <div key={category.slug} className="space-y-4">
                 <h3 className="text-xl font-semibold text-amber-600">{category.name}</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {category.items.map(item => (
-                    <Card key={item.name} className="hover:shadow-lg transition-shadow border-2 border-transparent hover:border-[#6BBF59] active:border-[#6BBF59]" data-testid={`card-menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
-                      <CardContent className="p-4">
-                        <div className="flex gap-4">
-                          <img
-                            src={item.image}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {category.items.map((item, idx) => {
+                    const pastelColors = [
+                      '#FFE8F0',
+                      '#FFF4E0', 
+                      '#E0F4FF',
+                      '#FFE8F0',
+                      '#FFF4E0',
+                      '#E0F4FF'
+                    ];
+                    const bgColor = pastelColors[idx % pastelColors.length];
+                    
+                    return (
+                      <div
+                        key={item.name}
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all hover:scale-105 hover:shadow-xl border-2 border-transparent hover:border-[#6BBF59] active:border-[#6BBF59] h-80"
+                        data-testid={`card-menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        onClick={() => addToCart(item)}
+                      >
+                        <div className="h-[85%] w-full">
+                          <img 
+                            src={item.image} 
                             alt={item.name}
-                            className="w-20 h-20 rounded-lg object-cover"
+                            className="w-full h-full object-cover"
+                            loading="lazy"
                           />
-                          <div className="flex-1">
-                            <h4 className="font-semibold">{item.name}</h4>
-                            <p className="text-sm text-gray-600 line-clamp-2">{item.description}</p>
-                            <div className="flex items-center justify-between mt-2">
-                              <span className="text-lg font-bold text-amber-600">${item.price.toFixed(2)}</span>
-                              <Button
-                                size="sm"
-                                onClick={() => addToCart(item)}
-                                data-testid={`button-add-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                              >
-                                <Plus className="w-4 h-4 mr-1" />
-                                Add
-                              </Button>
-                            </div>
-                          </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                        
+                        <div className="h-[15%] flex items-center justify-center px-4" style={{ backgroundColor: bgColor }}>
+                          <h3 className="font-semibold text-lg text-gray-900 text-center truncate">{item.name}</h3>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ))}
