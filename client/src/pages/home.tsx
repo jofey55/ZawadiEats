@@ -321,18 +321,17 @@ export default function Home() {
                     return (
                       <div 
                         key={itemKey}
-                        className="relative rounded-3xl p-6 cursor-pointer transition-all hover:scale-105 hover:shadow-xl border-2 border-transparent hover:border-[#6BBF59] active:border-[#6BBF59]"
-                        style={{ backgroundColor: bgColor }}
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all hover:scale-105 hover:shadow-xl border-2 border-transparent hover:border-[#6BBF59] active:border-[#6BBF59] h-80"
                         data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                         onClick={() => handleItemClick(item, category.slug)}
                       >
                         {discountAmount && (
-                          <div className="absolute top-4 left-4 bg-white rounded-full px-3 py-1 text-xs font-semibold shadow-md" style={{ color: '#6BBF59' }}>
+                          <div className="absolute top-4 left-4 bg-white rounded-full px-3 py-1 text-xs font-semibold shadow-md z-10" style={{ color: '#6BBF59' }}>
                             {discountAmount}
                           </div>
                         )}
                         <button 
-                          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg transition-shadow"
+                          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg transition-shadow z-10"
                           onClick={(e) => e.stopPropagation()}
                           aria-label={`Add ${item.name} to favorites`}
                         >
@@ -341,54 +340,17 @@ export default function Home() {
                           </svg>
                         </button>
                         
-                        <div className="flex justify-center mb-4">
-                          <div className="w-40 h-40 rounded-full overflow-hidden bg-white shadow-lg">
-                            <img 
-                              src={item.image} 
-                              alt={item.name}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
+                        <div className="h-[85%] w-full">
+                          <img 
+                            src={item.image} 
+                            alt={item.name}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
                         </div>
                         
-                        <div className="text-center">
-                          <h3 className="font-semibold text-lg text-gray-900 mb-1">{item.name}</h3>
-                          <p className="text-sm text-gray-600 mb-3 line-clamp-2">{item.description}</p>
-                          
-                          {item.tags && item.tags.length > 0 && (
-                            <div className="flex gap-2 mb-3 justify-center flex-wrap">
-                              {item.tags.slice(0, 2).map((tag, tagIdx) => {
-                                const isVegetarian = tag.toLowerCase().includes('vegetarian') || tag.toLowerCase().includes('vegan');
-                                return (
-                                  <span 
-                                    key={`${item.name}-${tag}-${tagIdx}`} 
-                                    className={`text-xs px-2 py-1 rounded-full ${isVegetarian ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}
-                                  >
-                                    {tag}
-                                  </span>
-                                );
-                              })}
-                            </div>
-                          )}
-                          
-                          <div className="flex items-center justify-between mt-4">
-                            <span className="text-xl font-bold text-gray-900">${item.price}</span>
-                            <button 
-                              className="w-8 h-8 flex items-center justify-center rounded-full shadow-md hover:shadow-lg transition-all"
-                              style={{ backgroundColor: '#6BBF59' }}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleItemClick(item, category.slug);
-                              }}
-                              aria-label={`Add ${item.name} to cart`}
-                              data-testid={`button-add-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                            >
-                              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                              </svg>
-                            </button>
-                          </div>
+                        <div className="h-[15%] flex items-center justify-center px-4" style={{ backgroundColor: bgColor }}>
+                          <h3 className="font-semibold text-lg text-gray-900 text-center truncate">{item.name}</h3>
                         </div>
                       </div>
                     );
