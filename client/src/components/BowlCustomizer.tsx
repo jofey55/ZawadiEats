@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { X, Plus, Minus, ShoppingCart } from "lucide-react";
+import { X, Plus, Minus, ShoppingCart, Eye } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import menuData from "../menu.json";
+import IngredientMenu from "./IngredientMenu";
 
 interface MenuItem {
   name: string;
@@ -59,6 +60,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   const [addDrink, setAddDrink] = useState<string>("");
   const [iceOption, setIceOption] = useState<string>("With Ice");
   const [selectedFountainDrink, setSelectedFountainDrink] = useState<string>("");
+  const [isIngredientMenuOpen, setIsIngredientMenuOpen] = useState(false);
 
   // Reset selections when item changes or modal opens
   useEffect(() => {
@@ -99,6 +101,13 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
       }
     }
   }, [item, isOpen]);
+
+  // Close ingredient menu when customizer is closed
+  useEffect(() => {
+    if (!isOpen) {
+      setIsIngredientMenuOpen(false);
+    }
+  }, [isOpen]);
 
   if (!item) return null;
 
@@ -247,13 +256,23 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                   <h2 className="text-3xl font-bold text-slate-900">
                     Customize Your {getItemTypeLabel()}
                   </h2>
-                  <button
-                    onClick={onClose}
-                    className="text-slate-400 hover:text-slate-600 transition-colors"
-                    data-testid="button-close-customizer"
-                  >
-                    <X className="w-8 h-8" />
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setIsIngredientMenuOpen(!isIngredientMenuOpen)}
+                      className="flex items-center gap-2 px-4 py-2 bg-[#6BBF59] hover:bg-green-600 text-white rounded-lg transition-all shadow-md hover:shadow-lg"
+                      data-testid="button-toggle-ingredient-menu"
+                    >
+                      <Eye className="w-5 h-5" />
+                      <span className="font-medium">View Ingredients</span>
+                    </button>
+                    <button
+                      onClick={onClose}
+                      className="text-slate-400 hover:text-slate-600 transition-colors"
+                      data-testid="button-close-customizer"
+                    >
+                      <X className="w-8 h-8" />
+                    </button>
+                  </div>
                 </div>
 
                 {/* Fountain Drink Flavor Selection */}
@@ -737,6 +756,11 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
           </motion.div>
         </motion.div>
       )}
+      {/* Ingredient Menu */}
+      <IngredientMenu 
+        isOpen={isIngredientMenuOpen} 
+        onClose={() => setIsIngredientMenuOpen(false)} 
+      />
     </AnimatePresence>
   );
 }
