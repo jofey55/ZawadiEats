@@ -31,6 +31,7 @@ interface BowlCustomizerProps {
 
 export interface CustomizedItem {
   baseItem: MenuItem;
+  base?: string;
   hotToppings: string[];
   coldToppings: string[];
   sauces: string[];
@@ -45,9 +46,11 @@ interface Topping {
   name: string;
   price: number;
   image?: string;
+  role?: "base" | "protein" | "vegetable";
 }
 
 export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: BowlCustomizerProps) {
+  const [selectedBase, setSelectedBase] = useState<string>("");
   const [selectedHotToppings, setSelectedHotToppings] = useState<string[]>([]);
   const [selectedColdToppings, setSelectedColdToppings] = useState<string[]>([]);
   const [selectedSauces, setSelectedSauces] = useState<string[]>([]);
@@ -60,6 +63,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   // Reset selections when item changes or modal opens
   useEffect(() => {
     if (item && isOpen) {
+      setSelectedBase("");
       setSelectedHotToppings([]);
       setSelectedColdToppings([]);
       setSelectedSauces([]);
@@ -107,7 +111,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   
   // Use item-specific custom toppings if available, otherwise fall back to global toppings
   const hotToppings: Topping[] = allowedToppings.includes("hot") 
-    ? (item.customToppings?.hot || menuData.toppings.hot) 
+    ? (item.customToppings?.hot || menuData.toppings.hot) as Topping[]
     : [];
   const coldToppings: Topping[] = allowedToppings.includes("cold") 
     ? (item.customToppings?.cold || menuData.toppings.cold) 
@@ -124,6 +128,11 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
     : [];
   const canAddFries = allowedToppings.includes("fries");
   const canAddIce = allowedToppings.includes("ice");
+
+  // Separate hot toppings by role
+  const baseToppings = hotToppings.filter(t => t.role === "base");
+  const proteinToppings = hotToppings.filter(t => t.role === "protein");
+  const vegetableToppings = hotToppings.filter(t => t.role === "vegetable");
 
   const toggleHotTopping = (topping: string) => {
     setSelectedHotToppings(prev =>
@@ -151,6 +160,12 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
 
   const calculateTotalPrice = () => {
     let total = item.price;
+    
+    // Add base price
+    if (selectedBase) {
+      const base = baseToppings.find(t => t.name === selectedBase);
+      if (base) total += base.price;
+    }
     
     // Add hot topping prices
     selectedHotToppings.forEach(toppingName => {
@@ -185,6 +200,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
   const handleCheckout = () => {
     const customizedItem: CustomizedItem = {
       baseItem: item,
+      base: selectedBase || undefined,
       hotToppings: selectedHotToppings,
       coldToppings: selectedColdToppings,
       sauces: selectedSauces,
@@ -323,8 +339,47 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                   </div>
                 )}
 
-                {/* Hot Toppings Section */}
-                {hotToppings.length > 0 && (
+                {/* Choose Your Base Section */}
+                {baseToppings.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3">
+                      Choose Your Base <span className="text-sm font-normal text-slate-500">(Select one)</span>
+                    </h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      {baseToppings.map((base) => (
+                        <button
+                          key={base.name}
+                          onClick={() => setSelectedBase(base.name)}
+                          className={`text-center p-3 rounded-xl border-2 transition-all ${
+                            selectedBase === base.name
+                              ? "border-red-500 bg-red-50 shadow-md"
+                              : "border-slate-200 hover:border-slate-300 bg-white"
+                          }`}
+                          data-testid={`button-base-${base.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        >
+                          <div className="flex flex-col items-center gap-2">
+                            {base.image && (
+                              <img 
+                                src={base.image} 
+                                alt={base.name}
+                                className="w-20 h-20 rounded-lg object-cover"
+                              />
+                            )}
+                            <span className="text-sm font-semibold text-slate-900 block">
+                              {base.name}
+                            </span>
+                            {base.price > 0 && (
+                              <span className="text-xs text-orange-600">+${base.price}</span>
+                            )}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Hot Toppings Section (Proteins & Vegetables) */}
+                {(proteinToppings.length > 0 || vegetableToppings.length > 0) && (
                   <div className="mb-6">
                     <h3 className="text-lg font-bold text-slate-900 mb-3">
                       {isQuesadilla ? "Inside the Quesadilla (Hot)" : "Hot Toppings"}
@@ -333,7 +388,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                       )}
                     </h3>
                     <div className="grid grid-cols-2 gap-2">
-                      {hotToppings.map((topping) => {
+                      {[...proteinToppings, ...vegetableToppings].map((topping) => {
                         const isSelected = selectedHotToppings.includes(topping.name);
                         const count = selectedHotToppings.filter(t => t === topping.name).length;
                         
