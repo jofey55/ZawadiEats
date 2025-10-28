@@ -68,6 +68,13 @@ The backend uses **Express.js** with **TypeScript** to provide a comprehensive R
         -   Meat selections: 48x48px rounded thumbnails
         -   Graceful degradation for toppings without images
         -   Ingredients with photos: Grilled Chicken, Skirt Steak, Coconut Rice, Saffron Rice, Cauliflower, Black Beans, Quinoa, Pickled Cabbage, Pico de Gallo, Guacamole, Pineapple, Ranch, Zawadi Sauce
+    -   **Ingredient Menu (October 2025)**: Visual guide displaying all available toppings, bases, and sides
+        -   Floating, minimizable panel accessible from "View Ingredients" button in BowlCustomizer
+        -   Displays 19 ingredients organized into 5 categories: Bases, Proteins, Cold Toppings, Sauces, Sides
+        -   Mini menu card design with pastel backgrounds matching main menu colors
+        -   2-column grid layout with ingredient photos
+        -   Fixed positioning on right side of screen
+        -   Automatically closes when customizer is closed
 -   **Toast POS Integration**: Infrastructure for menu sync, pricing, and order submission.
 -   **Comprehensive Database Schema**: Tables for orders, reviews, catering inquiries, job applications, contact messages, and feedback.
 -   **Dynamic Content Pages**: Fully functional pages for Catering, Feedback, Jobs, and Contact with forms and data storage.
