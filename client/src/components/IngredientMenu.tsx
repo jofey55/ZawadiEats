@@ -92,7 +92,7 @@ export default function IngredientMenu({ isOpen, onClose, selectedItem }: Ingred
   const categories: Ingredient["category"][] = ["Bases", "Proteins", "Cold Toppings", "Sauces", "Sides"];
 
   return (
-    <div className="fixed right-4 top-20 z-50 w-80 rounded-2xl shadow-2xl border-2 border-gray-200 dark:border-gray-700 transition-all duration-300 overflow-hidden">
+    <div className="fixed right-2 top-16 sm:right-4 sm:top-20 z-50 w-72 sm:w-80 max-h-[80vh] sm:max-h-none rounded-2xl shadow-2xl border-2 border-gray-200 dark:border-gray-700 transition-all duration-300 overflow-hidden">
       {/* Hexagonal Background Pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
@@ -159,7 +159,7 @@ export default function IngredientMenu({ isOpen, onClose, selectedItem }: Ingred
 
       {/* Content */}
       {!isMinimized && (
-        <ScrollArea className="h-[500px]">
+        <ScrollArea className="h-[400px] sm:h-[500px]">
           <div className="p-4 space-y-4">
             {categories.map(category => {
               const categoryIngredients = availableIngredients.filter(i => i.category === category);

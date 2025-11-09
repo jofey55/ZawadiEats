@@ -241,24 +241,25 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className="bg-gradient-to-br from-white to-slate-50 rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] flex flex-col"
+            className="bg-gradient-to-br from-white to-slate-50 rounded-2xl sm:rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex flex-1 min-h-0">
+            <div className="flex flex-col md:flex-row flex-1 min-h-0">
               {/* Left Side - Customization Options */}
-              <div className="w-1/2 p-8 overflow-y-auto border-r border-slate-200 flex-shrink-0">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-3xl font-bold text-slate-900">
+              <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 overflow-y-auto md:border-r border-slate-200 flex-shrink-0">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900">
                     Customize Your {getItemTypeLabel()}
                   </h2>
-                  <div className="flex gap-2">
+                  <div className="flex gap-1 sm:gap-2">
                     <button
                       onClick={() => setIsIngredientMenuOpen(!isIngredientMenuOpen)}
-                      className="flex items-center gap-2 px-4 py-2 bg-[#6BBF59] hover:bg-green-600 text-white rounded-lg transition-all shadow-md hover:shadow-lg"
+                      className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 bg-[#6BBF59] hover:bg-green-600 text-white rounded-lg transition-all shadow-md hover:shadow-lg text-xs sm:text-sm"
                       data-testid="button-toggle-ingredient-menu"
                     >
-                      <Eye className="w-5 h-5" />
-                      <span className="font-medium">View Ingredients</span>
+                      <Eye className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="font-medium hidden sm:inline">View Ingredients</span>
+                      <span className="font-medium sm:hidden">Menu</span>
                     </button>
                     <button
                       onClick={onClose}
@@ -606,10 +607,35 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                     </div>
                   </div>
                 )}
+
+                {/* Mobile Action Buttons (shown on mobile only) */}
+                <div className="md:hidden mt-6 space-y-3 border-t border-slate-200 pt-6">
+                  <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-slate-900">Total Price</span>
+                      <span className="text-2xl font-black text-red-500">${calculateTotalPrice().toFixed(2)}</span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleCheckout}
+                    className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+                    data-testid="button-checkout-mobile"
+                  >
+                    <ShoppingCart className="w-5 h-5" />
+                    Add to Cart - ${calculateTotalPrice().toFixed(2)}
+                  </button>
+                  <button
+                    onClick={onClose}
+                    className="w-full bg-white hover:bg-slate-50 text-slate-900 font-semibold py-3 px-6 rounded-xl border-2 border-slate-200 transition-all"
+                    data-testid="button-continue-shopping-mobile"
+                  >
+                    Continue Shopping
+                  </button>
+                </div>
               </div>
 
               {/* Right Side - Item Preview */}
-              <div className="w-1/2 p-8 flex flex-col">
+              <div className="hidden md:flex w-full md:w-1/2 p-4 sm:p-6 md:p-8 flex-col">
                 <motion.div
                   initial={{ x: -100, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
@@ -621,7 +647,7 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
                       <motion.img
                         src={item.image}
                         alt={item.name}
-                        className="w-full h-80 object-cover rounded-3xl shadow-2xl"
+                        className="w-full h-60 md:h-80 object-cover rounded-2xl md:rounded-3xl shadow-2xl"
                         initial={{ scale: 0.8, rotate: -5 }}
                         animate={{ scale: 1, rotate: 0 }}
                         transition={{ type: "spring", duration: 0.8 }}
