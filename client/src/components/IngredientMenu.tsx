@@ -58,31 +58,48 @@ const categoryColors: Record<Ingredient["category"], string> = {
   "Sides": "#E0F4FF",
 };
 
+interface Topping {
+  name: string;
+  price: number;
+  image?: string;
+  role?: string;
+}
+
 interface IngredientMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  selectedItem?: MenuItem | null;
+  itemName?: string;
+  baseToppings?: Topping[];
+  hotToppings?: Topping[];
+  coldToppings?: Topping[];
+  sauces?: Topping[];
+  meats?: Topping[];
 }
 
-export default function IngredientMenu({ isOpen, onClose, selectedItem }: IngredientMenuProps) {
+export default function IngredientMenu({ 
+  isOpen, 
+  onClose, 
+  itemName,
+  baseToppings = [],
+  hotToppings = [],
+  coldToppings = [],
+  sauces = [],
+  meats = []
+}: IngredientMenuProps) {
   const [isMinimized, setIsMinimized] = useState(false);
 
   if (!isOpen) return null;
 
-  // Filter ingredients based on selected item
+  // Filter ingredients based on actual available toppings
   const getAvailableIngredients = () => {
-    if (!selectedItem || !selectedItem.customToppings) {
-      return ingredients;
-    }
-
     const availableNames = new Set<string>();
-    const { hot, cold, sauces, meats } = selectedItem.customToppings;
 
-    // Collect all available topping names
-    hot?.forEach(t => availableNames.add(t.name));
-    cold?.forEach(t => availableNames.add(t.name));
-    sauces?.forEach(t => availableNames.add(t.name));
-    meats?.forEach(t => availableNames.add(t.name));
+    // Collect all available topping names from the passed arrays
+    baseToppings.forEach(t => availableNames.add(t.name));
+    hotToppings.forEach(t => availableNames.add(t.name));
+    coldToppings.forEach(t => availableNames.add(t.name));
+    sauces.forEach(t => availableNames.add(t.name));
+    meats.forEach(t => availableNames.add(t.name));
 
     // Filter ingredients to only show what's available
     return ingredients.filter(ing => availableNames.has(ing.name));
@@ -192,7 +209,7 @@ export default function IngredientMenu({ isOpen, onClose, selectedItem }: Ingred
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-[#6BBF59] to-green-600">
         <h3 className="font-bold text-white text-lg">
-          {selectedItem ? `${selectedItem.name} Ingredients` : "Ingredient Guide"}
+          {itemName ? `${itemName} Ingredients` : "Ingredient Guide"}
         </h3>
         <div className="flex gap-2">
           <Button

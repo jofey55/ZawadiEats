@@ -781,7 +781,12 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
       <IngredientMenu 
         isOpen={isIngredientMenuOpen} 
         onClose={() => setIsIngredientMenuOpen(false)}
-        selectedItem={item}
+        itemName={item.name}
+        baseToppings={baseToppings}
+        hotToppings={vegetableToppings.concat(proteinToppings)}
+        coldToppings={coldToppings}
+        sauces={sauces}
+        meats={meats}
       />
     </AnimatePresence>
   );
