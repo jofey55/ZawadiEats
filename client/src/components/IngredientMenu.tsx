@@ -93,19 +93,39 @@ export default function IngredientMenu({ isOpen, onClose, selectedItem }: Ingred
 
   return (
     <div className="fixed right-4 top-20 z-50 w-80 rounded-2xl shadow-2xl border-2 border-gray-200 dark:border-gray-700 transition-all duration-300 overflow-hidden">
-      {/* Decorative Background Pattern */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none">
-        <div className="absolute top-0 left-0 w-40 h-40 bg-pink-100 dark:bg-pink-900/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-20 right-0 w-32 h-32 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-10 w-36 h-36 bg-orange-50 dark:bg-orange-900/20 rounded-full blur-3xl"></div>
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      {/* Hexagonal Background Pattern */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="2" cy="2" r="1" fill="currentColor" className="text-gray-200 dark:text-gray-700" opacity="0.3"/>
+            <pattern id="hexPattern" x="0" y="0" width="50" height="43.4" patternUnits="userSpaceOnUse">
+              <g>
+                {/* Light hexagons with pastel colored strokes */}
+                <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
+                      fill="none" 
+                      stroke="#FFE8F0" 
+                      strokeWidth="0.5" 
+                      opacity="0.6"/>
+                <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
+                      fill="none" 
+                      stroke="#E0F4FF" 
+                      strokeWidth="0.3" 
+                      opacity="0.4"/>
+              </g>
+            </pattern>
+            <pattern id="hexPatternAccent" x="25" y="21.65" width="50" height="43.4" patternUnits="userSpaceOnUse">
+              <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
+                    fill="none" 
+                    stroke="#FFF4E0" 
+                    strokeWidth="0.4" 
+                    opacity="0.5"/>
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#dots)" />
+          <rect width="100%" height="100%" fill="url(#hexPattern)" />
+          <rect width="100%" height="100%" fill="url(#hexPatternAccent)" />
         </svg>
+        {/* Subtle gradient overlays */}
+        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-pink-50/30 to-transparent dark:from-pink-900/10"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-blue-50/30 to-transparent dark:from-blue-900/10"></div>
       </div>
 
       {/* Main Content Container with white background */}

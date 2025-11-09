@@ -754,7 +754,8 @@ export default function BowlCustomizer({ item, isOpen, onClose, onCheckout }: Bo
       {/* Ingredient Menu */}
       <IngredientMenu 
         isOpen={isIngredientMenuOpen} 
-        onClose={() => setIsIngredientMenuOpen(false)} 
+        onClose={() => setIsIngredientMenuOpen(false)}
+        selectedItem={item}
       />
     </AnimatePresence>
   );
