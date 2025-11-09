@@ -93,53 +93,117 @@ export default function IngredientMenu({ isOpen, onClose, selectedItem }: Ingred
 
   return (
     <div className="fixed right-2 top-16 sm:right-4 sm:top-20 z-50 w-72 sm:w-80 max-h-[80vh] sm:max-h-none rounded-2xl shadow-2xl border-2 border-gray-200 dark:border-gray-700 transition-all duration-300 overflow-hidden">
-      {/* Hexagonal Background Pattern - White with Red Accents */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+      {/* 3D Hexagonal Background Pattern - White with Red Glowing Edges */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 50%, #d8d8d8 100%)' }}>
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'normal' }}>
           <defs>
-            {/* Main hexagonal pattern with red strokes */}
-            <pattern id="hexPattern" x="0" y="0" width="50" height="43.4" patternUnits="userSpaceOnUse">
-              <g>
-                {/* White filled hexagon base */}
-                <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
-                      fill="#FFFFFF" 
-                      fillOpacity="0.3"
-                      stroke="#FF3008" 
-                      strokeWidth="0.8" 
-                      opacity="0.4"/>
-                {/* Red glow effect */}
-                <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
-                      fill="none" 
-                      stroke="#FF3008" 
-                      strokeWidth="1.2" 
-                      opacity="0.2"
-                      filter="url(#glow)"/>
-              </g>
-            </pattern>
-            {/* Offset pattern for depth effect */}
-            <pattern id="hexPatternAccent" x="25" y="21.65" width="50" height="43.4" patternUnits="userSpaceOnUse">
-              <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
-                    fill="#FAFAFA" 
-                    fillOpacity="0.5"
-                    stroke="#FF3008" 
-                    strokeWidth="0.5" 
-                    opacity="0.3"/>
-            </pattern>
-            {/* Glow filter for red accents */}
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+            {/* Strong glow filter for red edges */}
+            <filter id="redGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
               <feMerge>
+                <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
+            
+            {/* Shadow filter for depth */}
+            <filter id="hexShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+              <feOffset dx="0" dy="2" result="offsetblur"/>
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="0.5"/>
+              </feComponentTransfer>
+              <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+
+            {/* Main hex pattern - recessed hexagons (darker) */}
+            <pattern id="hexPattern3D" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+              <g>
+                {/* Deep recessed hex (dark shadow) */}
+                <path d="M 30 2 L 56 17.3 L 56 34.7 L 30 50 L 4 34.7 L 4 17.3 Z" 
+                      fill="#c8c8c8" 
+                      stroke="#999" 
+                      strokeWidth="0.5"
+                      opacity="0.6"/>
+                {/* Inner shadow gradient */}
+                <path d="M 30 2 L 56 17.3 L 56 34.7 L 30 50 L 4 34.7 L 4 17.3 Z" 
+                      fill="url(#innerShadow)" 
+                      opacity="0.4"/>
+              </g>
+            </pattern>
+
+            {/* Raised hexagons with glowing red edges */}
+            <pattern id="hexPatternRaised" x="30" y="26" width="60" height="52" patternUnits="userSpaceOnUse">
+              <g filter="url(#hexShadow)">
+                {/* Bright white raised hex */}
+                <path d="M 30 2 L 56 17.3 L 56 34.7 L 30 50 L 4 34.7 L 4 17.3 Z" 
+                      fill="#ffffff" 
+                      stroke="#f0f0f0" 
+                      strokeWidth="0.5"
+                      opacity="0.9"/>
+                {/* Top highlight for 3D effect */}
+                <path d="M 30 2 L 56 17.3 L 56 34.7 L 30 50 L 4 34.7 L 4 17.3 Z" 
+                      fill="url(#topLight)" 
+                      opacity="0.6"/>
+              </g>
+            </pattern>
+
+            {/* Glowing red edge hexagons (the "popping" effect) */}
+            <pattern id="hexPatternGlow" x="15" y="13" width="60" height="52" patternUnits="userSpaceOnUse">
+              <g>
+                {/* White hex base */}
+                <path d="M 30 2 L 56 17.3 L 56 34.7 L 30 50 L 4 34.7 L 4 17.3 Z" 
+                      fill="#fafafa" 
+                      opacity="0.8"/>
+                {/* Glowing red edges */}
+                <path d="M 30 2 L 56 17.3 L 56 34.7 L 30 50 L 4 34.7 L 4 17.3 Z" 
+                      fill="none" 
+                      stroke="#FF3008" 
+                      strokeWidth="2"
+                      opacity="0.9"
+                      filter="url(#redGlow)"/>
+                {/* Inner red glow */}
+                <path d="M 30 2 L 56 17.3 L 56 34.7 L 30 50 L 4 34.7 L 4 17.3 Z" 
+                      fill="none" 
+                      stroke="#FF3008" 
+                      strokeWidth="1.5"
+                      opacity="0.6"
+                      filter="url(#redGlow)"/>
+              </g>
+            </pattern>
+
+            {/* Gradients for lighting effects */}
+            <linearGradient id="innerShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#000', stopOpacity: 0.3 }}/>
+              <stop offset="100%" style={{ stopColor: '#000', stopOpacity: 0 }}/>
+            </linearGradient>
+            
+            <linearGradient id="topLight" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#fff', stopOpacity: 0.8 }}/>
+              <stop offset="50%" style={{ stopColor: '#fff', stopOpacity: 0.2 }}/>
+              <stop offset="100%" style={{ stopColor: '#fff', stopOpacity: 0 }}/>
+            </linearGradient>
           </defs>
-          <rect width="100%" height="100%" fill="url(#hexPattern)" />
-          <rect width="100%" height="100%" fill="url(#hexPatternAccent)" />
+          
+          {/* Layer 1: Recessed hexagons */}
+          <rect width="100%" height="100%" fill="url(#hexPattern3D)" opacity="1"/>
+          
+          {/* Layer 2: Raised white hexagons */}
+          <rect width="100%" height="100%" fill="url(#hexPatternRaised)" opacity="0.9"/>
+          
+          {/* Layer 3: Glowing red edge hexagons */}
+          <rect width="100%" height="100%" fill="url(#hexPatternGlow)" opacity="0.85"/>
         </svg>
-        {/* Subtle red gradient overlays for depth */}
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-red-50/40 to-transparent dark:from-red-900/10"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-red-50/40 to-transparent dark:from-red-900/10"></div>
+        
+        {/* Additional 3D depth with layered shadows */}
+        <div className="absolute inset-0" style={{
+          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.05) 100%)',
+          pointerEvents: 'none'
+        }}></div>
       </div>
 
       {/* Main Content Container with white background */}
