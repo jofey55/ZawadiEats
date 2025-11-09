@@ -187,8 +187,8 @@ export default function IngredientMenu({ isOpen, onClose, selectedItem }: Ingred
         </svg>
       </div>
 
-      {/* Main Content Container with white background */}
-      <div className="relative bg-white dark:bg-gray-900">
+      {/* Main Content Container with translucent glass effect */}
+      <div className="relative bg-white/80 backdrop-blur-md dark:bg-gray-900/80">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-[#6BBF59] to-green-600">
         <h3 className="font-bold text-white text-lg">
