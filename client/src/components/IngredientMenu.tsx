@@ -109,7 +109,7 @@ export default function IngredientMenu({
   const categories: Ingredient["category"][] = ["Bases", "Proteins", "Cold Toppings", "Sauces", "Sides"];
 
   return (
-    <div className="fixed right-2 top-16 sm:right-4 sm:top-20 z-50 w-72 sm:w-80 max-h-[80vh] sm:max-h-none rounded-2xl shadow-2xl border-2 border-gray-200 dark:border-gray-700 transition-all duration-300 overflow-hidden">
+    <div className="fixed bottom-0 left-0 right-0 md:right-2 md:top-16 md:left-auto md:bottom-auto lg:right-4 lg:top-20 z-50 w-full md:w-80 max-h-[70vh] md:max-h-[80vh] rounded-t-3xl md:rounded-2xl shadow-2xl border-2 border-gray-200 dark:border-gray-700 transition-all duration-300 overflow-hidden">
       {/* Modern Geometric Pattern Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ background: 'linear-gradient(135deg, #3d4f5c 0%, #2c3e50 50%, #34495e 100%)' }}>
         <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'normal' }}>
@@ -235,7 +235,7 @@ export default function IngredientMenu({
 
       {/* Content */}
       {!isMinimized && (
-        <ScrollArea className="h-[400px] sm:h-[500px]">
+        <ScrollArea className="h-[50vh] md:h-[400px] lg:h-[500px]">
           <div className="p-4 space-y-4">
             {categories.map(category => {
               const categoryIngredients = availableIngredients.filter(i => i.category === category);
