@@ -68,11 +68,15 @@ The backend uses **Express.js** with **TypeScript** to provide a comprehensive R
         -   Meat selections: 48x48px rounded thumbnails
         -   Graceful degradation for toppings without images
         -   Ingredients with photos: Grilled Chicken, Skirt Steak, Coconut Rice, Saffron Rice, Cauliflower, Black Beans, Quinoa, Pickled Cabbage, Pico de Gallo, Guacamole, Pineapple, Ranch, Zawadi Sauce
-    -   **Ingredient Menu (October 2025)**: Visual guide displaying all available toppings, bases, and sides
+    -   **Ingredient Menu (November 2025)**:  Visual guide displaying available toppings for selected items
         -   Floating, minimizable panel accessible from "View Ingredients" button in BowlCustomizer
+        -   **Context-Aware Filtering**: Shows only ingredients available in the currently selected menu item
         -   Displays 19 ingredients organized into 5 categories: Bases, Proteins, Cold Toppings, Sauces, Sides
+        -   **Hexagonal Background Pattern**: Light pastel hexagonal SVG pattern matching site colors (pink, peach, blue)
         -   Mini menu card design with pastel backgrounds matching main menu colors
         -   2-column grid layout with ingredient photos
+        -   **Responsive Design**: Adapts to mobile (w-72), tablet, and desktop (w-80) screens
+        -   Fixed positioning optimized for all screen sizes (right-2/top-16 on mobile, right-4/top-20 on larger screens)
         -   Fixed positioning on right side of screen
         -   Automatically closes when customizer is closed
 -   **Toast POS Integration**: Infrastructure for menu sync, pricing, and order submission.
@@ -81,6 +85,12 @@ The backend uses **Express.js** with **TypeScript** to provide a comprehensive R
 -   **Homepage Enhancements**: Special offers banner, prominent "Order Online" CTA, customer reviews section, FAQ accordion, and social media integration.
 -   **SEO Optimization**: Meta tags, Open Graph tags, structured data (JSON-LD), unique page titles, and descriptions.
 -   **API Routes**: Dedicated endpoints for submitting orders, reviews, catering inquiries, feedback, job applications, and contact messages.
+-   **Responsive Design (November 2025)**: Full mobile/tablet/desktop compatibility
+    -   **Mobile-First Approach**: Single-column layout on mobile devices
+    -   **BowlCustomizer**: Responsive modal with mobile-specific action buttons, hidden preview panel on small screens
+    -   **Breakpoint Strategy**: sm (640px), md (768px), lg (1024px) for progressive enhancement
+    -   **Touch-Friendly**: Optimized button sizes and spacing for mobile interactions
+    -   **Adaptive Typography**: Text sizes scale from mobile (text-xl) to desktop (text-3xl)
 
 ## External Dependencies
 
