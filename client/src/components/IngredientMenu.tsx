@@ -93,39 +93,53 @@ export default function IngredientMenu({ isOpen, onClose, selectedItem }: Ingred
 
   return (
     <div className="fixed right-2 top-16 sm:right-4 sm:top-20 z-50 w-72 sm:w-80 max-h-[80vh] sm:max-h-none rounded-2xl shadow-2xl border-2 border-gray-200 dark:border-gray-700 transition-all duration-300 overflow-hidden">
-      {/* Hexagonal Background Pattern */}
+      {/* Hexagonal Background Pattern - White with Red Accents */}
       <div className="absolute inset-0 pointer-events-none">
-        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+        <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
           <defs>
+            {/* Main hexagonal pattern with red strokes */}
             <pattern id="hexPattern" x="0" y="0" width="50" height="43.4" patternUnits="userSpaceOnUse">
               <g>
-                {/* Light hexagons with pastel colored strokes */}
+                {/* White filled hexagon base */}
                 <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
-                      fill="none" 
-                      stroke="#FFE8F0" 
-                      strokeWidth="0.5" 
-                      opacity="0.6"/>
-                <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
-                      fill="none" 
-                      stroke="#E0F4FF" 
-                      strokeWidth="0.3" 
+                      fill="#FFFFFF" 
+                      fillOpacity="0.3"
+                      stroke="#FF3008" 
+                      strokeWidth="0.8" 
                       opacity="0.4"/>
+                {/* Red glow effect */}
+                <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
+                      fill="none" 
+                      stroke="#FF3008" 
+                      strokeWidth="1.2" 
+                      opacity="0.2"
+                      filter="url(#glow)"/>
               </g>
             </pattern>
+            {/* Offset pattern for depth effect */}
             <pattern id="hexPatternAccent" x="25" y="21.65" width="50" height="43.4" patternUnits="userSpaceOnUse">
               <path d="M 25 0 L 50 14.43 L 50 28.87 L 25 43.3 L 0 28.87 L 0 14.43 Z" 
-                    fill="none" 
-                    stroke="#FFF4E0" 
-                    strokeWidth="0.4" 
-                    opacity="0.5"/>
+                    fill="#FAFAFA" 
+                    fillOpacity="0.5"
+                    stroke="#FF3008" 
+                    strokeWidth="0.5" 
+                    opacity="0.3"/>
             </pattern>
+            {/* Glow filter for red accents */}
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
           </defs>
           <rect width="100%" height="100%" fill="url(#hexPattern)" />
           <rect width="100%" height="100%" fill="url(#hexPatternAccent)" />
         </svg>
-        {/* Subtle gradient overlays */}
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-pink-50/30 to-transparent dark:from-pink-900/10"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-blue-50/30 to-transparent dark:from-blue-900/10"></div>
+        {/* Subtle red gradient overlays for depth */}
+        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-red-50/40 to-transparent dark:from-red-900/10"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-red-50/40 to-transparent dark:from-red-900/10"></div>
       </div>
 
       {/* Main Content Container with white background */}
