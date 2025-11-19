@@ -1,0 +1,57 @@
+Here is a clean **Replit Task Request** written like a professional development ticket.
+You can copy-paste this directly into Replit:
+
+---
+
+# ✅ **Replit Task Request: Integrate New Backend Into Existing ZawadiEats Project**
+
+### **Summary**
+
+We have created a new backend project (Node.js + TypeScript) for ZawadiEats, fully configured with Drizzle ORM and a working Neon Postgres database. The backend connects successfully, migrations run, and test records insert and read correctly. It is deployed to Vercel and pushed to GitHub. Now we need to integrate this backend with the full ZawadiEats application that contains routes, API logic, and Express server functionality.
+
+### **Current Backend Status**
+
+* New Node.js + TS backend created (`~/my-app`)
+* Drizzle ORM installed and configured (`drizzle-orm/node-postgres`)
+* Neon Postgres connected with working `DATABASE_URL`
+* Schema defined (`menu_items`)
+* Drizzle migrations generated and applied successfully
+* `db` instance confirmed working via insert/select test
+* Project builds with `npm run build` and runs via `node dist/index.js`
+* Code deployed to Vercel (working)
+* Repo connected to GitHub (`jofey55/ZawadiEats`)
+
+### **What Needs To Be Done Next**
+
+Please integrate this backend into the main ZawadiEats full application by doing the following:
+
+1. **Merge the new backend structure with the existing server code**
+
+   * Replace the old in-memory storage logic with the new Postgres database where appropriate.
+   * Ensure all routes (orders, reviews, catering, jobs, contact, etc.) point to the new database layer instead of local arrays.
+
+2. **Create additional Drizzle schemas** for the existing data models:
+
+   * users
+   * orders
+   * feedback
+   * catering inquiries
+   * job applications
+   * contact messages
+   * reviews
+
+3. **Generate and apply migrations** for these tables using Drizzle.
+
+4. **Update the server to use Drizzle queries** instead of in-memory arrays.
+
+5. **Ensure Express routes continue to work exactly the same** for the frontend.
+
+6. **Deploy updated backend to Vercel** so the frontend can consume real database data.
+
+### **Goal**
+
+The goal is to replace ALL in-memory storage with a fully persistent Postgres database using Drizzle ORM, while maintaining full compatibility with the existing frontend.
+
+---
+
+If you want, I can also generate the exact **drizzle schema templates**, or prepare the **database migration plan** for Replit.
