@@ -1,0 +1,217 @@
+Here is a **direct, clear, command-style message** you can paste straight into Replit so it knows EXACTLY what to build, with no confusion, no extras, no frontend, no Vite, no Replit plugins — **just a clean backend** ready for Neon + Drizzle + Vercel.
+
+---
+
+# ✅ **PASTE THIS DIRECTLY INTO REPLIT**
+
+**DO EXACTLY THE FOLLOWING — NO EXTRAS, NO FRONTEND, NO VITE.
+THIS PROJECT MUST BE BACKEND-ONLY (Node.js + Express + Drizzle + Neon).**
+
+---
+
+## **1. PROJECT STRUCTURE (CREATE EXACTLY THIS)**
+
+```
+project-root/
+  server/
+    index.ts
+    db.ts
+    schema.ts
+  drizzle.config.ts
+  tsconfig.json
+  package.json
+```
+
+No other folders.
+No frontend code.
+No Vite.
+No Replit dev server.
+
+---
+
+## **2. CREATE `server/db.ts`**
+
+```ts
+import { Pool } from "pg";
+import { drizzle } from "drizzle-orm/node-postgres";
+
+export const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
+
+export const db = drizzle(pool);
+```
+
+---
+
+## **3. CREATE `server/schema.ts`**
+
+```ts
+import {
+  pgTable,
+  serial,
+  text,
+  integer,
+  timestamp,
+} from "drizzle-orm/pg-core";
+
+export const menuItems = pgTable("menu_items", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  priceCents: integer("price_cents").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+```
+
+---
+
+## **4. CREATE `server/index.ts`**
+
+```ts
+import express from "express";
+import { db } from "./db";
+import { menuItems } from "./schema";
+
+const app = express();
+app.use(express.json());
+
+app.get("/api/health", async (_req, res) => {
+  try {
+    await db.select().from(menuItems).limit(1);
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("Health check error:", err);
+    res.status(500).json({ ok: false });
+  }
+});
+
+app.get("/api/menu-items", async (_req, res) => {
+  try {
+    const items = await db.select().from(menuItems);
+    res.json(items);
+  } catch (err) {
+    console.error("Get menu items error:", err);
+    res.status(500).json({ error: "Failed to load items" });
+  }
+});
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => {
+  console.log(`API server listening on port ${port}`);
+});
+```
+
+---
+
+## **5. CREATE `drizzle.config.ts`**
+
+```ts
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+  dialect: "postgresql",
+  schema: "./server/schema.ts",
+  out: "./drizzle",
+  dbCredentials: {
+    url: process.env.DATABASE_URL as string,
+  },
+});
+```
+
+---
+
+## **6. CREATE `tsconfig.json`**
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "rootDir": "server",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["server/**/*.ts"]
+}
+```
+
+---
+
+## **7. CREATE `package.json` (OVERWRITE IF NEEDED)**
+
+```json
+{
+  "name": "zawadi-backend",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "express": "^4.19.0",
+    "pg": "^8.16.0",
+    "drizzle-orm": "latest"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "ts-node": "latest",
+    "drizzle-kit": "latest",
+    "@types/node": "latest",
+    "@types/express": "latest"
+  }
+}
+```
+
+---
+
+## **8. REMOVE EVERYTHING ELSE**
+
+Delete all:
+
+* Vite configs
+* Replit plugins
+* Frontend folders (`public`, `src`, etc.)
+* Any Replit auto-generated dev servers
+* Any old Node server files
+
+This zip must be **backend-only**.
+
+---
+
+## **9. FINAL STEPS (Replit must run these)**
+
+```
+npm install
+npm run build
+node dist/index.js
+```
+
+Expected output:
+
+```
+API server listening on port 5000
+```
+
+Then test inside Replit:
+
+* GET `/api/health` → `{ ok: true }`
+* GET `/api/menu-items` → returns rows or empty array
+
+---
+
+# ✔️ “When finished, export me a ZIP of the entire project.”
+
+---
+
+Paste that into Replit exactly —
+then zip it and send it to me —
+and we will deploy perfectly to Vercel + Neon on the **first try**.
