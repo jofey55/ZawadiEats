@@ -154,4 +154,114 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export class PgStorage implements IStorage {
+  constructor(private db: any) {}
+  
+  async createOrder(data: InsertOrder): Promise<Order> {
+    const { db } = await import("./db");
+    const { orders } = await import("@shared/schema");
+    const [order] = await db.insert(orders).values(data).returning();
+    return order;
+  }
+  
+  async getOrder(id: string): Promise<Order | null> {
+    const { db } = await import("./db");
+    const { orders } = await import("@shared/schema");
+    const { eq } = await import("drizzle-orm");
+    const [order] = await db.select().from(orders).where(eq(orders.id, id));
+    return order || null;
+  }
+  
+  async getAllOrders(): Promise<Order[]> {
+    const { db } = await import("./db");
+    const { orders } = await import("@shared/schema");
+    return await db.select().from(orders);
+  }
+  
+  async updateOrderStatus(id: string, status: string, toastOrderGuid?: string): Promise<Order | null> {
+    const { db } = await import("./db");
+    const { orders } = await import("@shared/schema");
+    const { eq } = await import("drizzle-orm");
+    const updateData: any = { status };
+    if (toastOrderGuid) updateData.toastOrderGuid = toastOrderGuid;
+    const [order] = await db.update(orders).set(updateData).where(eq(orders.id, id)).returning();
+    return order || null;
+  }
+  
+  async createFeedback(data: InsertFeedback): Promise<Feedback> {
+    const { db } = await import("./db");
+    const { feedback } = await import("@shared/schema");
+    const [result] = await db.insert(feedback).values(data).returning();
+    return result;
+  }
+  
+  async getAllFeedback(): Promise<Feedback[]> {
+    const { db } = await import("./db");
+    const { feedback } = await import("@shared/schema");
+    return await db.select().from(feedback);
+  }
+  
+  async createCateringInquiry(data: InsertCateringInquiry): Promise<CateringInquiry> {
+    const { db } = await import("./db");
+    const { cateringInquiries } = await import("@shared/schema");
+    const [inquiry] = await db.insert(cateringInquiries).values(data).returning();
+    return inquiry;
+  }
+  
+  async getAllCateringInquiries(): Promise<CateringInquiry[]> {
+    const { db } = await import("./db");
+    const { cateringInquiries } = await import("@shared/schema");
+    return await db.select().from(cateringInquiries);
+  }
+  
+  async createJobApplication(data: InsertJobApplication): Promise<JobApplication> {
+    const { db } = await import("./db");
+    const { jobApplications } = await import("@shared/schema");
+    const [application] = await db.insert(jobApplications).values(data).returning();
+    return application;
+  }
+  
+  async getAllJobApplications(): Promise<JobApplication[]> {
+    const { db } = await import("./db");
+    const { jobApplications } = await import("@shared/schema");
+    return await db.select().from(jobApplications);
+  }
+  
+  async createContactMessage(data: InsertContactMessage): Promise<ContactMessage> {
+    const { db } = await import("./db");
+    const { contactMessages } = await import("@shared/schema");
+    const [message] = await db.insert(contactMessages).values(data).returning();
+    return message;
+  }
+  
+  async getAllContactMessages(): Promise<ContactMessage[]> {
+    const { db } = await import("./db");
+    const { contactMessages } = await import("@shared/schema");
+    return await db.select().from(contactMessages);
+  }
+  
+  async createReview(data: InsertReview): Promise<Review> {
+    const { db } = await import("./db");
+    const { reviews } = await import("@shared/schema");
+    const [review] = await db.insert(reviews).values(data).returning();
+    return review;
+  }
+  
+  async getApprovedReviews(): Promise<Review[]> {
+    const { db } = await import("./db");
+    const { reviews } = await import("@shared/schema");
+    const { eq } = await import("drizzle-orm");
+    return await db.select().from(reviews).where(eq(reviews.isApproved, true));
+  }
+  
+  async getAllReviews(): Promise<Review[]> {
+    const { db } = await import("./db");
+    const { reviews } = await import("@shared/schema");
+    return await db.select().from(reviews);
+  }
+}
+
+// Use PgStorage if DATABASE_URL is available, otherwise fall back to MemStorage
+export const storage = process.env.DATABASE_URL 
+  ? new PgStorage(null) 
+  : new MemStorage();

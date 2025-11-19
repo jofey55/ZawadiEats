@@ -41,7 +41,13 @@ The frontend is built with **React 18** and **TypeScript**, using **Vite** for f
 
 ### Backend Architecture
 
-The backend uses **Express.js** with **TypeScript** to provide a comprehensive REST API. It includes an integration layer for the **Toast POS API**, ready for menu synchronization and order submission. **PostgreSQL** serves as the database, managed with **Drizzle ORM** for type-safe queries and automatic UUID generation. The system uses an in-memory storage fallback with a database backup strategy. Data flow involves frontend submissions via TanStack Query, Zod validation on the backend, and persistence through the storage layer, with optional Toast API integration.
+The backend uses **Express.js** with **TypeScript** to provide a comprehensive REST API. It includes an integration layer for the **Toast POS API**, ready for menu synchronization and order submission. **PostgreSQL** serves as the database, managed with **Drizzle ORM** for type-safe queries and automatic UUID generation. The system uses a dual storage strategy: **PgStorage** (PostgreSQL via Drizzle ORM with Neon serverless driver) for production and **MemStorage** (in-memory fallback) for local development without database. Data flow involves frontend submissions via TanStack Query, Zod validation on the backend, and persistence through the storage layer, with optional Toast API integration.
+
+**Database Layer (November 2025)**:
+- `server/db.ts`: Drizzle ORM initialization using `drizzle-orm/neon-http` with `@neondatabase/serverless`
+- `server/storage.ts`: Dual implementation - `PgStorage` for PostgreSQL persistence, `MemStorage` for development
+- Automatic storage selection: Uses `PgStorage` when `DATABASE_URL` is set, otherwise falls back to `MemStorage`
+- Railway-ready: Configured for seamless deployment with PostgreSQL database
 
 ### Core Features
 
@@ -95,12 +101,34 @@ The backend uses **Express.js** with **TypeScript** to provide a comprehensive R
 ## External Dependencies
 
 -   **Runtime**: Node.js 20.x
--   **Database**: PostgreSQL
+-   **Database**: PostgreSQL (Neon serverless)
 -   **Frontend Libraries**: React, React-DOM, Wouter, Tailwind CSS, shadcn/ui, TanStack Query, React Hook Form, Zod, Embla Carousel.
--   **Backend Libraries**: Express.js, Drizzle ORM, Zod, Express-Session, Connect-PG-Simple.
+-   **Backend Libraries**: Express.js, Drizzle ORM (`drizzle-orm/neon-http`), Zod, Express-Session, Connect-PG-Simple, `@neondatabase/serverless`.
 -   **Third-Party Services**:
     -   **Toast POS**: For restaurant management and order processing.
     -   **Uber Eats & DoorDash**: Integrated for menu synchronization and external delivery services.
     -   **Google Analytics**: For website traffic and user behavior tracking.
     -   **Google Maps Embed**: On the contact page.
 -   **Development Tools**: Vite, Drizzle-Kit, TSX.
+
+## Deployment
+
+**Railway Deployment (November 2025)**: Project configured for Railway platform deployment
+
+**Configuration Files**:
+- `railway.json`: Railway build and deployment settings
+- `.railwayignore`: Excludes development files from deployment
+- `RAILWAY_QUICKSTART.md`: Quick deployment guide
+- `RAILWAY_DEPLOYMENT_GUIDE.md`: Comprehensive deployment documentation
+
+**Build Process**:
+- `npm run build`: Compiles client (Vite → `dist/public/`) and server (esbuild → `dist/index.js`)
+- `npm start`: Runs production Express server serving both API and static files
+- Server binds to `process.env.PORT` (Railway-compatible)
+
+**Database Setup**:
+- Environment variable `DATABASE_URL` required for PostgreSQL connection
+- Run `npm run db:push` after deployment to create database tables
+- Supports both Railway PostgreSQL and Neon PostgreSQL
+
+**Not Compatible With**: Vercel (requires serverless functions), Netlify (static sites only). Use Railway, Render, or Fly.io for Express.js deployment.

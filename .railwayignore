@@ -1,0 +1,48 @@
+# Railway Ignore File
+# Files and directories to exclude from Railway deployment
+
+# Development files
+.replit
+replit.nix
+.upm/
+.cache/
+
+# Logs
+*.log
+logs/
+/tmp/
+
+# Environment files (Railway manages these)
+.env
+.env.local
+.env.*.local
+
+# Dependencies (will be installed by Railway)
+node_modules/
+
+# Build outputs (will be generated during build)
+dist/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+
+# Testing
+coverage/
+*.test.ts
+*.spec.ts
+
+# Documentation
+*.md
+!README.md
+
+# Git
+.git/
+.gitignore
+
+# Misc
+.DS_Store
+unreachable_app.png
+attached_assets/
+download-uber-eats-photos.js
