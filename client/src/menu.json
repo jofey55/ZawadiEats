@@ -208,20 +208,6 @@
           ]
         },
         {
-          "name": "Sweet Potato Fries",
-          "description": "Crispy sweet potato strips served as a side dish.",
-          "price": 5.76,
-          "tags": [
-            "vegetarian"
-          ],
-          "image": "/images/sweet-potato-fries.jpg",
-          "type": "simple-item",
-          "allowedToppings": [
-            "drink",
-            "fries"
-          ]
-        },
-        {
           "name": "Plantains",
           "description": "Ripe plantains, a starchy and sweet side dish.",
           "price": 6,
@@ -527,34 +513,6 @@
               },
               {
                 "name": "Ranch",
-                "price": 0
-              },
-              {
-                "name": "Lime Squeeze",
-                "price": 0
-              }
-            ]
-          }
-        },
-        {
-          "name": "Fruit Bowl",
-          "description": "A mix of fresh fruits served in a bowl.",
-          "price": 6.67,
-          "tags": [
-            "vegetarian",
-            "gluten-free"
-          ],
-          "image": "/images/fruit-bowl.jpg",
-          "type": "fruit-bowl",
-          "allowedToppings": [
-            "sauces",
-            "drink",
-            "fries"
-          ],
-          "customToppings": {
-            "sauces": [
-              {
-                "name": "Tahini",
                 "price": 0
               },
               {
