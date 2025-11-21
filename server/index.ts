@@ -81,5 +81,3 @@ app.use(express.static(publicPath));
     { port, host: "0.0.0.0", reusePort: true },
     () => log("Serving on port " + port)
   );
-})();
-
