@@ -1,19 +1,17 @@
-import { fileURLToPath } from "url";
-import path from "path";
 import express, { Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { createViteServer, log } from "./vite";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// ESM __dirname fix
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Parse JSON + rawBody
+// Allow raw body (needed for Toast API)
 declare module "http" {
   interface IncomingMessage {
-    rawBody: unknown;
+    rawBody: any;
   }
 }
 
@@ -27,29 +25,38 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }));
 
-// Basic logger
+// Basic request logger
 app.use((req, res, next) => {
   const start = Date.now();
-  const pathUrl = req.path;
-  let capturedJsonResponse: any;
+  let capturedJson: any;
 
-  const originalResJson = res.json;
+  const originalJson = res.json;
   res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
+    capturedJson = bodyJson;
+    return originalJson.apply(res, [bodyJson, ...args]);
   };
 
   res.on("finish", () => {
-    if (pathUrl.startsWith("/api")) {
+    if (req.path.startsWith("/api")) {
       const duration = Date.now() - start;
-      let line = `${req.method} ${pathUrl} ${res.statusCode} in ${duration}ms`;
+      let line =
+        "API " +
+        req.method +
+        " " +
+        req.path +
+        " " +
+        res.statusCode +
+        " in " +
+        duration +
+        "ms";
 
-      if (capturedJsonResponse) {
-        line += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      if (capturedJson) {
+        const jsonStr = JSON.stringify(capturedJson);
+        line += " :: " + jsonStr;
       }
 
-      if (line.length > 150) line = line.slice(0, 149) + "…";
-      log(line);
+      if (line.length > 200) line = line.slice(0, 199) + "...";
+      console.log(line);
     }
   });
 
@@ -57,31 +64,26 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Register API routes first
   const server = await registerRoutes(app);
 
   // Error handler
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const msg = err.message || "Internal Server Error";
+
+    console.log("ERROR:", msg);
     res.status(status).json({ message: msg });
-    log(\`ERROR: \${msg}\`);
   });
 
-  // 👉 PRODUCTION STATIC FILE SERVING FIX
+  // Serve static frontend in production
   if (process.env.NODE_ENV === "production") {
-    const publicDir = path.join(__dirname, "../dist/public");
+    const publicPath = path.join(__dirname, "..", "dist", "public");
+    app.use(express.static(publicPath));
 
-    app.use("/assets", express.static(path.join(publicDir, "assets")));
-    app.use("/images", express.static(path.join(publicDir, "images")));
-    app.use("/gallery", express.static(path.join(publicDir, "gallery")));
-
-    app.get("*", (_req, res) => {
-      res.sendFile(path.join(publicDir, "index.html"));
+    // SPA fallback
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(publicPath, "index.html"));
     });
-  } else {
-    const vite = await createViteServer(app);
-    app.use(vite.middlewares);
   }
 
   const port = parseInt(process.env.PORT || "5000", 10);
@@ -92,7 +94,9 @@ app.use((req, res, next) => {
       host: "0.0.0.0",
       reusePort: true,
     },
-    () => log(\`Serving on port \${port}\`)
+    () => {
+      console.log("Serving on port " + port);
+    }
   );
 })();
 
