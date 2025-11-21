@@ -1,7 +1,1 @@
-{
-  "build": {
-    "nixpacks": {
-      "packages": ["nodejs_20"]
-    }
-  }
-}
+{"build": {"builder": "nixpacks"}}
