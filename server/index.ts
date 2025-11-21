@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Allow raw body for signature verification
+// RAW BODY ALLOW
 declare module "http" {
   interface IncomingMessage {
     rawBody: unknown;
@@ -24,10 +24,9 @@ app.use(
   })
 );
 
-// URL encoded parser
 app.use(express.urlencoded({ extended: false }));
 
-// Logger middleware
+// LOGGER
 app.use((req, res, next) => {
   const start = Date.now();
   const url = req.path;
@@ -51,7 +50,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// STATIC FILES (fix for images, gallery and assets)
+// STATIC FILES
 const publicPath = path.join(__dirname, "../dist/public");
 
 app.use("/images", express.static(path.join(publicPath, "images")));
@@ -62,7 +61,7 @@ app.use(express.static(publicPath));
 (async () => {
   const server = await registerRoutes(app);
 
-  // Error handler
+  // ERROR HANDLER
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || 500;
     const msg = err.message || "Internal Server Error";
@@ -70,14 +69,16 @@ app.use(express.static(publicPath));
     res.status(status).json({ message: msg });
   });
 
-  // SPA fallback
+  // SPA FALLBACK
   app.get("*", (req, res) => {
     res.sendFile(path.join(publicPath, "index.html"));
   });
 
-  // Start server
+  // START SERVER
   const port = parseInt(process.env.PORT || "5000", 10);
   server.listen(
     { port, host: "0.0.0.0", reusePort: true },
     () => log("Serving on port " + port)
   );
+})();
+
