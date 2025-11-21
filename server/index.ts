@@ -72,22 +72,24 @@ app.use((req, res, next) => {
     const vite = await createViteServer(app);
     app.use(vite.middlewares);
   }
+// PRODUCTION: serve client build
+if (process.env.NODE_ENV === "production") {
+  const distPath = path.join(__dirname, "public");
 
-  // 🚨 PRODUCTION: serve static files from dist/public
-  if (process.env.NODE_ENV === "production") {
-    app.use(
-      express.static(path.resolve(__dirname, "../dist/public"), {
-        maxAge: "1h",
-      })
-    );
+  app.use(express.static(distPath));
 
-    // SPA fallback
-    app.get("*", (_req, res) => {
-      res.sendFile(
-        path.resolve(__dirname, "../dist/public/index.html")
-      );
-    });
-  }
+  // Serve assets: images, gallery, videos, etc.
+  app.use("/assets", express.static(path.join(distPath, "assets")));
+  app.use("/images", express.static(path.join(distPath, "images")));
+  app.use("/gallery", express.static(path.join(distPath, "gallery")));
+  app.use("/videos", express.static(path.join(distPath, "videos")));
+
+  // SPA fallback
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
+
 
   // Start server
   const port = parseInt(process.env.PORT || "5000", 10);
