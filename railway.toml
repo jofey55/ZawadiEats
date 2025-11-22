@@ -4,6 +4,6 @@ builder = "nixpacks"
 [deploy]
 startCommand = "node dist/index.js"
 
-[nixpacks]
-nodeVersion = "22.12.0"
-
+[nixpacks.environment]
+NODE_VERSION = "22.12.0"
+NPM_CONFIG_PRODUCTION = "false"
