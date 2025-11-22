@@ -4,12 +4,26 @@
 }
 
 :80 {
-
   encode gzip
-
   root * /app/dist/public
-
   file_server
+
+  route /assets/* {
+    root * /app/dist/public
+    file_server
+  }
+  route /images/* {
+    root * /app/dist/public
+    file_server
+  }
+  route /gallery/* {
+    root * /app/dist/public
+    file_server
+  }
+  route /videos/* {
+    root * /app/dist/public
+    file_server
+  }
 
   try_files {path} /index.html
 }
