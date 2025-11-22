@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 });
 
 // STATIC FILES
-const publicPath = path.join(__dirname, "../dist/public");
+const publicPath = path.join(__dirname, "public");
 
 app.use("/images", express.static(path.join(publicPath, "images")));
 app.use("/gallery", express.static(path.join(publicPath, "gallery")));
