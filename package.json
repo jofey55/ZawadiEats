@@ -3,17 +3,19 @@
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-"scripts": {
-  "dev": "NODE_ENV=development tsx server/index.ts",
-"build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist && bash fix-permissions.sh"
-  "start": "NODE_ENV=production node dist/index.js",
-  "check": "tsc",
-  "db:push": "drizzle-kit push"
-},
+
+  "scripts": {
+    "dev": "NODE_ENV=development tsx server/index.ts",
+    "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist && bash fix-permissions.sh",
+    "start": "NODE_ENV=production node dist/index.js",
+    "check": "tsc",
+    "db:push": "drizzle-kit push"
+  },
 
   "engines": {
     "node": ">=22.12.0"
   },
+
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",
@@ -69,6 +71,7 @@
     "wouter": "^3.7.1",
     "zod": "^4.1.12"
   },
+
   "devDependencies": {
     "@replit/vite-plugin-runtime-error-modal": "^0.0.3",
     "@types/bcryptjs": "^2.4.2",
@@ -82,3 +85,4 @@
     "vite": "^7.2.4"
   }
 }
+
