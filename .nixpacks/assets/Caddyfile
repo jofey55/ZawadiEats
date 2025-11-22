@@ -1,0 +1,16 @@
+{
+    auto_https off
+}
+
+:5000 {
+    root * /app/dist/public
+
+    file_server /assets/*
+    file_server /images/*
+    file_server /gallery/*
+    file_server /videos/*
+
+    route {
+        reverse_proxy localhost:5000
+    }
+}
