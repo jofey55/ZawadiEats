@@ -1,0 +1,754 @@
+{
+  "currency": "USD",
+  "dietNotes": "Halal-friendly. Ask about allergens.",
+  "toppings": {
+    "hot": [
+      {
+        "name": "Grilled Chicken",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+        "role": "protein"
+      },
+      {
+        "name": "Sumac Chicken",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+        "role": "protein"
+      },
+      {
+        "name": "Skirt Steak",
+        "price": 1.92,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg",
+        "role": "protein"
+      },
+      {
+        "name": "Saffron Rice",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-white-rice.jpg",
+        "role": "base"
+      },
+      {
+        "name": "Coconut Rice",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-coconut-rice.jpg",
+        "role": "base"
+      },
+      {
+        "name": "Roasted Cauliflower",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-cauliflower.jpg",
+        "role": "base"
+      },
+      {
+        "name": "Roasted Corn",
+        "price": 0,
+        "role": "vegetable"
+      },
+      {
+        "name": "Black Beans",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+        "role": "base"
+      },
+      {
+        "name": "Quinoa",
+        "price": 0.96,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-quinoa.jpg",
+        "role": "base"
+      }
+    ],
+    "cold": [
+      {
+        "name": "Lettuce",
+        "price": 0
+      },
+      {
+        "name": "Pickled Cabbage",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-cabbage.jpg"
+      },
+      {
+        "name": "Pico de Gallo",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-pico.jpg"
+      },
+      {
+        "name": "Cucumber Tomato Salsa",
+        "price": 0
+      },
+      {
+        "name": "Avocado",
+        "price": 1.92
+      },
+      {
+        "name": "Guacamole",
+        "price": 1.92,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-guac.jpg"
+      },
+      {
+        "name": "Pineapple",
+        "price": 0.96,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-pineapple.jpg"
+      },
+      {
+        "name": "Banana",
+        "price": 0
+      },
+      {
+        "name": "Watermelon",
+        "price": 0.96
+      }
+    ],
+    "sauces": [
+      {
+        "name": "Chipotle Sauce",
+        "price": 0
+      },
+      {
+        "name": "Harissa",
+        "price": 0.48
+      },
+      {
+        "name": "Jalapeño Mayo",
+        "price": 0
+      },
+      {
+        "name": "Ranch",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-ranch.jpg"
+      },
+      {
+        "name": "Zawadi Sauce",
+        "price": 0,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-zawadi-sauce.jpg"
+      },
+      {
+        "name": "Tahini",
+        "price": 0
+      },
+      {
+        "name": "Lime Squeeze",
+        "price": 0
+      }
+    ],
+    "meats": [
+      {
+        "name": "Grilled Chicken",
+        "price": 3.84,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg"
+      },
+      {
+        "name": "Skirt Steak",
+        "price": 5.76,
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg"
+      },
+      {
+        "name": "No Meat",
+        "price": 0
+      }
+    ],
+    "drinks": [
+      {
+        "name": "Pineapple Ginger",
+        "price": 3.5
+      },
+      {
+        "name": "Hibiscus Ginger",
+        "price": 3.5
+      },
+      {
+        "name": "OG Lemonade",
+        "price": 3.5
+      },
+      {
+        "name": "Fountain Drink",
+        "price": 2.2
+      }
+    ],
+    "fountainDrinks": [
+      {
+        "name": "Coke",
+        "price": 0
+      },
+      {
+        "name": "Sprite",
+        "price": 0
+      },
+      {
+        "name": "Fanta",
+        "price": 0
+      },
+      {
+        "name": "Green Melo",
+        "price": 0
+      },
+      {
+        "name": "Diet Coke",
+        "price": 0
+      }
+    ]
+  },
+  "categories": [
+    {
+      "name": "Appetizers",
+      "slug": "appetizers",
+      "items": [
+        {
+          "name": "Seasoned Fries",
+          "description": "Crispy fries seasoned to perfection.",
+          "price": 5.76,
+          "tags": [
+            "vegetarian"
+          ],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/seasoned-fries.jpg",
+          "type": "simple-item",
+          "allowedToppings": [
+            "drink",
+            "fries"
+          ]
+        },
+        {
+          "name": "Plantains",
+          "description": "Ripe plantains, a starchy and sweet side dish.",
+          "price": 6,
+          "tags": [
+            "vegetarian",
+            "gluten-free"
+          ],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/plantains.jpg",
+          "type": "simple-item",
+          "allowedToppings": [
+            "drink",
+            "fries"
+          ]
+        },
+        {
+          "name": "Loaded Fries",
+          "description": "Crunchy fries loaded with toppings.",
+          "price": 13.44,
+          "tags": [],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/loaded-fries.jpg",
+          "type": "loaded-fries",
+          "allowedToppings": [
+            "meats",
+            "cold",
+            "sauces",
+            "fries",
+            "drink"
+          ],
+          "customToppings": {
+            "meats": [
+              {
+                "name": "Grilled Chicken",
+                "price": 3.84
+              },
+              {
+                "name": "Skirt Steak",
+                "price": 5.76
+              },
+              {
+                "name": "No Meat",
+                "price": 0
+              }
+            ],
+            "cold": [
+              {
+                "name": "Lettuce",
+                "price": 0
+              },
+              {
+                "name": "Pico de Gallo",
+                "price": 0
+              },
+              {
+                "name": "Jalapeños",
+                "price": 0
+              },
+              {
+                "name": "Sour Cream",
+                "price": 0.48
+              },
+              {
+                "name": "Guacamole",
+                "price": 1.92
+              },
+              {
+                "name": "Shredded Cheese",
+                "price": 0.96
+              }
+            ],
+            "sauces": [
+              {
+                "name": "Chipotle Sauce",
+                "price": 0
+              },
+              {
+                "name": "Ranch",
+                "price": 0
+              },
+              {
+                "name": "Zawadi Sauce",
+                "price": 0
+              },
+              {
+                "name": "Jalapeño Mayo",
+                "price": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bowls",
+      "slug": "bowls",
+      "items": [
+        {
+          "name": "Grilled Chicken Bowl",
+          "description": "Tender grilled chicken served over a bed of flavorful ingredients.",
+          "price": 12.48,
+          "tags": [
+            "halal"
+          ],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/chicken-bowl.jpg",
+          "type": "chicken-bowl",
+          "allowedToppings": [
+            "hot",
+            "cold",
+            "sauces",
+            "fries",
+            "drink"
+          ],
+          "defaultProtein": "Grilled Chicken",
+          "customToppings": {
+            "hot": [
+              {
+                "name": "Grilled Chicken",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+                "role": "protein"
+              },
+              {
+                "name": "Extra Chicken",
+                "price": 2.88,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+                "role": "protein"
+              },
+              {
+                "name": "Saffron Rice",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-white-rice.jpg",
+                "role": "base"
+              },
+              {
+                "name": "Coconut Rice",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-coconut-rice.jpg",
+                "role": "base"
+              },
+              {
+                "name": "Black Beans",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+                "role": "base"
+              },
+              {
+                "name": "Roasted Corn",
+                "price": 0,
+                "role": "vegetable"
+              }
+            ],
+            "cold": [
+              {
+                "name": "Lettuce",
+                "price": 0
+              },
+              {
+                "name": "Pico de Gallo",
+                "price": 0
+              },
+              {
+                "name": "Cucumber Tomato Salsa",
+                "price": 0
+              },
+              {
+                "name": "Pickled Cabbage",
+                "price": 0
+              },
+              {
+                "name": "Avocado",
+                "price": 1.92
+              }
+            ],
+            "sauces": [
+              {
+                "name": "Chipotle Sauce",
+                "price": 0
+              },
+              {
+                "name": "Jalapeño Mayo",
+                "price": 0
+              },
+              {
+                "name": "Zawadi Sauce",
+                "price": 0
+              },
+              {
+                "name": "Ranch",
+                "price": 0
+              },
+              {
+                "name": "Lime Squeeze",
+                "price": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "Skirt Steak Bowl",
+          "description": "Premium skirt steak served over rice with fresh toppings.",
+          "price": 16.00,
+          "tags": [
+            "halal"
+          ],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/steak-bowl.jpg",
+          "type": "steak-bowl",
+          "allowedToppings": [
+            "hot",
+            "cold",
+            "sauces",
+            "fries",
+            "drink"
+          ],
+          "defaultProtein": "Skirt Steak",
+          "customToppings": {
+            "hot": [
+              {
+                "name": "Skirt Steak",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg",
+                "role": "protein"
+              },
+              {
+                "name": "Extra Steak",
+                "price": 5.76,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg",
+                "role": "protein"
+              },
+              {
+                "name": "Saffron Rice",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-white-rice.jpg",
+                "role": "base"
+              },
+              {
+                "name": "Coconut Rice",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-coconut-rice.jpg",
+                "role": "base"
+              },
+              {
+                "name": "Black Beans",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+                "role": "base"
+              },
+              {
+                "name": "Roasted Corn",
+                "price": 0,
+                "role": "vegetable"
+              },
+              {
+                "name": "Grilled Peppers",
+                "price": 0,
+                "role": "vegetable"
+              }
+            ],
+            "cold": [
+              {
+                "name": "Lettuce",
+                "price": 0
+              },
+              {
+                "name": "Pico de Gallo",
+                "price": 0
+              },
+              {
+                "name": "Cucumber Tomato Salsa",
+                "price": 0
+              },
+              {
+                "name": "Pickled Cabbage",
+                "price": 0
+              },
+              {
+                "name": "Pickled Onions",
+                "price": 0
+              },
+              {
+                "name": "Avocado",
+                "price": 1.92
+              },
+              {
+                "name": "Guacamole",
+                "price": 1.92
+              }
+            ],
+            "sauces": [
+              {
+                "name": "Chipotle Sauce",
+                "price": 0
+              },
+              {
+                "name": "Harissa",
+                "price": 0
+              },
+              {
+                "name": "Jalapeño Mayo",
+                "price": 0
+              },
+              {
+                "name": "Zawadi Sauce",
+                "price": 0
+              },
+              {
+                "name": "Ranch",
+                "price": 0
+              },
+              {
+                "name": "Lime Squeeze",
+                "price": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quesadillas",
+      "slug": "quesadillas",
+      "items": [
+        {
+          "name": "Cheese Quesadilla",
+          "description": "Melted cheese inside a crispy tortilla.",
+          "price": 10.56,
+          "tags": [
+            "vegetarian"
+          ],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/quesadilla.jpg",
+          "type": "quesadilla",
+          "allowedToppings": [
+            "sauces",
+            "fries",
+            "drink"
+          ],
+          "baseProtein": null,
+          "customToppings": {
+            "sauces": [
+              {
+                "name": "Chipotle Sauce",
+                "price": 0
+              },
+              {
+                "name": "Ranch",
+                "price": 0
+              },
+              {
+                "name": "Salsa Verde",
+                "price": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "Chicken Quesadilla",
+          "description": "Tender chicken wrapped in a crispy tortilla.",
+          "price": 11.76,
+          "tags": [
+            "halal"
+          ],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/quesadilla.jpg",
+          "type": "quesadilla",
+          "allowedToppings": [
+            "hot",
+            "sauces",
+            "fries",
+            "drink"
+          ],
+          "baseProtein": "Grilled Chicken",
+          "customToppings": {
+            "hot": [
+              {
+                "name": "Grilled Chicken",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+                "role": "protein"
+              },
+              {
+                "name": "Roasted Corn",
+                "price": 0,
+                "role": "vegetable"
+              },
+              {
+                "name": "Black Beans",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+                "role": "base"
+              }
+            ],
+            "sauces": [
+              {
+                "name": "Chipotle Sauce",
+                "price": 0
+              },
+              {
+                "name": "Jalapeño Mayo",
+                "price": 0
+              },
+              {
+                "name": "Ranch",
+                "price": 0
+              },
+              {
+                "name": "Zawadi Sauce",
+                "price": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "Steak Quesadilla",
+          "description": "Tender steak wrapped in a crispy tortilla with melted cheese.",
+          "price": 14.4,
+          "tags": [
+            "halal"
+          ],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/quesadilla.jpg",
+          "type": "quesadilla",
+          "allowedToppings": [
+            "hot",
+            "sauces",
+            "fries",
+            "drink"
+          ],
+          "baseProtein": "Skirt Steak",
+          "customToppings": {
+            "hot": [
+              {
+                "name": "Skirt Steak",
+                "price": 1.92,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg",
+                "role": "protein"
+              },
+              {
+                "name": "Roasted Corn",
+                "price": 0,
+                "role": "vegetable"
+              },
+              {
+                "name": "Black Beans",
+                "price": 0,
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+                "role": "base"
+              },
+              {
+                "name": "Grilled Peppers",
+                "price": 0,
+                "role": "vegetable"
+              }
+            ],
+            "sauces": [
+              {
+                "name": "Chipotle Sauce",
+                "price": 0
+              },
+              {
+                "name": "Harissa",
+                "price": 0
+              },
+              {
+                "name": "Jalapeño Mayo",
+                "price": 0
+              },
+              {
+                "name": "Steak Sauce",
+                "price": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sambusa",
+      "slug": "sambusa",
+      "items": [
+        {
+          "name": "Spiced Beef",
+          "description": "Beef filled pastry pockets with aromatic spices.",
+          "price": 2.45,
+          "tags": [
+            "halal"
+          ],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/sambosa.jpg",
+          "type": "sambusa",
+          "allowedToppings": [
+            "drink",
+            "fries"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Drinks",
+      "slug": "drinks",
+      "items": [
+        {
+          "name": "Pineapple Ginger",
+          "description": "Pineapple and ginger infused drink.",
+          "price": 3.5,
+          "tags": [],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/pineapple-ginger.jpg",
+          "type": "drink",
+          "allowedToppings": [
+            "ice"
+          ]
+        },
+        {
+          "name": "Hibiscus Ginger",
+          "description": "Floral and spicy tea infused with hibiscus and ginger.",
+          "price": 3.5,
+          "tags": [],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hibiscus-ginger.jpg",
+          "type": "drink",
+          "allowedToppings": [
+            "ice"
+          ]
+        },
+        {
+          "name": "OG Lemonade",
+          "description": "Refreshing original lemonade.",
+          "price": 3.5,
+          "tags": [],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/og-lemonade.jpg",
+          "type": "drink",
+          "allowedToppings": [
+            "ice"
+          ]
+        },
+        {
+          "name": "Fountain Drinks",
+          "description": "Your choice of fountain soda.",
+          "price": 2.2,
+          "tags": [],
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/fountain-drinks.webp",
+          "type": "fountain-drink",
+          "allowedToppings": [
+            "fountainDrinks",
+            "ice"
+          ]
+        }
+      ]
+    }
+  ]
+}

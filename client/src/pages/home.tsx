@@ -1,0 +1,528 @@
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { Star } from "lucide-react";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
+import type { Review } from "@shared/schema";
+import menuData from "../menu.json";
+import { Helmet } from "react-helmet";
+import BowlCustomizer, { type CustomizedItem } from "@/components/BowlCustomizer";
+import { useLocation } from "wouter";
+
+const heroImages = [
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/gallery-1.png",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/gallery-2.png",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/gallery-3.png",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/gallery-4.png",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/gallery-5.png",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/seasoned-fries.jpg",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/sweet-potato-fries.jpg",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/plantains.jpg",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/lentil-soup.jpg",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/plantain-chips-guac.jpg",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/fruit-bowl.jpg",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/pineapple-ginger.jpg",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hibiscus-ginger.jpg",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/og-lemonade.jpg",
+  "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/fountain-soda.jpg",
+];
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
+const faqs = [
+  {
+    question: "Is your food halal?",
+    answer: "Yes! We are halal-friendly and follow halal practices in our kitchen."
+  },
+  {
+    question: "Do you have vegetarian options?",
+    answer: "Absolutely! We have several vegetarian options including our Veggie Bowl, plantains, and more. Check our menu for items tagged as 'vegetarian'."
+  },
+  {
+    question: "What's included in a bowl?",
+    answer: "Our bowls start with your choice of base (coconut rice, saffron rice, or black beans), then you choose your protein (or go veggie), and add unlimited toppings including vegetables, sauces, and seasonings."
+  },
+  {
+    question: "Do you offer catering?",
+    answer: "Yes! We cater events of all sizes. Visit our Catering page or call us at (612) 284-0880 for a custom quote."
+  },
+  {
+    question: "Can I order for pickup?",
+    answer: "Yes! You can order online directly from our website for pickup, or use Uber Eats or DoorDash for delivery."
+  },
+];
+
+const uberEatsUrl = "https://www.ubereats.com/store/zawadi-restaurant-bloomington/bl9IxulbXL29K44sE6aR8Q?utm_source=website";
+const doorDashUrl = "https://www.doordash.com/store/zawadi-restraint-bloomington-30199876?utm_source=website";
+const phone = "(612) 284-0880";
+const email = "info@zawadirestaurant.com";
+const address = "1701 American Blvd E, Suite 15, Bloomington, MN 55425";
+
+const hours = [
+  { d: "Mon", h: "11:00 AM – 9:30 PM" },
+  { d: "Tue", h: "11:00 AM – 9:30 PM" },
+  { d: "Wed", h: "11:00 AM – 9:30 PM" },
+  { d: "Thu", h: "11:00 AM – 9:30 PM" },
+  { d: "Fri", h: "11:00 AM – 11:00 PM" },
+  { d: "Sat", h: "11:00 AM – 11:00 PM" },
+  { d: "Sun", h: "11:00 AM – 11:00 PM" },
+];
+
+function getTodaysHours() {
+  const now = new Date();
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Chicago',
+    weekday: 'short'
+  });
+  const weekday = formatter.format(now);
+  const today = hours.find(h => h.d === weekday);
+  return today ? today.h : "11:00 AM – 9:30 PM";
+}
+
+interface MenuItem {
+  name: string;
+  description: string;
+  price: number;
+  tags?: string[];
+  image: string;
+  type?: string;
+  allowedToppings?: string[];
+  baseProtein?: string | null;
+  defaultProtein?: string;
+}
+
+export default function Home() {
+  const [todaysHours, setTodaysHours] = useState(getTodaysHours());
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTodaysHours(getTodaysHours());
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const bestSellers = menuData.categories.find(cat => cat.slug === "best-sellers")?.items || [];
+  
+  const { data: reviews = [] } = useQuery<Review[]>({
+    queryKey: ["/api/reviews"],
+  });
+
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_path: window.location.pathname,
+      });
+    }
+  }, []);
+
+  const handleItemClick = (item: MenuItem, categorySlug: string) => {
+    // Open customizer for items that have allowedToppings (customization options)
+    if (item.allowedToppings && item.allowedToppings.length > 0) {
+      setSelectedItem(item);
+      setIsCustomizerOpen(true);
+    } else {
+      // For items without any customization, go directly to order page
+      // Store the item in sessionStorage so order page can add it to cart
+      sessionStorage.setItem('quickAddItem', JSON.stringify(item));
+      setLocation('/order');
+    }
+  };
+
+  const handleCheckout = (customizedItem: CustomizedItem) => {
+    setIsCustomizerOpen(false);
+    
+    // Convert customized item to cart format with unique ID
+    const cartItem = {
+      id: `custom-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      name: customizedItem.baseItem.name,
+      price: customizedItem.totalPrice,
+      quantity: 1,
+      image: customizedItem.baseItem.image,
+      description: customizedItem.baseItem.description,
+      customization: {
+        hotToppings: customizedItem.hotToppings,
+        coldToppings: customizedItem.coldToppings,
+        sauces: customizedItem.sauces,
+        meat: customizedItem.meat,
+        addFries: customizedItem.addFries,
+        addDrink: customizedItem.addDrink,
+        iceOption: customizedItem.iceOption,
+      }
+    };
+    
+    sessionStorage.setItem('quickAddItem', JSON.stringify(cartItem));
+    setLocation('/order');
+  };
+
+  return (
+    <>
+      <Helmet>
+        <title>Zawadi Restaurant - East-African Cuisine in Bloomington, MN</title>
+        <meta name="description" content="Authentic East-African bowls, sambusa, and more. Order online for pickup or delivery. Halal-friendly. Located in Bloomington, MN." />
+        
+        <meta property="og:title" content="Zawadi Restaurant - East-African Cuisine" />
+        <meta property="og:description" content="Authentic East-African bowls, sambusa, and more. Order online for pickup or delivery." />
+        <meta property="og:type" content="restaurant" />
+        <meta property="og:url" content="https://zawadirestaurant.com" />
+        <meta property="og:image" content="https://zawadirestaurant.comhttps://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hero.png" />
+        
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Restaurant",
+            "name": "Zawadi Restaurant",
+            "image": "https://zawadirestaurant.comhttps://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hero.png",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "1701 American Blvd E, Suite 15",
+              "addressLocality": "Bloomington",
+              "addressRegion": "MN",
+              "postalCode": "55425",
+              "addressCountry": "US"
+            },
+            "telephone": "+16122840880",
+            "email": "info@zawadirestaurant.com",
+            "servesCuisine": "East African",
+            "priceRange": "$$",
+            "openingHours": ["Mo-Th 11:00-21:30", "Fr-Su 11:00-23:00"]
+          })}
+        </script>
+      </Helmet>
+      
+      <main className="min-h-screen bg-white text-slate-900">
+      {/* Hero with Slideshow */}
+      <section className="relative isolate overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <Carousel
+            opts={{ loop: true }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+              }),
+            ]}
+            className="h-full w-full"
+          >
+            <CarouselContent className="h-full">
+              {heroImages.map((image, index) => (
+                <CarouselItem key={index} className="h-full">
+                  <img 
+                    src={image} 
+                    alt={`Zawadi Restaurant - East African dishes including bowls, sambusa, plantains, and more (${index + 1})`}
+                    className="h-full w-full object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        <div className="mx-auto max-w-5xl px-4 py-32 sm:py-40 text-center relative z-10">
+          <h1 className="font-display text-6xl sm:text-7xl lg:text-8xl font-bold text-white mb-2 tracking-tight drop-shadow-2xl" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.5), 0 0 20px rgba(255,165,0,0.3)' }}>
+            Zawadi Restaurant
+          </h1>
+          <p className="text-base sm:text-lg font-normal text-white/95 mb-8 drop-shadow-lg">
+            East African cuisine, made fresh
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4 justify-center">
+            <a 
+              href="/order" 
+              className="rounded-full bg-red-500 px-8 py-3 text-sm font-medium text-white hover:bg-red-600 transition-colors" 
+              aria-label="Order Online for Pickup"
+              data-testid="button-order-online"
+            >
+              Order for Pickup
+            </a>
+            <a 
+              href="#menu" 
+              className="rounded-full bg-white/20 px-8 py-3 text-sm font-medium text-white hover:bg-white/30 transition-colors" 
+              aria-label="View Menu"
+              data-testid="button-view-menu"
+            >
+              View Menu
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Special Offer Banner */}
+      <section className="border-b border-gray-100 py-6">
+        <div className="mx-auto max-w-5xl px-4 text-center">
+          <p className="text-base text-gray-600">
+            First online order? Get <span className="font-semibold text-red-500">10% off</span> with code <span className="font-mono font-medium">FIRST10</span>
+          </p>
+        </div>
+      </section>
+
+      {/* Delivery Options */}
+      <section className="py-8 bg-gray-50">
+        <div className="mx-auto max-w-5xl px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a 
+              href={uberEatsUrl} 
+              className="rounded-xl px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all w-full sm:w-auto text-center"
+              style={{ backgroundColor: '#1A1A1A' }}
+              data-testid="button-ubereats-top"
+            >
+              Order on Uber Eats
+            </a>
+            <a 
+              href={doorDashUrl} 
+              className="rounded-xl px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all w-full sm:w-auto text-center"
+              style={{ backgroundColor: '#FF3008' }}
+              data-testid="button-doordash-top"
+            >
+              Order on DoorDash
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Decorative Divider */}
+      <div className="decorative-divider bg-gradient-to-b from-gray-50 to-white">
+        <div className="mx-auto max-w-5xl px-4 text-center">
+          <div className="inline-flex items-center gap-3">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-pink-300"></div>
+            <svg className="w-8 h-8 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-pink-300"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Menu */}
+      <section id="menu" className="menu-texture py-20 relative">
+        <div className="mx-auto max-w-6xl px-4 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-5xl sm:text-6xl font-bold text-gray-900 mb-4" style={{ color: '#6BBF59' }}>Menu</h2>
+            <p className="text-base text-gray-600">
+              {menuData.dietNotes}
+            </p>
+          </div>
+          
+          <div className="space-y-16">
+            {menuData.categories.filter(cat => cat.slug !== "best-sellers").map((category, catIdx) => (
+              <div key={category.slug} data-testid={`section-${category.slug}`}>
+                <h3 className="font-display text-4xl font-bold text-gray-900 mb-8">{category.name}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {category.items.map((item, idx) => {
+                    const pastelColors = [
+                      '#FFE8F0',
+                      '#FFF4E0', 
+                      '#E0F4FF',
+                      '#FFE8F0',
+                      '#FFF4E0',
+                      '#E0F4FF'
+                    ];
+                    const bgColor = pastelColors[idx % pastelColors.length];
+                    
+                    const itemKey = `${category.slug}-${item.name}`;
+                    const seedValue = itemKey.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+                    const hasDiscount = (seedValue % 10) < 3;
+                    const discountAmount = hasDiscount ? ((seedValue % 2) === 0 ? '15% Off' : '10% Off') : null;
+                    
+                    return (
+                      <div 
+                        key={itemKey}
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all hover:scale-105 hover:shadow-xl border-2 border-transparent hover:border-[#6BBF59] active:border-[#6BBF59] h-80"
+                        data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        onClick={() => handleItemClick(item, category.slug)}
+                      >
+                        {discountAmount && (
+                          <div className="absolute top-4 left-4 bg-white rounded-full px-3 py-1 text-xs font-semibold shadow-md z-10" style={{ color: '#6BBF59' }}>
+                            {discountAmount}
+                          </div>
+                        )}
+                        <button 
+                          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg transition-shadow z-10"
+                          onClick={(e) => e.stopPropagation()}
+                          aria-label={`Add ${item.name} to favorites`}
+                        >
+                          <svg className="w-5 h-5 text-gray-400 hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                          </svg>
+                        </button>
+                        
+                        <div className="h-[85%] w-full">
+                          <img 
+                            src={item.image} 
+                            alt={item.name}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                        
+                        <div className="h-[15%] flex items-center justify-center px-4" style={{ backgroundColor: bgColor }}>
+                          <h3 className="font-semibold text-lg text-gray-900 text-center truncate">{item.name}</h3>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Reviews */}
+      {reviews.length > 0 && (
+        <section className="bg-white py-20">
+          <div className="mx-auto max-w-6xl px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-semibold text-gray-900 mb-2">What customers say</h2>
+              <p className="text-base text-gray-500">Real reviews from real people</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {reviews.slice(0, 3).map((review) => (
+                <div 
+                  key={review.id} 
+                  className="bg-gray-50 p-6 rounded-xl"
+                  data-testid={`card-review-${review.id}`}
+                >
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-700 mb-3">{review.comment}</p>
+                  <p className="font-medium text-sm text-gray-900">{review.customerName}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* FAQ Section */}
+      <section className="bg-gray-50 py-20">
+        <div className="mx-auto max-w-3xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-semibold text-gray-900 mb-2">Questions</h2>
+          </div>
+          <div className="bg-white rounded-xl border border-gray-200 divide-y divide-gray-200">
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} data-testid={`faq-${index}`} className="border-0">
+                  <AccordionTrigger className="text-base font-medium text-gray-900 hover:text-gray-600 px-6 py-4">{faq.question}</AccordionTrigger>
+                  <AccordionContent className="text-sm text-gray-600 px-6 pb-4">{faq.answer}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* Location & Contact */}
+      <section className="bg-white py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-semibold text-gray-900 mb-2">Visit us</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <p className="text-base text-gray-700 mb-2" data-testid="text-address">{address}</p>
+              <p className="text-base text-gray-700 mb-1">
+                <a className="text-red-500 hover:text-red-600" href={`tel:${phone.replace(/[^\d]/g, "")}`} data-testid="link-phone">{phone}</a>
+              </p>
+              <p className="text-base text-gray-700 mb-8">
+                <a className="text-red-500 hover:text-red-600" href={`mailto:${email}`} data-testid="link-email">{email}</a>
+              </p>
+              <div className="rounded-xl overflow-hidden border border-gray-200 mb-8">
+                <iframe
+                  title="Google Map"
+                  src="https://www.google.com/maps?q=1701+American+Blvd+E,+Suite+15,+Bloomington,+MN+55425&output=embed"
+                  className="h-64 w-full"
+                  loading="lazy"
+                />
+              </div>
+              <div className="bg-gray-50 p-6 rounded-xl">
+                <h3 className="text-base font-semibold text-gray-900 mb-4">Hours</h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  {hours.map((x) => (
+                    <li key={x.d} className="flex justify-between" data-testid={`hours-${x.d.toLowerCase()}`}>
+                      <span className="font-medium">{x.d}</span>
+                      <span>{x.h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-8 rounded-xl">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Catering</h3>
+              <p className="text-sm text-gray-600 mb-6">
+                Planning a large event? Get in touch for catering options.
+              </p>
+              <a 
+                href="/catering"
+                className="inline-block rounded-full bg-red-500 px-6 py-3 text-sm font-medium text-white hover:bg-red-600 transition-colors"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 py-12 text-center border-t border-gray-200">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="flex items-center justify-center gap-6 mb-6">
+            <a 
+              href="https://www.facebook.com/zawadirestaurant" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-400 hover:text-gray-300 transition-colors"
+              data-testid="link-facebook"
+              aria-label="Follow us on Facebook"
+            >
+              <FaFacebook className="w-6 h-6" />
+            </a>
+            <a 
+              href="https://www.instagram.com/zawadirestaurant" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-400 hover:text-gray-300 transition-colors"
+              data-testid="link-instagram"
+              aria-label="Follow us on Instagram"
+            >
+              <FaInstagram className="w-6 h-6" />
+            </a>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-6 mb-6 text-sm">
+            <a href="/order" className="text-gray-400 hover:text-gray-300 transition-colors" data-testid="link-order-footer">Order</a>
+            <a href="#menu" className="text-gray-400 hover:text-gray-300 transition-colors" data-testid="link-menu-footer">Menu</a>
+            <a href="/contact" className="text-gray-400 hover:text-gray-300 transition-colors" data-testid="link-contact-footer">Contact</a>
+            <a href="/catering" className="text-gray-400 hover:text-gray-300 transition-colors" data-testid="link-catering-footer">Catering</a>
+            <a href="/jobs" className="text-gray-400 hover:text-gray-300 transition-colors" data-testid="link-jobs-footer">Jobs</a>
+          </div>
+          <p className="text-sm text-gray-500">© {new Date().getFullYear()} Zawadi Restaurant</p>
+        </div>
+      </footer>
+
+      <BowlCustomizer
+        item={selectedItem}
+        isOpen={isCustomizerOpen}
+        onClose={() => setIsCustomizerOpen(false)}
+        onCheckout={handleCheckout}
+      />
+    </main>
+    </>
+  );
+}
