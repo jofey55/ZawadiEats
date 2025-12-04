@@ -217,3 +217,22 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* CRITICAL: Prevent all images from breaking layout */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Food/menu item images - adjust dimensions as needed */
+.food-item img,
+.menu-item img,
+.dish-card img,
+.meal-image img {
+  width: 100%;
+  max-width: 400px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
