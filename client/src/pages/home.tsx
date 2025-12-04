@@ -357,7 +357,7 @@ export default function Home() {
                           <img 
                             src={item.image} 
                             alt={item.name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-64 object-cover"
                             loading="lazy"
                           />
                         </div>

@@ -258,7 +258,7 @@ export default function IngredientMenu({
                           <img
                             src={ingredient.image}
                             alt={ingredient.name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-48 object-cover"
                           />
                         </div>
                         <div className="p-2 text-center">
