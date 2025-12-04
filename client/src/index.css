@@ -253,3 +253,19 @@ img {
 .w-20.h-20 {
   max-width: max-content;
 }
+
+/* Aggressive container height limits */
+div:has(> img.w-full),
+div:has(> img.h-64),
+div:has(> img.h-48) {
+  max-height: 400px !important;
+  overflow: hidden;
+}
+
+/* Force all images to respect max height */
+img.w-full,
+img.h-64,
+img.h-48 {
+  max-height: 400px !important;
+  object-fit: cover !important;
+}
