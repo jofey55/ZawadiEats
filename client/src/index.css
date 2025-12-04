@@ -236,3 +236,20 @@ img {
   object-fit: cover;
   border-radius: 8px;
 }
+
+/* Override Tailwind classes for large images */
+.w-full.h-full {
+  max-height: 300px;
+}
+
+.h-full.w-full.object-cover {
+  max-height: 500px;
+}
+
+/* Keep small thumbnails working */
+.w-16.h-16,
+.w-12.h-12,
+.w-10.h-10,
+.w-20.h-20 {
+  max-width: max-content;
+}
