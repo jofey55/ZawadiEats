@@ -173,14 +173,14 @@ export default function Home() {
         <meta property="og:description" content="Authentic East-African bowls, sambusa, and more. Order online for pickup or delivery." />
         <meta property="og:type" content="restaurant" />
         <meta property="og:url" content="https://zawadirestaurant.com" />
-        <meta property="og:image" content="https://zawadirestaurant.comhttps://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hero.png" />
+        <meta property="og:image" content="https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hero.png" />
         
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Restaurant",
             "name": "Zawadi Restaurant",
-            "image": "https://zawadirestaurant.comhttps://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hero.png",
+            "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hero.png",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "1701 American Blvd E, Suite 15",
