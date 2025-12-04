@@ -3,51 +3,42 @@ import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 
+// Resolve __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Create express app
 const app = express();
 
-// ---------- STATIC FRONTEND ROOT ----------
-const publicPath = path.join(__dirname, "..", "dist", "public");
+// Path to your built client
+const publicPath = path.join(__dirname, "../dist/public");
 
-// Confirm folder exists so server doesn't silently crash
-if (!fs.existsSync(publicPath)) {
-  console.error("❌ ERROR: dist/public not found at:", publicPath);
-} else {
-  console.log("✅ Serving static files from:", publicPath);
-}
+// -------------------------------------------------------
+//  ENABLE 1-YEAR CACHING FOR /images (LIVE SPEED BOOST)
+// -------------------------------------------------------
+app.use(
+  "/images",
+  express.static(path.join(__dirname, "../images"), {
+    maxAge: "365d",
+    immutable: true,
+    etag: true,
+    lastModified: true,
+  })
+);
 
-// ---------- STATIC FILE ROUTES ----------
+// -------------------------------------------------------
+//  STATIC FILE ROUTES (other folders — no caching change)
+// -------------------------------------------------------
 app.use(express.static(publicPath));
 app.use("/assets", express.static(path.join(publicPath, "assets")));
-app.use("/images", express.static(path.join(publicPath, "images")));
 app.use("/gallery", express.static(path.join(publicPath, "gallery")));
 app.use("/videos", express.static(path.join(publicPath, "videos")));
 
-// ---------- SPA FALLBACK ----------
+// -------------------------------------------------------
+//  SPA FALLBACK (keep this last)
+// -------------------------------------------------------
 app.get("*", (req, res) => {
-  const indexFile = path.join(publicPath, "index.html");
-
-  if (!fs.existsSync(indexFile)) {
-    console.error("❌ index.html NOT FOUND:", indexFile);
-    return res.status(500).send("index.html missing");
-  }
-
-  res.sendFile(indexFile);
-});
-
-// ---------- GLOBAL ERROR HANDLER ----------
-app.use((err, req, res, next) => {
-  console.error("❌ Express error:", err);
-  res.status(500).send("Server error");
-});
-
-// ---------- START SERVER (REQUIRED FOR RAILWAY) ----------
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 export default app;
