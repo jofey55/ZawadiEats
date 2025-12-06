@@ -6,37 +6,37 @@
       {
         "name": "Grilled Chicken",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.webp",
         "role": "protein"
       },
       {
         "name": "Sumac Chicken",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.webp",
         "role": "protein"
       },
       {
         "name": "Skirt Steak",
         "price": 1.92,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg",
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.webp",
         "role": "protein"
       },
       {
         "name": "Saffron Rice",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-white-rice.jpg",
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-white-rice.webp",
         "role": "base"
       },
       {
         "name": "Coconut Rice",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-coconut-rice.jpg",
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-coconut-rice.webp",
         "role": "base"
       },
       {
         "name": "Roasted Cauliflower",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-cauliflower.jpg",
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-cauliflower.webp",
         "role": "base"
       },
       {
@@ -47,13 +47,13 @@
       {
         "name": "Black Beans",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.webp",
         "role": "base"
       },
       {
         "name": "Quinoa",
         "price": 0.96,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-quinoa.jpg",
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-quinoa.webp",
         "role": "base"
       }
     ],
@@ -65,12 +65,12 @@
       {
         "name": "Pickled Cabbage",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-cabbage.jpg"
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-cabbage.webp"
       },
       {
         "name": "Pico de Gallo",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-pico.jpg"
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-pico.webp"
       },
       {
         "name": "Cucumber Tomato Salsa",
@@ -83,12 +83,12 @@
       {
         "name": "Guacamole",
         "price": 1.92,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-guac.jpg"
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-guac.webp"
       },
       {
         "name": "Pineapple",
         "price": 0.96,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-pineapple.jpg"
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-pineapple.webp"
       },
       {
         "name": "Banana",
@@ -115,12 +115,12 @@
       {
         "name": "Ranch",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-ranch.jpg"
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-ranch.webp"
       },
       {
         "name": "Zawadi Sauce",
         "price": 0,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-zawadi-sauce.jpg"
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-zawadi-sauce.webp"
       },
       {
         "name": "Tahini",
@@ -135,12 +135,12 @@
       {
         "name": "Grilled Chicken",
         "price": 3.84,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg"
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.webp"
       },
       {
         "name": "Skirt Steak",
         "price": 5.76,
-        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg"
+        "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.webp"
       },
       {
         "name": "No Meat",
@@ -200,7 +200,7 @@
           "tags": [
             "vegetarian"
           ],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/seasoned-fries.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/seasoned-fries.webp",
           "type": "simple-item",
           "allowedToppings": [
             "drink",
@@ -215,7 +215,7 @@
             "vegetarian",
             "gluten-free"
           ],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/plantains.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/plantains.webp",
           "type": "simple-item",
           "allowedToppings": [
             "drink",
@@ -227,7 +227,7 @@
           "description": "Crunchy fries loaded with toppings.",
           "price": 13.44,
           "tags": [],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/loaded-fries.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/loaded-fries.webp",
           "type": "loaded-fries",
           "allowedToppings": [
             "meats",
@@ -310,7 +310,7 @@
           "tags": [
             "halal"
           ],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/chicken-bowl.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/chicken-bowl.webp",
           "type": "chicken-bowl",
           "allowedToppings": [
             "hot",
@@ -325,31 +325,31 @@
               {
                 "name": "Grilled Chicken",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.webp",
                 "role": "protein"
               },
               {
                 "name": "Extra Chicken",
                 "price": 2.88,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.webp",
                 "role": "protein"
               },
               {
                 "name": "Saffron Rice",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-white-rice.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-white-rice.webp",
                 "role": "base"
               },
               {
                 "name": "Coconut Rice",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-coconut-rice.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-coconut-rice.webp",
                 "role": "base"
               },
               {
                 "name": "Black Beans",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.webp",
                 "role": "base"
               },
               {
@@ -411,7 +411,7 @@
           "tags": [
             "halal"
           ],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/steak-bowl.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/steak-bowl.webp",
           "type": "steak-bowl",
           "allowedToppings": [
             "hot",
@@ -426,31 +426,31 @@
               {
                 "name": "Skirt Steak",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.webp",
                 "role": "protein"
               },
               {
                 "name": "Extra Steak",
                 "price": 5.76,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.webp",
                 "role": "protein"
               },
               {
                 "name": "Saffron Rice",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-white-rice.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-white-rice.webp",
                 "role": "base"
               },
               {
                 "name": "Coconut Rice",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-coconut-rice.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-coconut-rice.webp",
                 "role": "base"
               },
               {
                 "name": "Black Beans",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.webp",
                 "role": "base"
               },
               {
@@ -535,7 +535,7 @@
           "tags": [
             "vegetarian"
           ],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/quesadilla.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/quesadilla.webp",
           "type": "quesadilla",
           "allowedToppings": [
             "sauces",
@@ -567,7 +567,7 @@
           "tags": [
             "halal"
           ],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/quesadilla.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/quesadilla.webp",
           "type": "quesadilla",
           "allowedToppings": [
             "hot",
@@ -581,7 +581,7 @@
               {
                 "name": "Grilled Chicken",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-chicken.webp",
                 "role": "protein"
               },
               {
@@ -592,7 +592,7 @@
               {
                 "name": "Black Beans",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.webp",
                 "role": "base"
               }
             ],
@@ -623,7 +623,7 @@
           "tags": [
             "halal"
           ],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/quesadilla.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/quesadilla.webp",
           "type": "quesadilla",
           "allowedToppings": [
             "hot",
@@ -637,7 +637,7 @@
               {
                 "name": "Skirt Steak",
                 "price": 1.92,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-steak.webp",
                 "role": "protein"
               },
               {
@@ -648,7 +648,7 @@
               {
                 "name": "Black Beans",
                 "price": 0,
-                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.jpg",
+                "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/ingredient-beans.webp",
                 "role": "base"
               },
               {
@@ -690,7 +690,7 @@
           "tags": [
             "halal"
           ],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/sambosa.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/sambosa.webp",
           "type": "sambusa",
           "allowedToppings": [
             "drink",
@@ -708,7 +708,7 @@
           "description": "Pineapple and ginger infused drink.",
           "price": 3.5,
           "tags": [],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/pineapple-ginger.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/pineapple-ginger.webp",
           "type": "drink",
           "allowedToppings": [
             "ice"
@@ -719,7 +719,7 @@
           "description": "Floral and spicy tea infused with hibiscus and ginger.",
           "price": 3.5,
           "tags": [],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hibiscus-ginger.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/hibiscus-ginger.webp",
           "type": "drink",
           "allowedToppings": [
             "ice"
@@ -730,7 +730,7 @@
           "description": "Refreshing original lemonade.",
           "price": 3.5,
           "tags": [],
-          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/og-lemonade.jpg",
+          "image": "https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/og-lemonade.webp",
           "type": "drink",
           "allowedToppings": [
             "ice"
