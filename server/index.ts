@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import fs from "fs";
 import mime from "mime-types";
 
 // ----------------------------------------------------
@@ -20,7 +19,7 @@ const app = express();
 const publicPath = path.join(__dirname, "../dist/public");
 
 // ----------------------------------------------------
-// STATIC ROUTE: IMAGES (with caching + webp enabled)
+// STATIC ROUTE: IMAGES (MUST BE FIRST!)
 // ----------------------------------------------------
 app.use(
   "/images",
@@ -38,15 +37,19 @@ app.use(
 );
 
 // ----------------------------------------------------
-// OTHER STATIC ROUTES
+// OTHER STATIC ROUTES (SECOND)
 // ----------------------------------------------------
-app.use(express.static(publicPath));
 app.use("/assets", express.static(path.join(publicPath, "assets")));
 app.use("/gallery", express.static(path.join(publicPath, "gallery")));
 app.use("/videos", express.static(path.join(publicPath, "videos")));
 
 // ----------------------------------------------------
-// SPA FALLBACK (must stay LAST)
+// MAIN STATIC SERVE (THIRD — AFTER ALL SUBROUTES)
+// ----------------------------------------------------
+app.use(express.static(publicPath));
+
+// ----------------------------------------------------
+// SPA FALLBACK (LAST ONLY)
 // ----------------------------------------------------
 app.get("*", (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"));
@@ -60,4 +63,3 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
