@@ -5,3 +5,4 @@ server/public
 vite.config.ts.*
 *.tar.gzclient/public/https://pub-c43cf51ce1a645229ad1d10dee326989.r2.dev/zawadieats/*
 client/public/gallery/*
+!dist/public/images/
